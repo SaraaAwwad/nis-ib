@@ -58,13 +58,13 @@
                         <p>Profile</p>
                     </a>
                 </li>
-                <li >
+                <li>
                     <a href="staff.html" >
                         <i class="pe-7s-note2"></i>
                         <p>Staff Members</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="students.html">
                         <i class="pe-7s-news-paper"></i>
                         <p>
@@ -72,7 +72,7 @@
                         </p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="courses.html">
                         <i class="pe-7s-science"></i>
                         <p>Courses</p>
@@ -253,6 +253,21 @@
     </div>
 </div>
 
+    <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<!-- Calendar -->
+<script src="../js/jquery-ui.js"></script>
+<script>
+        $(function() {
+        $( "#datepicker,#datepicker1" ).datepicker();
+        });
+
+$(document).ready(function(){
+    $("#f-option").click(function(){
+        $("#todisplay").hide();
+        $("#textsearch").show();
+    });
+});
+</script>
 
 </body>
 
