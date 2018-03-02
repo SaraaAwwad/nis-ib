@@ -1,23 +1,17 @@
-/*
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
-*/
-/*--Reset code--*/
 
-body {
-    
-    background-size: cover;
+#liststudents{
+   background: url(../images/49.jpg)no-repeat; 
+   background-size: cover;
     font-family: 'PT Sans', sans-serif;
     background-attachment: fixed;
     background-position: center;
 }
-#liststudents{
-   background: url(../images/49.jpg)no-repeat; 
-}
 #addstudent{
     background: url(../images/background.jpg)no-repeat;
+        background-size: cover;
+    font-family: 'PT Sans', sans-serif;
+    background-attachment: fixed;
+    background-position: center;
 }
 body a{
 	transition:0.5s all;
