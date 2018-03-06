@@ -26,45 +26,7 @@
     <!--============================= HEADER =============================-->
     <header>
         <div class="container nav-menu">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="index.html"><img src="images/nib_logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
-                            <span class="icon-menu"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="admission-form.html">Admissions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="academics.html">Academics</a>
-                                </li>
-                                <li class="nav-logo">
-                                    <a href="#" class="navbar-brand"><img src="images/nib_logo.png" class="img-fluid" alt="logo"></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="research.html">Research</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="blog.html">Blog</a>
-                                </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
+        <?php include_once ("header.php");  ?>
     </div>
     <div class="slider_img">
         <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -393,7 +355,7 @@
     </div>
     <!--//END DETAILED CHART -->
     <!--============================= OUR BLOG =============================-->
-    <section class="blog">
+    <!-- <section class="blog">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -466,7 +428,6 @@
                                 <div class="blog-play_btn"> <img src="images/play-btn.png" alt="play-btn"> </div>
                                 <img src="images/blog-img_4.jpg" class="img-fluid blog_display" alt="blog-img">
                             </div>
-                            <!-- // end .blog-video -->
                             <div class="blogtitle">
                                 <h3>Nam libero tempore</h3>
                                 <i class="icon-user fa-common" aria-hidden="true"></i>
@@ -484,73 +445,12 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!--//END OUR BLOG -->
+    </section> -->
     <!--============================= Instagram Feed =============================-->
     <div id="instafeed"></div>
     <!--//END Instagram feed JS -->
-    <!--============================= FOOTER =============================-->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="subscribe">
-                        <h3>Newsletter</h3>
-                        <form id="subscribeform" action="php/subscribe.php" method="post">
-                            <input class="signup_form" type="text" name="email" placeholder="Enter Your Email Address">
-                            <button type="submit" class="btn btn-warning" id="js-subscribe-btn">SUBSCRIBE</button>
-                            <div id="js-subscribe-result" data-success-msg="Success, Please check your email." data-error-msg="Oops! Something went wrong"></div>
-                            <!-- // end #js-subscribe-result -->
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="foot-logo">
-                        <a href="index.html">
-                            <img src="images/nib_logo.png" class="img-fluid" alt="footer_logo">
-                        </a>
-                        <p>2018 © copyright
-                            <br> All rights reserved.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="sitemap">
-                            <h3>Navigation</h3>
-                            <ul>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="admission-form.html">Admissions </a></li>
-                                <li><a href="admission.html">Academics</a></li>
-                                <li><a href="research.html">Research</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="tweet_box">
-                            <h3>Tweets</h3>
-                            <div class="tweet-wrap">
-                                <div class="tweet"></div>
-                                <!-- // end .tweet -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="address">
-                            <h3>Contact us</h3>
-                            <p><span>Address: </span> Km 22 Ismailia desert road -Left side , Cairo</p>
-                            <p>Email :  nlsinfo@niscl.com
-                                <br> Telephone :  26562521– 26562522 - 26562526 -01066682298</p>
-                                <ul class="footer-social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook fa-fb" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!--//END FOOTER -->
+    <!-- FOOTER -->
+    <?php include_once ("footer.php"); ?>
             <!-- jQuery, Bootstrap JS. -->
             <script src="js/jquery.min.js"></script>
             <script src="js/tether.min.js"></script>

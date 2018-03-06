@@ -33,7 +33,7 @@
               <img src="images/nib_logo.png" class="img-fluid" alt="Coming-soon-logo">
               <h1>COMING SOON</h1>
               <p>The Website is Under Construction. Please Check Back Later!</p>
-              <a href="index.html" class="btn btn-warning">Back to home page</a>
+              <a href="index.php" class="btn btn-warning">Back to home page</a>
           </div>
       </div>
   </div>
