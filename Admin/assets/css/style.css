@@ -2359,7 +2359,7 @@ input[type="date"]{
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 
 }
-.container {
+.containerradio {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -2373,7 +2373,7 @@ input[type="date"]{
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.containerradio input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -2391,29 +2391,29 @@ input[type="date"]{
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.containerradio:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.containerradio input:checked ~ .checkmark {
     background-color: #2196F3;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
+.checkmarkradio:after {
     content: "";
     position: absolute;
     display: none;
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.containerradio input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.containerradio .checkmark:after {
     top: 9px;
     left: 9px;
     width: 8px;

@@ -83,11 +83,11 @@ function randomPassword() {
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
-                            <label class="container">Male
+                            <label class="containerradio">Male
                             <input type="radio" checked="checked" name="radio">
                             <span class="checkmark"></span>
                             </label>
-                            <label class="container">Female
+                            <label class="containerradio">Female
                             <input type="radio" name="radio">
                             <span class="checkmark"></span>
                             </label>
