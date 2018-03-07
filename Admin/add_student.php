@@ -41,7 +41,7 @@
             <div class="row mt">
               <div class="col-lg-12">
                  <div class="container">
-                       
+                       <!-- STUDENT FORM -->
                     <form class="form form-horizontal">
                        <div class="form-group">
                          <div class="col-md-3">
@@ -68,6 +68,16 @@
                           </select>
                          </div>
 
+                         <div class="form-group">
+                            <div class="col-md-3">
+                         <label>Gender :</label> 
+                          <select class="form-control" required="">
+                            <option>Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                          </select>
+                          </div>
+                        </div>
                       
                          </div>
                     </form>
@@ -75,7 +85,7 @@
                       <form class="form form-horizontal">
                        <div class="form-group">
                           <div class="col-md-3">
-                          <label>username:</label>
+                          <label>Username:</label>
                           <input type="text" name="username" class="form-control" placeholder="" required="">
                             <br/>
                          </div>
@@ -117,16 +127,7 @@
                           <input type="text" name="bdate" class="form-control" placeholder="DD/MM/YYYY" required="">
                          </div>
 
-                          <div class="form-group">
-                            <div class="col-md-3">
-                         <label>Gender :</label> 
-                          <select class="form-control" required="">
-                            <option>Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                          </select>
-                          </div>
-                        </div>
+                          
                       </div>
                       </form>
 
@@ -142,15 +143,162 @@
                       </div>
                       </form>
 
+                      <form class="form form-horizontal">
+                       <div class="form-group">
+                          <div class="col-md-3">
+                          <div class="radio">
+                          <label><input type="radio" name="optradio" id="existp">Add to existing parent</label>
+                          <label><input type="radio" name="optradio" id="newp">Add new parent</label>
+                        </div>
+                            <br/>
+                         </div>
+
+                        
+                      </div>
+
+                      </form>
+
+                      
+                    </div>
+                  </div>
+                  </div>
+                      
+                      
+                       
+                       <!-- student form ends here -->
+
+                      <div class="row mt">
+                      <div class="col-lg-12">
+  
+                       <div class="container" id="searchp">
+                         <form class="form form-horizontal">
+                          <div class="form-group">
+                         <div class="col-md-3">
+                          <label>Search for parent:</label>
+                          <input type="text" name="FName" class="form-control" placeholder="Search by username">
+                         </div>
+                         </form>
                        </div>
+                       </div>
+                     </div>
+
+
+
+                       <!-- PARENT FORM -->
+
+                       <div class="container" id="pform">
+   
+                          <form class="form form-horizontal">
+                       <div class="form-group">
+                         <div class="col-md-3">
+                          <label>First Name:</label>
+                          <input type="text" name="FName" class="form-control" placeholder=""  required="">
+                         </div>
+
+                         <div class="col-md-3">
+                          <label>Last Name:</label>
+                          <input type="text" name="LName" class="form-control" placeholder="" required="">
+                         </div>
+                         </div>
+                    </form>
+
+                    <form class="form form-horizontal">
+                       <div class="form-group">
+                         <div class="col-md-3">
+                         <label>Gender :</label> 
+                          <select class="form-control" required="">
+                            <option>Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                          </select>
+                          </div>
+                         </div>
+                    </form>
+
+                       <form class="form form-horizontal">
+                       <div class="form-group">
+                          <div class="col-md-3">
+                          <label>Username:</label>
+                          <input type="text" name="username" class="form-control" placeholder="" required="">
+                            <br/>
+                         </div>
+
+                          <div class="col-md-3">
+                          <label>Email:</label>
+                          <input type="text" name="email" class="form-control" placeholder="" required="">
+
+                         </div>
+                      </div>
+                      </form>
+
+                        <form class="form form-horizontal">
+                       <div class="form-group">
+                          <div class="col-md-3">
+                          <label>Password:</label>
+                          <input type="password" name="pwd1" class="form-control" placeholder="" required="">
+                            <br/>
+                         </div>
+
+                          <div class="col-md-3">
+                          <label>retype password:</label>
+                          <input type="password" name="pwd2" class="form-control" placeholder="" required="">
+
+                         </div>
+                      </div>
+                      </form>
+
+
+                        <form class="form form-horizontal">
+                       <div class="form-group">
+                          <div class="col-md-3">
+                          <label>Telephone:</label>
+                          <input type="text" name="tele" class="form-control" placeholder="" required="">
+                            <br/>
+                         </div>
+                          <div class="col-md-3">
+                          <label>Birthdate :</label>
+                          <input type="text" name="bdate" class="form-control" placeholder="DD/MM/YYYY" required="">
+                         </div>
+
+                          
+                      </div>
+                      </form>
+
+                      <form class="form form-horizontal">
+                       <div class="form-group">
+                          <div class="col-md-3">
+                          <label>SSN:</label>
+                          <input type="text" name="tele" class="form-control" placeholder="" required="">
+                            <br/>
+                         </div>
+
+                          <div class="form-group">
+                          <div class="col-md-3">
+                          <label>Address:</label>
+                          <input type="text" name="address" class="form-control" placeholder="" required="">
+                            <br/>
+                         </div>
+
+                          
+                      </div>
+                          
+                      </div>
+                      </form>
+
+                      
+                      
+                       </div>
+
+                       <!-- parent form ends here -->
                      
-                   </form>
+                   
+                 </div>
                         <button type="button" class="btn btn-primary">Add</button>
                    </div>
 
               
-              </div>
-            </div>
+              
+            
  
 
 
@@ -164,7 +312,7 @@
 
     <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
-
+    <script src="assets/js/add-parent.js"></script>
     <!--script for this page-->
     
   <script>
