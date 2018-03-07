@@ -136,18 +136,31 @@ a, a:hover, a:focus {
 }
 
 .btn-theme04 {
-  color: #fff;
-  background-color: #ed5565;
-  border-color: #da4453;
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 .btn-theme04:hover,
 .btn-theme04:focus,
 .btn-theme04:active,
 .btn-theme04.active,
 .open .dropdown-toggle.btn-theme04 {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   color: #fff;
-  background-color: #da4453;
-  border-color: #da4453;
+  transform: translateY(-7px);
 }
 
 .btn-clear-g {
@@ -2240,4 +2253,223 @@ label {
     min-height: 900px;
 }
 
+.left{
+        margin-left: 980px;
+}
 
+.buttonlink{
+    color: #424a5d;
+    text-decoration: none;
+}
+
+.tabcontent table {
+  border-spacing: 0px;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  background-color: transparent; /* Change the background-color of table here */
+  text-align: left; /* Change the text-alignment of table here */
+}
+.tabcontent th {
+  font-weight: bold;
+  border: 1px solid #555555;; /* Change the border-color of heading here */
+  padding: 8px;
+  color:#424a5d;
+}
+.tabcontent td {
+  border: 1px solid #555555;; /* Change the border-color of cells here */
+  padding: 8px;
+}
+/* Adding Striped Effect for odd rows */
+.tabcontent tr {
+  background-color: transparent; /* Change the default background-color of rows here */
+}
+.tabcontent tr:nth-of-type(2n+1) {
+  background-color: transparent; /* Change the background-color of odd rows here */
+}
+.tabcontent tr:nth-of-type(2n) {
+  background-color: transparent; /* Change the background-color of odd rows here */
+}
+.tabcontent tr th {
+  background-color: transparent; /* Change the background-color of heading here */
+}
+/* Adding Hover Effect for rows */
+.tabcontent tr {
+  -moz-transition: background-color 300ms ease-in-out 0s;
+  -ms-transition: background-color 300ms ease-in-out 0s;
+  -o-transition: background-color 300ms ease-in-out 0s;
+  -webkit-transition: background-color 300ms ease-in-out 0s;
+  transition: background-color 300ms ease-in-out 0s;
+}
+.tabcontent tr:hover {
+  background-color: #fff176; /* Change the hover background-color of rows here */
+}
+/* Removing left and right border of rows for modern UIs */
+.tabcontent tr {
+  border-top: 1px solid #555555;;
+  border-bottom: 1px solid #555555;;
+}
+.tabcontent th, td {
+  border: none;
+}
+
+input[type="search"] {
+    border:1px solid #d1d1d1;
+    font: bold 12px Arial, Helvetica, Sans-serif;
+    color:#bebebe;
+    width:200px;
+    float: left;
+    margin-bottom: 20px;
+    padding:6px 15px 6px 35px;
+    border-radius:20px;
+    margin-top: -30px;
+    text-shadow:0 2px 3px rgba(0,0,0,0.1);
+    box-shadow:0 1px 3px rgba(0,0,0,0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+}
+
+input[type="search"]:focus{
+    width:300px;
+    outline:0;
+}
+
+input[type="date"]{
+    line-height: 10px;
+    display: block;
+    width: 50%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 470px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+    margin-left: 15px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 470px;
+}
+
+.styled-select.slate {
+   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 470px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 470px;
+}
+
+#main{
+    width: 200px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    font-family: 'Helvetica Neue','Helvetica',sans-serif;
+    font-weight: 100;
+    background-color: #424a5d;
+    border-radius: 10px;
+    margin-left: 440px;
+    transition: border-radius 0.3s;
+    transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-radius 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#main:hover{
+  cursor:pointer;
+  background-color: #2EE59D;
+  color: #fff;
+  border-radius:50px;
+  color:#eee;
+  transition:border-radius 0.3s;
+  transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-radius 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  
+}
