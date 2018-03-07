@@ -30,7 +30,7 @@
       
       <!-- ************* MAIN SIDEBAR MENU **************** -->
       <!--sidebar start-->
-      <?php include_once("sidemenu.php"); ?>
+      <?php include_once("side.php"); ?>
       <!--sidebar end-->
       
       <!-- ************ MAIN CONTENT **************** -->
@@ -53,6 +53,22 @@
                           <label>Last Name:</label>
                           <input type="text" name="LName" class="form-control" placeholder="" required="">
                          </div>
+                         </div>
+                    </form>
+
+                    <form class="form form-horizontal">
+                       <div class="form-group">
+                         <div class="col-md-3">
+                          <label>Level:</label>
+                          <select class="form-control" required="">
+                            <option>Level</option>
+                            <option>PYP</option>
+                            <option>MYP</option>
+                            <option>DP</option>
+                          </select>
+                         </div>
+
+                      
                          </div>
                     </form>
 
@@ -100,17 +116,31 @@
                           <label>Birthdate :</label>
                           <input type="text" name="bdate" class="form-control" placeholder="DD/MM/YYYY" required="">
                          </div>
-                          <div>
+
+                          <div class="form-group">
+                            <div class="col-md-3">
                          <label>Gender :</label> 
                           <select class="form-control" required="">
                             <option>Gender</option>
                             <option>Male</option>
                             <option>Female</option>
                           </select>
+                          </div>
                         </div>
                       </div>
                       </form>
 
+                      <form class="form form-horizontal">
+                       <div class="form-group">
+                          <div class="col-md-3">
+                          <label>Address:</label>
+                          <input type="text" name="address" class="form-control" placeholder="" required="">
+                            <br/>
+                         </div>
+
+                          
+                      </div>
+                      </form>
 
                        </div>
                      
