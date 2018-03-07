@@ -1,3 +1,8 @@
+<?php
+require_once("../classes/pages.php");
+$page = new pages;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,11 +22,6 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -43,12 +43,22 @@
             <h3><i class="fa fa-angle-right"></i> Add Page:</h3>
             <div class="row mt">
                 <div class="col-lg-12">
-                  <form method="post">
+                 <form action="" method="POST"  enctype="multipart/form-data">
                
-                 <label class="form-group col-md-1"><B>Tile</B></label>
+                 <label class="form-group col-md-1"><B>Friendly Name: </B></label>
                   <div class="col-sm-2">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="friname" id="friname">
                   </div>
+                  <label class="form-group col-md-1"><B>Physical Name: </B></label>
+                  <div class="col-sm-2">
+                        <input type="text" class="form-control" name="physname" id="physname">
+                  </div>
+                  <label class="form-group col-md-1"><B>Status: </B></label>
+                  <select class="selectpicker" name="statuspicker">
+                  <option value ="1">publish</option>
+                  <option value = "0">hide</option>
+                  </select>
+
 
                   <div>
                   <br />
@@ -57,20 +67,37 @@
                      <script type="text/javascript">
                         CKEDITOR.replace( 'editor1' );
                      </script>
-                  </p>
-                  <p>
-                                           <button type="button" class="btn btn-primary">Add</button>
-
-                  </p>
+                     <input type="submit" name="add" id="saverest" value="Add"/>
+                  
                </form>
+
              </div>
                 </div>
             </div>
             
         </section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+      </section>
+      <?php
+      if(isset($_POST['add'])){
 
-      <!--main content end-->
+        $fn =  $_POST['friname'];
+        $pn =  $_POST['physname'];
+        $stat = $_POST['statuspicker'];
+        $content = $_POST['editor1']; 
+        $result =  $page->insertpage($fn , $pn, $content);
+        if($result)
+        {
+          $msg='<div class="alert alert-success">Thank You! I will be in touch</div>';
+          echo $msg;
+        }else{
+
+          $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+          echo $msg;
+
+        }
+      }?>
+  
+
       <!--footer start-->
       <?php include_once("footer.php");?>
       <!--footer end-->
