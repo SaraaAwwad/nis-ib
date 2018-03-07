@@ -46,9 +46,14 @@
                             <hr>
                               <thead>
                               <tr>
-                                  <th><i class="fa fa-question-circle"></i> First Name </th>
+                                  <th><i class="fa fa-key"></i> ID </th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>First Name</th>
                                   <th class="hidden-phone"><i class="fa fa-question-circle"></i>Last Name</th>
-                                   <th class="hidden-phone"><i class="fa fa-user"></i> Username</th>
+                                  <th class="hidden-phone"><i class="fa fa-user"></i>Gender</th>
+                                  <th class="hidden-phone"><i class="fa fa-calendar"></i>DOB</th>
+                                  <th class="hidden-phone"><i class="fa fa-map"></i>Address</th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>Level</th>
+                                  <th class="hidden-phone"><i class="fa fa-user"></i> Username</th>
                                   <th class="hidden-phone"><i class="fa fa-envelope"></i> Email</th>
                                   <th class="hidden-phone"><i class="fa fa-lock"></i> Password</th>
                                   <th><i class=" fa fa-edit"></i> Actions </th>
@@ -57,8 +62,13 @@
                               </thead>
                               <tbody>
                               <tr>
-                                  <td>Amira</td>
+                                  <td>65</td>
+                                  <td class="hidden-phone">Amira</td>
                                   <td class="hidden-phone">Galal</td>
+                                  <td class="hidden-phone">Female</td>
+                                  <td class="hidden-phone">1-1-1996</td>
+                                  <td class="hidden-phone">Maadi</td>
+                                  <td class="hidden-phone">DP</td>
                                   <td class="hidden-phone">Amirag</td>
                                   <td class="hidden-phone">amirag@gmail.com</td>
                                   <td class="hidden-phone">123456</td>
@@ -71,11 +81,16 @@
                               </tr>
 
                                <tr>
-                                  <td>Sara</td>
-                                  <td class="hidden-phone">Awwad</td>
+                                  <td>31</td>
+                                  <td class="hidden-phone">Sara</td>
+                                  <td class="hidden-phone">Hassan</td>
+                                  <td class="hidden-phone">Female</td>
+                                  <td class="hidden-phone">1-1-1996</td>
+                                  <td class="hidden-phone">Heliopolis</td>
+                                  <td class="hidden-phone">DP</td>
                                   <td class="hidden-phone">Saraw</td>
-                                  <td class="hidden-phone">Saraw@gmail.com</td>
-                                  <td class="hidden-phone">654321</td>
+                                  <td class="hidden-phone">saraw@gmail.com</td>
+                                  <td class="hidden-phone">123456</td>
 
                                   <td>
                                       <button class="btn btn-primary btn-xs" onclick="window.location.href='#'">
@@ -85,10 +100,15 @@
                               </tr>
 
                                 <tr>
-                                  <td>Farah</td>
+                                  <td>56</td>
+                                  <td class="hidden-phone">Farrah</td>
                                   <td class="hidden-phone">Hisham</td>
-                                  <td class="hidden-phone">Farahh</td>
-                                  <td class="hidden-phone">Farahh@gmail.com</td>
+                                  <td class="hidden-phone">Female</td>
+                                  <td class="hidden-phone">1-1-1996</td>
+                                  <td class="hidden-phone">Nasr City</td>
+                                  <td class="hidden-phone">DP</td>
+                                  <td class="hidden-phone">Farrahh</td>
+                                  <td class="hidden-phone">farrah@gmail.com</td>
                                   <td class="hidden-phone">123456</td>
 
                                   <td>
@@ -98,11 +118,16 @@
                                   </td>
                               </tr>
                                 <tr>
-                                  <td>Menna</td>
+                                  <td>73</td>
+                                  <td class="hidden-phone">Menna</td>
                                   <td class="hidden-phone">Mohamed</td>
+                                  <td class="hidden-phone">Female</td>
+                                  <td class="hidden-phone">1-1-1996</td>
+                                  <td class="hidden-phone">Mokattam</td>
+                                  <td class="hidden-phone">DP</td>
                                   <td class="hidden-phone">Mennam</td>
-                                  <td class="hidden-phone">mennam@gmail.com</td>
-                                  <td class="hidden-phone">123123</td>
+                                  <td class="hidden-phone">menna@gmail.com</td>
+                                  <td class="hidden-phone">123456</td>
 
                                   <td>
                                       <button class="btn btn-primary btn-xs" onclick="window.location.href='#'">
@@ -113,7 +138,10 @@
 
                               </tbody>
                           </table>
+
                       </div><!-- /content-panel -->
+                      <br>
+                      <button type="button" class="btn btn-primary" onclick="window.location.href='add_student.php'">Add Student</button>
                   </div><!-- /col-md-12 -->
               </div><!-- /row -->
 
