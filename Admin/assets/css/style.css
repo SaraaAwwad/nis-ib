@@ -2266,6 +2266,7 @@ label {
   border-spacing: 0px;
   border-collapse: collapse;
   width: 100%;
+  color:white;
   max-width: 100%;
   margin-bottom: 15px;
   margin-top: 15px;
@@ -2274,6 +2275,7 @@ label {
 }
 .tabcontent th {
   font-weight: bold;
+  color:white;
   border: 1px solid #555555;; /* Change the border-color of heading here */
   padding: 8px;
   color:#424a5d;
@@ -2287,13 +2289,14 @@ label {
   background-color: transparent; /* Change the default background-color of rows here */
 }
 .tabcontent tr:nth-of-type(2n+1) {
-  background-color: transparent; /* Change the background-color of odd rows here */
+  background-color: #777777a8; /* Change the background-color of odd rows here */
 }
 .tabcontent tr:nth-of-type(2n) {
-  background-color: transparent; /* Change the background-color of odd rows here */
+  background-color: #7777776b; /* Change the background-color of odd rows here */
 }
 .tabcontent tr th {
-  background-color: transparent; /* Change the background-color of heading here */
+    color:white;
+  background-color: #424a5d; /* Change the background-color of heading here */
 }
 /* Adding Hover Effect for rows */
 .tabcontent tr {
@@ -2356,7 +2359,7 @@ input[type="date"]{
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 
 }
-.container {
+.containerradio {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -2370,7 +2373,7 @@ input[type="date"]{
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.containerradio input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -2388,29 +2391,29 @@ input[type="date"]{
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.containerradio:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.containerradio input:checked ~ .checkmark {
     background-color: #2196F3;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
+.checkmarkradio:after {
     content: "";
     position: absolute;
     display: none;
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.containerradio input:checked ~ .checkmark:after {
     display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.containerradio .checkmark:after {
     top: 9px;
     left: 9px;
     width: 8px;
@@ -2473,3 +2476,8 @@ input[type="date"]{
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-radius 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   
 }
+
+.floatLeft { width: 33.3%; float: left; }
+.floatCenter {width: 33.3%; float: left; }
+.floatRight {width: 33.3%; float: left; }
+.container1 { overflow: hidden; width: 100%;}

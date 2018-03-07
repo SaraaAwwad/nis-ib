@@ -47,7 +47,7 @@ function randomPassword() {
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add To Staff</h3>
+            <h3><i class="fa fa-angle-right"></i> Add Addresses</h3>
             
             <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
@@ -55,63 +55,14 @@ function randomPassword() {
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="get">
                         <fieldset>
-                          <legend>Personal Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">First Name</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
-                              <div class="col-sm-10">
-                                  <input id="date" type="date">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Gender</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Male
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">Female
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Profession</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
-                          </div>
-                          </div>
-                        </fieldset>
-                          <fieldset>
-                          <legend>Address Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Building</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
+                              <label class="col-sm-2 col-sm-2 control-label">City</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
                               </div>
@@ -120,44 +71,15 @@ function randomPassword() {
                               <label class="col-sm-2 col-sm-2 control-label">Area</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">City</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
                           </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Egypt" value="Egypt" disabled>
-                              </div>
-                          </div>
-                          </fieldset>
-                          <fieldset>
-                          <legend>Account Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Email</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">@nis.edu.eg
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Password</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo randomPassword(); ?>" disabled>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Username</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
-                              </div>
                           </div>
-                        </fieldset>
+                          </div>
+                         </fieldset>
                           <input type="submit" id="main">
                       </form>
                   </div>
