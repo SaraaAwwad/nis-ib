@@ -2266,6 +2266,7 @@ label {
   border-spacing: 0px;
   border-collapse: collapse;
   width: 100%;
+  color:white;
   max-width: 100%;
   margin-bottom: 15px;
   margin-top: 15px;
@@ -2274,6 +2275,7 @@ label {
 }
 .tabcontent th {
   font-weight: bold;
+  color:white;
   border: 1px solid #555555;; /* Change the border-color of heading here */
   padding: 8px;
   color:#424a5d;
@@ -2287,13 +2289,14 @@ label {
   background-color: transparent; /* Change the default background-color of rows here */
 }
 .tabcontent tr:nth-of-type(2n+1) {
-  background-color: transparent; /* Change the background-color of odd rows here */
+  background-color: #777777a8; /* Change the background-color of odd rows here */
 }
 .tabcontent tr:nth-of-type(2n) {
-  background-color: transparent; /* Change the background-color of odd rows here */
+  background-color: #7777776b; /* Change the background-color of odd rows here */
 }
 .tabcontent tr th {
-  background-color: transparent; /* Change the background-color of heading here */
+    color:white;
+  background-color: #424a5d; /* Change the background-color of heading here */
 }
 /* Adding Hover Effect for rows */
 .tabcontent tr {
@@ -2473,3 +2476,8 @@ input[type="date"]{
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-radius 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   
 }
+
+.floatLeft { width: 33.3%; float: left; }
+.floatCenter {width: 33.3%; float: left; }
+.floatRight {width: 33.3%; float: left; }
+.container1 { overflow: hidden; width: 100%;}

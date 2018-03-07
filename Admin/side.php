@@ -16,11 +16,12 @@
                     <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-book"></i>
-                          <span>Pages</span>
+                          <span>Control</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="view_pages.php">View Pages</a></li>
                           <li><a href="add_page.php">Add Page</a></li>
+                          <li><a href="viewaddress.php">Manage Address</a></li>
                       </ul>
                   </li>
 
@@ -53,7 +54,7 @@
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="view_staff.php">View Staff</a></li>
-                          <li><a href="add_staff.php">Add Staff</a></li>
+                          <li><a href="addteacher.php">Add Staff</a></li>
                       </ul>
                   </li>
 
