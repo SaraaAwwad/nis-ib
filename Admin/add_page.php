@@ -1,7 +1,6 @@
 <?php
 require_once("../classes/pages.php");
 $page = new pages;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +43,30 @@ $page = new pages;
             <div class="row mt">
                 <div class="col-lg-12">
                  <form action="" method="POST"  enctype="multipart/form-data">
-               
+                  <?php
+
+
+                  if(isset($_POST['add'])){
+
+                    $fn =  $_POST['friname'];
+                    $pn =  $_POST['physname'];
+                    $stat = $_POST['statuspicker'];
+                    $content = $_POST['editor1']; 
+                    $result =  $page->insertpage($fn , $pn, $content ,$stat);
+                    if($result)
+                    {
+                      
+                      $msg='<div class="alert alert-success">Page added successfully! </div>';
+                      echo $msg;
+                      
+                    }else{
+
+                      $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+                      echo $msg;
+
+                    }
+      }?>
+  
                  <label class="form-group col-md-1"><B>Friendly Name: </B></label>
                   <div class="col-sm-2">
                         <input type="text" class="form-control" name="friname" id="friname">
@@ -55,7 +77,7 @@ $page = new pages;
                   </div>
                   <label class="form-group col-md-1"><B>Status: </B></label>
                   <select class="selectpicker" name="statuspicker">
-                  <option value ="1">publish</option>
+                  <option value ="1">Publish</option>
                   <option value = "0">hide</option>
                   </select>
 
@@ -63,11 +85,11 @@ $page = new pages;
                   <div>
                   <br />
                   <br />
-                     <textarea name="editor1">Initial value</textarea>
+                     <textarea name="editor1"></textarea>
                      <script type="text/javascript">
                         CKEDITOR.replace( 'editor1' );
                      </script>
-                     <input type="submit" name="add" id="saverest" value="Add"/>
+                     <input  class="btn btn-primary" type="submit" name="add" id="saverest" value="Add"/>
                   
                </form>
 
@@ -77,26 +99,7 @@ $page = new pages;
             
         </section><! --/wrapper -->
       </section>
-      <?php
-      if(isset($_POST['add'])){
-
-        $fn =  $_POST['friname'];
-        $pn =  $_POST['physname'];
-        $stat = $_POST['statuspicker'];
-        $content = $_POST['editor1']; 
-        $result =  $page->insertpage($fn , $pn, $content);
-        if($result)
-        {
-          $msg='<div class="alert alert-success">Thank You! I will be in touch</div>';
-          echo $msg;
-        }else{
-
-          $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
-          echo $msg;
-
-        }
-      }?>
-  
+      
 
       <!--footer start-->
       <?php include_once("footer.php");?>

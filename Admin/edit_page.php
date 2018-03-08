@@ -1,3 +1,12 @@
+<?php
+require_once("../classes/pages.php");
+if(isset($_GET['page']))
+{
+  $pid= $_GET['page'];
+}
+$page_obj = new  pages($pid);
+$html_content = $page_obj->__get("html");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +43,7 @@
       
       <!-- ************* MAIN SIDEBAR MENU **************** -->
       <!--sidebar start-->
-      <?php include_once("sidemenu.php"); ?>
+      <?php include_once("side.php"); ?>
       <!--sidebar end-->
       
       <!-- ************ MAIN CONTENT **************** -->
@@ -44,27 +53,59 @@
             <h3><i class="fa fa-angle-right"></i> Edit Page:</h3>
             <div class="row mt">
                 <div class="col-lg-12">
-                  <form method="post">
-               
-                 <label class="form-group col-md-1"><B>Tile</B></label>
+                  
+                  <form action="" method="POST"  enctype="multipart/form-data">
+                  <?php
+
+                  if(isset($_POST['save'])){
+
+                    $fn =  $_POST['friname'];
+                    $pn =  $_POST['physname'];
+                    $stat = $_POST['statuspicker'];
+                    $content = $_POST['editor1']; 
+                    $result =  $page_obj->updatePage($fn , $pn, $content ,$stat);
+                    if($result)
+                    {
+                      
+                      $msg='<div class="alert alert-success">Page added successfully! </div>';
+                      $page_obj->getInfo($page_obj->__get("id"));
+                      echo $msg;
+                      
+                    }else{
+
+                      $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+                      echo $msg;
+
+                    }
+                  }?>
+                  
+                  <label class="form-group col-md-1"><B>Friendly Name: </B></label>
                   <div class="col-sm-2">
-                        <input type="text" class="form-control">
+                      <input type="text" class="form-control" name="friname" id="friname" value="<?php echo $page_obj->__get("friendlyname");?>">
                   </div>
 
+                  <label class="form-group col-md-1"><B>Physical Name: </B></label>
+                  <div class="col-sm-2">
+                    <input type="text" class="form-control" name="physname" id="physname" value="<?php echo $page_obj->__get("physicalname");?>">
+                  </div>
+                  <label class="form-group col-md-1"><B>Status: </B></label>
+                  <select class="selectpicker" name="statuspicker">
+                  <option value ="1" <?php if($page_obj->__get("status") == 1) echo "selected='selected'"?>>Publish</option>
+                  <option value = "0" <?php if($page_obj->__get("status") == 0) echo "selected='selected'"?>>hide</option>
+                  </select>
                   <div>
-                  <br />
-                  <br />
-                     <textarea name="editor1">Initial value</textarea>
+                  <br/>
+                  <br/>
+                     <textarea name="editor1" id="myDiv"><?php echo $page_obj->__get("html");?></textarea>  
                      <script type="text/javascript">
-                        CKEDITOR.replace( 'editor1' );
+
+                       CKEDITOR.replace( 'editor1' );
+                       
                      </script>
-                  </p>
-                  <p>
-                   <a class="btn btn-primary btn-sm pull-left" href="#">Submit</a>
-                  </p>
+                    <input  class="btn btn-primary" type="submit" name="save" value="save"/>
                </form>
              </div>
-                </div>
+               </div>
             </div>
             
         </section><! --/wrapper -->
