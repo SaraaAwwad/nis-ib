@@ -31,8 +31,7 @@
                           <span>Courses</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
-                          <li><a href="view_courses.php">View Courses</a></li>
-                          <li><a href="add_course.php">Add Course</a></li>
+                          <li><a href="view_courses.php">Manage Courses</a></li>
                       </ul>
                   </li>
 

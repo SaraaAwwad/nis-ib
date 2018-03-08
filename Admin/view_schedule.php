@@ -37,36 +37,35 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> View Courses</h3>
+            <h3><i class="fa fa-angle-right"></i> View Schedule</h3>
   <section class="tabcontent">
-    <a class="buttonlink btn btn-theme04 left" href="addteacher.php"><i class="fa fa-plus"></i>Course</a>
+    <a class="buttonlink btn btn-theme04 left" href="add_schedule.php"><i class="fa fa-plus"></i> Schedule</a>
     <input type="search" class="light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
     <table class="order-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th class="hidden-phone">Course Name</th>
-          <th class="hidden-phone">Course Code</th>
-          <th>Level</th>
-          <th>Group</th>
-          <th>Teaching Hours</th>
-          <th>Description</th>
-          <th><i class=" fa fa-edit"></i> Status</th>
+          <th class="hidden-phone">Section ID</th>
+          <th>Room</th>
+          <th>Room's Capacity</th>
+          <th>Day</th>
+          <th>Slot</th>
+          <th>Start Time</th>
+          <th>End Time</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
-          <td><a href="view_sections.php">Computer Skills</a></td>
-          <td>CSC012</td>
-          <td>SL</td>
-          <td>5</td>
-          <td>4 Hours</td>
-          <td>Teach Computer Skills like Word, Excel and Powerpoint.</td>
-          <td><span class="label label-info label-mini">Available</span></td>
-          <td  colspan="2">
-            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+          <td>1</td>
+          <td>311</td>
+          <td>25</td>
+          <td>Wednesday</td>
+          <td>1st</td>
+          <td>8:30AM</td>
+          <td>11:00AM</td>
+          <td>
             <button class="btn btn-Coordinatorimary btn-xs"><i class="fa fa-pencil"></i></button>
           </td>
         </tr>
@@ -87,9 +86,6 @@
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-    <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
     <script src="assets/js/staff.js"></script>
     <!--script for this page-->

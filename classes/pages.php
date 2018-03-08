@@ -1,7 +1,7 @@
 <?php
 	require_once("..\db\database.php");
 
-class pages{
+class Pages{
 
 	public $id;
 	public $friendlyname;
@@ -26,35 +26,57 @@ class pages{
 		$userinfo = $this->dbobj->selectsql($sql);
 		if($userinfo){
 			$row = mysqli_fetch_array($userinfo);
-			$this->ID = $row['ID'];
-			$this->Name = $row['Name'];
-			$this->Description = $row['Description'];
-			$this->Image = $row['Image'];
-			$this->Category = $row['Category'];
-			$this->Status = $row['Status'];
-			$this->RestID = $row['RestID'];
-			$this->values = array();
+			$this->id = $row['id'];
+			$this->friendlyname = $row['friendlyname'];
+			$this->physicalname = $row['physicalname'];
+			$this->HTML = $row['HTML'];
+		//	$this->pageid = $row['Category'];
+			$this->status = $row['status'];
 		}
 
 	}
 
-	public function insertPage($frname , $phyname , $html){
-
+	Static function insertPage($frname , $phyname , $html){
+		#static ya amira.. 
+		$this->db_obj= new dbconnect();
 		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
 			     VALUES ('$frname', '$phyname', '$html', '0', '0')"; 
 	   
 	    $stmt = $this->db_obj->executesql($sql);
 	    if($stmt){
-			
-			return ture;
-
+			return true;
 	    }else{
 			return false;
 		}
 
 	}
 
+	Static function getAllPages(){
+		$dbobj= new dbconnect;
+		$sql = "SELECT * FROM pages";
+		$result = $dbobj->selectsql($sql);
+		$PagesArr= array();
+		$i=0;
+		while ($row = mysqli_fetch_assoc($result)){
+			$PagesObj = new Pages($row['id']);
+			$PagesArr[$i] = $PagesObj;
+			$i++;
+		}
+		return $PagesArr;
+	}
 
-
+	Static function getAllPagesGroups(){
+		$dbobj= new dbconnect;
+		$sql = "SELECT * FROM pages WHERE pageid=0";
+		$result = $dbobj->selectsql($sql);
+		$PagesArr= array();
+		$i=0;
+		while ($row = mysqli_fetch_assoc($result)){
+			$PagesObj = new Pages($row['id']);
+			$PagesArr[$i] = $PagesObj;
+			$i++;
+		}
+		return $PagesArr;
+	}
 }
 ?>
