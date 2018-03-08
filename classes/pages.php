@@ -11,7 +11,7 @@ class Pages{
 	public $status;
 	public $publisher;
 
-	private $db_obj;
+	//private $db_obj;
 
 	public function __construct($id=""){
 		$this->db_obj= new dbconnect();
@@ -23,7 +23,7 @@ class Pages{
 	public function getInfo($id){
 
 		$sql = "SELECT * FROM pages Where id = '$id' ";
-		$userinfo = $this->dbobj->selectsql($sql);
+		$userinfo = $this->db_obj->selectsql($sql);
 		if($userinfo){
 			$row = mysqli_fetch_array($userinfo);
 			$this->id = $row['id'];
@@ -36,13 +36,13 @@ class Pages{
 
 	}
 
-	Static function insertPage($frname , $phyname , $html){
-		#static ya amira.. 
-		$this->db_obj= new dbconnect();
+	Static function insertPage($frname , $phyname , $html, $pageid, $status){
+		//make validation(no repeated physical name, name.. )
+		$db_obj= new dbconnect();
 		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
-			     VALUES ('$frname', '$phyname', '$html', '0', '0')"; 
+			     VALUES ('$frname', '$phyname', '$html', '$pageid', '$status')"; 
 	   
-	    $stmt = $this->db_obj->executesql($sql);
+	    $stmt = $db_obj->executesql($sql);
 	    if($stmt){
 			return true;
 	    }else{
@@ -65,7 +65,7 @@ class Pages{
 		return $PagesArr;
 	}
 
-	Static function getAllPagesGroups(){
+	Static function getAllGroupPages(){
 		$dbobj= new dbconnect;
 		$sql = "SELECT * FROM pages WHERE pageid=0";
 		$result = $dbobj->selectsql($sql);
