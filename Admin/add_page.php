@@ -1,6 +1,10 @@
 <?php
 require_once("../classes/pages.php");
+<<<<<<< HEAD
+$page = new pages;
+=======
 
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +78,34 @@ require_once("../classes/pages.php");
             <div class="row mt">
                 
                  <form action="" method="POST"  enctype="multipart/form-data">
+<<<<<<< HEAD
+                  <?php
+
+
+                  if(isset($_POST['add'])){
+
+                    $fn =  $_POST['friname'];
+                    $pn =  $_POST['physname'];
+                    $stat = $_POST['statuspicker'];
+                    $content = $_POST['editor1']; 
+                    $result =  $page->insertpage($fn , $pn, $content ,$stat);
+                    if($result)
+                    {
+                      
+                      $msg='<div class="alert alert-success">Page added successfully! </div>';
+                      echo $msg;
+                      
+                    }else{
+
+                      $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+                      echo $msg;
+
+                    }
+      }?>
+  
+=======
                <div class="col-lg-12">
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
                  <label class="form-group col-md-1"><B>Friendly Name: </B></label>
                   <div class="col-sm-3">
                         <input type="text" class="form-control" name="friname" id="friname">
@@ -87,7 +118,11 @@ require_once("../classes/pages.php");
                   <label class="form-group col-md-1"><B>Status: </B></label>
                   <select class="selectpicker" name="statuspicker">
                   <option value ="1">Publish</option>
+<<<<<<< HEAD
+                  <option value = "0">hide</option>
+=======
                   <option value = "0">Hide</option>
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
                   </select>
 
                  </div>
@@ -114,6 +149,14 @@ require_once("../classes/pages.php");
                   </div>
                   	<div class="row"></div>
                   <br />
+<<<<<<< HEAD
+                     <textarea name="editor1"></textarea>
+                     <script type="text/javascript">
+                        CKEDITOR.replace( 'editor1' );
+                     </script>
+                     <input  class="btn btn-primary" type="submit" name="add" id="saverest" value="Add"/>
+                  
+=======
                   <div class="col-lg-12">
                      <textarea name="editor1">Initial value</textarea>
                      <script type="text/javascript">
@@ -121,6 +164,7 @@ require_once("../classes/pages.php");
                      </script>
                      <input type="submit" name="add" id="saverest" value="Add"/>
                   </div>
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
                </form>
 
              </div>
@@ -129,8 +173,12 @@ require_once("../classes/pages.php");
             
         </section><! --/wrapper -->
       </section>
+<<<<<<< HEAD
+      
+=======
 
   
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 
       <!--footer start-->
       <?php include_once("footer.php");?>
