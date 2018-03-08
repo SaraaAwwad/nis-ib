@@ -36,28 +36,42 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add Course</h3>
+            <h3><i class="fa fa-angle-right"></i> Add To Schedule</h3>
             
             <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="get">
-                          <legend>Course Information</legend>
+                        
+                          <legend>Date Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Course Name</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Section</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input class="form-control" id="disabledInput" type="text" disabled>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Course Code</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                              <label class="col-sm-2 col-sm-2 control-label">Day</label>
+                              <div class="weekDays-selector">
+                              <input type="checkbox" id="weekday-mon" class="weekday" value="Monday"/>
+                              <label for="weekday-mon">M</label>
+                              <input type="checkbox" id="weekday-tue" class="weekday" value="Tuesday"/>
+                              <label for="weekday-tue">T</label>
+                              <input type="checkbox" id="weekday-wed" class="weekday" value="Wednesday"/>
+                              <label for="weekday-wed">W</label>
+                              <input type="checkbox" id="weekday-thu" class="weekday" value="Thursday"/>
+                              <label for="weekday-thu">T</label>
+                              <input type="checkbox" id="weekday-fri" class="weekday" value="Friday"/>
+                              <label for="weekday-fri">F</label>
+                              <input type="checkbox" id="weekday-sat" class="weekday" value="Saturday"/>
+                              <label for="weekday-sat">S</label>
+                              <input type="checkbox" id="weekday-sun" class="weekday" value="Sunday"/>
+                              <label for="weekday-sun">S</label>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Level</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Slot</label>
                               <div class="styled-select slate">
                               <select>
                               <option></option>
@@ -65,31 +79,19 @@
                           </div>
                           </div>
                            <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Group</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Room Number</label>
                               <div class="styled-select slate">
                               <select>
                               <option></option>
                               </select>
                           </div>
                           </div>
+                          <legend>Register Students</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Teaching Hours</label>
-                              <div class="col-sm-10">
-                                  <input type="number" class="form-control">
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Activate
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">Inactivate
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
+                              <label class="col-sm-2 col-sm-2 control-label">Students</label>
+                              <select multiple>
+                              <option></option>
+                              </select>
                           </div>
 
                           <input type="submit" id="main">

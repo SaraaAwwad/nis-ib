@@ -36,62 +36,36 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add Course</h3>
+            <h3><i class="fa fa-angle-right"></i> Add Section</h3>
             
             <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="get">
-                          <legend>Course Information</legend>
+                        
+                          <legend>Teacher's Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Course Name</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Username</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
                               </div>
                           </div>
+                          <legend>Section Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Course Code</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Course</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input class="form-control" id="disabledInput" type="text" disabled>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Level</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Semester</label>
                               <div class="styled-select slate">
                               <select>
                               <option></option>
                               </select>
                           </div>
                           </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Group</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
-                          </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Teaching Hours</label>
-                              <div class="col-sm-10">
-                                  <input type="number" class="form-control">
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Activate
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">Inactivate
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
-                          </div>
-
                           <input type="submit" id="main">
                       </form>
                   </div>
