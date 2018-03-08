@@ -63,6 +63,7 @@ require_once("../classes/pages.php");
         {
           $msg='<div class="alert alert-success">Thank You! I will be in touch</div>';
           echo $msg;
+          
         }else{
 
           $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
