@@ -4,32 +4,32 @@
 class User{
 
 	public $id;
-    protected $username;
-    protected $fname;
-    protected $lname;
-    protected $DOB;
-    protected $email;
-    protected $gender;
-    protected $img;
-    protected $telephone = array();
-    protected $address = array();
-    protected $status;
+    public $username;
+    public $fname;
+    public $lname;
+    public $DOB;
+    public $email;
+    public $gender;
+    public $img;
+    public $telephone = array();
+    public $address = array();
+    public $status;
 
-	private $db_obj;
+	public $dbobj;
 
 	public function __construct($id=""){
-		$this->db_obj= new dbconnect();
+		$this->dbobj= new dbconnect();
 		if($id != ""){
 			$this->getInfo($id);
 		}
 	}
 
-	private function getInfo($id){
+	public function getInfo($id){
 		$sql = "SELECT * FROM user Where id = '$id' ";
 		$userinfo = $this->dbobj->selectsql($sql);
 		if($userinfo){
 			$row = mysqli_fetch_array($userinfo);
-			$this->id = $row['ID'];
+			$this->id = $row['id'];
 			$this->fname = $row['fname'];
 			$this->lname = $row['lname'];
 			$this->img = $row['img'];
@@ -39,8 +39,8 @@ class User{
 			$this->gender = $row['gender'];
 			$this->status = $row['status'];
 		}
-		$getUserAddress();
-		$getUserTelephone();
+		$this->getUserAddress();
+		$this->getUserTelephone();
 	}
 
 	private function getUserAddress(){
@@ -128,8 +128,5 @@ class User{
 			
 	}
 
-	static function getAll(){
-
-	}
 }
 ?>

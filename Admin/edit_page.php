@@ -34,7 +34,7 @@
       
       <!-- ************* MAIN SIDEBAR MENU **************** -->
       <!--sidebar start-->
-      <?php include_once("sidemenu.php"); ?>
+      <?php include_once("side.php"); ?>
       <!--sidebar end-->
       
       <!-- ************ MAIN CONTENT **************** -->
