@@ -13,7 +13,7 @@ class Student extends User{
     public function __construct($id=""){
 		if($id != ""){
             parent::__construct($id);
-            $this->getInfo2($id);
+            //$this->getInfo2($id);
            // $this->registeration = new Registeration();
         }
     }

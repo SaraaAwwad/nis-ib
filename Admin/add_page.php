@@ -1,6 +1,5 @@
 <?php
 require_once("../classes/pages.php");
-$page = new pages;
 
 ?>
 <!DOCTYPE html>
@@ -55,10 +54,9 @@ $page = new pages;
                   </div>
                   <label class="form-group col-md-1"><B>Status: </B></label>
                   <select class="selectpicker" name="statuspicker">
-                  <option value ="1">publish</option>
-                  <option value = "0">hide</option>
+                  <option value ="1">Publish</option>
+                  <option value = "0">Hide</option>
                   </select>
-
 
                   <div>
                   <br />
@@ -84,7 +82,7 @@ $page = new pages;
         $pn =  $_POST['physname'];
         $stat = $_POST['statuspicker'];
         $content = $_POST['editor1']; 
-        $result =  $page->insertpage($fn , $pn, $content);
+        $result =  Pages::insertpage($fn , $pn, $content, $stat);
         if($result)
         {
           $msg='<div class="alert alert-success">Thank You! I will be in touch</div>';
