@@ -23,7 +23,6 @@ class Pages{
 	public function getInfo($id){
 
 		$sql = "SELECT * FROM pages Where id = '$id' ";
-<<<<<<< HEAD
 		$pageinfo = $this->db_obj->selectsql($sql);
 		if($pageinfo){
 			$row = mysqli_fetch_array($pageinfo);
@@ -32,7 +31,7 @@ class Pages{
 			$this->physicalname = $row['physicalname'];
 			$this->html = $row['HTML'];
 			$this->pageid = $row['pageid'];
-=======
+
 		$userinfo = $this->db_obj->selectsql($sql);
 		if($userinfo){
 			$row = mysqli_fetch_array($userinfo);
@@ -41,13 +40,12 @@ class Pages{
 			$this->physicalname = $row['physicalname'];
 			$this->HTML = $row['HTML'];
 		//	$this->pageid = $row['Category'];
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 			$this->status = $row['status'];
-		}
+			}
 
+		}
 	}
 
-<<<<<<< HEAD
 	public function insertPage($frname , $phyname , $html , $stat){
 
 		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
@@ -78,7 +76,7 @@ class Pages{
 		$i=0;
 		$pagesArr = array();
 		while ($row = mysqli_fetch_assoc($stmt)){
-=======
+
 	Static function insertPage($frname , $phyname , $html, $pageid, $status){
 		//make validation(no repeated physical name, name.. )
 		$db_obj= new dbconnect();
@@ -91,7 +89,6 @@ class Pages{
 	    }else{
 			return false;
 		}
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 
 			$pageObj = new pages($row['id']);
 			$pageObj->friendlyname = $row['friendlyname'];
@@ -105,7 +102,6 @@ class Pages{
 		return $pagesArr;
 	}
 
-<<<<<<< HEAD
 	public function __get( $key )
     {
         return $this->$key;
@@ -116,10 +112,6 @@ class Pages{
         $this->key = $value;
     }
 
-
-
-
-=======
 	Static function getAllPages(){
 		$dbobj= new dbconnect;
 		$sql = "SELECT * FROM pages";
@@ -133,7 +125,6 @@ class Pages{
 		}
 		return $PagesArr;
 	}
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 
 	Static function getAllGroupPages(){
 		$dbobj= new dbconnect;
