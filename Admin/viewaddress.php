@@ -37,44 +37,61 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> View Courses</h3>
-  <section class="tabcontent">
-    <a class="buttonlink btn btn-theme04 left" href="addteacher.php"><i class="fa fa-plus"></i>Course</a>
-    <input type="search" class="light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
-    <table class="order-table">
-      <thead>
+            <h3><i class="fa fa-angle-right"></i> View Addresses</h3>
+    <a class="buttonlink btn btn-theme04 left" href="AddAddress.php"><i class="fa fa-plus"></i> Add Address</a>
+
+<div class="container1">
+<div class="floatLeft">
+<section class="tabcontent">
+<table>
+   <thead>
         <tr>
-          <th>ID</th>
-          <th class="hidden-phone">Course Name</th>
-          <th class="hidden-phone">Course Code</th>
-          <th>Level</th>
-          <th>Group</th>
-          <th>Teaching Hours</th>
-          <th>Description</th>
-          <th><i class=" fa fa-edit"></i> Status</th>
-          <th>Action</th>
+          <th>Counrty</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td><a href="view_sections.php">Computer Skills</a></td>
-          <td>CSC012</td>
-          <td>SL</td>
-          <td>5</td>
-          <td>4 Hours</td>
-          <td>Teach Computer Skills like Word, Excel and Powerpoint.</td>
-          <td><span class="label label-info label-mini">Available</span></td>
-          <td  colspan="2">
-            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-            <button class="btn btn-Coordinatorimary btn-xs"><i class="fa fa-pencil"></i></button>
-          </td>
-        </tr>
-      </tbody>
+      <tr>
+        <td>Egypt</td>
+      </tr>
+    </tbody>
     </table>
   </section>
+</div>
 
-                      
+<div class="floatCenter">
+<section class="tabcontent">
+<table>
+   <thead>
+        <tr>
+          <th>City</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Cairo</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+</div>
+
+<div class="floatRight">
+<section class="tabcontent">
+<table>
+   <thead>
+        <tr>
+          <th>Area</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Masr ElGedida</td>
+      </tr>
+    </tbody>
+    </table>
+  </section>
+</div>
+            </div>          
     </section><!-- wrapper -->
       </section><!-- /MAIN CONTENT -->
 
@@ -93,6 +110,16 @@
     <script src="assets/js/common-scripts.js"></script>
     <script src="assets/js/staff.js"></script>
     <!--script for this page-->
+    
+  <script>
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+  </script>
+
 
   </body>
 </html>

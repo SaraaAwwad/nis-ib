@@ -13,7 +13,6 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/js/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
         
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -33,52 +32,29 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--header start-->
-     <?php include_once("header.php"); ?>
+      <?php include_once("header.php"); ?>
       <!--header end-->
       
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-      <?php include_once("sidemenu.php"); ?>
+      <?php include_once("side.php"); ?>
       <!--sidebar end-->
-
+      
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Calendar</h3>
-              <!-- page start-->
-              <div class="row mt">
-                  <aside class="col-lg-3 mt">
-                      <h4><i class="fa fa-angle-right"></i> Draggable Events</h4>
-                      <div id="external-events">
-                          <div class="external-event label label-theme">My Event 1</div>
-                          <div class="external-event label label-success">My Event 2</div>
-                          <div class="external-event label label-info">My Event 3</div>
-                          <div class="external-event label label-warning">My Event 4</div>
-                          <div class="external-event label label-danger">My Event 5</div>
-                          <div class="external-event label label-default">My Event 6</div>
-                          <div class="external-event label label-theme">My Event 7</div>
-                          <div class="external-event label label-info">My Event 8</div>
-                          <div class="external-event label label-success">My Event 9</div>
-                          <p class="drop-after">
-                              <input type="checkbox" id="drop-remove">
-                              Remove After Drop
-                          </p>
-                      </div>
-                  </aside>
-                  <aside class="col-lg-9 mt">
-                      <section class="panel">
-                          <div class="panel-body">
-                              <div id="calendar" class="has-toolbar"></div>
-                          </div>
-                      </section>
-                  </aside>
-              </div>
-              <!-- page end-->
+          <section class="wrapper site-min-height">
+          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+          	<div class="row mt">
+          		<div class="col-lg-12">
+          		<p>Place your content here.</p>
+          		</div>
+          	</div>
+			
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
@@ -90,9 +66,9 @@
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="assets/js/fullcalendar/fullcalendar.min.js"></script>    
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -102,13 +78,12 @@
     <script src="assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-	<script src="assets/js/calendar-conf-events.js"></script>    
-  
+    
   <script>
       //custom select box
 
       $(function(){
-          $("select.styled").customSelect();
+          $('select.styled').customSelect();
       });
 
   </script>

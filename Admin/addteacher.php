@@ -47,7 +47,7 @@ function randomPassword() {
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add New Student</h3>
+            <h3><i class="fa fa-angle-right"></i> Add To Staff</h3>
             
             <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
@@ -69,16 +69,9 @@ function randomPassword() {
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Level</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
                               <div class="col-sm-10">
-                            <label class="containerradio">MYP
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">DP
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
+                                  <input type="text" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">
@@ -100,7 +93,14 @@ function randomPassword() {
                             </label>
                               </div>
                           </div>
-                         
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Profession</label>
+                              <div class="styled-select slate">
+                              <select>
+                              <option></option>
+                              </select>
+                          </div>
+                          </div>
                         </fieldset>
                           <fieldset>
                           <legend>Address Information</legend>
@@ -158,128 +158,7 @@ function randomPassword() {
                               </div>
                           </div>
                         </fieldset>
-                          
-
-                        <fieldset>
-                          <legend>Parent Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Add Parent Info</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Existing Parent
-                            <input type="radio" checked="checked" name="radio" id="existp">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">New Parent
-                            <input type="radio" name="radio" id="newp">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
-                          </div>
-
-                          <fieldset id="searchp">
-                            <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Search for parent</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Search by username">
-                              </div>
-                          </div>
-                          </fieldset>
-
-                          <fieldset id="pform">
-                          <legend>Personal Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">First Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
-                              <div class="col-sm-10">
-                                  <input id="date" type="date">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Gender</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Male
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">Female
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
-                          </div>
-                          <legend>Address Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Building</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">City</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
-                          </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Egypt" value="Egypt" disabled>
-                              </div>
-                          </div>
-                          <legend>Account Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Email</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">@nis.edu.eg
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Password</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo randomPassword(); ?>" disabled>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Username</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-
-                          <legend>Payment Information</legend>
-                          
-                          </fieldset>
                           <input type="submit" id="main">
-
-                          </fieldset>
-
-
-
                       </form>
                   </div>
               </div><!-- col-lg-12-->       
@@ -322,7 +201,7 @@ function randomPassword() {
   
   
   <script src="assets/js/form-component.js"></script>    
-  <script src="assets/js/add-parent.js"></script>
+    
     
   <script>
       //custom select box

@@ -1,4 +1,15 @@
-
+<?php 
+function randomPassword() {
+    $alphabet = "0123456789";
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,105 +47,92 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add Course</h3>
+            <h3><i class="fa fa-angle-right"></i> Add Addresses</h3>
             
             <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="get">
-                          <legend>Course Information</legend>
+                        <fieldset>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Course Name</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Course Code</label>
+                              <label class="col-sm-2 col-sm-2 control-label">City</label>
                               <div class="col-sm-10">
                                   <input type="text" class="form-control">
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Level</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
-                          </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Group</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
+                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control">
                           </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Teaching Hours</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
                               <div class="col-sm-10">
-                                  <input type="number" class="form-control">
-                              </div>
+                                  <input type="text" class="form-control">
                           </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Activate
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                            <label class="containerradio">Inactivate
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
                           </div>
-
+                         </fieldset>
                           <input type="submit" id="main">
                       </form>
                   </div>
               </div><!-- col-lg-12-->       
             </div><!-- /row -->
             
-       
+          
+            
             
     </section><!--/wrapper -->
-    </section><!-- /MAIN CONTENT -->
+      </section><!-- /MAIN CONTENT -->
   </section>
 
-  <!-- js placed at the end of the document so the pages load faster -->
-  <script src="assets/js/jquery.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="assets/js/jquery.scrollTo.min.js"></script>
-  <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="assets/js/jquery.scrollTo.min.js"></script>
+    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 
-  <!--common script for all pages-->
-  <script src="assets/js/common-scripts.js"></script>
-  <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <!--common script for all pages-->
+    <script src="assets/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+  <!--custom switch-->
   <script src="assets/js/bootstrap-switch.js"></script>
+  
+  <!--custom tagsinput-->
   <script src="assets/js/jquery.tagsinput.js"></script>
+  
+  <!--custom checkbox & radio-->
+  
   <script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+  
   <script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-  <script src="assets/js/form-component.js"></script>
+  
+  
+  <script src="assets/js/form-component.js"></script>    
+    
+    
   <script>
-    $(function(){  
-  $('input[type="time"][value="now"]').each(function(){    
-    var d = new Date(),        
-        h = d.getHours(),
-        m = d.getMinutes();
-    if(h < 10) h = '0' + h; 
-    if(m < 10) m = '0' + m; 
-    $(this).attr({
-      'value': h + ':' + m
-    });
-  });
-});
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
   </script>
+
   </body>
 </html>

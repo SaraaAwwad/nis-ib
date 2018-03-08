@@ -1,7 +1,7 @@
 <?php
 	require_once("..\db\database.php");
 
-class pages{
+class Pages{
 
 	public $id;
 	public $friendlyname;
@@ -11,7 +11,7 @@ class pages{
 	public $status;
 	public $publisher;
 
-	private $db_obj;
+	//private $db_obj;
 
 	public function __construct($id=""){
 		$this->db_obj= new dbconnect();
@@ -23,6 +23,7 @@ class pages{
 	public function getInfo($id){
 
 		$sql = "SELECT * FROM pages Where id = '$id' ";
+<<<<<<< HEAD
 		$pageinfo = $this->db_obj->selectsql($sql);
 		if($pageinfo){
 			$row = mysqli_fetch_array($pageinfo);
@@ -31,11 +32,22 @@ class pages{
 			$this->physicalname = $row['physicalname'];
 			$this->html = $row['HTML'];
 			$this->pageid = $row['pageid'];
+=======
+		$userinfo = $this->db_obj->selectsql($sql);
+		if($userinfo){
+			$row = mysqli_fetch_array($userinfo);
+			$this->id = $row['id'];
+			$this->friendlyname = $row['friendlyname'];
+			$this->physicalname = $row['physicalname'];
+			$this->HTML = $row['HTML'];
+		//	$this->pageid = $row['Category'];
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 			$this->status = $row['status'];
 		}
 
 	}
 
+<<<<<<< HEAD
 	public function insertPage($frname , $phyname , $html , $stat){
 
 		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
@@ -66,6 +78,20 @@ class pages{
 		$i=0;
 		$pagesArr = array();
 		while ($row = mysqli_fetch_assoc($stmt)){
+=======
+	Static function insertPage($frname , $phyname , $html, $pageid, $status){
+		//make validation(no repeated physical name, name.. )
+		$db_obj= new dbconnect();
+		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
+			     VALUES ('$frname', '$phyname', '$html', '$pageid', '$status')"; 
+	   
+	    $stmt = $db_obj->executesql($sql);
+	    if($stmt){
+			return true;
+	    }else{
+			return false;
+		}
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 
 			$pageObj = new pages($row['id']);
 			$pageObj->friendlyname = $row['friendlyname'];
@@ -79,6 +105,7 @@ class pages{
 		return $pagesArr;
 	}
 
+<<<<<<< HEAD
 	public function __get( $key )
     {
         return $this->$key;
@@ -92,7 +119,34 @@ class pages{
 
 
 
+=======
+	Static function getAllPages(){
+		$dbobj= new dbconnect;
+		$sql = "SELECT * FROM pages";
+		$result = $dbobj->selectsql($sql);
+		$PagesArr= array();
+		$i=0;
+		while ($row = mysqli_fetch_assoc($result)){
+			$PagesObj = new Pages($row['id']);
+			$PagesArr[$i] = $PagesObj;
+			$i++;
+		}
+		return $PagesArr;
+	}
+>>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 
-
+	Static function getAllGroupPages(){
+		$dbobj= new dbconnect;
+		$sql = "SELECT * FROM pages WHERE pageid=0";
+		$result = $dbobj->selectsql($sql);
+		$PagesArr= array();
+		$i=0;
+		while ($row = mysqli_fetch_assoc($result)){
+			$PagesObj = new Pages($row['id']);
+			$PagesArr[$i] = $PagesObj;
+			$i++;
+		}
+		return $PagesArr;
+	}
 }
 ?>

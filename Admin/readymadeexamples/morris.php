@@ -13,25 +13,19 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">    
         
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-    
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
 
   <section id="container" >
-      <!-- **********************************************************************************************************************************************************
+      <!-- *****************
       TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
+      ******************************* -->
       <!--header start-->
       <?php include_once("header.php"); ?>
       <!--header end-->
@@ -39,8 +33,8 @@
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
-     <!--sidebar start-->
-      <?php include_once("sidemenu.php"); ?>
+      <!--sidebar start-->
+      <?php include_once("side.php"); ?>
       <!--sidebar end-->
       
       <!-- **********************************************************************************************************************************************************
@@ -48,24 +42,24 @@
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> Chartjs Charts</h3>
+          <section class="wrapper site-min-height">
+          <h3><i class="fa fa-angle-right"></i> Morris Charts</h3>
               <!-- page start-->
-              <div class="tab-pane" id="chartjs">
+              <div id="morris">
                   <div class="row mt">
                       <div class="col-lg-6">
                           <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="doughnut" height="300" width="400"></canvas>
+                              <h4><i class="fa fa-angle-right"></i> Chart Example 1</h4>
+                              <div class="panel-body">
+                                  <div id="hero-graph" class="graph"></div>
                               </div>
                           </div>
                       </div>
                       <div class="col-lg-6">
                           <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Line</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="line" height="300" width="400"></canvas>
+                              <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                              <div class="panel-body">
+                                  <div id="hero-bar" class="graph"></div>
                               </div>
                           </div>
                       </div>
@@ -73,46 +67,28 @@
                   <div class="row mt">
                       <div class="col-lg-6">
                           <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Radar</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="radar" height="300" width="400"></canvas>
+                              <h4><i class="fa fa-angle-right"></i> Chart Example 3</h4>
+                              <div class="panel-body">
+                                  <div id="hero-area" class="graph"></div>
                               </div>
                           </div>
                       </div>
                       <div class="col-lg-6">
                           <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Polar Area</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="polarArea" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row mt">
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Bar</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="bar" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Pie</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="pie" height="300" width="400"></canvas>
+                              <h4><i class="fa fa-angle-right"></i> Chart Example 4</h4>
+                              <div class="panel-body">
+                                  <div id="hero-donut" class="graph"></div>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
               <!-- page end-->
-          </section>          
+          </section>
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
-      <!--footer start-->
+     <!--footer start-->
       <?php include_once("footer.php");?>
       <!--footer end-->
   </section>
@@ -126,11 +102,12 @@
 
 
     <!--common script for all pages-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
     <script src="assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-    <script src="assets/js/chart-master/Chart.js"></script>
-    <script src="assets/js/chartjs-conf.js"></script>
+    <script src="assets/js/morris-conf.js"></script>
     
   <script>
       //custom select box

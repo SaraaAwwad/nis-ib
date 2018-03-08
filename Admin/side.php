@@ -3,7 +3,7 @@
               <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
               
-                  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                  <p class="centered"><a href="profile.php"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
                   <h5 class="centered">Admin</h5>
                     
                   <li class="mt">
@@ -16,11 +16,12 @@
                     <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-book"></i>
-                          <span>Pages</span>
+                          <span>Control</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="view_pages.php">View Pages</a></li>
                           <li><a href="add_page.php">Add Page</a></li>
+                          <li><a href="viewaddress.php">Manage Address</a></li>
                       </ul>
                   </li>
 
@@ -30,8 +31,7 @@
                           <span>Courses</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
-                          <li><a href="view_courses.php">View Courses</a></li>
-                          <li><a href="add_course.php">Add Course</a></li>
+                          <li><a href="view_courses.php">Manage Courses</a></li>
                       </ul>
                   </li>
 
@@ -53,7 +53,7 @@
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="view_staff.php">View Staff</a></li>
-                          <li><a href="add_staff.php">Add Staff</a></li>
+                          <li><a href="addteacher.php">Add Staff</a></li>
                       </ul>
                   </li>
 
