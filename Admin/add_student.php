@@ -176,6 +176,15 @@ function randomPassword() {
                               </div>
                           </div>
 
+                          <fieldset id="searchp">
+                            <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Search for parent</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" placeholder="Search by username">
+                              </div>
+                          </div>
+                          </fieldset>
+
                           <fieldset id="pform">
                           <legend>Personal Information</legend>
                           <div class="form-group">
@@ -261,10 +270,15 @@ function randomPassword() {
                                   <input type="text" class="form-control">
                               </div>
                           </div>
+
+                          <legend>Payment Information</legend>
+                          
                           </fieldset>
                           <input type="submit" id="main">
 
                           </fieldset>
+
+
 
                       </form>
                   </div>
