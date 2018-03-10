@@ -1,10 +1,5 @@
 <?php
 require_once("../classes/pages.php");
-<<<<<<< HEAD
-$page = new pages;
-=======
-
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +73,6 @@ $page = new pages;
             <div class="row mt">
                 
                  <form action="" method="POST"  enctype="multipart/form-data">
-<<<<<<< HEAD
                   <?php
 
 
@@ -103,9 +97,7 @@ $page = new pages;
                     }
       }?>
   
-=======
                <div class="col-lg-12">
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
                  <label class="form-group col-md-1"><B>Friendly Name: </B></label>
                   <div class="col-sm-3">
                         <input type="text" class="form-control" name="friname" id="friname">
@@ -118,11 +110,7 @@ $page = new pages;
                   <label class="form-group col-md-1"><B>Status: </B></label>
                   <select class="selectpicker" name="statuspicker">
                   <option value ="1">Publish</option>
-<<<<<<< HEAD
-                  <option value = "0">hide</option>
-=======
                   <option value = "0">Hide</option>
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
                   </select>
 
                  </div>
@@ -149,14 +137,6 @@ $page = new pages;
                   </div>
                   	<div class="row"></div>
                   <br />
-<<<<<<< HEAD
-                     <textarea name="editor1"></textarea>
-                     <script type="text/javascript">
-                        CKEDITOR.replace( 'editor1' );
-                     </script>
-                     <input  class="btn btn-primary" type="submit" name="add" id="saverest" value="Add"/>
-                  
-=======
                   <div class="col-lg-12">
                      <textarea name="editor1">Initial value</textarea>
                      <script type="text/javascript">
@@ -164,7 +144,6 @@ $page = new pages;
                      </script>
                      <input type="submit" name="add" id="saverest" value="Add"/>
                   </div>
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
                </form>
 
              </div>
@@ -173,12 +152,9 @@ $page = new pages;
             
         </section><! --/wrapper -->
       </section>
-<<<<<<< HEAD
       
-=======
 
   
->>>>>>> c1d87afbaf85a50db1511262fbb6c99c81eeb29f
 
       <!--footer start-->
       <?php include_once("footer.php");?>

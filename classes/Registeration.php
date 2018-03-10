@@ -1,5 +1,5 @@
 <?php
-	require_once("..\db\database.php");
+	require_once("\..\db\database.php");
 
     class Registeration {
         public function __construct($id=""){

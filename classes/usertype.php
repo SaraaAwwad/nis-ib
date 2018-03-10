@@ -1,10 +1,10 @@
 <?php
-    require_once("..\db\database.php");
-    
+    require_once("\..\db\database.php");
+    require_once("pages.php");
     class UserType{
         public $id;
         public $title;
-        public $ArrayOfPages = array();
+        public $UserPages = array();
     
         public function __construct($id=""){
             $this->dbobj = new dbconnect;
@@ -25,11 +25,11 @@
         }
         
         public function getUserPages(){
-            $sql = "SELECT id from user_type_pages WHERE typeid_fk = '$this->id' order by ordervalue";
+            $sql = "SELECT id from user_type_pages WHERE typeid_fk = '$this->id' order by ordervalue ";
             $result = $this->dbobj->selectsql($sql);
             $i=0;
             while ($row = mysqli_fetch_assoc($result)){
-                $this->ArrayOfPages[$i] = new Pages($row['id']);
+                $this->UserPages[$i] = new Pages($row['id']);
                 $i++;
             }
         }

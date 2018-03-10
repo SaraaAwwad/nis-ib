@@ -1,5 +1,5 @@
 <?php
-	require_once("..\db\database.php");
+	require_once("\..\db\database.php");
 
 class Pages{
 
@@ -11,8 +11,7 @@ class Pages{
 	public $status;
 	public $publisher;
 
-	//private $db_obj;
-
+	private $db_obj;
 	public function __construct($id=""){
 		$this->db_obj= new dbconnect();
 		if($id != ""){
@@ -23,15 +22,6 @@ class Pages{
 	public function getInfo($id){
 
 		$sql = "SELECT * FROM pages Where id = '$id' ";
-		$pageinfo = $this->db_obj->selectsql($sql);
-		if($pageinfo){
-			$row = mysqli_fetch_array($pageinfo);
-			$this->id = $row['id'];
-			$this->friendlyname = $row['friendlyname'];
-			$this->physicalname = $row['physicalname'];
-			$this->html = $row['HTML'];
-			$this->pageid = $row['pageid'];
-
 		$userinfo = $this->db_obj->selectsql($sql);
 		if($userinfo){
 			$row = mysqli_fetch_array($userinfo);
@@ -44,9 +34,8 @@ class Pages{
 			}
 
 		}
-	}
 
-	public function insertPage($frname , $phyname , $html , $stat){
+	/*public function insertPage($frname , $phyname , $html , $stat){
 
 		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
 			     VALUES ('$frname', '$phyname', '$html', '0', $stat)"; 
@@ -54,7 +43,7 @@ class Pages{
 	    $stmt = $this->db_obj->executesql($sql);
 	    return $stmt;
 
-	}
+	}*/
 
 	public function updatePage($frname , $phyname , $html , $stat)
 	{
@@ -76,7 +65,19 @@ class Pages{
 		$i=0;
 		$pagesArr = array();
 		while ($row = mysqli_fetch_assoc($stmt)){
-
+			
+			$pageObj = new pages($row['id']);
+			$pageObj->friendlyname = $row['friendlyname'];
+			$pageObj->physicalname = $row['physicalname'];
+			$pageObj->html = $row['HTML'];
+			$pageObj->pageid = $row['pageid'];
+			$pageObj->status = $row['status'];
+			$pagesArr[$i]= $pageObj;
+		$i++;
+		}
+		return $pagesArr;
+		
+	}
 	Static function insertPage($frname , $phyname , $html, $pageid, $status){
 		//make validation(no repeated physical name, name.. )
 		$db_obj= new dbconnect();
@@ -89,27 +90,16 @@ class Pages{
 	    }else{
 			return false;
 		}
-
-			$pageObj = new pages($row['id']);
-			$pageObj->friendlyname = $row['friendlyname'];
-			$pageObj->physicalname = $row['physicalname'];
-			$pageObj->html = $row['HTML'];
-			$pageObj->pageid = $row['pageid'];
-			$pageObj->status = $row['status'];
-			$pagesArr[$i]= $pageObj;
-		$i++;
-		}
-		return $pagesArr;
 	}
 
 	public function __get( $key )
     {
-        return $this->$key;
+        //return $this->$key;
     }
 
     public function __set( $key, $value )
     {
-        $this->key = $value;
+        //$this->key = $value;
     }
 
 	Static function getAllPages(){
