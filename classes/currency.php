@@ -1,11 +1,11 @@
 <?php
-    require_once("..\db\database.php");
+	require_once("..\db\database.php");
+    require_once("user.php");
+    require_once("salary.php");
 
-class UserType
-{
-	public $id;
-	public $title;
-	public function __construct($id=""){
+class Currency{
+
+    public function __construct($id=""){
         if($id != ""){
             $this->getInfo($id);
         }
@@ -13,32 +13,33 @@ class UserType
 
     public function getInfo($id){
         $dbobj = new dbconnect;
-        $sql = "SELECT * FROM user_type Where id = '$id'";
+        $sql = "SELECT * FROM currency Where id = '$id'";
         $userinfo = $dbobj->selectsql($sql);
         if($userinfo){
             $row = mysqli_fetch_array($userinfo);
             $this->id = $row['id'];
-            $this->user_id_fk = $row['title'];
+            $this->user_id_fk = $row['code'];
         }
     }
 
-  Static function SelectProfessionsInDB()
+    Static function SelectCurrencyInDB()
     {
         $dbobj = new dbconnect;
-        $sql="SELECT * from user_type";
+        $sql="SELECT * FROM currency order by code";
         $result = $dbobj->selectsql($sql);
         $i=0;
         $Result = array();
         while ($row = mysqli_fetch_assoc($result))
         {
-            $MyObj= new Address($row["id"]);
+            $MyObj= new Currency($row["id"]);
             $MyObj->id=$row["id"];
-            $MyObj->title=$row["title"];
+            $MyObj->code=$row["code"];
             $Result[$i]=$MyObj;
             $i++;
         }
         return $Result;
     }
-}
 
+}
+    
 ?>

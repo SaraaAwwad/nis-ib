@@ -45,7 +45,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th class="hidden-phone">Section ID</th>
+          <th class="hidden-phone">Section Code</th>
           <th>Room</th>
           <th>Room's Capacity</th>
           <th>Day</th>
@@ -58,7 +58,7 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td>1</td>
+          <td>CSC01122</td>
           <td>311</td>
           <td>25</td>
           <td>Wednesday</td>

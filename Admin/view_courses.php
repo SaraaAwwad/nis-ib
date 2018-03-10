@@ -39,7 +39,7 @@
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> View Courses</h3>
   <section class="tabcontent">
-    <a class="buttonlink btn btn-theme04 left" href="addteacher.php"><i class="fa fa-plus"></i>Course</a>
+    <a class="buttonlink btn btn-theme04 left" href="add_course.php"><i class="fa fa-plus"></i>Course</a>
     <input type="search" class="light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
     <table class="order-table">
       <thead>

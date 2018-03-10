@@ -30,7 +30,6 @@ class dbconnect
             //$result = mysqli_query($this->con, $sql);
             return true;
         }else{
-           echo "Error: ". $this->con->error;
             return false;
         }
     }
@@ -39,7 +38,6 @@ class dbconnect
         if($this->con->query($sql) == TRUE){
             return $result = mysqli_query($this->con,$sql);
         }else{
-           echo "Error: ". $this->con->error;
             return false;
         }
     }
@@ -52,8 +50,11 @@ class dbconnect
         }
     }
 
+    function query($query) {
+        $result = mysqli_query($this->con,$query);
+        return $result;
+    }
     function selectsql($sql){
-
         if($result = mysqli_query($this->con, $sql))
         return $result;
         else

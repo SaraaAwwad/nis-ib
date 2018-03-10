@@ -1,3 +1,16 @@
+<?php 
+
+require_once("..\db\database.php");
+require_once("..\classes\address.php");
+require_once("..\classes\salary.php");
+require_once("..\classes\usertype.php");
+require_once("..\classes\user.php");
+require_once("../classes/teacher.php");
+
+$allStaff = array();
+$allStaff = Teacher::SelectAllStaffInDB();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,52 +65,36 @@
           <th>Username</th>
           <th>Password</th>
           <th>Email</th>
-          <th>Telephone</th>
-          <th>Address</th>
+          <th>User</th>
+          <!--<th>Telephone</th>
+          <th>Address</th>-->
           <th><i class="fa fa-bookmark"></i> Salary</th>
           <th><i class=" fa fa-edit"></i> Status</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
+        <?php for($i=0; $i<count($allStaff); $i++){ ?>
         <tr>
-          <td>1</td>
-          <td>Farrah</td>
-          <td>Hisham</td>
-          <td>Female</td>
-          <td>7/11/1996</td>
-          <td>
-            <a href="teacherspanel.php#">Farrahhisham</a></td>
-          <td>123</td>
-          <td>farrah@gmail.com</td>
-          <td>0111111111</td>
-          <td>18 elnozha, cairo, egypt.</td>
-          <td>12000.00$ </td>
-          <td><span class="label label-info label-mini">Due</span></td>
+          <td><?php echo $allStaff[$i]->id;?></td>
+          <td><?php echo $allStaff[$i]->fname;?></td>
+          <td><?php echo $allStaff[$i]->lname;?></td>
+          <td><?php echo $allStaff[$i]->gender;?></td>
+          <td><?php echo $allStaff[$i]->DOB;?></td>
+          <td><a href="teacherspanel.php#"><?php echo $allStaff[$i]->username;?></a></td>
+          <td><?php echo ''.$allStaff[$i]->pwd.''; ?></td>
+          <td><?php echo $allStaff[$i]->email;?></td>
+          <td><?php echo $allStaff[$i]->usertype;?></td>
+          <!--<td><?php echo $allStaff[$i]->telephone;?></td>
+          <td>18 elnozha, cairo, egypt.</td>-->
+          <td><?php echo $allStaff[$i]->salary;?></td>
+          <td><span class="label label-info label-mini"><?php echo $allStaff[$i]->active;?></span></td>
           <td  colspan="2">
             <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
             <button class="btn btn-Coordinatorimary btn-xs"><i class="fa fa-pencil"></i></button>
           </td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Farrah</td>
-          <td>Hisham</td>
-          <td>Female</td>
-          <td>7/11/1996</td>
-          <td>
-            <a href="teacherspanel.php#">Farrahhisham</a></td>
-          <td>123</td>
-          <td>farrah@gmail.com</td>
-          <td>0111111111</td>
-          <td>18 elnozha, cairo, egypt.</td>
-          <td>12000.00$ </td>
-          <td><span class="label label-info label-mini">Due</span></td>
-          <td  colspan="2">
-            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-            <button class="btn btn-Coordinatorimary btn-xs"><i class="fa fa-pencil"></i></button>
-          </td>
-        </tr>
+        <?php } ?>
       </tbody>
     </table>
   </section>
@@ -105,8 +102,6 @@
                       
     </section><!-- wrapper -->
       </section><!-- /MAIN CONTENT -->
-
-      <!--main content end-->
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->

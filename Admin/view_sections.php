@@ -45,8 +45,10 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th class="hidden-phone">Section Code</th>
           <th class="hidden-phone">Course</th>
           <th>Teacher</th>
+          <th>Semester</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th>Action</th>
@@ -54,9 +56,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><a href="view_schedule.php">1</a></td>
+          <td>1</td>
+          <td><a href="view_schedule.php">CSC0112</a></td>
           <td>Computer Skills</td>
           <td>Ahmed Mohamed</td>
+          <td>Fall - 2018</td>
           <td>1/1/2018</td>
           <td>3/3/2018</td>
           <td>

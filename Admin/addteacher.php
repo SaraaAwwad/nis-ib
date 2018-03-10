@@ -1,4 +1,11 @@
 <?php 
+require_once("..\db\database.php");
+require_once("..\classes\address.php");
+require_once("..\classes\usertype.php");
+require_once("..\classes\user.php");
+require_once("..\classes\currency.php");
+require_once("../classes/teacher.php");
+
 function randomPassword() {
     $alphabet = "0123456789";
     $pass = array(); //remember to declare $pass as an array
@@ -9,6 +16,37 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
+$allCities = array();
+$allAreas = array();
+$allStreets = array();
+$allCities = Address::SelectAllCitiesInDB();
+$allAreas = Address::SelectAllAreasInDB();
+$allStreets = Address::SelectAllStreetsInDB();
+$Country = Address::SelectCountryInDB();
+$Users = UserType::SelectProfessionsInDB();
+$Currency = Currency::SelectCurrencyInDB();
+
+if(isset($_POST['update'])) {
+  $objUser = new User();
+  $objUser->fname = $_POST['fnameinput'];
+  $objUser->lname = $_POST['lnameinput'];
+  $objUser->phone = $_POST['numberinput'];
+  $objUser->DOB = $_POST['dateinput'];
+  $objUser->gender = $_POST['radioinput'];
+  $objUser->type_id = $_POST['professioninput'];
+  $objUser->address_id_fk = $_POST['streetinput'];
+  $objUser->area = $_POST['areainput'];
+  $objUser->city = $_POST['cityinput'];
+  $objUser->email = $_POST['emailinput'];
+  $objUser->status = $_POST['statusinput'];
+  $objUser->pwd = $_POST['passwordinput'];
+  $objUser->username = $_POST['usernameinput'];
+  $objUser->img = $_POST['imageinput'];
+  $objUser->amount = $_POST['salaryinput'];
+  $objUser->currency = $_POST['currencyinput'];
+  Teacher::InsertinDB($objUser);
+  header("location: view_staff.php");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +56,8 @@ function randomPassword() {
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
-        
-    <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
   </head>
@@ -33,18 +65,9 @@ function randomPassword() {
   <body>
 
   <section id="container" >
-      <!-- TOP BAR CONTENT & NOTIFICATIONS-->
-      <!--header start-->
-      <?php include_once("header.php"); ?>
-      <!--header end-->
-      
-      <!--MAIN SIDEBAR MENU-->
-      <!--sidebar start-->
-      <?php include_once("side.php"); ?>
-      <!--sidebar end-->
-      
-      <!-- MAIN CONTENT-->
-      <!--main content start-->
+      <?php require_once("header.php"); ?>
+      <?php require_once("side.php"); ?>
+
       <section id="main-content">
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Add To Staff</h3>
@@ -53,42 +76,55 @@ function randomPassword() {
             <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
-                      <form class="form-horizontal style-form" method="get">
+                      <form class="form-horizontal style-form" method="post">
                         <fieldset>
                           <legend>Personal Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">First Name</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="fnameinput">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="lnameinput">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="numberinput">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
                               <div class="col-sm-10">
-                                  <input id="date" type="date">
+                                  <input id="date" type="date" name="dateinput">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
                             <label class="containerradio">Male
-                            <input type="radio" checked="checked" name="radio">
+                            <input type="radio" checked="checked" value="M" name="radioinput">
                             <span class="checkmark"></span>
                             </label>
-                            <label class="containerradio">Female
-                            <input type="radio" name="radio">
+                            <label class="containerradio" >Female
+                            <input type="radio" value="F" name="radioinput">
+                            <span class="checkmark"></span>
+                            </label>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                              <div class="col-sm-10">
+                            <label class="containerradio">Active
+                            <input type="radio" checked="checked" value="1" name="statusinput">
+                            <span class="checkmark"></span>
+                            </label>
+                            <label class="containerradio" >Inactive
+                            <input type="radio" value="2" name="statusinput">
                             <span class="checkmark"></span>
                             </label>
                               </div>
@@ -96,8 +132,10 @@ function randomPassword() {
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Profession</label>
                               <div class="styled-select slate">
-                              <select>
-                              <option></option>
+                              <select name="professioninput">
+                               <?php for($i=0; $i<count($Users); $i++){ ?>
+                              <option value="<?php echo $Users[$i]->id; ?>"><?php echo $Users[$i]->title; ?></option>
+                              <?php } ?>
                               </select>
                           </div>
                           </div>
@@ -105,35 +143,39 @@ function randomPassword() {
                           <fieldset>
                           <legend>Address Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Building</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Street</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
+                              <div class="styled-select slate">
+                              <select name="streetinput">
+                              <?php for($i=0; $i<count($allStreets); $i++){ ?>
+                              <option value="<?php echo $allStreets[$i]->id; ?>"><?php echo $allStreets[$i]->address; ?></option>
+                              <?php } ?>
+                              </select>
+                          </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Area</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
+                              <div class="styled-select slate">
+                              <select name="areainput">
+                              <?php for($i=0; $i<count($allAreas); $i++){ ?>
+                              <option value="<?php echo $allAreas[$i]->id; ?>"><?php echo $allAreas[$i]->address; ?></option>
+                              <?php } ?>
+                              </select>
+                          </div>
                           </div>
                            <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">City</label>
                               <div class="styled-select slate">
-                              <select>
-                              <option></option>
+                              <select name="cityinput">
+                              <?php for($i=0; $i<count($allCities); $i++){ ?>
+                              <option value="<?php echo $allCities[$i]->id; ?>"><?php echo $allCities[$i]->address; ?></option>
+                              <?php } ?>
                               </select>
                           </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Country</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Egypt" value="Egypt" disabled>
+                                  <input class="form-control" id="disabledInput" type="text" value="Egypt" name="country" placeholder="Egypt" disabled>
                               </div>
                           </div>
                           </fieldset>
@@ -142,75 +184,65 @@ function randomPassword() {
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Email</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">@nis.edu.eg
+                                  <input type="text" class="form-control" name="emailinput">@nis.edu.eg
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Password</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo randomPassword(); ?>" disabled>
+                                <input type="text" class="form-control" name="passwordinput" value="<?php echo randomPassword(); ?>">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Username</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="usernameinput">
                               </div>
                           </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Image</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="imageinput">
+                              </div>
+                          </div>
+                          <legend>Salary Information</legend>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Salary</label>
+                              <div class="col-sm-10">
+                                  <input type="number" class="form-control" name="salaryinput">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Currency</label>
+                              <div class="styled-select slate">
+                              <select name="currencyinput">
+                              <?php for($i=0; $i<count($Currency); $i++){ ?>
+                              <option value="<?php echo $Currency[$i]->id; ?>"><?php echo $Currency[$i]->code; ?></option>
+                              <?php } ?>
+                              </select>
+                          </div>
+                          </div>
                         </fieldset>
-                          <input type="submit" id="main">
+                          <input type="submit" name="update" id="main">
                       </form>
                   </div>
               </div><!-- col-lg-12-->       
             </div><!-- /row -->
-            
-          
-            
-            
     </section><!--/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+    </section><!-- /MAIN CONTENT -->
   </section>
 
-    <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-    <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
-
-    <!--script for this page-->
     <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-
-  <!--custom switch-->
   <script src="assets/js/bootstrap-switch.js"></script>
-  
-  <!--custom tagsinput-->
   <script src="assets/js/jquery.tagsinput.js"></script>
-  
-  <!--custom checkbox & radio-->
-  
-  <script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-  
   <script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-  
-  
   <script src="assets/js/form-component.js"></script>    
-    
-    
-  <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
 
   </body>
 </html>
