@@ -23,7 +23,7 @@ $allCities = Address::SelectAllCitiesInDB();
 $allAreas = Address::SelectAllAreasInDB();
 $allStreets = Address::SelectAllStreetsInDB();
 $Country = Address::SelectCountryInDB();
-$Users = UserType::SelectProfessionsInDB();
+$Users = UserType::getAllUserTypes();
 $Currency = Currency::SelectCurrencyInDB();
 
 if(isset($_POST['update'])) {

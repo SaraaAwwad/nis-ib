@@ -1,7 +1,8 @@
 <?php
-	require_once("..\db\database.php");
-
-class User{
+	require_once("\..\db\database.php");
+	require_once("usertype.php");
+	//session_start();
+ class User{
 	public $id;
     public $username;
     public $fname;
@@ -13,8 +14,8 @@ class User{
     public $telephone = array();
     public $address = array();
     public $status;
-
 	public $dbobj;
+	public $UserTypeObj;
 
 	public function __construct($id=""){
 		$this->dbobj= new dbconnect();
@@ -37,9 +38,11 @@ class User{
 			$this->username = $row['username'];
 			$this->gender = $row['gender'];
 			$this->status = $row['status'];
+			$this->UserTypeObj=new UserType($row["type_id"]);
 		}
 		$this->getUserAddress();
 		$this->getUserTelephone();
+		
 	}
 
 	private function getUserAddress(){
@@ -49,6 +52,10 @@ class User{
 
 	private function getUserTelephone(){
 		#get multiple telephones and store inside telephone array
+	}
+
+	private function getUserType(){
+		
 	}
 
 	Static function isExist($username){
@@ -69,10 +76,11 @@ class User{
 		if ($result){
 			$row = mysqli_fetch_array($result);
 
-			if(password_verify($pw, $row['Password'])){
-
+			//if(password_verify($pw, $row['pwd'])){
+			if($password== $row['pwd']){
 				session_start();
-				$_SESSION["userID"] = $row['UID'];
+				$_SESSION["userID"] = $row['id'];
+				//$_SESSION["userType"] = $row['type_id'];
 				return true;
 			}
 		}

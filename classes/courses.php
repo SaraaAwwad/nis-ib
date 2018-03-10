@@ -1,5 +1,5 @@
 <?php
-	require_once("..\db\database.php");
+	require_once("\..\db\database.php");
 
     class Courses {
         public function __construct($id=""){

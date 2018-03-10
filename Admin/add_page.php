@@ -1,6 +1,5 @@
 <?php
 require_once("../classes/pages.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,33 +39,111 @@ require_once("../classes/pages.php");
       <section id="main-content">
           <section class="wrapper site-min-height">
             <h3><i class="fa fa-angle-right"></i> Add Page:</h3>
+                  <?php
+      if(isset($_POST['add'])){
+
+        $fn =  $_POST['friname'];
+        $pn =  $_POST['physname'];
+        $stat = $_POST['statuspicker'];
+        $content = $_POST['editor1']; 
+
+        //choose   
+        switch($_POST['optradio']) {
+        case "exist":
+            $value = $_POST['grouppicker'];
+            break;
+        case "notexist":
+            $value = 0;
+            break;
+    	}
+
+        $result =  Pages::insertPage($fn , $pn, $content, $value, $stat);
+        if($result)
+        {
+          $msg='<div class="alert alert-success">Thank You! I will be in touch</div>';
+          echo $msg;
+          
+        }else{
+
+          $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+          echo $msg;
+
+        }
+      }?>
             <div class="row mt">
-                <div class="col-lg-12">
+                
                  <form action="" method="POST"  enctype="multipart/form-data">
-               
+                  <?php
+
+
+                  if(isset($_POST['add'])){
+
+                    $fn =  $_POST['friname'];
+                    $pn =  $_POST['physname'];
+                    $stat = $_POST['statuspicker'];
+                    $content = $_POST['editor1']; 
+                    $result =  $page->insertpage($fn , $pn, $content ,$stat);
+                    if($result)
+                    {
+                      
+                      $msg='<div class="alert alert-success">Page added successfully! </div>';
+                      echo $msg;
+                      
+                    }else{
+
+                      $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+                      echo $msg;
+
+                    }
+      }?>
+  
+               <div class="col-lg-12">
                  <label class="form-group col-md-1"><B>Friendly Name: </B></label>
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                         <input type="text" class="form-control" name="friname" id="friname">
                   </div>
                   <label class="form-group col-md-1"><B>Physical Name: </B></label>
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                         <input type="text" class="form-control" name="physname" id="physname">
                   </div>
+
                   <label class="form-group col-md-1"><B>Status: </B></label>
                   <select class="selectpicker" name="statuspicker">
                   <option value ="1">Publish</option>
                   <option value = "0">Hide</option>
                   </select>
 
-                  <div>
+                 </div>
+
+                  <div class="col-lg-12">
+                  	<label class="form-group col-md-1"><B>Category:</B></label>
+                   	<label class="radio-inline">
+      					<input type="radio" name="optradio" value="exist" >Add to an Existing Group:
+		      			
+		      				<?php 
+		      					$pages = Pages::getAllGroupPages(); 
+		      					echo '<select class="selectpicker" name="grouppicker">';
+		      					for ($i=0; $i<count($pages); $i++){
+		      						echo '<option value="'.$pages[$i]->id.'">'.$pages[$i]->friendlyname.'</option>' ;
+		      					}
+		      					echo '  </select>';
+		      				?>
+		               
+    				</label>
+    				<label class="radio-inline">
+      					<input type="radio" name="optradio" value="notexist" checked="checked" >Add to a New Group
+    				</label>
+
+                  </div>
+                  	<div class="row"></div>
                   <br />
-                  <br />
+                  <div class="col-lg-12">
                      <textarea name="editor1">Initial value</textarea>
                      <script type="text/javascript">
                         CKEDITOR.replace( 'editor1' );
                      </script>
                      <input type="submit" name="add" id="saverest" value="Add"/>
-                  
+                  </div>
                </form>
 
              </div>
@@ -75,25 +152,8 @@ require_once("../classes/pages.php");
             
         </section><! --/wrapper -->
       </section>
-      <?php
-      if(isset($_POST['add'])){
+      
 
-        $fn =  $_POST['friname'];
-        $pn =  $_POST['physname'];
-        $stat = $_POST['statuspicker'];
-        $content = $_POST['editor1']; 
-        $result =  Pages::insertpage($fn , $pn, $content, $stat);
-        if($result)
-        {
-          $msg='<div class="alert alert-success">Thank You! I will be in touch</div>';
-          echo $msg;
-        }else{
-
-          $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
-          echo $msg;
-
-        }
-      }?>
   
 
       <!--footer start-->
