@@ -1,5 +1,5 @@
 <?php
-	require_once("\..\db\database.php");
+    require_once("\..\db\database.php");
 
 class Pages{
 
@@ -28,7 +28,7 @@ class Pages{
 			$this->id = $row['id'];
 			$this->friendlyname = $row['friendlyname'];
 			$this->physicalname = $row['physicalname'];
-			$this->HTML = $row['HTML'];
+			$this->html = $row['HTML'];
 		//	$this->pageid = $row['Category'];
 			$this->status = $row['status'];
 			}
@@ -94,12 +94,12 @@ class Pages{
 
 	public function __get( $key )
     {
-        //return $this->$key;
+        return $this->$key;
     }
 
     public function __set( $key, $value )
     {
-        //$this->key = $value;
+        $this->key = $value;
     }
 
 	Static function getAllPages(){
