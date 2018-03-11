@@ -5,6 +5,7 @@ require_once("..\classes\usertype.php");
 require_once("..\classes\user.php");
 require_once("..\classes\currency.php");
 require_once("../classes/teacher.php");
+require_once("..\classes\status.php");
 
 function randomPassword() {
     $alphabet = "0123456789";
@@ -16,13 +17,14 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
+$Status = Status::getAllStatus();
 $Users = UserType::getAllUserTypes();
 $Currency = Currency::SelectCurrencyInDB();
 $concatenate = "@nis.edu.eg";
 
 
 if(isset($_POST['update'])) {
-  $objUser = new User();
+  $objUser = new Teacher();
   $objUser->fname = $_POST['fnameinput'];
   $objUser->lname = $_POST['lnameinput'];
   $objUser->phone = $_POST['numberinput'];
@@ -112,25 +114,24 @@ if(isset($_POST['update'])) {
                             </label>
                               </div>
                           </div>
+
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                              <div class="col-sm-10">
-                            <label class="containerradio">Active
-                            <input type="radio" checked="checked" value="1" name="statusinput">
+                            <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                            <div class="col-sm-10">
+                            <?php for($i=0; $i<count($Status); $i++){ ?>
+                            <label class="containerradio"><?php echo $Status[$i]->code; ?>
+                            <input type="radio" checked="checked" value="<?php echo $Status[$i]->id; ?>" name="statusinput">
                             <span class="checkmark"></span>
                             </label>
-                            <label class="containerradio" >Inactive
-                            <input type="radio" value="2" name="statusinput">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
+                            <?php } ?>
+                          </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Profession</label>
                               <div class="styled-select slate">
                               <select name="professioninput">
                               <option>Select Profession</option>
-                               <?php for($i=0; $i<count($Users); $i++){ ?>
+                              <?php for($i=0; $i<count($Users); $i++){ ?>
                               <option value="<?php echo $Users[$i]->id; ?>"><?php echo $Users[$i]->title; ?></option>
                               <?php } ?>
                               </select>
@@ -151,7 +152,7 @@ if(isset($_POST['update'])) {
                            <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">City</label>
                               <div class="styled-select slate">
-                              <select name="city" id="city" >
+                              <select name="city" id="city">
                               <option value="">Select City</option>
                               </select>
                           </div>

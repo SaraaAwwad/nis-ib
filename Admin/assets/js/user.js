@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function(){
 
 	$('#country').change(function(){
@@ -16,9 +13,6 @@ $(document).ready(function(){
 			}
 	});
 });
-
-
-
 
 	$('#city').change(function(){
 		var city_id = $(this).val();
