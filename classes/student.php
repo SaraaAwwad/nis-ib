@@ -1,7 +1,7 @@
 <?php
 	require_once("\..\db\database.php");
     require_once("user.php");
-    require_once("Registeration.php");
+    require_once("usertype.php");
 
 class Student extends User{
     private $GPA;
@@ -43,6 +43,16 @@ class Student extends User{
     public function viewCourseWork($CourseWork){
         //coursework = new CourseWork();
         //select from cw 
+    }
+
+    
+    Static function InsertinDB($objUser)
+    {
+        $dbobj = new dbconnect;
+        $result = UserType::getStudentId();
+        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk) VALUES ('$result', '$objUser->fname','$objUser->lname','$objUser->gender', '$objUser->DOB', '$objUser->username', '$objUser->pwd', '$objUser->email', '$objUser->status', '$objUser->img','$objUser->user_id_fk','$objUser->address_id_fk')";
+        $idresult = $dbobj->insertsql($sql);
+        return $idresult;
     }
 
     

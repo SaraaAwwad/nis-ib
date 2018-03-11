@@ -1,4 +1,11 @@
 <?php 
+require_once("..\classes\level.php");
+require_once("..\classes\address.php");
+require_once("..\classes\student.php");
+require_once("..\classes\parent.php");
+require_once("..\db\database.php");
+require_once("..\classes\status.php");
+
 function randomPassword() {
     $alphabet = "0123456789";
     $pass = array(); //remember to declare $pass as an array
@@ -9,6 +16,57 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
+$Levels = Level::getAllLevel();
+$Status = Status::getAllStatus();
+$concatenate = "@nis.edu.eg";
+
+
+
+if(isset($_POST['update'])) {
+
+  $objParent = new Parents();
+  $objParent->parentsearch = $_POST['parentsearch'];
+  $objParent->fname = $_POST['parentfname'];
+  $objParent->lname = $_POST['parentlname'];
+  $objParent->phone = $_POST['parentnumber'];
+  $objParent->DOB = $_POST['parentdate'];
+  $objParent->gender = $_POST['parentradio'];
+  $objParent->address_id_fk = $_POST['street'];
+  $objParent->email = $_POST['parentemail'].$concatenate;
+  $objParent->pwd = $_POST['parentpassword'];
+  $objParent->username = $_POST['parentusername'];
+  $objParent->img = $_POST['parentimage'];
+  $objParent->parent = 0;
+
+
+  $objUser = new Student();
+  $objUser->fname = $_POST['fname'];
+  $objUser->lname = $_POST['lname'];
+  $objUser->phone = $_POST['number'];
+  $objUser->DOB = $_POST['date'];
+  $objUser->gender = $_POST['radio'];
+  $objUser->address_id_fk = $_POST['street'];
+  $objUser->email = $_POST['email'].$concatenate;
+  $objUser->status = $_POST['status'];
+  $objUser->pwd = $_POST['password'];
+  $objUser->username = $_POST['username'];
+  $objUser->img = $_POST['image'];
+
+  switch($_POST['pickradio']) {
+        case "exist":
+            $idresult = Parents::getExistingParent($objParent->parentsearch);
+            break;
+        case "notexist":
+            $idresult = Parents::InsertinDB($objParent);
+            break;
+  }  
+
+  $objUser->user_id_fk = $idresult;
+  Student::InsertinDB($objUser);
+  header("location: view_students.php");
+  }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +76,10 @@ function randomPassword() {
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
-        
-    <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
   </head>
@@ -33,305 +87,259 @@ function randomPassword() {
   <body>
 
   <section id="container" >
-      <!-- TOP BAR CONTENT & NOTIFICATIONS-->
-      <!--header start-->
       <?php include_once("header.php"); ?>
-      <!--header end-->
-      
-      <!--MAIN SIDEBAR MENU-->
-      <!--sidebar start-->
       <?php include_once("side.php"); ?>
-      <!--sidebar end-->
-      
-      <!-- MAIN CONTENT-->
-      <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Add New Student</h3>
             
-            <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
-                      <form class="form-horizontal style-form" method="get">
-                        <fieldset>
-                          <legend>Personal Information</legend>
+                      <form class="form-horizontal style-form" method="post">
+                        
+                          <legend>Student Info</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">First Name</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="fname">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="lname">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Level</label>
                               <div class="col-sm-10">
-                            <label class="containerradio">MYP
-                            <input type="radio" checked="checked" name="radio">
+                            <?php for($i=0; $i<count($Levels); $i++){ ?>
+                            <label class="containerradio"><?php echo $Levels[$i]->level; ?>
+                            <input type="radio" checked="checked" value ="<?php echo $Levels[$i]->id; ?>" name="level">
                             <span class="checkmark"></span>
                             </label>
-                            <label class="containerradio">DP
-                            <input type="radio" name="radio">
-                            <span class="checkmark"></span>
-                            </label>
-                              </div>
+                            <?php } ?>
+                            </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
                               <div class="col-sm-10">
-                                  <input id="date" type="date">
+                                  <input id="date" type="date" name="date">
                               </div>
                           </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="number">
+                              </div>
+                          </div>
+
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
                             <label class="containerradio">Male
-                            <input type="radio" checked="checked" name="radio">
+                            <input type="radio" checked="checked" value="M" name="radio">
                             <span class="checkmark"></span>
                             </label>
-                            <label class="containerradio">Female
-                            <input type="radio" name="radio">
+                            <label class="containerradio" >Female
+                            <input type="radio" value="F" name="radio">
                             <span class="checkmark"></span>
                             </label>
                               </div>
                           </div>
-                         
-                        </fieldset>
-                          <fieldset>
+
+                          <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                            <div class="col-sm-10">
+                            <?php for($i=0; $i<count($Status); $i++){ ?>
+                            <label class="containerradio"><?php echo $Status[$i]->code; ?>
+                            <input type="radio" checked="checked" value="<?php echo $Status[$i]->id; ?>" name="status">
+                            <span class="checkmark"></span>
+                            </label>
+                            <?php } ?>
+                          </div>
+                          </div>
+
                           <legend>Address Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Building</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
+                              <div class="styled-select slate">
+                              <select name="country" id="country">
+                              <option value="">Select Country</option>
+                              <?php Address::loadCountry(); ?>
+                              </select>
                               </div>
                           </div>
                            <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">City</label>
                               <div class="styled-select slate">
-                              <select>
-                              <option></option>
+                              <select name="city" id="city" >
+                              <option value="">Select City</option>
+                              </select>
+                          </div>
+                          </div>
+                           <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
+                              <div class="styled-select slate">
+                              <select name="area" id="area">
+                              <option value="">Select Area</option>
                               </select>
                           </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Egypt" value="Egypt" disabled>
-                              </div>
+                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
+                              <div class="styled-select slate">
+                              <select name="street" id="street">
+                              <option value="">Select Street</option>
+                              </select>
                           </div>
-                          </fieldset>
-                          <fieldset>
+                          </div>
+
+
                           <legend>Account Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Email</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">@nis.edu.eg
+                                  <input type="text" class="form-control" name="email" maxlength="15">@nis.edu.eg
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Password</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo randomPassword(); ?>" disabled>
+                                <input type="text" class="form-control" name="password" value="<?php echo randomPassword(); ?>">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Username</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="username">
                               </div>
                           </div>
-                        </fieldset>
-                          
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Image</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="image">
+                              </div>
+                          </div>
 
-                        <fieldset>
                           <legend>Parent Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Add Parent Info</label>
                               <div class="col-sm-10">
                             <label class="containerradio">Existing Parent
-                            <input type="radio" checked="checked" name="radio" id="existp">
+                            <input type="radio" checked="checked" name="pickradio" value="exist" id="existp">
                             <span class="checkmark"></span>
                             </label>
                             <label class="containerradio">New Parent
-                            <input type="radio" name="radio" id="newp">
+                            <input type="radio" name="pickradio" value="notexist" id="newp">
                             <span class="checkmark"></span>
                             </label>
                               </div>
                           </div>
 
-                          <fieldset id="searchp">
+                          <fieldset id="searchp" style="display:none;">
                             <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Search for parent</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Username</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" placeholder="Search by username">
+                                  <input type="text" class="form-control" placeholder="Search By Username" name="parentsearch">
                               </div>
                           </div>
                           </fieldset>
 
-                          <fieldset id="pform">
-                          <legend>Personal Information</legend>
+                          <fieldset id="pform" style="display:none;">
+                          <legend>Personal Info</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">First Name</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="parentfname">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="parentlname">
                               </div>
                           </div>
+
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
                               <div class="col-sm-10">
-                                  <input id="date" type="date">
+                                  <input id="date" type="date" name="parentdate">
                               </div>
                           </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
+                              <div class="col-sm-10">
+                                 <input type="text" class="form-control" name="parentnumber">
+                              </div>
+                          </div>
+
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                               <div class="col-sm-10">
                             <label class="containerradio">Male
-                            <input type="radio" checked="checked" name="radio">
+                            <input type="radio" checked="checked" value="M" name="parentradio">
                             <span class="checkmark"></span>
                             </label>
-                            <label class="containerradio">Female
-                            <input type="radio" name="radio">
+                            <label class="containerradio" >Female
+                            <input type="radio" value="F" name="parentradio">
                             <span class="checkmark"></span>
                             </label>
                               </div>
                           </div>
-                          <legend>Address Information</legend>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Building</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control">
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">City</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
-                          </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="Egypt" value="Egypt" disabled>
-                              </div>
-                          </div>
-                          <legend>Account Information</legend>
+
+                           <legend>Account Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Email</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">@nis.edu.eg
+                                  <input type="text" class="form-control" name="parentemail" maxlength="15">@nis.edu.eg
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Password</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" placeholder="<?php echo randomPassword(); ?>" disabled>
+                                <input type="text" class="form-control" name="parentpassword" value="<?php echo randomPassword(); ?>">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Username</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control">
+                                  <input type="text" class="form-control" name="parentusername">
                               </div>
                           </div>
-
-                          <legend>Payment Information</legend>
-                          
-                          </fieldset>
-                          <input type="submit" id="main">
-
-                          </fieldset>
-
-
-
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Image</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" name="parentimage">
+                              </div>
+                          </div>
+                        </fieldset>
+                        <input type="submit" name="update" id="main">
                       </form>
                   </div>
-              </div><!-- col-lg-12-->       
-            </div><!-- /row -->
-            
-          
-            
-            
-    </section><!--/wrapper -->
-      </section><!-- /MAIN CONTENT -->
-  </section>
+              </div>      
+            </div>
 
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
+    </section>
+    </section>
+  </section>
+ <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/user.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-    <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
-
-    <!--script for this page-->
     <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-
-  <!--custom switch-->
   <script src="assets/js/bootstrap-switch.js"></script>
-  
-  <!--custom tagsinput-->
   <script src="assets/js/jquery.tagsinput.js"></script>
-  
-  <!--custom checkbox & radio-->
-  
-  <script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-  
   <script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-  
-  
-  <script src="assets/js/form-component.js"></script>    
-  <script src="assets/js/add-parent.js"></script>
-    
-  <script>
-      //custom select box
+  <script src="assets/js/form-component.js"></script>  
+    <script src="assets/js/add-parent.js"></script>  
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
 
   </body>
 </html>

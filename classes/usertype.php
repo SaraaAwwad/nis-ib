@@ -59,5 +59,29 @@
             }
             return $Types;
         }
+
+        Static function getUserTypeId(){
+            $dbobj= new dbconnect;
+            $title = 'parent';
+            $sql = "SELECT id FROM user_type WHERE title = '$title'";
+            $qresult = $dbobj->selectsql($sql);
+            while($row = mysqli_fetch_array($qresult)){
+                $result = $row['id'];
+            }
+            return $result;
+        }
+
+        Static function getStudentId(){
+            $dbobj= new dbconnect;
+            $title = 'student';
+            $sql = "SELECT id FROM user_type WHERE title = '$title'";
+            $qresult = $dbobj->selectsql($sql);
+            while($row = mysqli_fetch_array($qresult)){
+                $result = $row['id'];
+            }
+            return $result;
+        }
+
+
     }
 ?>
