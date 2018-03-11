@@ -72,32 +72,8 @@ require_once("../classes/pages.php");
       }?>
             <div class="row mt">
                 
-                 <form action="" method="POST"  enctype="multipart/form-data">
-                  <?php
-
-
-                  if(isset($_POST['add'])){
-
-                    $fn =  $_POST['friname'];
-                    $pn =  $_POST['physname'];
-                    $stat = $_POST['statuspicker'];
-                    $content = $_POST['editor1']; 
-                    $result =  $page->insertpage($fn , $pn, $content ,$stat);
-                    if($result)
-                    {
-                      
-                      $msg='<div class="alert alert-success">Page added successfully! </div>';
-                      echo $msg;
-                      
-                    }else{
-
-                      $msg='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
-                      echo $msg;
-
-                    }
-      }?>
-  
-               <div class="col-lg-12">
+                 <form action="" method="POST"  enctype="multipart/form-data"> 
+                <div class="col-lg-12">
                  <label class="form-group col-md-1"><B>Friendly Name: </B></label>
                   <div class="col-sm-3">
                         <input type="text" class="form-control" name="friname" id="friname">

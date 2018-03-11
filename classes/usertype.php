@@ -1,5 +1,5 @@
 <?php
-    require_once("\..\db\database.php");
+    require_once("..\db\database.php");
     require_once("pages.php");
     class UserType{
         public $id;
