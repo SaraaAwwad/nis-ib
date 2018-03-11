@@ -6,8 +6,8 @@
                   <h5 class="centered">User</h5>
 
                 
-      <?php /*
-        require_once("../classes/user.php");
+      <?php 
+        /*require_once("../classes/user.php");
         if(!isset($_SESSION["userID"])){
             echo 'sorry you cant view this page'; 
             exit();
@@ -20,18 +20,18 @@
             {
                 if ($userObj->UserTypeObj->UserPages[$i]->physicalname!="")
                 {   
-                   // if ($userObj->UserTypeObj->UserPages[$i]->pageid == 0){
+                    if ($userObj->UserTypeObj->UserPages[$i]->pageid == 0){
                         echo '
                         <li><a href='.$userObj->UserTypeObj->UserPages[$i]->physicalname.'><span>'
                         .$userObj->UserTypeObj->UserPages[$i]->friendlyname.'
                         </span></a></li>';
-                    /*}else{
+                    }else{
                         echo '<ul class="sub" style="display: block;">
                         <li><a href="view_pages.php">View Pages</a></li>
                        
                     </ul>';
                     }
-                    echo '</li>';*/
+                    echo '</li>';
                    /* echo ' <li class="sub-menu">
                      <a href="admin_home.php">
                          <i class="fa fa-dashboard"></i>
