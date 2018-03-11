@@ -1,5 +1,5 @@
 <?php
-    require_once("\..\db\database.php");
+    require_once("..\db\database.php");
 
 class Pages{
 
@@ -34,23 +34,16 @@ class Pages{
 			}
 
 		}
-
-	/*public function insertPage($frname , $phyname , $html , $stat){
-
-		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
-			     VALUES ('$frname', '$phyname', '$html', '0', $stat)"; 
-	   
-	    $stmt = $this->db_obj->executesql($sql);
-	    return $stmt;
-
-	}*/
+		
 
 	public function updatePage($frname , $phyname , $html , $stat)
-	{
+	{	
+		$pid = $this->id;
+		$id = $this->id;
 		$sql = " UPDATE pages
 		         SET  friendlyname = '$frname', physicalname= '$phyname' , 
-		         HTML = '$html' , status = $stat , pageid = 0
-                 WHERE id = 16";
+		         HTML = '$html' , status = $stat , pageid = $pid
+                 WHERE id = $id";
              
         $stmt = $this->db_obj->executesql($sql);
         return $stmt;
@@ -67,11 +60,6 @@ class Pages{
 		while ($row = mysqli_fetch_assoc($stmt)){
 			
 			$pageObj = new pages($row['id']);
-			$pageObj->friendlyname = $row['friendlyname'];
-			$pageObj->physicalname = $row['physicalname'];
-			$pageObj->html = $row['HTML'];
-			$pageObj->pageid = $row['pageid'];
-			$pageObj->status = $row['status'];
 			$pagesArr[$i]= $pageObj;
 		$i++;
 		}
@@ -128,6 +116,12 @@ class Pages{
 			$i++;
 		}
 		return $PagesArr;
+	}
+
+	static function viewPage($pid){
+		$dbobj= new dbconnect;
+		$sql = "SELECT * FROM pages WHERE id = ";
+
 	}
 }
 ?>
