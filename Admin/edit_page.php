@@ -4,7 +4,7 @@ if(isset($_GET['page']))
 {
   $pid= $_GET['page'];
 }
-$page_obj = new  pages($pid);
+$page_obj = new  Pages($pid);
 $html_content = $page_obj->__get("html");
 ?>
 <!DOCTYPE html>

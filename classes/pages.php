@@ -28,7 +28,7 @@ class Pages{
 			$this->id = $row['id'];
 			$this->friendlyname = $row['friendlyname'];
 			$this->physicalname = $row['physicalname'];
-			$this->HTML = $row['HTML'];
+			$this->html = $row['HTML'];
 		//	$this->pageid = $row['Category'];
 			$this->status = $row['status'];
 			}
