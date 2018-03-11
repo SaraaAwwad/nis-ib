@@ -1,4 +1,10 @@
+<?php
+require_once("../classes/weekdays.php");
+require_once("../classes/slot.php");
+require_once("../classes/room.php");
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,40 +57,54 @@
                                   <input class="form-control" id="disabledInput" type="text" disabled>
                               </div>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group"  id ="new">
+
                               <label class="col-sm-2 col-sm-2 control-label">Day</label>
                               <div class="weekDays-selector">
-                              <input type="checkbox" id="weekday-mon" class="weekday" value="Monday"/>
-                              <label for="weekday-mon">M</label>
-                              <input type="checkbox" id="weekday-tue" class="weekday" value="Tuesday"/>
-                              <label for="weekday-tue">T</label>
-                              <input type="checkbox" id="weekday-wed" class="weekday" value="Wednesday"/>
-                              <label for="weekday-wed">W</label>
-                              <input type="checkbox" id="weekday-thu" class="weekday" value="Thursday"/>
-                              <label for="weekday-thu">T</label>
-                              <input type="checkbox" id="weekday-fri" class="weekday" value="Friday"/>
-                              <label for="weekday-fri">F</label>
-                              <input type="checkbox" id="weekday-sat" class="weekday" value="Saturday"/>
-                              <label for="weekday-sat">S</label>
-                              <input type="checkbox" id="weekday-sun" class="weekday" value="Sunday"/>
-                              <label for="weekday-sun">S</label>
+                               <select class="selectpicker" name="dayspicker">
+
+                              	<?php
+
+                                $result = array();
+                                $result = Weekdays::getWeekdays();
+                                for($i=0; $i<count($result); $i++){ 
+                                	 echo ' <option value ='.$result[$i]->id.'>'.$result[$i]->day_name.'</option>';
+                                	
+                                }
+                                ?>
+                                </select>
+
                               </div>
-                          </div>
-                          <div class="form-group">
+                              <br/>
                               <label class="col-sm-2 col-sm-2 control-label">Slot</label>
-                              <div class="styled-select slate">
+                              <div class="slot-selector">
                               <select>
-                              <option></option>
+                              	<?php
+                                $result = array();
+                                $result = slot::getSlots();
+                                for($i=0; $i<count($result); $i++){ 
+                                 echo ' <option value ='.$result[$i]->slotName.'>'.$result[$i]->startTime.' - '.$result[$i]->endTime.'</option>';
+                                	
+                                }
+                                ?>
+                              </select>
+                         	  </div>
+                         	  <br/>
+                         	  <label class="col-sm-2 col-sm-2 control-label">Room Number</label>
+                              <div class="room-selector">
+                              <select>
+                              	<?php
+                                $result = array();
+                                $result = Room::getRoom();
+                                for($i=0; $i<count($result); $i++){ 
+                                 echo ' <option value ='.$result[$i]->id.'>'.$result[$i]->roomName.' </option>';
+                                	
+                                }
+                                ?>
                               </select>
                           </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Room Number</label>
-                              <div class="styled-select slate">
-                              <select>
-                              <option></option>
-                              </select>
-                          </div>
+                    		   
+                          <a class="btn btn-primary pull-right" class="pull-left"  id="adding"><i class="fa fa-plus"></i> Add </a>
                           </div>
                           <legend>Register Students</legend>
                           <div class="form-group">
@@ -137,6 +157,12 @@
     });
   });
 });
+
+	$("#adding").click(function(){
+		
+		 $("#new").append("<hr/><div class=\"form-group-center\" id =\"new\"><label class=\"col-sm-2 col-sm-2 control-label\">Day</label><div class=\"weekDays-selector\"><select class=\"selectpicker\" name=\"dayspicker\"></select></div><br/><label class=\"col-sm-2 col-sm-2 control-label\">Slot</label><div class=\"slot-selector\"><select></select></div><br/><label class=\"col-sm-2 col-sm-2 control-label\">Room Number</label><div class=\"room-selector\"><select></select></div>");
+    
+	});
   </script>
   </body>
 </html>
