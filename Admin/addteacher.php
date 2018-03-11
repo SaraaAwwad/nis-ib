@@ -16,15 +16,10 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
-$allCities = array();
-$allAreas = array();
-$allStreets = array();
-$allCities = Address::SelectAllCitiesInDB();
-$allAreas = Address::SelectAllAreasInDB();
-$allStreets = Address::SelectAllStreetsInDB();
-$Country = Address::SelectCountryInDB();
 $Users = UserType::getAllUserTypes();
 $Currency = Currency::SelectCurrencyInDB();
+$concatenate = "@nis.edu.eg";
+
 
 if(isset($_POST['update'])) {
   $objUser = new User();
@@ -34,10 +29,11 @@ if(isset($_POST['update'])) {
   $objUser->DOB = $_POST['dateinput'];
   $objUser->gender = $_POST['radioinput'];
   $objUser->type_id = $_POST['professioninput'];
-  $objUser->address_id_fk = $_POST['streetinput'];
-  $objUser->area = $_POST['areainput'];
-  $objUser->city = $_POST['cityinput'];
-  $objUser->email = $_POST['emailinput'];
+  $objUser->country = $_POST['country'];
+  $objUser->address_id_fk = $_POST['street'];
+  $objUser->area = $_POST['area'];
+  $objUser->city = $_POST['city'];
+  $objUser->email = $_POST['emailinput'].$concatenate;
   $objUser->status = $_POST['statusinput'];
   $objUser->pwd = $_POST['passwordinput'];
   $objUser->username = $_POST['usernameinput'];
@@ -133,50 +129,48 @@ if(isset($_POST['update'])) {
                               <label class="col-sm-2 col-sm-2 control-label">Profession</label>
                               <div class="styled-select slate">
                               <select name="professioninput">
+                              <option>Select Profession</option>
                                <?php for($i=0; $i<count($Users); $i++){ ?>
                               <option value="<?php echo $Users[$i]->id; ?>"><?php echo $Users[$i]->title; ?></option>
                               <?php } ?>
                               </select>
                           </div>
                           </div>
-                        </fieldset>
+                          </fieldset>
                           <fieldset>
                           <legend>Address Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
                               <div class="styled-select slate">
-                              <select name="streetinput">
-                              <?php for($i=0; $i<count($allStreets); $i++){ ?>
-                              <option value="<?php echo $allStreets[$i]->id; ?>"><?php echo $allStreets[$i]->address; ?></option>
-                              <?php } ?>
+                              <select name="country" id="country">
+                              <option value="">Select Country</option>
+                              <?php Address::loadCountry(); ?>
                               </select>
-                          </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
-                              <div class="styled-select slate">
-                              <select name="areainput">
-                              <?php for($i=0; $i<count($allAreas); $i++){ ?>
-                              <option value="<?php echo $allAreas[$i]->id; ?>"><?php echo $allAreas[$i]->address; ?></option>
-                              <?php } ?>
-                              </select>
-                          </div>
+                              </div>
                           </div>
                            <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">City</label>
                               <div class="styled-select slate">
-                              <select name="cityinput">
-                              <?php for($i=0; $i<count($allCities); $i++){ ?>
-                              <option value="<?php echo $allCities[$i]->id; ?>"><?php echo $allCities[$i]->address; ?></option>
-                              <?php } ?>
+                              <select name="city" id="city" >
+                              <option value="">Select City</option>
+                              </select>
+                          </div>
+                          </div>
+                           <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
+                              <div class="styled-select slate">
+                              <select name="area" id="area">
+                              <option value="">Select Area</option>
                               </select>
                           </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
-                              <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" value="Egypt" name="country" placeholder="Egypt" disabled>
-                              </div>
+                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
+                              <div class="styled-select slate">
+                              <select name="street" id="street">
+                              <option value="">Select Street</option>
+                              </select>
+                          </div>
                           </div>
                           </fieldset>
                           <fieldset>
@@ -184,7 +178,7 @@ if(isset($_POST['update'])) {
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Email</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="emailinput">@nis.edu.eg
+                                  <input type="text" class="form-control" name="emailinput" maxlength="15">@nis.edu.eg
                               </div>
                           </div>
                           <div class="form-group">
@@ -233,6 +227,7 @@ if(isset($_POST['update'])) {
   </section>
 
     <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/user.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
