@@ -32,7 +32,7 @@ class Pages{
 			$this->friendlyname = $row['friendlyname'];
 			$this->physicalname = $row['physicalname'];
 			$this->html = $row['HTML'];
-		//	$this->pageid = $row['Category'];
+			$this->pageid = $row['pageid'];
 			$this->status = $row['status'];
 			}
 
