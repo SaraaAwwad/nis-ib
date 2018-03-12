@@ -1,3 +1,14 @@
+<?php 
+require_once("..\db\database.php");
+require_once("..\classes\address.php");
+require_once("..\classes\student.php");
+require_once("..\classes\usertype.php");
+require_once("..\classes\user.php");
+require_once("../classes/teacher.php");
+
+$allStudents = array();
+$allStudents = Student::SelectAllInDB();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,165 +18,78 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Nefertari - View Students</title>
+    <title>NIS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        
-    <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-
   </head>
-
   <body>
 
   <section id="container" >
-      <!-- ****************** TOP BAR CONTENT & NOTIFICATIONS **************** -->
-      <!--header start-->
       <?php include_once("header.php"); ?>
-      <!--header end-->
-      
-      <!-- ************* MAIN SIDEBAR MENU **************** -->
-      <!--sidebar start-->
       <?php include_once("side.php"); ?>
-      <!--sidebar end-->
-      
-      <!-- ************ MAIN CONTENT **************** -->
-      <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> View Students</h3>
 
-              <div class="row mt">
-                  <div class="col-md-12">
-                      <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-                            <h4><i class="fa fa-angle-right"></i> Students Table</h4>
-                            <hr>
-                              <thead>
-                              <tr>
-                                  <th><i class="fa fa-key"></i> ID </th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>First Name</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>Last Name</th>
-                                  <th class="hidden-phone"><i class="fa fa-user"></i>Gender</th>
-                                  <th class="hidden-phone"><i class="fa fa-calendar"></i>DOB</th>
-                                  <th class="hidden-phone"><i class="fa fa-map"></i>Address</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>Level</th>
-                                  <th class="hidden-phone"><i class="fa fa-user"></i> Username</th>
-                                  <th class="hidden-phone"><i class="fa fa-envelope"></i> Email</th>
-                                  <th class="hidden-phone"><i class="fa fa-lock"></i> Password</th>
-                                  <th><i class=" fa fa-edit"></i> Actions </th>
-                                  
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr>
-                                  <td>65</td>
-                                  <td class="hidden-phone">Amira</td>
-                                  <td class="hidden-phone">Galal</td>
-                                  <td class="hidden-phone">Female</td>
-                                  <td class="hidden-phone">1-1-1996</td>
-                                  <td class="hidden-phone">Maadi</td>
-                                  <td class="hidden-phone">DP</td>
-                                  <td class="hidden-phone">Amirag</td>
-                                  <td class="hidden-phone">amirag@gmail.com</td>
-                                  <td class="hidden-phone">123456</td>
+  <section class="tabcontent">
+    <a class="buttonlink btn btn-theme04 left" href="add_student.php"><i class="fa fa-plus"></i> Add Student</a>
+    <input type="search" class="light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th class="hidden-phone">First Name</th>
+          <th class="hidden-phone">Last Name</th>
+          <th>Gender</th>
+          <th>DOB</th>
+          <th>Telephone</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Email</th>
+          <th><i class=" fa fa-edit"></i> Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php for($i=0; $i<count($allStudents); $i++){ ?>
+        <tr>
+          <td><?php echo $allStudents[$i]->id;?></td>
+          <td><?php echo $allStudents[$i]->fname;?></td>
+          <td><?php echo $allStudents[$i]->lname;?></td>
+          <td><?php echo $allStudents[$i]->gender;?></td>
+          <td><?php echo $allStudents[$i]->DOB;?></td>
+          <td><?php echo $allStudents[$i]->telephone;?></td>
+          <td><a href="teacherspanel.php#"><?php echo $allStudents[$i]->username;?></a></td>
+          <td><?php echo ''.$allStudents[$i]->pwd.''; ?></td>
+          <td><?php echo $allStudents[$i]->email;?></td>
+          <td><span class="label label-info label-mini"><?php echo $allStudents[$i]->active;?></span></td>
+          <td  colspan="2">
+            <a class="btn btn-success btn-xs" href="update.php?id='.$allStudents[$i]->id.'">Update</a><br><br>
+            <a class="btn btn-success btn-xs" href="update.php?id='.$allStudents[$i]->id.'">Activate</a>
+          </td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </section>
 
-                                  <td>
-                                      <button class="btn btn-primary btn-xs" onclick="window.location.href='#'">
-                                        <i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
+                      
+    </section><!-- wrapper -->
+      </section><!-- /MAIN CONTENT -->
+  </section>
 
-                               <tr>
-                                  <td>31</td>
-                                  <td class="hidden-phone">Sara</td>
-                                  <td class="hidden-phone">Hassan</td>
-                                  <td class="hidden-phone">Female</td>
-                                  <td class="hidden-phone">1-1-1996</td>
-                                  <td class="hidden-phone">Heliopolis</td>
-                                  <td class="hidden-phone">DP</td>
-                                  <td class="hidden-phone">Saraw</td>
-                                  <td class="hidden-phone">saraw@gmail.com</td>
-                                  <td class="hidden-phone">123456</td>
-
-                                  <td>
-                                      <button class="btn btn-primary btn-xs" onclick="window.location.href='#'">
-                                        <i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-
-                                <tr>
-                                  <td>56</td>
-                                  <td class="hidden-phone">Farrah</td>
-                                  <td class="hidden-phone">Hisham</td>
-                                  <td class="hidden-phone">Female</td>
-                                  <td class="hidden-phone">1-1-1996</td>
-                                  <td class="hidden-phone">Nasr City</td>
-                                  <td class="hidden-phone">DP</td>
-                                  <td class="hidden-phone">Farrahh</td>
-                                  <td class="hidden-phone">farrah@gmail.com</td>
-                                  <td class="hidden-phone">123456</td>
-
-                                  <td>
-                                      <button class="btn btn-primary btn-xs" onclick="window.location.href='#'">
-                                        <i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                                <tr>
-                                  <td>73</td>
-                                  <td class="hidden-phone">Menna</td>
-                                  <td class="hidden-phone">Mohamed</td>
-                                  <td class="hidden-phone">Female</td>
-                                  <td class="hidden-phone">1-1-1996</td>
-                                  <td class="hidden-phone">Mokattam</td>
-                                  <td class="hidden-phone">DP</td>
-                                  <td class="hidden-phone">Mennam</td>
-                                  <td class="hidden-phone">menna@gmail.com</td>
-                                  <td class="hidden-phone">123456</td>
-
-                                  <td>
-                                      <button class="btn btn-primary btn-xs" onclick="window.location.href='#'">
-                                        <i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-
-                              </tbody>
-                          </table>
-
-                      </div><!-- /content-panel -->
-                      <br>
-                      <button type="button" class="btn btn-primary" onclick="window.location.href='add_student.php'">Add Student</button>
-                  </div><!-- /col-md-12 -->
-              </div><!-- /row -->
-
-    <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/js/jquery.scrollTo.min.js"></script>
     <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-    <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
-
-    <!--script for this page-->
-    
-  <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
+    <script src="assets/js/staff.js"></script>
 
   </body>
 </html>
+s

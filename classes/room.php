@@ -46,5 +46,24 @@ class Room{
 
     }
 
+    Static function SelectAvailableRooms()
+    {
+        $dbobj = new dbconnect;
+        $sql="SELECT * from room where id NOT IN (Select room_id from schedule)";
+        $result = $dbobj->executesql2($sql);
+        $i=0;
+        $Result = array();
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $MyObj= new Room($row["id"]);
+            $MyObj->id=$row["id"];
+            $MyObj->name=$row["name"];
+            $MyObj->size=$row["size"];
+            $Result[$i]=$MyObj;
+            $i++;
+        }
+        return $Result;
+    }
+
 }
    

@@ -3,7 +3,6 @@ require_once("../classes/weekdays.php");
 require_once("../classes/slot.php");
 require_once("../classes/room.php");
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

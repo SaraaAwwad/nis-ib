@@ -82,6 +82,15 @@
             return $result;
         }
 
+        Static function getUser($title){
+            $dbobj= new dbconnect;
+            $sql = "SELECT id FROM user_type WHERE title = '$title'";
+            $qresult = $dbobj->selectsql($sql);
+            while($row = mysqli_fetch_array($qresult)){
+                $result = $row['id'];
+            }
+            return $result;
+        }
 
     }
 ?>

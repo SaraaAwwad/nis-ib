@@ -46,11 +46,29 @@ class Slot{
             $i++;
 
         }
-      
         return $SlotsArr;
-
-
     }
 
+    Static function SelectAvailableSlots()
+    {
+        $dbobj = new dbconnect;
+        $sql="SELECT * from slot where id NOT IN (Select slot_id_fk from schedule)";
+        $result = $dbobj->executesql2($sql);
+        $i=0;
+        $Result = array();
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $MyObj= new Slot($row["id"]);
+            $MyObj->id = $row['id'];
+            $MyObj->slotName = $row['slot_name'];
+            $MyObj->startTime = $row['start_time'];
+            $MyObj->endTime = $row['end_time'];
+            $Result[$i]=$MyObj;
+            $i++;
+        }
+        return $Result;
+    }
+
+
 }
-   
+   ?>
