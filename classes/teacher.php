@@ -1,26 +1,22 @@
 <?php
-	require_once("..\db\database.php");
+    require_once("..\db\database.php");
     require_once("user.php");
     require_once("salary.php");
     require_once("Registeration.php");
-
+    require_once("usertype.php");
 class Teacher extends User{
     //aggregation
-
     public function __construct($id=""){
-		if($id != ""){
+        if($id != ""){
             parent::__construct($id);
         }
     }
-
+    
     Static function InsertinDB($objUser)
     {
         $dbobj = new dbconnect;
-        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img) VALUES ('$objUser->type_id', '$objUser->fname','$objUser->lname','$objUser->gender', '$objUser->DOB', '$objUser->username', '$objUser->pwd', '$objUser->email', '$objUser->status', '$objUser->img')";
+        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk) VALUES ('$objUser->type_id', '$objUser->fname','$objUser->lname','$objUser->gender', '$objUser->DOB', '$objUser->username', '$objUser->pwd', '$objUser->email', '$objUser->status', '$objUser->img','0','$objUser->address_id_fk')";
         $result = $dbobj->insertsql($sql);
-        $sql1 = "INSERT INTO user_address (user_id_fk, address_id_fk)
-        VALUES('$result','$objUser->address_id_fk')";
-        $dbobj->selectsql($sql1);
         $sql2 = "INSERT INTO salary (user_id_fk, amount, currency_id)
         VALUES('$result','$objUser->amount','$objUser->currency')";
         $dbobj->executesql($sql2);
@@ -29,10 +25,8 @@ class Teacher extends User{
     Static function SelectAllStaffInDB()
     {
         $dbobj = new dbconnect;
-        $salary = new Salary;
-        $usertype = new UserType;
-        $sql="SELECT user.*, user_type.title, salary.amount, status.code FROM user INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk INNER JOIN status ON user.status = status.id where title NOT IN ('student','parent')";
-        $result = $dbobj->selectsql($sql);
+        $sql="SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM user INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk INNER JOIN status ON user.status = status.id INNER JOIN telephone ON user.id = telephone.user_id_fk where title NOT IN ('student','parent')";
+        $result = $dbobj->executesql2($sql);
         $i=0;
         $Result = array();
         while ($row = mysqli_fetch_assoc($result))
@@ -42,6 +36,7 @@ class Teacher extends User{
             $MyObj->salary = $row["amount"];
             $MyObj->fname=$row["fname"];
             $MyObj->lname=$row["lname"];
+            $MyObj->telephone=$row["number"];
             $MyObj->gender=$row["gender"];
             $MyObj->DOB=$row["DOB"];
             $MyObj->username=$row["username"];
@@ -55,6 +50,35 @@ class Teacher extends User{
         return $Result;
     }
 
-}
+    Static function SelectAvailableTeachers()
+    {
+        $dbobj = new dbconnect;
+        $title = 'teacher';
+        $usertype = new UserType();
+        $idresult = $usertype->getUser($title);
+        $sql="SELECT * from user where id NOT IN (Select teacher_id_fk from section) and type_id = '$idresult'";
+        $result = $dbobj->executesql2($sql);
+        $i=0;
+        $Result = array();
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $MyObj= new Teacher($row["id"]);
+            $MyObj->id=$row["id"];
+            $MyObj->fname=$row["fname"];
+            $MyObj->lname=$row["lname"];
+            $MyObj->username=$row["username"];
+            $Result[$i]=$MyObj;
+            $i++;
+        }
+        return $Result;
+    }
+
     
+    public function changeActive($status){
+        $sql = "UPDATE user SET status = '$status' WHERE id='$this->id'";
+        $this->dbobj->executesql2($sql);
+    }
+
+
+}
 ?>

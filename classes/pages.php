@@ -1,5 +1,6 @@
 <?php
-	require_once("\..\db\database.php");
+    require_once("..\db\database.php");
+    require_once("layout.php");
 
 class Pages{
 
@@ -11,9 +12,11 @@ class Pages{
 	public $status;
 	public $publisher;
 
+
 	private $db_obj;
 	public function __construct($id=""){
 		$this->db_obj= new dbconnect();
+	
 		if($id != ""){
 			$this->getInfo($id);
 		}
@@ -35,22 +38,15 @@ class Pages{
 
 		}
 
-	/*public function insertPage($frname , $phyname , $html , $stat){
-
-		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
-			     VALUES ('$frname', '$phyname', '$html', '0', $stat)"; 
-	   
-	    $stmt = $this->db_obj->executesql($sql);
-	    return $stmt;
-
-	}*/
 
 	public function updatePage($frname , $phyname , $html , $stat)
-	{
+	{	
+		$pid = $this->id;
+		$id = $this->id;
 		$sql = " UPDATE pages
 		         SET  friendlyname = '$frname', physicalname= '$phyname' , 
-		         HTML = '$html' , status = $stat , pageid = 0
-                 WHERE id = 16";
+		         HTML = '$html' , status = $stat , pageid = $pid
+                 WHERE id = $id";
              
         $stmt = $this->db_obj->executesql($sql);
         return $stmt;
@@ -67,11 +63,6 @@ class Pages{
 		while ($row = mysqli_fetch_assoc($stmt)){
 			
 			$pageObj = new pages($row['id']);
-			$pageObj->friendlyname = $row['friendlyname'];
-			$pageObj->physicalname = $row['physicalname'];
-			$pageObj->html = $row['HTML'];
-			$pageObj->pageid = $row['pageid'];
-			$pageObj->status = $row['status'];
 			$pagesArr[$i]= $pageObj;
 		$i++;
 		}
@@ -81,8 +72,8 @@ class Pages{
 	Static function insertPage($frname , $phyname , $html, $pageid, $status){
 		//make validation(no repeated physical name, name.. )
 		$db_obj= new dbconnect();
-		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status)
-			     VALUES ('$frname', '$phyname', '$html', '$pageid', '$status')"; 
+		$sql = " INSERT INTO pages (friendlyname, physicalname, HTML, pageid, status,layout_id_fk)
+			     VALUES ('$frname', '$phyname', '$html', '$pageid', '$status',1)"; 
 	   
 	    $stmt = $db_obj->executesql($sql);
 	    if($stmt){
@@ -128,6 +119,21 @@ class Pages{
 			$i++;
 		}
 		return $PagesArr;
+	}
+
+	public function viewPage($layoutObj,$pid){
+
+		$dbobj= new dbconnect;
+		$sql = "SELECT * FROM pages WHERE id = $pid";
+		$stmt = $this->db_obj->selectsql($sql);
+		$row = mysqli_fetch_assoc($stmt);
+		$gethtml = $row['HTML'];
+		$getlayout = $row['layout_id_fk'];
+		$layout1 = $layoutObj->getContent($getlayout);
+		$layout2 = $layoutObj->getChildContent($getlayout);
+		$output = $layout1 . $gethtml .$layout2;  
+        return $output;
+
 	}
 }
 ?>

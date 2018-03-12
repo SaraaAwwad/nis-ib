@@ -1,6 +1,7 @@
 <?php
-	require_once("\..\db\database.php");
+	require_once("..\db\database.php");
 	require_once("usertype.php");
+	// require_once("weekdays.php");
 	//session_start();
  class User{
 	public $id;
@@ -16,6 +17,7 @@
     public $status;
 	public $dbobj;
 	public $UserTypeObj;
+	// public $WeekdaysObj;
 
 	public function __construct($id=""){
 		$this->dbobj= new dbconnect();
@@ -134,6 +136,12 @@
 		}
 			
 	}
+
+	// public function getdays(){
+	// 	$WeekdaysObj = new Weekdays();
+	// 	$WeekdaysObj->getWeekdays();
+	// 	return $WeekdaysObj;
+	// }
 
 }
 ?>

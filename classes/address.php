@@ -31,77 +31,19 @@ class Address{
         $dbobj->executesql2($sql);
     }
 
-    Static function SelectAllCitiesInDB()
-    {
+    function loadCountry(){
         $dbobj = new dbconnect;
-        $sql="SELECT * from address where add_id = (SELECT id FROM address WHERE address in ('Egypt', 'egypt'))  order by address";
-        $result = $dbobj->selectsql($sql);
-        $i=0;
-        $Result = array();
-        while ($row = mysqli_fetch_assoc($result))
+        $output = '';
+        $sql = "SELECT * FROM address WHERE address in ('Egypt','egypt')";
+        $result = $dbobj->executesql2($sql);
+        while ($row = mysqli_fetch_array($result))
         {
-            $MyObj= new Address($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->address=$row["address"];
-            $Result[$i]=$MyObj;
-            $i++;
+            $output = '<option value="'.$row['id'].'">'.$row['address'].'</option>'; 
         }
-        return $Result;
+        echo $output;
     }
 
-    Static function SelectAllAreasInDB()
-    {
-        $dbobj = new dbconnect;
-        $sql="SELECT * from address where add_id in ((SELECT id FROM address WHERE add_id = (SELECT id FROM address WHERE address in ('Egypt', 'egypt')))) order by address";
-        $result = $dbobj->selectsql($sql);
-        $i=0;
-        $Result = array();
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $MyObj= new Address($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->address=$row["address"];
-            $Result[$i]=$MyObj;
-            $i++;
-        }
-        return $Result;
-    }
 
-    Static function SelectAllStreetsInDB()
-    {
-        $dbobj = new dbconnect;
-        $sql="SELECT * from address where add_id in (Select id from address where add_id in (Select id from address where add_id=(Select id from address where address in ('Egypt', 'egypt')))) order by address";
-        $result = $dbobj->selectsql($sql);
-        $i=0;
-        $Result = array();
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $MyObj= new Address($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->address=$row["address"];
-            $Result[$i]=$MyObj;
-            $i++;
-        }
-        return $Result;
-    }
-    Static function SelectCountryInDB()
-    {
-        $dbobj = new dbconnect;
-        $sql="SELECT * from address where address in ('Egypt', 'egypt')";
-        $result = $dbobj->selectsql($sql);
-        $i=0;
-        $Result = array();
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $MyObj= new Address($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->address=$row["address"];
-            $MyObj->address=$row["add_id"];
-            $Result[$i]=$MyObj;
-        }
-        return $Result;
-    }
-    
 }
     
 ?>
