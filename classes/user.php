@@ -55,7 +55,7 @@
 	}
 
 	private function getUserType(){
-		
+	 	
 	}
 
 	Static function isExist($username){
