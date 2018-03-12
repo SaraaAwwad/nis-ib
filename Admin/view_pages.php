@@ -66,16 +66,13 @@ require_once("../classes/pages.php");
                                 for($i=0; $i<count($result); $i++){ 
 
                                   echo '<tr>';
-                                  echo '<td><a href="basic_table.html#">'.$result[$i]->friendlyname.'</a></td>';
+                                  echo '<td><a href="open_page.php?page='.$result[$i]->id.'">'.$result[$i]->friendlyname.'</a></td>';
                                   echo ' <td class="hidden-phone">'.$result[$i]->physicalname.'</td>';
                                   echo ' <td class="hidden-phone">'.$result[$i]->status.'</td>';
                                   echo '<td>';
                                   echo '<a href="edit_page.php?page='. $result[$i]->id . '"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"> </i></button></a>';
-                                  //<h2><a href="userviewmenu.php?Rest='.$allRest[$i]->ID.'&Area='.$place.'">'.$allRest[$i]->Name.'</a></h2>
 
-                                  echo '<button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o "></i></button>
-                                       </td>
-                                       </tr>';
+                                  echo '</td></tr>';
                                 }
 
                                 ?>
