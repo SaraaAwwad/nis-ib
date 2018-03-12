@@ -3,7 +3,7 @@ require_once("..\db\database.php");
 require_once("..\classes\section.php");
 $id = $_GET['id'];
 $allSections = array();
-$allSections = Section::SelectAllSectionsInDB();
+$allSections = Section::SelectAllSectionsInDB($id);
 ?>
 <!DOCTYPE html>
 <html lang="en">

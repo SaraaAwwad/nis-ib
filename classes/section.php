@@ -23,17 +23,20 @@
         }
     }
 
-    Static function InsertinDB($objCourse)
+    Static function InsertinDB($objSection)
     {
         $dbobj = new dbconnect;
-        $sql = "INSERT INTO course (name, course_code, descr, level_id_fk, group_id_fk, status, teaching_hours) VALUES ('$objCourse->cname', '$objCourse->ccode','$objCourse->descr','$objCourse->level', '$objCourse->group', '$objCourse->status', '$objCourse->hours')";
-        $dbobj->executesql($sql);
+        $sql = "INSERT INTO section (course_id_fk, teacher_id_fk, semester_id_fk, code) VALUES ('$objSection->courseid', '$objSection->username','$objSection->semester','$objSection->sectioncode')";
+        $id = $dbobj->insertsql($sql);
+        $sql1 = "INSERT INTO schedule (section_id, room_id, day_id_fk, slot_id_fk) VALUES ('$id', '$objSection->room','$objSection->day','$objSection->slot')";
+        $dbobj->executesql($sql1);
+        return $id;
     }
 
-        Static function SelectAllSectionsInDB()
+        Static function SelectAllSectionsInDB($id)
         {
         $dbobj = new dbconnect;
-        $sql="SELECT section.*, course.name, user.username, semester.year FROM section INNER JOIN course ON course.id = section.course_id_fk INNER JOIN user ON user.id = section.teacher_id_fk INNER JOIN semester ON semester.id = section.semester_id_fk ORDER BY section.id";
+        $sql="SELECT section.*, course.name, user.username, semester.year FROM section INNER JOIN course ON course.id = section.course_id_fk INNER JOIN user ON user.id = section.teacher_id_fk INNER JOIN semester ON semester.id = section.semester_id_fk Where section.course_id_fk = '$id' ORDER BY section.id";
 
         $result = $dbobj->executesql2($sql);
         $i=0;

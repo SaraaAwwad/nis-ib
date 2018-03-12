@@ -1,14 +1,38 @@
-<?php require_once("../classes/weekdays.php");
+<?php 
+require_once("../classes/weekdays.php");
 require_once("../classes/slot.php");
 require_once("../classes/room.php");
+require_once("../classes/section.php");
 require_once("../classes/student.php");
 require_once("../classes/courses.php");
+require_once("../classes/Registeration.php");
 require_once("../classes/teacher.php");
 require_once("../classes/semester.php");
 $id = $_GET['id'];
 $Teachers = Teacher::SelectAvailableTeachers();
 $Semesters = Semester::getAllSemester();
 $Course = Courses::SelectCourse($id);
+
+
+
+if(isset($_POST['update'])) {
+  $objSection = new Section();
+  $objSection->username = $_POST['username'];
+  $objSection->courseid = $_POST['courseid'];
+  $objSection->semester = $_POST['semester'];
+  $objSection->sectioncode = $_POST['sectioncode'];
+  $objSection->day = $_POST['day'];
+  $objSection->slot = $_POST['slot'];
+  $objSection->room = $_POST['room'];
+
+  $cid = Section::InsertinDB($objSection);
+
+  if(isset($_POST['students'])){
+  foreach ($_POST['students'] as $selectedOption)
+  { Registeration::InsertinDB($cid,$selectedOption); }}
+
+  header('location: view_sections.php?id='.$id.'');
+  }
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +68,7 @@ $Course = Courses::SelectCourse($id);
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Username</label>
                               <div class="styled-select slate">
-                              <select name="country" id="country">
+                              <select name="username" id="username">
                               <option value="">Select Teacher</option>
                               <?php
                                 for($i=0; $i<count($Teachers); $i++){ 
@@ -58,17 +82,17 @@ $Course = Courses::SelectCourse($id);
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Course Name</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" value="<?php echo ''.$Course[0]->name.''; ?>" type="text" disabled><br>
+                                  <input class="form-control" id="disabledInput" value="<?php echo ''.$Course[0]->name.''; ?>" type="text" ><br>
                                 </div>
                                   <label class="col-sm-2 col-sm-2 control-label">Course ID</label>
                                <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" value="<?php echo ''.$Course[0]->id.''; ?>" type="text" disabled>
+                                  <input class="form-control" id="disabledInput" name="courseid" value="<?php echo ''.$Course[0]->id.''; ?>" type="text" >
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Semester</label>
                               <div class="styled-select slate">
-                              <select>
+                              <select name="semester" id="semester">
                               <option value="">Select Semester</option>
                               <?php
                                 for($i=0; $i<count($Semesters); $i++){ 
@@ -81,14 +105,14 @@ $Course = Courses::SelectCourse($id);
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Section Code</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text">
+                                  <input class="form-control" name="sectioncode" id="disabledInput" type="text">
                               </div>
                           </div>
 
                               <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Day</label>
                               <div class="styled-select slate">
-                              <select name="country" id="country">
+                              <select name="day" id="day">
                               <option value="">Select Day</option>
                               <?php
                                 $result = array();
@@ -104,7 +128,7 @@ $Course = Courses::SelectCourse($id);
                               <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Slot</label>
                               <div class="styled-select slate">
-                              <select name="country" id="country">
+                              <select name="slot" id="slot">
                               <option value="">Select Slot</option>
                               <?php
                                 $qresult = array();
@@ -120,7 +144,7 @@ $Course = Courses::SelectCourse($id);
                               <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Room</label>
                               <div class="styled-select slate">
-                              <select name="country" id="country">
+                              <select name="room" id="room">
                               <option value="">Select Room</option>
                               <?php
                                 $result = array();
@@ -137,7 +161,7 @@ $Course = Courses::SelectCourse($id);
                           <legend>Register Students</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Students</label>
-                              <select multiple>
+                              <select name="students[]" multiple>
                               <?php
                                 $Students = array();
                                 $Students = Student::getRegisteredStudents();

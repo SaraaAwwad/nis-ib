@@ -1,7 +1,29 @@
-<?php
+<?php 
 require_once("../classes/weekdays.php");
 require_once("../classes/slot.php");
 require_once("../classes/room.php");
+require_once("../classes/section.php");
+require_once("../classes/student.php");
+require_once("../classes/courses.php");
+require_once("../classes/Registeration.php");
+require_once("../classes/teacher.php");
+require_once("../classes/semester.php");
+
+if(isset($_POST['update'])) {
+  $objSection = new Schedule();
+  $sid = $_GET['id'];
+  $objSection->sectioncode = $_POST['sectioncode'];
+  $objSection->day = $_POST['day'];
+  $objSection->slot = $_POST['slot'];
+  $objSection->room = $_POST['room'];
+  Schedule::InsertinDB($sid,$objSection);
+
+  if(isset($_POST['students'])){
+  foreach ($_POST['students'] as $selectedOption)
+  { Registeration::InsertinDB($sid,$selectedOption); }}
+  header('location: view_schedule.php?id='.$sid.'');
+  
+}
 
 ?>
 <!DOCTYPE html>
@@ -12,14 +34,10 @@ require_once("../classes/room.php");
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
-        
-    <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
   </head>
@@ -27,93 +45,89 @@ require_once("../classes/room.php");
   <body>
 
   <section id="container" >
-      <!-- TOP BAR CONTENT & NOTIFICATIONS-->
-      <!--header start-->
       <?php include_once("header.php"); ?>
-      <!--header end-->
-      
-      <!--MAIN SIDEBAR MENU-->
-      <!--sidebar start-->
       <?php include_once("side.php"); ?>
-      <!--sidebar end-->
-      
-      <!-- MAIN CONTENT-->
-      <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Add To Schedule</h3>
             
-            <!-- BASIC FORM ELELEMNTS -->
             <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="get">
                         
-                          <legend>Date Information</legend>
+                         <legend>Schedule Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Section</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Section Code</label>
                               <div class="col-sm-10">
-                                  <input class="form-control" id="disabledInput" type="text" disabled>
+                                  <input class="form-control" name="sectioncode" id="disabledInput" type="text">
                               </div>
                           </div>
-                          <div class="form-group"  id ="new">
 
+                              <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Day</label>
-                              <div class="weekDays-selector">
-                               <select class="selectpicker" name="dayspicker">
-
-                              	<?php
-
+                              <div class="styled-select slate">
+                              <select name="day" id="day">
+                              <option value="">Select Day</option>
+                              <?php
                                 $result = array();
                                 $result = Weekdays::getWeekdays();
                                 for($i=0; $i<count($result); $i++){ 
-                                	 echo ' <option value ='.$result[$i]->id.'>'.$result[$i]->day_name.'</option>';
-                                	
+                                   echo ' <option value ='.$result[$i]->id.'>'.$result[$i]->day_name.'</option>';
                                 }
                                 ?>
-                                </select>
-
+                              </select>
                               </div>
-                              <br/>
+                              </div>
+
+                              <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Slot</label>
-                              <div class="slot-selector">
-                              <select>
-                              	<?php
-                                $result = array();
-                                $result = slot::getSlots();
-                                for($i=0; $i<count($result); $i++){ 
-                                 echo ' <option value ='.$result[$i]->slotName.'>'.$result[$i]->startTime.' - '.$result[$i]->endTime.'</option>';
-                                	
+                              <div class="styled-select slate">
+                              <select name="slot" id="slot">
+                              <option value="">Select Slot</option>
+                              <?php
+                                $qresult = array();
+                                $qresult = Slot::SelectAvailableSlots();
+                                for($i=0; $i<count($qresult); $i++){ 
+                                 echo ' <option value ='.$qresult[$i]->id.'>'.$qresult[$i]->slotName.' '.$qresult[$i]->startTime.'-'.$qresult[$i]->endTime.'</option>';
                                 }
                                 ?>
                               </select>
-                         	  </div>
-                         	  <br/>
-                         	  <label class="col-sm-2 col-sm-2 control-label">Room Number</label>
-                              <div class="room-selector">
-                              <select>
-                              	<?php
+                              </div>
+                              </div>
+
+                              <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Room</label>
+                              <div class="styled-select slate">
+                              <select name="room" id="room">
+                              <option value="">Select Room</option>
+                              <?php
                                 $result = array();
-                                $result = Room::getRoom();
+                                $result = Room::SelectAvailableRooms();
                                 for($i=0; $i<count($result); $i++){ 
-                                 echo ' <option value ='.$result[$i]->id.'>'.$result[$i]->roomName.' </option>';
-                                	
+                                 echo ' <option value ='.$result[$i]->id.'>'.$result[$i]->name.' </option>';
+                                  
                                 }
                                 ?>
                               </select>
-                          </div>
-                    		   
-                          <a class="btn btn-primary pull-right" class="pull-left"  id="adding"><i class="fa fa-plus"></i> Add </a>
-                          </div>
+                              </div>
+                              </div>
+                           
                           <legend>Register Students</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Students</label>
-                              <select multiple>
-                              <option></option>
+                              <select name="students[]" multiple>
+                              <?php
+                                $Students = array();
+                                $Students = Student::getRegisteredStudents();
+                                for($i=0; $i<count($Students); $i++){ 
+                                   echo ' <option value ='.$Students[$i]->id.'>'.$Students[$i]->fname.' '.$Students[$i]->lname.'</option>';
+                                }
+                                ?>
                               </select>
                           </div>
 
-                          <input type="submit" id="main">
+                          <input type="submit" name="update" id="main">
                       </form>
                   </div>
               </div><!-- col-lg-12-->       
@@ -143,25 +157,5 @@ require_once("../classes/room.php");
   <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
   <script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
   <script src="assets/js/form-component.js"></script>
-  <script>
-    $(function(){  
-  $('input[type="time"][value="now"]').each(function(){    
-    var d = new Date(),        
-        h = d.getHours(),
-        m = d.getMinutes();
-    if(h < 10) h = '0' + h; 
-    if(m < 10) m = '0' + m; 
-    $(this).attr({
-      'value': h + ':' + m
-    });
-  });
-});
-
-	$("#adding").click(function(){
-		
-		 $("#new").append("<hr/><div class=\"form-group-center\" id =\"new\"><label class=\"col-sm-2 col-sm-2 control-label\">Day</label><div class=\"weekDays-selector\"><select class=\"selectpicker\" name=\"dayspicker\"></select></div><br/><label class=\"col-sm-2 col-sm-2 control-label\">Slot</label><div class=\"slot-selector\"><select></select></div><br/><label class=\"col-sm-2 col-sm-2 control-label\">Room Number</label><div class=\"room-selector\"><select></select></div>");
-    
-	});
-  </script>
   </body>
 </html>

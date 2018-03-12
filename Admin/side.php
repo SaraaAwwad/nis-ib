@@ -56,7 +56,6 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="view_pages.php">View Pages</a></li>
                           <li><a href="add_page.php">Add Page</a></li>
-                          <li><a href="viewaddress.php">Manage Address</a></li>
                       </ul>
                   </li>
 
