@@ -1,3 +1,11 @@
+<?php
+require_once("..\db\database.php");
+require_once("..\classes\section.php");
+require_once("..\classes\schedule.php");
+$id = $_GET['id'];
+$allSchedule = array();
+$allSchedule = Schedule::SelectAllSchedulesInDB($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +17,6 @@
 
     <title>NIS</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -39,36 +46,36 @@
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> View Schedule</h3>
   <section class="tabcontent">
-    <a class="buttonlink btn btn-theme04 left" href="add_schedule.php"><i class="fa fa-plus"></i> Schedule</a>
+    <a class="buttonlink btn btn-theme04 left" href="add_schedule.php?id=<?php echo ''.$id.''; ?>"><i class="fa fa-plus"></i> Schedule</a>
     <input type="search" class="light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
     <table class="order-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th class="hidden-phone">Section Code</th>
-          <th>Room</th>
+          <th class="hidden-phone">Section id</th>
+          <th>Room id</th>
           <th>Room's Capacity</th>
           <th>Day</th>
           <th>Slot</th>
-          <th>Start Time</th>
-          <th>End Time</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>CSC01122</td>
-          <td>311</td>
-          <td>25</td>
-          <td>Wednesday</td>
-          <td>1st</td>
-          <td>8:30AM</td>
-          <td>11:00AM</td>
-          <td>
-            <button class="btn btn-Coordinatorimary btn-xs"><i class="fa fa-pencil"></i></button>
+         <?php for($i=0; $i<count($allSchedule); $i++){ 
+          echo
+        '<tr>
+          <td> '.$allSchedule[$i]->id.'</td>
+          <td>'.$allSchedule[$i]->section_id.'</td>
+          <td>'.$allSchedule[$i]->name.'</td>
+          <td>'.$allSchedule[$i]->size.'</td>
+          <td>'.$allSchedule[$i]->day.'</td>
+          <td>'.$allSchedule[$i]->slot_name.'</td>
+          <td  colspan="2">
+            <a class="btn btn-success btn-xs" href="update.php?id='.$allSchedule[$i]->id.'">Update</a><br><br>
+            <a class="btn btn-success btn-xs" href="update.php?id='.$allSchedule[$i]->id.'">Activate</a>
           </td>
-        </tr>
+        </tr>';
+         } ?>
       </tbody>
     </table>
   </section>
