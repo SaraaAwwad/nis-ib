@@ -1,28 +1,29 @@
 <?php 
 session_start(); 
-/*if(!isset($_SESSION["userID"])){
+require_once("..\classes\usertype.php");
+if(!isset($_SESSION["userID"])){
     echo 'sorry you cant view this page'; 
     exit();
 }
 else{
-    $userID = $_SESSION["userID"];
-    $userObj = new User($userID);
+    $userTypeID = $_SESSION["userType"];
+    $UserTypeObj = new UserType($userTypeID);
 
-    for ($i=0;$i<count($userObj->UserTypeObj->UserPages);$i++)
+    for ($i=0;$i<count($UserTypeObj->UserPages);$i++)
     {
-       /* if ($userObj->UserTypeObj->UserPages[$i]->Linkaddress!="")
+       if ($UserTypeObj->UserPages[$i]->physicalname!="")
         {
-        echo 	"<br><a href=".$UseObject->UserType_obj->ArrayOfPages[$i]->Linkaddress.">".$UseObject->UserType_obj->ArrayOfPages[$i]->FreindlyName."</a>";
+        echo 	"<br><a href=".$UserTypeObj->UserPages[$i]->physicalname.">".$UserTypeObj->UserPages[$i]->friendlyname."</a>";
         
         }
         else
         {
-            echo "<br><a href=displayArticleController.php?ID=".$UseObject->UserType_obj->ArrayOfPages[$i]->ID.">".$UseObject->UserType_obj->ArrayOfPages[$i]->FreindlyName."</a>";
+            echo "<br><a href=displayArticleController.php?ID=".$UserTypeObj->UserPages[$i]->id.">".$UserTypeObj->UserPages[$i]->friendlyname."</a>";
             
         }
         echo 'hello';
     }
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,45 +63,7 @@ else{
       <section id="main-content">
           <section class="wrapper">
             
-    <div class="form-panel">
-            <div class="row mt">
-              <div class="col-lg-12">
-                          
-            <form name="assign" method="POST" action="" class="form-horizontal style-form">
-            <legend>Assign Pages</legend>
-            <select name="Pages[]" id ="fromopt" style="color: red; width: 200px; height: 150px;" multiple>
-            <?php 
-                for ($i=0; $i< count($allPages); $i++){
-                    echo '<option value="'.$allPages[$i]->id.'" >'.$allPages[$i]->friendlyname.'</option>';
-                }
-            ?>
 
-            
-    </select>
-    <button type="button" id="from"> << </button>    
-    <button type="button" id="to"> >> </button>
-    <select id="toopt" name="SelectedPages[]" style="color: red; width: 200px; height: 150px;" multiple>    </select>
-    <br/>
-    </div>
-   </div>
-    
-    <div class="row mt">
-    <div class="col-lg-12">
-        <select name="usertype" id ="type">
-            <?php 
-                for ($i=0; $i< count($allTypes); $i++){
-                    echo '<option value="'.$allTypes[$i]->id.'" >'.$allTypes[$i]->title.'</option>';
-                }
-            ?>
-        </select>
-    
-        <input type="submit" value="Submit" name="submit">
-    </div>
-
-
-</div>
-</div>
-</form>
 </section>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

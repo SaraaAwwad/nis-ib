@@ -1,9 +1,9 @@
 <?php
-	require_once("..\db\database.php");
+	require_once("\..\db\database.php");
 	require_once("usertype.php");
 	// require_once("weekdays.php");
 	//session_start();
- class User{
+ abstract class User{
 	public $id;
     public $username;
     public $fname;
@@ -82,7 +82,7 @@
 			if($password== $row['pwd']){
 				session_start();
 				$_SESSION["userID"] = $row['id'];
-				//$_SESSION["userType"] = $row['type_id'];
+				$_SESSION["userType"] = $row['type_id'];
 				return true;
 			}
 		}
