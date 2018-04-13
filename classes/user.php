@@ -1,5 +1,5 @@
 <?php
-	require_once("\..\db\database.php");
+	require_once("..\db\database.php");
 	require_once("usertype.php");
 	// require_once("weekdays.php");
 	//session_start();
