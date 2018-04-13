@@ -112,8 +112,6 @@ class Student extends User{
         return $Result;
     }
 
-    
-
 }
     
 ?>
