@@ -32,6 +32,62 @@ namespace PHPMVC\Lib\Database;
         } else { // There is already a PDO, so just send it back.
             return self::$_db;
         }
-    }  
+    }
+    
+    /*static public function executesql($sql){
+        if($this->con->query($sql) == TRUE){
+            //$result = mysqli_query($this->con, $sql);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    static public function executesql2($sql){
+        if($this->con->query($sql) == TRUE){
+            return $result = mysqli_query($this->con,$sql);
+        }else{
+            return false;
+        }
+    }
+
+    static public function insertsql($sql){
+        if($this->con->query($sql) == TRUE){
+        return mysqli_insert_id($this->con);
+        }else{
+            return false;
+        }
+    }
+
+    static public function query($query) {
+        $result = mysqli_query($this->con,$query);
+        return $result;
+    }
+
+    static public function selectsql($sql){
+        if($result = mysqli_query($this->con, $sql))
+        return $result;
+        else
+        return false;
+    }
+
+    static public function selectsql2($sql){
+        if($result = mysqli_query($this->con, $sql))
+          {$num = mysqli_num_rows ( $result );
+         return $num;}
+        else
+        {return false;}
+    }*/
+
+    /*function disconnect(){
+        return $this->con->close();
+    }*/
+
+    function test_input($data) {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+    }
 
 }
