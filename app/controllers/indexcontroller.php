@@ -16,12 +16,16 @@ class IndexController extends AbstractController{
             $em = $_POST["username"];
             $psw =$_POST["password"];
            if(UserModel::login($em, $psw)){
-               $this->redirect('\user');
+                $this->redirect('\user');
            }else{
             echo 'user doesnt exist';				
            }
         }
-
         $this->_view();
+    }
+
+    public function logoutAction(){
+    	session_destroy();
+	    $this->redirect('\index');	
     }
 }

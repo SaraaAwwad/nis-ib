@@ -25,17 +25,13 @@ define('ASSETS_ICONS', DS . 'public' . DS . 'assets' . DS. 'lineicons' . DS);
 
 
 
-
-
-
-
 define('DB_HOST' ,'localhost');
 define('DB_NAME', 'nefertari');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-defined('SESSION_NAME')     ? null : define ('SESSION_NAME', '_ESTORE_SESSION');
-defined('SESSION_LIFE_TIME')     ? null : define ('SESSION_LIFE_TIME', 0);
-defined('SESSION_SAVE_PATH')     ? null : define ('SESSION_SAVE_PATH', APP_PATH . DS . '..' . DS . 'sessions');
+#defined('SESSION_NAME')     ? null : define ('SESSION_NAME', '_NIS_SESSION');
+#defined('SESSION_LIFE_TIME')     ? null : define ('SESSION_LIFE_TIME', 0);
+#defined('SESSION_SAVE_PATH')     ? null : define ('SESSION_SAVE_PATH', APP_PATH . DS . '..' . DS . 'sessions');
 
 define('DOMAIN_NAME', '.nisib.example.com'); //change according to virtualhost

@@ -32,4 +32,32 @@ abstract class UserModel {
 		}
 	}
 
+	public static function getByPK($id){
+        $db = DatabaseHandler::getConnection();
+
+        $sql ="SELECT * FROM `user` WHERE id = '$id'"; //and status == active
+        $result = mysqli_query($db,$sql);
+        $Res= false;
+        $i=0;
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            //$MyObj= new StudentModel($row["id"]);
+            $Res['id']=$row["id"];
+            $Res['fname']=$row["fname"];
+            $Res['lname']=$row["lname"];
+            $Res['gender']=$row["gender"];
+            $Res['DOB']=$row["DOB"];
+            $Res['username']=$row["username"];
+            $Res['email']=$row["email"];
+            $Res['img']=$row["img"];
+            //$MyObj->password=$row["pwd"];
+            //$MyObj->phone=$row["phone"];
+            //$MyObj->address_id_fk = $row["add_id_fk"];
+            //$MyObj->status = $row["status"];
+            //$Res=$MyObj;
+        }
+
+        return $Res;
+    }
+
 }

@@ -3,13 +3,12 @@ namespace PHPMVC\LIB;
 
 class SessionManager extends \SessionHandler
 {
-
     private $sessionName = SESSION_NAME;
     private $sessionMaxLifetime = SESSION_LIFE_TIME;
     private $sessionSSL = false;
     private $sessionHTTPOnly = true;
     private $sessionPath = '/';
-    private $sessionDomain = '.mvcapp.com';
+    private $sessionDomain = DOMAIN_NAME;
     private $sessionSavePath = SESSION_SAVE_PATH;
 
     private $sessionCipherAlgo = 'AES-128-ECB';
@@ -38,7 +37,6 @@ class SessionManager extends \SessionHandler
             $this->sessionHTTPOnly
         );
 
-//        session_set_save_handler($this, true);
     }
 
     public function __get($key) {
