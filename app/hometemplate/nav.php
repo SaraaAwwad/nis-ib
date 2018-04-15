@@ -54,6 +54,7 @@
                           <span>Control</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
+                          <li><a href="\usertypes">User Types</a></li>
                           <li><a href="view_pages.php">View Pages</a></li>
                           <li><a href="add_page.php">Add Page</a></li>
                       </ul>

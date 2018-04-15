@@ -50,14 +50,12 @@ abstract class UserModel {
             $Res['username']=$row["username"];
             $Res['email']=$row["email"];
             $Res['img']=$row["img"];
-            //$MyObj->password=$row["pwd"];
-            //$MyObj->phone=$row["phone"];
-            //$MyObj->address_id_fk = $row["add_id_fk"];
-            //$MyObj->status = $row["status"];
+            $Res['password']=$row["pwd"];
+            $Res['phone']=$row["phone"];
+            $Res['address_id_fk'] = $row["add_id_fk"];
+            $Res['status'] = $row["status"];
             //$Res=$MyObj;
         }
-
         return $Res;
     }
-
 }
