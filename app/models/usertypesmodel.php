@@ -43,7 +43,7 @@ class UserTypesModel{
         }
     }
     
-    Static function getAllUserTypes(){
+    Static function getAll(){
         $db = DatabaseHandler::getConnection();
         $sql = "SELECT * FROM user_type";
         $result = mysqli_query($db,$sql);
@@ -57,6 +57,20 @@ class UserTypesModel{
         return $Types;
     }
 
+    public function update($title, $statusId){
+        $this->title = $title;
+        $this->status_id_fk = $statusId;
+
+        $db = DatabaseHandler::getConnection();
+        $sql = "UPDATE user_type SET title= '$this->title' , status_id_fk= '$this->status_id_fk' WHERE id='$this->id'";
+                
+                if (mysqli_query($db, $sql)){
+                    return true;
+                }else{
+                   return false;
+               // die(mysqli_error($db));
+                }
+    }
 
     public function getUserPages(){
         $sql = "SELECT id from user_type_pages WHERE typeid_fk = '$this->id' order by ordervalue ";

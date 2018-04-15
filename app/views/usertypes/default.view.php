@@ -10,7 +10,15 @@
             <h1>User Types</h1>
 		</div>
 	</div>		
-    
+
+  <section class="tabcontent">    
+    <div class="row">
+    <div class="col-lg-12 main-chart">
+    <a class="buttonlink btn btn-theme04 left" href="/usertypes/add"><i class="fa fa-plus"></i>User Type</a>
+    </div>
+  </div>
+  </section>
+
   <section class="tabcontent">
     <table class="order-table">
       <thead>
@@ -29,8 +37,7 @@
                     <td>'.$ut->id.'</td>
                     <td>'.$ut->title.'</td>
                     <td>'.$ut->status.'</td>
-                    <td><a href="usertypes\add\\'.$ut->id.'">Add</a> , 
-                        <a href="usertypes\edit\\'.$ut->id.'">Edit</a></td>
+                    <td> <a href="usertypes\edit\\'.$ut->id.'">Edit</a></td>
                     </tr>';
                 }
             ?>
