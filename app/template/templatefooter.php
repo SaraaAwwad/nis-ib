@@ -17,7 +17,7 @@
                 <div class="col-md-3">
                     <div class="foot-logo">
                         <a href="index.html">
-                            <img src="/public/images/nib_logo.png" class="img-fluid" alt="footer_logo">
+                            <img src="<?= IMG ?>nib_logo.png" class="img-fluid" alt="footer_logo">
                         </a>
                         <p>2018 © copyright
                             <br> All rights reserved.</p>
@@ -59,20 +59,20 @@
                 </div>
             </footer>
 
-            <script src="/public/js/jquery.min.js"></script>
-            <script src="/public/js/tether.min.js"></script>
-            <script src="/public/js/bootstrap.min.js"></script>
+            <script src="<?= JS ?>jquery.min.js"></script>
+            <script src="<?= JS ?>tether.min.js"></script>
+            <script src="<?= JS ?>bootstrap.min.js"></script>
             <!-- Plugins -->
-            <script src="/public/js/slick.min.js"></script>
-            <script src="/public/js/waypoints.min.js"></script>
-            <script src="/public/js/counterup.min.js"></script>
-            <script src="/public/js/instafeed.min.js"></script>
-            <script src="/public/js/owl.carousel.min.js"></script>
-            <script src="/public/js/validate.js"></script>
-            <script src="/public/js/tweetie.min.js"></script>
+            <script src="<?= JS ?>slick.min.js"></script>
+            <script src="<?= JS ?>waypoints.min.js"></script>
+            <script src="<?= JS ?>counterup.min.js"></script>
+            <script src="<?= JS ?>instafeed.min.js"></script>
+            <script src="<?= JS ?>owl.carousel.min.js"></script>
+            <script src="<?= JS ?>validate.js"></script>
+            <script src="<?= JS ?>tweetie.min.js"></script>
             <!-- Subscribe -->
-            <script src="/public/js/subscribe.js"></script>
+            <script src="<?= JS ?>subscribe.js"></script>
             <!-- Script JS -->
-            <script src="/public/js/script.js"></script>
+            <script src="<?= JS ?>script.js"></script>
 </body>
 </html>

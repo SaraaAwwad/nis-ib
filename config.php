@@ -12,7 +12,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 ini_set('register_globals', 0);
 
 // Define App Constants
-define('APP_PATH', );
+//define('APP_PATH', );
 
 
 

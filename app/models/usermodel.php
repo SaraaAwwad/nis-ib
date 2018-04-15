@@ -11,9 +11,9 @@ abstract class UserModel {
             $row = mysqli_fetch_array($result);
 			//if(password_verify($pw, $row['pwd'])){
 			if($password== $row['pwd']){
-			//	session_start();
-			//	$_SESSION["userID"] = $row['id'];
-			//	$_SESSION["userType"] = $row['type_id'];
+				session_start();
+				$_SESSION["userID"] = $row['id'];
+				$_SESSION["userType"] = $row['type_id'];
 				return true;
 			}
 		}
