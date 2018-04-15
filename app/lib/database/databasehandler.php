@@ -2,13 +2,16 @@
 namespace PHPMVC\Lib\Database;
 
  class DatabaseHandler{
-    static private $_db = null; // The same PDO will persist from one call to the next
 
-    private function __construct() {} // disallow calling the class via new DBConn
+    //Singleton design pattern
+
+    static private $_db = null; // you have only one copy
+
+    private function __construct() {} // private to disallow calling the class via new DBConn  
    
     private function __clone() {} // disallow cloning the class
 
-    static public function getConnection(){
+    static public function getConnection(){ 
         
         if (self::$_db == null) { // No PDO exists yet, so make one and send it back.
           //di el pdo::
