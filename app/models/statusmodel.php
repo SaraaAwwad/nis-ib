@@ -4,7 +4,7 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class StatusModel{
     public $id;
-    public $code="a";
+    public $code;
 
     public function __construct($id=""){
         if($id != ""){

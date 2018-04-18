@@ -9,7 +9,7 @@ class AutoLoad{
         //remove namemainspace ;
         $className = str_replace('PHPMVC', '', $className);
         //$className = str_replace('\\', '/', $className);
-	      $className = $className . '.php';
+	    $className = $className . '.php';
         $className = strtolower($className);
         
        // echo APP_PATH . $className;

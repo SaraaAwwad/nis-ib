@@ -16,12 +16,8 @@ class FrontController{
     }
 
     private function _parseUrl(){
-        
-        /*if(($_SERVER['SERVER_NAME']==='localhost')){
-            $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 4);
-            array_shift($url);
-        }else{*/
-            $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 3);
+
+        $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 3);
 
         if(isset($url[0]) && $url[0]!= ''){
             $this->_controller = $url[0];           
@@ -39,6 +35,7 @@ class FrontController{
         $controllerClassName = 'PHPMVC\Controllers\\' .ucfirst($this->_controller) . 'Controller';
        
         $actionName = $this->_action . 'Action';
+
         if(!class_exists($controllerClassName)){
             $controllerClassName = self::NOT_FOUND_CONTROLLER;
         } 

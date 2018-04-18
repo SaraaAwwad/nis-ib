@@ -2,7 +2,7 @@
     require_once("..\db\database.php");
     require_once("layout.php");
 
-class Pages{
+class PagesModel{
 
 	public $id;
 	public $friendlyname;
