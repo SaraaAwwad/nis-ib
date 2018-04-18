@@ -17,12 +17,11 @@ class FrontController{
 
     private function _parseUrl(){
         
-        if(($_SERVER['SERVER_NAME']==='localhost')){
+        /*if(($_SERVER['SERVER_NAME']==='localhost')){
             $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 4);
             array_shift($url);
-        }else{
+        }else{*/
             $url = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'), 3);
-        }
 
         if(isset($url[0]) && $url[0]!= ''){
             $this->_controller = $url[0];           

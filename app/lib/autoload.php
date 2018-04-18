@@ -4,12 +4,12 @@ namespace PHPMVC\LIB;
 class AutoLoad{
     public static function autoload($className){
        
-      // echo APP_PATH .'\\'. $className;
+        // echo APP_PATH .'\\'. $className;
 
-       //remove namemainspace ;
+        //remove namemainspace ;
         $className = str_replace('PHPMVC', '', $className);
         //$className = str_replace('\\', '/', $className);
-	    $className = $className . '.php';
+	      $className = $className . '.php';
         $className = strtolower($className);
         
        // echo APP_PATH . $className;
@@ -19,4 +19,7 @@ class AutoLoad{
 	    } 
     }
 }
+
+// use autoload function in this class as autoload pre-built function in php
+// for better performance 
 spl_autoload_register(__NAMESPACE__ . '\AutoLoad::autoload');

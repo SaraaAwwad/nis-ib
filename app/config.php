@@ -9,21 +9,19 @@ define('VIEWS_PATH', APP_PATH . DS . 'views' . DS);
 define('TEMPLATE_PATH', APP_PATH . DS . 'template' . DS);
 define('HOME_TEMPLATE_PATH', APP_PATH . DS . 'hometemplate' . DS);
 
-//define('PUBLIC_PATH', '..' . DS . 'public');
+define('PUBLIC_PATH',  DS . 'public' . DS);
 
-define('CSS', DS . 'public' . DS . 'css' . DS);
-define('IMG', DS . 'public' . DS . 'images' . DS);
-define('JS', DS . 'public' . DS . 'js' . DS);
-define('FONTS', DS . 'public' . DS . 'fonts' . DS);
+define('CSS', PUBLIC_PATH . 'css' . DS);
+define('IMG', PUBLIC_PATH . 'images' . DS);
+define('JS', PUBLIC_PATH. 'js' . DS);
+define('FONTS',  PUBLIC_PATH. 'fonts' . DS);
 
-define('ASSETS_CSS', DS . 'public' . DS . 'assets' . DS . 'css'. DS);
-define('ASSETS_JS', DS . 'public' . DS . 'assets' . DS . 'js'. DS);
-define('ASSETS_IMG', DS . 'public' . DS . 'assets' . DS . 'img'. DS);
-define('ASSETS_FONTS', DS . 'public' . DS . 'assets' . DS . 'fonts'. DS);
-define('ASSETS_FONT_AWESOME', DS . 'public' . DS . 'assets' . DS . 'font-awesome'. DS);
-define('ASSETS_ICONS', DS . 'public' . DS . 'assets' . DS. 'lineicons' . DS);
-
-
+define('ASSETS_CSS',  PUBLIC_PATH. 'assets' . DS . 'css'. DS);
+define('ASSETS_JS', PUBLIC_PATH . 'assets' . DS . 'js'. DS);
+define('ASSETS_IMG', PUBLIC_PATH . 'assets' . DS . 'img'. DS);
+define('ASSETS_FONTS',  PUBLIC_PATH . 'assets' . DS . 'fonts'. DS);
+define('ASSETS_FONT_AWESOME',  PUBLIC_PATH . 'assets' . DS . 'font-awesome'. DS);
+define('ASSETS_ICONS',  PUBLIC_PATH . 'assets' . DS. 'lineicons' . DS);
 
 define('DB_HOST' ,'localhost');
 define('DB_NAME', 'nefertari');

@@ -1,9 +1,10 @@
-<header>
-<!-- header goes here -->
-<div class="container nav-menu">
-<div class="row">
+
+    <!--============================= HEADER =============================-->
+    <header>
+        <div class="container nav-menu">
+            <div class="row">
                 <div class="col-md-12">
-                    <a href="index.html"><img src="<?= IMG ?>nib_logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
+                    <a href="index.html"><img src="images/nib_logo.png" class="responsive-logo img-fluid" alt="responsive-logo"></a>
                 </div>
             </div>
             <div class="row">
@@ -24,7 +25,7 @@
                                     <a class="nav-link" href="academics.php">Academics</a>
                                 </li>
                                 <li class="nav-logo">
-                                    <a href="index.php" class="navbar-brand"><img src="<?= IMG ?>nib_logo.png" class="img-fluid" alt="logo"></a>
+                                    <a href="index.php" class="navbar-brand"><img src="images/nib_logo.png" class="img-fluid" alt="logo"></a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,14 +49,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="contact.php">Contact</a>
                             </li>
-                             <a class="nav-link" href="/index/login">Login</a>
+                             <a class="nav-link" href="login.php">Login</a>
                         </ul>
                     </div>
                 </nav>
             </div>
         </div>
         </div>
-        <div class="slider_img">
+
+    <div class="slider_img">
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carousel" data-slide-to="0" class="active"></li>
@@ -64,7 +66,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                    <img class="d-block" src="<?= IMG ?>slider.jpg" alt="First slide">
+                    <img class="d-block" src="images/slider.jpg" alt="First slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>Creative Thinking &amp; Innovation</h1>
@@ -77,7 +79,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block" src="<?= IMG ?>slider-2.jpg" alt="Second slide">
+                    <img class="d-block" src="images/slider-2.jpg" alt="Second slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>We foster wisdom</h1>
@@ -90,7 +92,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block" src="<?= IMG ?>slider-3.jpg" alt="Third slide">
+                    <img class="d-block" src="images/slider-3.jpg" alt="Third slide">
                     <div class="carousel-caption d-md-block">
                         <div class="slider_title">
                             <h1>Campus life @ Unisco</h1>
@@ -113,3 +115,4 @@
         </div>
     </div>
 </header>
+<!--//END HEADER -->

@@ -18,8 +18,12 @@ class StudentModel {
     public $status;
     public $password;
     public $user_id_fk;
+    //const tableName = 'user';
+    //public $dbfields = array('type_id', 'fname', 'lname', 'gender', 'DOB', 'username',
+    //                        'pwd', 'email', 'status', 'img', 'user_id_fk', 'add_id_fk');
 
     public function __construct($id=""){
+
 		if($id != ""){
             $this->id = $id;
             //get info
@@ -29,8 +33,8 @@ class StudentModel {
     public static function getAll(){
         //ay habal print all users::
         $db = DatabaseHandler::getConnection();
-
-        $sql ="SELECT * FROM `user`";
+       //$sql ="SELECT * FROM " . StudentModel::tableName;
+        $sql ="SELECT * FROM user ";
         $result = mysqli_query($db,$sql);
         $Res = array();
         $i=0;
