@@ -48,7 +48,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="contact.php">Contact</a>
                             </li>
-                             <a class="nav-link" href="login.php">Login</a>
+                             <a class="nav-link" href="/index/login">Login</a>
                         </ul>
                     </div>
                 </nav>
