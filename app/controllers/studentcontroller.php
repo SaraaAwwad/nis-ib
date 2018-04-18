@@ -3,6 +3,7 @@ namespace PHPMVC\Controllers;
 use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\Models\StatusModel;
+use PHPMVC\Models\AddressModel;
 use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\InputFilter;
 
@@ -50,14 +51,18 @@ class StudentController extends AbstractController{
         }
         
 
-
         $Levels = LevelModel::getAll();
         $this->_data['Levels'] = $Levels;
         
+        $Address = Address::loadCountry();
+        $this->_data['Address'] = $Address;
 
         $stat = StatusModel::getAll();
         $this->_data['status'] = $stat;
         $this->_view();
+
+
+
         
     }
 

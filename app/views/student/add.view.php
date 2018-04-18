@@ -80,7 +80,7 @@
                                 <select name="status" class="form-control" id="status">
                                     <option value="" disabled>Select Status</option>
                                     <?php
-                                   
+
                                         foreach($status as $st){
                                             echo '<option value='.$st->id.'>'.$st->code.'</option>';
                                         }
@@ -89,7 +89,47 @@
                               </div>
                           </div>
 
+                          <legend>Address Information</legend>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Country</label>
+                              <div class="styled-select slate">
+                              <select name="country" id="country">
+                              <option value="">Select Country</option>
+                              <?php
+                              foreach($Address as $ad){
+                                            echo '<option value='.$ad->id.'>'.$address->.'</option>';
+                                        }
+                               ?>
+                              </select>
+                              </div>
+                          </div>
 
+                           <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">City</label>
+                              <div class="styled-select slate">
+                              <select name="city" id="city" >
+                              <option value="">Select City</option>
+                              </select>
+                          </div>
+                          </div>
+
+                           <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Area</label>
+                              <div class="styled-select slate">
+                              <select name="area" id="area">
+                              <option value="">Select Area</option>
+                              </select>
+                          </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Street</label>
+                              <div class="styled-select slate">
+                              <select name="street" id="street">
+                              <option value="">Select Street</option>
+                              </select>
+                          </div>
+                          </div>
 
                         </fieldset>
                         <input type="submit" name="addstudent" id="main">
