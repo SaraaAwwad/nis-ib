@@ -47,6 +47,8 @@ class StudentModel {
             $MyObj->DOB=$row["DOB"];
             $MyObj->username=$row["username"];
             $MyObj->email=$row["email"];
+            $MyObj->phone=$row["phone"];
+            $MyObj->status=$row["status"];  
             $Res[$i]=$MyObj;
             $i++;
         }

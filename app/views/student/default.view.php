@@ -33,10 +33,18 @@ if(isset($students)){
 echo '        <tr>
         <td>'.$st->id.'</td>
         <td>'.$st->fname.'</td>
-        <td><a href="student\edit\\'.$st->lname.'">Edit</a></td>
-        <td><a href="student\delete\\'.$st->gender.'">Delete</a></td>
-        <td><a href="student\delete\\'.$st->DOB.'">Delete</a></td>
-        <td><a href="student\delete\\'.$st->phone.'">Delete</a></td>
+        <td>'.$st->lname.'</a></td>
+        <td>'.$st->gender.'</td>
+        <td>'.$st->DOB.'</td>
+        <td>'.$st->phone.'</td>
+        <td>'.$st->username.'</td>
+        <td>'.$st->password.'</td>
+        <td>'.$st->email.'</td>
+        <td>'.$st->status.'</td>
+        <td>
+        <a class="btn btn-success btn-xs" href="update.php?id='.$st->id.'">Update</a>
+        <a class="btn btn-success btn-xs" href="update.php?id='.$st->id.'">Activate</a>
+        </td>
         </tr>';
  
  }
