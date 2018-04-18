@@ -45,8 +45,11 @@ class StudentModel {
             $MyObj->lname=$row["lname"];
             $MyObj->gender=$row["gender"];
             $MyObj->DOB=$row["DOB"];
+            $MyObj->password=$row["pwd"];  
             $MyObj->username=$row["username"];
             $MyObj->email=$row["email"];
+            $MyObj->phone=$row["phone"];
+            $MyObj->status=$row["status"];  
             $Res[$i]=$MyObj;
             $i++;
         }
@@ -110,4 +113,5 @@ class StudentModel {
                  //die(mysqli_error($db));
                 }
     }
+
 }

@@ -74,19 +74,19 @@ class StudentController extends AbstractController{
             //to send to view 
             $this->_data['student'] = $stud;
 
-            if(isset($_POST['update'])){
+            if(isset($_POST['updatestudent'])){
                 $objUser = new StudentModel($id);
                 $objUser->fname = $_POST['fname'];
                 $objUser->lname = $_POST['lname'];
                 $objUser->phone = $_POST['number'];
                 $objUser->DOB = $_POST['date'];
-                $objUser->gender = "F";//$_POST['radio'];
+                $objUser->gender = $_POST['radio'];
                 $objUser->address_id_fk = 4;
                 $objUser->email = $_POST['email'];
                 $objUser->status = 1;
-                $objUser->password = "h";//$_POST['password'];
-                $objUser->username = "h";//$_POST['username'];
-                $objUser->img = "h";//$_POST['image'];
+                $objUser->password = $_POST['password'];
+                $objUser->username = $_POST['username'];
+                $objUser->img = $_POST['image'];
                 $objUser->user_id_fk = 6;
                     
                 if ($objUser->update()){
