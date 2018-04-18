@@ -45,6 +45,7 @@ class StudentModel {
             $MyObj->lname=$row["lname"];
             $MyObj->gender=$row["gender"];
             $MyObj->DOB=$row["DOB"];
+            $MyObj->password=$row["pwd"];  
             $MyObj->username=$row["username"];
             $MyObj->email=$row["email"];
             $MyObj->phone=$row["phone"];
