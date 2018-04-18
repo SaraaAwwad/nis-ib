@@ -26,12 +26,11 @@ class StudentModel {
 
 		if($id != ""){
             $this->id = $id;
-            //get info
         }
     }
 
     public static function getAll(){
-        //ay habal print all users::
+
         $db = DatabaseHandler::getConnection();
        //$sql ="SELECT * FROM " . StudentModel::tableName;
         $sql ="SELECT * FROM user ";
