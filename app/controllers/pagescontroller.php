@@ -70,4 +70,19 @@ class PagesController extends AbstractController{
     public function manageAction(){
         $this->_view();
     }
+
+    public function viewpermissionsAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+          
+            $pagesObj = new PagesModel($id);
+            $permissions = $pagesObj->getAllPermissions();
+            $this->_data['permissions'] = $permissions; //change to draw the same user type table
+            $this->_view();
+        }else{
+            $this->redirect('\pages');
+        }
+
+        
+    }
 }

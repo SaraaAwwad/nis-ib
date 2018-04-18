@@ -1,6 +1,7 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\UserTypesModel;
+use PHPMVC\Models\PagesModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\Lib\Helper;
 
@@ -16,10 +17,6 @@ class UserTypesController extends AbstractController{
     public function addAction(){
 
         if(isset($_POST['addusertype'])){
-            //validate then (could use inputfilter trait or js)
-                            //testing w/ any data
-            //ex:
-            //$objUser->fname = $this->filterString($_POST['fname']);
 
             $title = $_POST['title']; 
             $status_id = $_POST['status'];                 
@@ -57,6 +54,36 @@ class UserTypesController extends AbstractController{
                 }
             }
             $this->_view();
+        }
+    }
+
+    public function managepagesAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+            $userTypesObj = new UserTypesModel($id);
+
+            if(isset($_POST['addpermission'])){
+                //delete all
+                $userTypesObj->deleteAllPermissions();
+                //add new permissions
+                $i=1;
+                foreach($_POST['content'] as $selected){
+                    $userTypesObj->insertUserPages($selected, $i);
+                    $i++; 
+                }    
+
+                $this->redirect('\usertypes');
+            }
+
+          
+            $userPages = $userTypesObj->pages;            
+            $pagesObjArr = PagesModel::getAll();
+            $this->_data['userTypeName'] = $userTypesObj->title;
+            $this->_data['allPages'] = $pagesObjArr;
+            $this->_data['userPages'] = $userPages; 
+            $this->_view();
+        }else{
+            $this->redirect('\usertypes');
         }
     }
 }

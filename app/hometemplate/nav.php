@@ -47,8 +47,7 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="\usertypes">User Types</a></li>
                           <li><a href="\pages">View Pages</a></li>
-                          <li><a href="\pages\add">Add Page</a></li>
-                          <li><a href="\pages\manage">Manage Permissions</a></li>                          
+                          <li><a href="\pages\add">Add Page</a></li>                        
                       </ul>
                   </li>
 

@@ -74,4 +74,20 @@ class PagesModel{
         }
     }
     
+    public function getAllPermissions(){
+        $db= DatabaseHandler::getConnection();
+        $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
+        $result = mysqli_query($db,$sql);
+        
+        $Res = array();
+        $i=0;
+        if($result){
+            while ($row = mysqli_fetch_assoc($result))
+            {   $userTypesObj = new UserTypesModel($row['id']);
+                $Res[$i]=$userTypesObj;
+                $i++;
+            }
+        }
+        return $Res;
+    }
 }
