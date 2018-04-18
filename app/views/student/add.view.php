@@ -1,8 +1,19 @@
-<section id="main-content">
-          <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add New Student</h3>
-            
-            <div class="row mt">
+<?php
+    require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
+    require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
+    require_once HOME_TEMPLATE_PATH . 'header.php';
+    require_once HOME_TEMPLATE_PATH . 'nav.php';
+    require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
+?>
+
+    <div class="row">
+        <div class="col-lg-9 main-chart">
+            <h1>Add A New Student Type</h1>
+            <hr>
+    </div>
+  </div>  
+
+        <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="post">
@@ -10,34 +21,28 @@
                           <legend>Student Info</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">First Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="fname">
+                              <div class="col-sm-8">
+                                  <input name="title" type="text" class="form-control" required>
                               </div>
                           </div>
+
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="lname">
+                              <div class="col-sm-8">
+                                  <input name="title" type="text" class="form-control" required>
                               </div>
                           </div>
-                          
-                          <div class="form-group">
+
+                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
-                              <div class="col-sm-10">
+                              <div class="col-sm-8">
                                   <input id="date" type="date" name="date">
                               </div>
                           </div>
 
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="number">
-                              </div>
-                          </div>
-
-                          <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Gender</label>
-                              <div class="col-sm-10">
+                              <div class="col-sm-8">
                             <label class="containerradio">Male
                             <input type="radio" checked="checked" value="M" name="radio">
                             <span class="checkmark"></span>
@@ -49,43 +54,49 @@
                               </div>
                           </div>
 
-
-                          <legend>Account Information</legend>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Email</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="email" maxlength="15">@nis.edu.eg
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Password</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="password" value="123">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Username</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="username">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Image</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="image">
+                              <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
+                              <div class="col-sm-8">
+                                  <input name="title" type="text" class="form-control" required>
                               </div>
                           </div>
 
-                          
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Level</label>
+                              <div class="col-sm-8">
+                            <?php for($i=0; $i<count($Levels); $i++){ ?>
+                            <label class="containerradio"><?php echo $Levels[$i]->level; ?>
+                            <input type="radio" checked="checked" value ="<?php echo $Levels[$i]->id; ?>" name="level">
+                            <span class="checkmark"></span>
+                            </label>
+                            <?php } ?>
+                            </div>
+                          </div>
+
+                          <div class="form-group">                               
+                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                              <div class="col-sm-8">
+                                <select name="status" class="form-control" id="status">
+                                    <option value="" disabled>Select Status</option>
+                                    <?php
+                                   
+                                        foreach($status as $st){
+                                            echo '<option value='.$st->id.'>'.$st->code.'</option>';
+                                        }
+                                    ?>
+                                </select>
+                              </div>
+                          </div>
+
+
+
                         </fieldset>
-                        <input type="submit" name="add" id="main">
+                        <input type="submit" name="addstudent" id="main">
                       </form>
                   </div>
               </div>      
             </div>
-
-    </section>
-    </section>
-  </section>
 <?php
-?>
+    require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
+    require_once HOME_TEMPLATE_PATH . 'templatefooter.php';

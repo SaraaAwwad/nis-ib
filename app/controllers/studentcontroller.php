@@ -1,6 +1,8 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\StudentModel;
+use PHPMVC\Models\LevelModel;
+use PHPMVC\Models\StatusModel;
 use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\InputFilter;
 
@@ -18,11 +20,14 @@ class StudentController extends AbstractController{
 
     public function addAction(){
 
-        if(isset($_POST['add'])){
+        if(isset($_POST['addstudent'])){
             //validate then (could use inputfilter trait or js)
                             //testing w/ any data
             //ex:
             //$objUser->fname = $this->filterString($_POST['fname']);
+                //$levels = Level::getAllLevel();
+                //$this->_data['levels'] = $levels;
+               
                 $objUser = new StudentModel();
                 $objUser->fname = $_POST['fname'];
                 $objUser->lname = $_POST['lname'];
@@ -43,7 +48,17 @@ class StudentController extends AbstractController{
 
                 }
         }
+        
+
+
+        $Levels = LevelModel::getAll();
+        $this->_data['Levels'] = $Levels;
+        
+
+        $stat = StatusModel::getAll();
+        $this->_data['status'] = $stat;
         $this->_view();
+        
     }
 
     public function deleteAction(){

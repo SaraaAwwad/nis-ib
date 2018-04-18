@@ -63,7 +63,7 @@
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="\student">View Students</a></li>
-                          <li><a href="add_student.php">Add Student</a></li>
+                          <li><a href="\student\add">Add Student</a></li>
                       </ul>
                   </li>
 
