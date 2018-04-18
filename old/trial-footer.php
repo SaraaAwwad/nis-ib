@@ -1,9 +1,7 @@
-   <!--============================= Instagram Feed =============================-->
-    <div id="instafeed"></div>
+ <div id="instafeed"></div>
     <!--//END Instagram feed JS -->
     <!-- FOOTER -->
-     <!--============================= FOOTER =============================-->
-    <footer>
+ <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -63,23 +61,5 @@
                     </div>
                 </div>
             </footer>
-            <!--//END FOOTER -->
-            <!-- jQuery, Bootstrap JS. -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/tether.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <!-- Plugins -->
-            <script src="js/slick.min.js"></script>
-            <script src="js/waypoints.min.js"></script>
-            <script src="js/counterup.min.js"></script>
-            <script src="js/instafeed.min.js"></script>
-            <script src="js/owl.carousel.min.js"></script>
-            <script src="js/validate.js"></script>
-            <script src="js/tweetie.min.js"></script>
-            <!-- Subscribe -->
-            <script src="js/subscribe.js"></script>
-            <!-- Script JS -->
-            <script src="js/script.js"></script>
-        </body>
-
-        </html>
+            <!--//END FOOTER -->            
+            <!-- JS. -->

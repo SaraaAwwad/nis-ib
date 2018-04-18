@@ -17,11 +17,12 @@ define('DS', DIRECTORY_SEPARATOR);
 define('PS', PATH_SEPARATOR);
 // Domain Constants
 define('HOST_NAME', $_SERVER['HTTP_HOST']);
-echo HOST_NAME;
-define('CSS_DIR', HOST_NAME . '/css');
-
+define('CSS_DIR', 'css' . DS);
+define('JS_DIR', 'js' . DS);
 // Paths
 define('APP_PATH', realpath(dirname(_FILE_)) . DS);
+define('CSS_PATH', APP_PATH . 'css' . DS);
+define('JS_PATH', APP_PATH. 'js' . DS);
 //define('TEMPLATE_PATH', APP_PATH . '_t');
 
 // Database Credentials
@@ -34,19 +35,10 @@ require_once (APP_PATH . 'db/trial-database.php');
 $dbh = Database::getInstance();
 
 // Call template
-// require_once('trial-header.php');
-// require_once('trial-footer.php');
 require_once(APP_PATH . 'classes\template.php');
 $obj = new template();
-$obj->setCSS();
-// $dir = opendir(APP_PATH . 'classes');
-// echo readdir($dir);
-
-// while ($file = readdir($dir)) {
-
-// 	echo $file . '</br>';
-// }
-// Include config.php inside index.php
+$obj->setPage();
+echo '</body></html>';
 
 //End buffer and send output
 ob_flush();

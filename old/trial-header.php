@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home - Nefertari </title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- Simple Line Font -->
-    <link rel="stylesheet" href="css/simple-line-icons.css">
-    <!-- Slider / Carousel -->
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <!-- Main CSS -->
-    <link href="css/style.css" rel="stylesheet">
-</head>
-
-<body>
     <!--============================= HEADER =============================-->
     <header>
         <div class="container nav-menu">
@@ -80,7 +56,8 @@
             </div>
         </div>
         </div>
-        <div class="slider_img">
+
+    <div class="slider_img">
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carousel" data-slide-to="0" class="active"></li>
