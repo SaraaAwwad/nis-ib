@@ -1,3 +1,11 @@
+<?php
+    require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
+    require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
+    require_once HOME_TEMPLATE_PATH . 'header.php';
+    require_once HOME_TEMPLATE_PATH . 'nav.php';
+    require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
+?>                    
+
                       <form class="form-horizontal style-form" method="post">
                         
                           <legend>Student Info</legend>
@@ -73,5 +81,11 @@
                             </label>
                               </div>
                           </div>
-                        <input type="submit" name="update" id="main">
+                        <input type="submit" name="updatestudent" id="main">
                       </form>
+
+
+<?php                    
+require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
+require_once HOME_TEMPLATE_PATH . 'templatefooter.php';
+?>

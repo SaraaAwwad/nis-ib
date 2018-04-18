@@ -30,7 +30,7 @@
 
 if(isset($students)){
     foreach($students as $st){
-echo '        <tr>
+echo '  <tr>
         <td>'.$st->id.'</td>
         <td>'.$st->fname.'</td>
         <td>'.$st->lname.'</a></td>
@@ -41,10 +41,7 @@ echo '        <tr>
         <td>'.$st->password.'</td>
         <td>'.$st->email.'</td>
         <td>'.$st->status.'</td>
-        <td>
-        <a class="btn btn-success btn-xs" href="update.php?id='.$st->id.'">Update</a>
-        <a class="btn btn-success btn-xs" href="update.php?id='.$st->id.'">Activate</a>
-        </td>
+        <td> <a href="student\edit\\'.$st->id.'">Edit</a></td>
         </tr>';
  
  }
