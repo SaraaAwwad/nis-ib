@@ -113,4 +113,5 @@ class StudentModel {
                  //die(mysqli_error($db));
                 }
     }
+
 }
