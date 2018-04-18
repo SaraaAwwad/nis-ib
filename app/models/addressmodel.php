@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class AddressModel {
+class AddressModel{
     public $id;
     public $address;
     public $add_id;
@@ -14,14 +14,14 @@ class AddressModel {
     }
 
     public function getInfo($id){
-        $sql = "SELECT * FROM address Where id = '$id' ";
         $db = DatabaseHandler::getConnection();
-        $addressinfo = mysqli_query($db,$sql);
-        if($addressinfo){
-            $row = mysqli_fetch_array($addressinfo);
+        $sql = "SELECT * FROM address Where id = '$id' ";
+        $userinfo = $dbobj->selectsql($sql);
+        if($userinfo){
+            $row = mysqli_fetch_array($userinfo);
             $this->id = $row['id'];
             $this->address = $row['address'];
-            $this->add_id = $row['add_id']; 
+            $this->add_id = $row['add_id'];
         }
     }
 
@@ -54,5 +54,11 @@ class AddressModel {
     }
 
 
+    Static function InsertinDB($objUser)
+    {
+        $db = DatabaseHandler::getConnection();
+        $sql = "INSERT INTO address (address, add_id)
+        VALUES ('$objUser->address', '$objUser->add_id')";
+        $dbobj->executesql2($sql);
+    }
 
-}

@@ -38,6 +38,7 @@ namespace PHPMVC\Lib\Database;
             return self::$_db;
         }
     }
+    
     public static function factory()
     {
         $driver = DATABASE_CONN_DRIVER;
@@ -48,6 +49,10 @@ namespace PHPMVC\Lib\Database;
         }
     }
 
+    static public function removeConnection(){
+        self::$_db == null;
+    }
+    
     /*static public function executesql($sql){
         if($this->con->query($sql) == TRUE){
             //$result = mysqli_query($this->con, $sql);

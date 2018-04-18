@@ -1,7 +1,7 @@
 <?php
 
 if(!defined('DS')){
-    define('DS', DIRECTORY_SEPARATOR);   
+    define('DS', DIRECTORY_SEPARATOR);
 }
 
 define('APP_PATH', realpath(dirname(__FILE__)));
@@ -15,6 +15,7 @@ define('CSS', PUBLIC_PATH . 'css' . DS);
 define('IMG', PUBLIC_PATH . 'images' . DS);
 define('JS', PUBLIC_PATH. 'js' . DS);
 define('FONTS',  PUBLIC_PATH. 'fonts' . DS);
+define('CKEDITOR',  PUBLIC_PATH. 'ckeditor' . DS);
 
 define('ASSETS_CSS',  PUBLIC_PATH. 'assets' . DS . 'css'. DS);
 define('ASSETS_JS', PUBLIC_PATH . 'assets' . DS . 'js'. DS);

@@ -7,7 +7,7 @@ class UserTypesModel{
     public $title;
     public $status_id_fk;
     public $status;
-    public $UserPages = array();
+    public $UserParentPages = array();
 
     public function __construct($id=""){
         if($id != ""){
@@ -27,7 +27,7 @@ class UserTypesModel{
             $st = new StatusModel( $this->status_id_fk);
             $this->status = $st->code;
             }   
-        //$this->getUserPages();
+        $this->getUserParentPages();
     }
 
     public static function addUserType($title, $statusId){
@@ -72,14 +72,37 @@ class UserTypesModel{
                 }
     }
 
-    public function getUserPages(){
-        $sql = "SELECT id from user_type_pages WHERE typeid_fk = '$this->id' order by ordervalue ";
-        $result = $this->dbobj->selectsql($sql);
+    public function getUserParentPages(){
+
+        $sql = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
+        WHERE typeid_fk = '$this->id' AND pages.pageid = 0 order by ordervalue ";
+        
+        $db = DatabaseHandler::getConnection();
+        $result = mysqli_query($db,$sql);
         $i=0;
+        if($result){
+            while ($row = mysqli_fetch_assoc($result)){
+                $this->UserParentPages[$i] = new PagesModel($row['pageid_fk']);
+                $i++;
+            }
+        }
+    }
+
+    public function getUserPages($parentid){
+        $sql = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
+        WHERE typeid_fk = '$this->id' AND pages.pageid = '$parentid' order by ordervalue";
+
+        $db = DatabaseHandler::getConnection();
+        $result = mysqli_query($db,$sql);
+        $i=0;
+        $UserPages  = array();
         while ($row = mysqli_fetch_assoc($result)){
-            $this->UserPages[$i] = new Pages($row['id']);
+            $PageObj = new PagesModel($row['pageid_fk']);
+            $UserPages[$i] = $PageObj;
             $i++;
         }
+
+        return $UserPages;
     }
 
 

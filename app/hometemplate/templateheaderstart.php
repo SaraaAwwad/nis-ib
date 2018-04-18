@@ -22,9 +22,7 @@
     <link href="<?= ASSETS_CSS ?>style-responsive.css" rel="stylesheet">
 
     <script src="<?= ASSETS_JS ?>chart-master/Chart.js"></script>
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="<?= ASSETS_JS ?>jquery.scrollTo.min.js"></script>
+    <script src="<?= ASSETS_JS ?>jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="<?= ASSETS_JS ?>jquery.sparkline.js"></script>

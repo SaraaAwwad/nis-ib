@@ -26,12 +26,11 @@ class StudentModel {
 
 		if($id != ""){
             $this->id = $id;
-            //get info
         }
     }
 
     public static function getAll(){
-        //ay habal print all users::
+
         $db = DatabaseHandler::getConnection();
        //$sql ="SELECT * FROM " . StudentModel::tableName;
         $sql ="SELECT * FROM user ";
@@ -46,8 +45,11 @@ class StudentModel {
             $MyObj->lname=$row["lname"];
             $MyObj->gender=$row["gender"];
             $MyObj->DOB=$row["DOB"];
+            $MyObj->password=$row["pwd"];  
             $MyObj->username=$row["username"];
             $MyObj->email=$row["email"];
+            $MyObj->phone=$row["phone"];
+            $MyObj->status=$row["status"];  
             $Res[$i]=$MyObj;
             $i++;
         }
@@ -111,4 +113,17 @@ class StudentModel {
                  //die(mysqli_error($db));
                 }
     }
+
+    public function getLevel(){
+        $db = DatabaseHandler::getConnection();
+        $sql = "SELECT level FROM scl_level";
+        $result = mysqli_query($db,$sql);
+        $Res = array();
+        while ($row = mysqli_fetch_assoc($result)){
+            $Res[] = $row;
+        }
+        return $Res;
+
+    }
+
 }

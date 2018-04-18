@@ -55,3 +55,4 @@
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
     require_once HOME_TEMPLATE_PATH . 'templatefooter.php';
+  ?>
