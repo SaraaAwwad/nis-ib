@@ -2,6 +2,8 @@
 namespace PHPMVC\Lib\Database;
 
  class DatabaseHandler{
+    const DATABASE_DRIVER_POD       = 1;
+    const DATABASE_DRIVER_MYSQLI    = 2;
 
     //Singleton design pattern
 
@@ -34,6 +36,16 @@ namespace PHPMVC\Lib\Database;
           return self::$_db;
         } else { // There is already a PDO, so just send it back.
             return self::$_db;
+        }
+    }
+    
+    public static function factory()
+    {
+        $driver = DATABASE_CONN_DRIVER;
+        if ($driver == self::DATABASE_DRIVER_POD) {
+            return PDODatabaseHandler::getInstance();
+        } elseif ($driver == self::DATABASE_DRIVER_MYSQLI) {
+            return MySQLiDatabaseHandler::getInstance();
         }
     }
 

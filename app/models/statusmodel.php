@@ -28,10 +28,8 @@ class StatusModel{
         $sql = "SELECT * FROM status";
         $db = DatabaseHandler::getConnection();
         $statusinfo = mysqli_query($db,$sql);
-        
         $Stat = array();
         $i=0;
-
         if($statusinfo){
             while($row = mysqli_fetch_array($statusinfo)){
                 $Stat[$i] = new StatusModel();

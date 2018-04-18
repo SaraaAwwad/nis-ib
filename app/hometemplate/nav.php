@@ -68,7 +68,7 @@
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="\student">View Students</a></li>
-                          <li><a href="add_student.php">Add Student</a></li>
+                          <li><a href="\student\add">Add Student</a></li>
                       </ul>
                   </li>
 
@@ -78,8 +78,8 @@
                           <span>Staff</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
-                          <li><a href="view_staff.php">View Staff</a></li>
-                          <li><a href="addteacher.php">Add Staff</a></li>
+                          <li><a href="/user">View Staff</a></li>
+                          <li><a href="/user/add">Add Staff</a></li>
                       </ul>
                   </li>
 
