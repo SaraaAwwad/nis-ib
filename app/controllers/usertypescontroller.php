@@ -59,5 +59,4 @@ class UserTypesController extends AbstractController{
             $this->_view();
         }
     }
-
 }

@@ -36,6 +36,10 @@ namespace PHPMVC\Lib\Database;
             return self::$_db;
         }
     }
+
+    static public function removeConnection(){
+        self::$_db == null;
+    }
     
     /*static public function executesql($sql){
         if($this->con->query($sql) == TRUE){

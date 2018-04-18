@@ -3,15 +3,8 @@
               2018 - NIS
           </div>
       </footer>
-      <script src="<?= ASSETS_JS ?>jquery.js"></script>
-    <script src="<?= ASSETS_JS ?>jquery-1.8.3.min.js"></script>
     <script src="<?= ASSETS_JS ?>bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="<?= ASSETS_JS ?>jquery.dcjqaccordion.2.7.js"></script>
-    <script src="<?= ASSETS_JS ?>jquery.scrollTo.min.js"></script>
-    <script src="<?= ASSETS_JS ?>jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="<?= ASSETS_JS ?>jquery.sparkline.js"></script>
-
-
     <!--common script for all pages-->
     <script src="<?= ASSETS_JS ?>common-scripts.js"></script>
     

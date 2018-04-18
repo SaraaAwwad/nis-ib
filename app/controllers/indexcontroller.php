@@ -10,17 +10,19 @@ class IndexController extends AbstractController{
     public function defaultAction(){
        $this->_view();
     }
+
     public function loginAction(){
        
         if (isset($_POST['loginbtn'])){
+            //validation and sqli injection
             $em = $_POST["username"];
             $psw =$_POST["password"];
            if(UserModel::login($em, $psw)){
                 $this->redirect('\user');
-           }else{
-            echo 'user doesnt exist';				
+           }else{			
            }
         }
+
         $this->_view();
     }
 
@@ -28,4 +30,5 @@ class IndexController extends AbstractController{
     	session_destroy();
 	    $this->redirect('\index');	
     }
+
 }

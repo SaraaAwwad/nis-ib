@@ -6,7 +6,7 @@
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
 
- <div class="row">
+    <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>Add A New User Type</h1>
             <hr>
@@ -46,9 +46,6 @@
                   </div>
               </div>      
             </div>
-	
-
-
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
     require_once HOME_TEMPLATE_PATH . 'templatefooter.php';

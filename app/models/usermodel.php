@@ -6,7 +6,6 @@ abstract class UserModel {
 
 	Static function Login($username, $password){
         $result = self::isExist($username);
-        
 		if ($result){
             $row = mysqli_fetch_array($result);
 			//if(password_verify($pw, $row['pwd'])){
@@ -19,8 +18,7 @@ abstract class UserModel {
 		}
 		return false;
     }
-    
-    
+        
 	Static function isExist($username){
         $db = DatabaseHandler::getConnection();
 		$sql = "SELECT * FROM user Where username = '$username' ";
