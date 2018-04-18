@@ -35,3 +35,4 @@ define('DB_PASS', '');
 #defined('SESSION_SAVE_PATH')     ? null : define ('SESSION_SAVE_PATH', APP_PATH . DS . '..' . DS . 'sessions');
 
 define('DOMAIN_NAME', '.nisib.example.com'); //change according to virtualhost
+defined('DATABASE_CONN_DRIVER')     ? null : define ('DATABASE_CONN_DRIVER', 1);

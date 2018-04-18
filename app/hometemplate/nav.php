@@ -3,7 +3,7 @@
               <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
                   <p class="centered"><a href="profile.php"><img src="<?= ASSETS_IMG ?>ui-sam.jpg" class="img-circle" width="60"></a></p>
-                  <h5 class="centered"> <?= $user['lname'] .', '. $user['fname'];?></h5>
+                 <!-- <h5 class="centered"> <?= $user['lname'] .', '. $user['fname'];?></h5> -->
 
                 
       <?php 
@@ -86,8 +86,8 @@
                           <span>Staff</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
-                          <li><a href="view_staff.php">View Staff</a></li>
-                          <li><a href="addteacher.php">Add Staff</a></li>
+                          <li><a href="/user">View Staff</a></li>
+                          <li><a href="/user/add">Add Staff</a></li>
                       </ul>
                   </li>
 

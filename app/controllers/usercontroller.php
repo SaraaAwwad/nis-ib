@@ -1,13 +1,25 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\UserModel;
-use PHPMVC\Lib\Helper;
 
-class UserController extends AbstractController{
-
-    public function defaultAction(){
-        $user = UserModel::getByPK($_SESSION["userID"]);
-        $this->_data['user'] = $user;
+class UserController extends AbstractController
+{
+   
+    public function defaultAction()
+    {
+        $this->_data['users'] = UserModel::getUsers();
         $this->_view();
     }
+
+    public function addAction()
+    {
+    	if(isset($_POST('submit')))
+    	{
+    		var_dump($_POST);
+    	}
+        $this->_view();
+    }
+
+
+  
 }

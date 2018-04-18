@@ -2,6 +2,8 @@
 namespace PHPMVC\Lib\Database;
 
  class DatabaseHandler{
+    const DATABASE_DRIVER_POD       = 1;
+    const DATABASE_DRIVER_MYSQLI    = 2;
     static private $_db = null; // The same PDO will persist from one call to the next
 
     private function __construct() {} // disallow calling the class via new DBConn
@@ -33,7 +35,16 @@ namespace PHPMVC\Lib\Database;
             return self::$_db;
         }
     }
-    
+    public static function factory()
+    {
+        $driver = DATABASE_CONN_DRIVER;
+        if ($driver == self::DATABASE_DRIVER_POD) {
+            return PDODatabaseHandler::getInstance();
+        } elseif ($driver == self::DATABASE_DRIVER_MYSQLI) {
+            return MySQLiDatabaseHandler::getInstance();
+        }
+    }
+
     /*static public function executesql($sql){
         if($this->con->query($sql) == TRUE){
             //$result = mysqli_query($this->con, $sql);

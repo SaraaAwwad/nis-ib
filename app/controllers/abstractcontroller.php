@@ -36,10 +36,7 @@ class AbstractController{
             if(file_exists($view)){
                 //leha view
                 extract($this->_data);
-
                 require_once $view;
-
-                
             }else{
                 //el action mawgood bas lesa malhash view
                 require_once VIEWS_PATH . 'notfound' . DS . 'noview.view.php';                
