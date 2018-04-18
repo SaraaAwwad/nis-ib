@@ -105,6 +105,20 @@ class UserTypesModel{
         return $UserPages;
     }
 
+    Static function getUsers(){
+        $db = DatabaseHandler::getConnection();
+        $sql = "SELECT * FROM user_type WHERE title NOT IN ('student','Student')";
+        $result = mysqli_query($db,$sql);
+        $Types= array();
+        $i=0;
+        while ($row = mysqli_fetch_assoc($result)){
+            $UserTypeObj = new UserTypesModel($row['id']);
+            $Types[$i] = $UserTypeObj;
+            $i++;
+        }
+        return $Types;
+    }
+
 
     Static function insertUserPages($id, $pageid, $ordervalue){
         $dbobj = new dbconnect;

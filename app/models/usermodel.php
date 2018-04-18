@@ -17,6 +17,7 @@ class UserModel extends AbstractModel {
     public $img;
     public $user_id_fk;
     public $add_id_fk;
+    public $phone;
 
     protected static $tableName = 'user';
     protected static $tableSchema = array(
@@ -32,7 +33,8 @@ class UserModel extends AbstractModel {
         'status'              => self::DATA_TYPE_INT,
         'img'                 => self::DATA_TYPE_STR,
         'user_id_fk'          => self::DATA_TYPE_INT,
-        'add_id_fk'           => self::DATA_TYPE_INT
+        'add_id_fk'           => self::DATA_TYPE_INT,
+        'phone'               => self::DATA_TYPE_INT
     );
     protected static $primaryKey = 'id';
 
@@ -43,7 +45,6 @@ class UserModel extends AbstractModel {
         );
     }
 
-    
 
     Static function Login($username, $password){
         $result = self::isExist($username);
