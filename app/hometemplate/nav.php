@@ -26,8 +26,13 @@
                         <span class="dcjq-icon"></span></a>
                         <ul class="sub" style="display: block;">';
                            $subpages = $userTypesObj->getUserPages($userTypesObj->UserParentPages[$i]->id);
-                                for ($j=0; $j< count($subpages); $j++){             
-                                    echo '  <li><a href="\usertypes">'. $subpages[$j]->friendlyname  .'</a></li>';
+                                for ($j=0; $j< count($subpages); $j++){  
+                                    if ($subpages[$j]->html != ""){
+                                        echo '  <li><a href="'.$subpages[$j]->physicalname.$subpages[$j]->id.'">'. $subpages[$j]->friendlyname  .'</a></li>';
+
+                                    }else{
+                                        echo '  <li><a href="'.$subpages[$j]->physicalname.'">'. $subpages[$j]->friendlyname  .'</a></li>';
+                                    }           
                                  }
                         echo'</ul>
                     </li>';
@@ -43,6 +48,7 @@
                           <li><a href="\usertypes">User Types</a></li>
                           <li><a href="\pages">View Pages</a></li>
                           <li><a href="\pages\add">Add Page</a></li>
+                          <li><a href="\pages\manage">Manage Permissions</a></li>                          
                       </ul>
                   </li>
 

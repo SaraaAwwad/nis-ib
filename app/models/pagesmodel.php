@@ -35,8 +35,17 @@ class PagesModel{
         return $Res;
     }
 
-    public static function insertPage(){
+    public static function insertPage($friendlyname, $physicalname, $status_id, $parentid, $html){
+        $db = DatabaseHandler::getConnection();
+        $sql = "INSERT INTO pages (friendlyname, physicalname, status_id_fk, pageid, HTML, layout_id_fk) 
+        VALUES ('$friendlyname', '$physicalname', '$status_id', '$parentid', '$html', 1)";
 
+        if (mysqli_query($db, $sql)){
+            return true;
+        }else{
+          //  return false;
+         die(mysqli_error($db));
+        }
     }
 
     public static function getAllParentPages(){
@@ -63,10 +72,6 @@ class PagesModel{
 
             }
         }
-    }
-
-    public static function addPage(){
-
     }
     
 }

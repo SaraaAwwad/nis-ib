@@ -30,7 +30,7 @@
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Physical Name: </label>
                               <div class="col-sm-8">
-                                  <input name="physicalname" type="text" class="form-control" required>
+                                  <input name="physicalname" type="text" id="url" class="form-control" required>
                               </div>
                           </div>
 
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-lg-4">
                             <label class="radio-inline">
-                                <input type="radio" name="optradio" value="0" checked="checked" >Add to a New Group
+                                <input type="radio" name="optradio" value="notexist" checked="checked" >Add to a New Group
                             </label>
                             </div>
                             </div>                            
@@ -91,16 +91,23 @@
  <script>
      $(document).ready(function(data){
         CKEDITOR.replace( 'editor1', {height: "220px"});        
-         
+        $("#url").prop("readonly", true);
+        $("#url").val("/pages/view/");
+
         $('#cb').change(function() {
         if(this.checked) {
             CKEDITOR.replace( 'editor1', {height: "220px"});           
+            $("#url").prop("readonly", true);
+            $("#url").val("/pages/view/");       
         }else{
             if(typeof CKEDITOR.instances['editor1'] != 'undefined') {
                 CKEDITOR.instances['editor1'].updateElement();
                 CKEDITOR.instances['editor1'].destroy();
-            }
             $('#editor1').hide();
+            $("#url").prop("readonly", false);
+            $("#url").val("");    
+            } 
+            
         }     
     });
 });
