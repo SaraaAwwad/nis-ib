@@ -37,11 +37,12 @@
                     <td>'.$ut->id.'</td>
                     <td>'.$ut->title.'</td>
                     <td>'.$ut->status.'</td>
-                    <td> <a href="usertypes\edit\\'.$ut->id.'">Edit</a></td>
+                    <td> <a href="usertypes\edit\\'.$ut->id.'">Edit , </a>
+                        <a href="usertypes\managepages\\'.$ut->id.'">Permissions</a>
+                    </td>
                     </tr>';
                 }
             ?>
-
         </tr>
         </tbody>
     </table>

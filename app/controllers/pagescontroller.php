@@ -5,6 +5,7 @@ use PHPMVC\Models\StatusModel;
 use PHPMVC\Lib\Helper;
 
 class PagesController extends AbstractController{
+    use Helper;
 
     public function defaultAction(){
         $pages = PagesModel::getAll();
@@ -23,26 +24,33 @@ class PagesController extends AbstractController{
     public function addAction(){
 
         if(isset($_POST['addpage'])){
-            //validate then (could use inputfilter trait or js)
-                            //testing w/ any data
-            //ex:
-            //$objUser->fname = $this->filterString($_POST['fname']);
 
             $friendlyname = $_POST['friendlyname']; 
             $physicalname = $_POST['physicalname'];
             $status_id = $_POST['status']; 
 
-            if($_POST['optradio']==1){
-                $parentid = $_POST['grouppicker'];
-            }else{
-                $parentid = $_POST['optradio'];
-            }
+            $parentid=-1;
 
-            if($_POST['content']){
+            switch($_POST['optradio']) {
+                case "exist":
+                    $parentid = $_POST['grouppicker'];
+                    break;
+                case "notexist":
+                    $parentid = 0;
+                    break;
+                }
+
+            if(isset($_POST['content'])){
                 $html = $_POST['editor1'];
+            }else{
+                $html="";
             }
 
-            PagesModel::addPage($friendlyname, $physicalname, $status_id, $parentid, $html);
+           if(PagesModel::insertPage($friendlyname, $physicalname, $status_id, $parentid, $html)){
+                $this->redirect('\pages');
+           }else{
+                //error cl
+           }
         }
 
 
@@ -52,7 +60,29 @@ class PagesController extends AbstractController{
         $pages = PagesModel::getAll();
         $this->_data['pages'] = $pages;
 
-
         $this->_view();
+    }
+
+    public function editAction(){
+
+    }
+
+    public function manageAction(){
+        $this->_view();
+    }
+
+    public function viewpermissionsAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+          
+            $pagesObj = new PagesModel($id);
+            $permissions = $pagesObj->getAllPermissions();
+            $this->_data['permissions'] = $permissions; //change to draw the same user type table
+            $this->_view();
+        }else{
+            $this->redirect('\pages');
+        }
+
+        
     }
 }

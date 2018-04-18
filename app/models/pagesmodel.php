@@ -35,8 +35,17 @@ class PagesModel{
         return $Res;
     }
 
-    public static function insertPage(){
+    public static function insertPage($friendlyname, $physicalname, $status_id, $parentid, $html){
+        $db = DatabaseHandler::getConnection();
+        $sql = "INSERT INTO pages (friendlyname, physicalname, status_id_fk, pageid, HTML, layout_id_fk) 
+        VALUES ('$friendlyname', '$physicalname', '$status_id', '$parentid', '$html', 1)";
 
+        if (mysqli_query($db, $sql)){
+            return true;
+        }else{
+          //  return false;
+         die(mysqli_error($db));
+        }
     }
 
     public static function getAllParentPages(){
@@ -64,9 +73,21 @@ class PagesModel{
             }
         }
     }
-
-    public static function addPage(){
-
-    }
     
+    public function getAllPermissions(){
+        $db= DatabaseHandler::getConnection();
+        $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
+        $result = mysqli_query($db,$sql);
+        
+        $Res = array();
+        $i=0;
+        if($result){
+            while ($row = mysqli_fetch_assoc($result))
+            {   $userTypesObj = new UserTypesModel($row['id']);
+                $Res[$i]=$userTypesObj;
+                $i++;
+            }
+        }
+        return $Res;
+    }
 }

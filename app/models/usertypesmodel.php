@@ -8,6 +8,7 @@ class UserTypesModel{
     public $status_id_fk;
     public $status;
     public $UserParentPages = array();
+    public $pages = array();
 
     public function __construct($id=""){
         if($id != ""){
@@ -28,6 +29,7 @@ class UserTypesModel{
             $this->status = $st->code;
             }   
         $this->getUserParentPages();
+        $this->getAllPages();
     }
 
     public static function addUserType($title, $statusId){
@@ -39,7 +41,6 @@ class UserTypesModel{
             return true;
         }else{
             return false;
-        // die(mysqli_error($db));
         }
     }
     
@@ -105,6 +106,7 @@ class UserTypesModel{
         return $UserPages;
     }
 
+
     Static function getUsers(){
         $db = DatabaseHandler::getConnection();
         $sql = "SELECT * FROM user_type WHERE title NOT IN ('student','Student')";
@@ -120,18 +122,47 @@ class UserTypesModel{
     }
 
 
-    Static function insertUserPages($id, $pageid, $ordervalue){
-        $dbobj = new dbconnect;
-        $sql = "INSERT INTO user_type_pages (typeid_fk, pageid_fk, ordervalue) VALUES ('$id', '$pageid', '$ordervalue')";
-        $dbobj->executesql($sql);
+    public function getAllPages(){
+        $sql = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
+        WHERE typeid_fk = '$this->id'
+        order by ordervalue";
+
+        $db = DatabaseHandler::getConnection();
+        $result = mysqli_query($db,$sql);
+        $i=0;
+        
+        if($result){
+            while ($row = mysqli_fetch_assoc($result)){
+                $this->pages[$i] = new PagesModel($row['pageid_fk']);      
+                $i++;
+            }
+        }
     }
 
-    Static function delUserPages($id){
-        $dbobj= new dbconnect;
-        $sql2 = "DELETE FROM user_type_pages WHERE typeid_fk ='$id'";
-        $dbobj->executesql($sql2);
+   
+    public function insertUserPages($pageid, $ordervalue){
+        $sql = "INSERT INTO user_type_pages (typeid_fk, pageid_fk, ordervalue) VALUES ('$this->id', '$pageid', '$ordervalue')";
+        $db = DatabaseHandler::getConnection();
+        $result = mysqli_query($db,$sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
     }
 
+    public function deleteAllPermissions(){
+        $sql = "DELETE FROM user_type_pages WHERE typeid_fk ='$this->id'";
+        $db = DatabaseHandler::getConnection();
+        $result = mysqli_query($db,$sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    /*
     Static function getUserTypeId(){
         $dbobj= new dbconnect;
         $title = 'parent';
@@ -162,7 +193,7 @@ class UserTypesModel{
             $result = $row['id'];
         }
         return $result;
-    }
+    }*/
 
 }
 

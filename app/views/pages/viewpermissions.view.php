@@ -7,35 +7,29 @@
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1>Pages</h1>
+            <h1>Page Access</h1>
+            <hr>
 		</div>
-	</div>		
-
+    </div>
+    
+    
   <section class="tabcontent">
     <table class="order-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Friendly Name</th>
-          <th>Physical Name</th>
-          <th>Parent Page</th>
+          <th>User Type</th>
           <th>Status</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr>
             <?php
-                foreach ($pages as $pt){
+                foreach ($permissions as $ut){
                     echo '<tr>
-                    <td>'.$pt->id.'</td>
-                    <td>'.$pt->friendlyname.'</td>                    
-                    <td>'.$pt->physicalname.'</td>                    
-                    <td>'.$pt->pageid.'</td>                    
-                    <td>'.$pt->status.'</td>    
-                    <td><a href="pages\edit\\'.$pt->id.'"</a> Edit ,
-                    <a href="pages\delete\\'.$pt->id.'"</a>Delete ,
-                    <a href="pages\viewpermissions\\'.$pt->id.'"</a>View Permissions </td>
+                    <td>'.$ut->id.'</td>
+                    <td>'.$ut->title.'</td>
+                    <td>'.$ut->status.'</td>
                     </tr>';
                 }
             ?>
