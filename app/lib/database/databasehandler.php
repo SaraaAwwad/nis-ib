@@ -4,7 +4,6 @@ namespace PHPMVC\Lib\Database;
  class DatabaseHandler{
     const DATABASE_DRIVER_POD       = 1;
     const DATABASE_DRIVER_MYSQLI    = 2;
-    static private $_db = null; // The same PDO will persist from one call to the next
 
     //Singleton design pattern
 

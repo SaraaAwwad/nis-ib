@@ -19,8 +19,10 @@ function randomPassword() {
                 require_once HOME_TEMPLATE_PATH . 'header.php';
                 require_once HOME_TEMPLATE_PATH . 'nav.php';
 
-?>
-
+?>  
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>      
+      <script src="../../../public/js/user.js">
+      </script>
       <section id="container" >
       <section id="main-content">
           <section class="wrapper">
@@ -85,7 +87,7 @@ function randomPassword() {
                               <div class="styled-select slate">
                               <select name="professioninput">
                               <option>Select Profession</option>
-                              <option value="<?php echo $Users[$i]->id; ?>"></option>
+                              <option></option>
                               </select>
                           </div>
                           </div>
@@ -97,6 +99,9 @@ function randomPassword() {
                               <div class="styled-select slate">
                               <select name="country" id="country">
                               <option value="">Select Country</option>
+                              <?php foreach($country as $count){ ?>
+                              <option value="<?php echo $count->id; ?>"><?php echo $count->address; ?></option>
+                              <?php } ?>
                               </select>
                               </div>
                           </div>
@@ -178,3 +183,4 @@ function randomPassword() {
                 <?php
                 //require_once TEMPLATE_PATH . 'wrapperend.php';
                 require_once HOME_TEMPLATE_PATH . 'templatefooter.php';
+
