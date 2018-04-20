@@ -13,6 +13,7 @@ class StudentModel {
     public $gender;
     public $img;
     //public $OtherPhones;
+    public $type_id;
     public $phone;
     public $address_id_fk;
     public $status;
@@ -56,12 +57,11 @@ class StudentModel {
         return $Res;
     }
 
-    public static function insertInDB($objUser){
+    public static function insertInDB($stud){
         $db = DatabaseHandler::getConnection();
 
-        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk) 
-        VALUES ('1', '$objUser->fname','$objUser->lname','$objUser->gender', '$objUser->DOB', '$objUser->username', '$objUser->pwd', 
-        '$objUser->email', '$objUser->status', '$objUser->img','$objUser->user_id_fk','$objUser->address_id_fk')";
+        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk, phone) 
+        VALUES ('1', '$stud->fname','$stud->lname','$stud->gender', '$stud->DOB', '$stud->username', '$stud->password', '$stud->email', '$stud->status', '$stud->img','$stud->user_id_fk','$stud->address_id_fk','$stud->phone')";
 
         if (mysqli_query($db, $sql)){
             return true;
