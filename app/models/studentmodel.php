@@ -32,7 +32,6 @@ class StudentModel {
     public static function getAll(){
 
         $db = DatabaseHandler::getConnection();
-       //$sql ="SELECT * FROM " . StudentModel::tableName;
         $sql ="SELECT * FROM user ";
         $result = mysqli_query($db,$sql);
         $Res = array();

@@ -54,8 +54,8 @@ class StudentController extends AbstractController{
         $Levels = LevelModel::getAll();
         $this->_data['Levels'] = $Levels;
         
-        $Address = Address::loadCountry();
-        $this->_data['Address'] = $Address;
+        $Address = AddressModel::getCountry();
+        $this->_data['country'] = $Address;
 
         $stat = StatusModel::getAll();
         $this->_data['status'] = $stat;
