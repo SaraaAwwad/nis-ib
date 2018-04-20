@@ -6,10 +6,7 @@
 
               ?>
                 	
-                  
-      <!-- **********************************************************************************************************************************************************
-      RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->                  
+                       
       <section id="container" >
       <section id="main-content">
           <section class="wrapper">
@@ -27,6 +24,7 @@
           <th>Gender</th>
           <th>DOB</th>
           <th>Username</th>
+          <th>Password</th> 
           <th>Email</th>
           <th>Telephone</th>
           <th>User</th>
@@ -34,7 +32,6 @@
           <th><i class=" fa fa-edit"></i> Status</th>
           <th>Action</th>
           <!--
-          
           <th>Address</th>
           -->
         </tr>
@@ -47,7 +44,8 @@
           <td><?php echo $user->lname; ?></td>
           <td><?php echo $user->gender; ?></td>
           <td><?php echo $user->DOB; ?></td>
-          <td><a href="teacherspanel.php#"><?php echo $user->username;?></a></td>
+          <td><a href=""><?php echo $user->username;?></a></td>
+          <td><?php echo $user->pwd; ?></td>
           <td><?php echo $user->email;?></td>
           <td><?php echo $user->number;?></td>
           <td><?php echo $user->title;?></td>
@@ -64,8 +62,8 @@
   </section>
 
                
-    </section><!-- wrapper -->
-      </section><!-- /MAIN CONTENT -->
+    </section>
+      </section>
   </section>
                 <?php
                 require_once HOME_TEMPLATE_PATH . 'templatefooter.php';

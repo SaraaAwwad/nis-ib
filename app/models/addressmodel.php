@@ -14,10 +14,10 @@ class AddressModel{
     }
 
     public function getInfo($id){
-        $db = DatabaseHandler::getConnection();
         $sql = "SELECT * FROM address Where id = '$id' ";
-        $userinfo = $dbobj->selectsql($sql);
-        if($userinfo){
+         $db = DatabaseHandler::getConnection();
+        $userinfo = mysqli_query($db,$sql);
+         if($userinfo){
             $row = mysqli_fetch_array($userinfo);
             $this->id = $row['id'];
             $this->address = $row['address'];
@@ -62,3 +62,4 @@ class AddressModel{
         $dbobj->executesql2($sql);
     }
 
+}
