@@ -4,6 +4,7 @@ use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\AddressModel;
+use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\InputFilter;
 
@@ -13,13 +14,21 @@ class StudentController extends AbstractController{
     use Helper;
 
     public function defaultAction(){
-        //example of get all
-        $arrOfObj = StudentModel::getAll();
-        $this->_data['students'] = $arrOfObj;
+        
+        $this->_data['students'] = StudentModel::getAll();
+        // $this->_data['country'] = AddressModel::getCountry();
+        // $this->_data['status'] = StatusModel::getAll();
+        // $this->_data['usertype'] = UserTypesModel::getUsers();
+        $this->_data['usertype'] = UserTypesModel::getUsers();
         $this->_view();
     }
 
     public function addAction(){
+
+        // $Usertype = UserTypesModel::getAll();
+        // $this->_data['usertype'] = $Usertype;
+
+        // $this->_data['usertype'] = UserTypesModel::getUsers();
 
         if(isset($_POST['addstudent'])){
             //validate then (could use inputfilter trait or js)
@@ -29,24 +38,24 @@ class StudentController extends AbstractController{
                 //$levels = Level::getAllLevel();
                 //$this->_data['levels'] = $levels;
                
-                $objUser = new StudentModel();
-                $objUser->fname = $_POST['fname'];
-                $objUser->lname = $_POST['lname'];
-                $objUser->phone = $_POST['number'];
-                $objUser->DOB = $_POST['date'];
-                $objUser->gender = $_POST['radio'];
-                $objUser->address_id_fk = 4;
-                $objUser->email = $_POST['email'];
-                $objUser->status = 1;
-                $objUser->pwd = $_POST['password'];
-                $objUser->username = $_POST['username'];
-                $objUser->img = $_POST['image'];
-                $objUser->user_id_fk = 6;
+                $stud = new StudentModel();
+                $stud->fname = $_POST['fnamein'];
+                $stud->lname = $_POST['lnamein'];
+                $stud->phone = $_POST['numberin'];
+                $stud->DOB = $_POST['datein'];
+                $stud->gender = $_POST['radioin'];
+                $stud->address_id_fk = $_POST['street'];
+                $stud->email = $_POST['emailin'];
+                $stud->status = $_POST['statusinput'];
+                $stud->pwd = $_POST['passwordin'];
+                $stud->username = $_POST['usernamein'];
+                $stud->img = $_POST['imagein'];
+                $stud->user_id_fk = 0;
                 
-                if (StudentModel::insertInDB($objUser)){
+                if (StudentModel::insertInDB($stud)){
                     $this->redirect("\student");
                 }else{
-
+                    
                 }
         }
         
