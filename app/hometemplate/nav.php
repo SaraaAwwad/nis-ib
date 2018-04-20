@@ -47,7 +47,8 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="\usertypes">User Types</a></li>
                           <li><a href="\pages">View Pages</a></li>
-                          <li><a href="\pages\add">Add Page</a></li>                        
+                          <li><a href="\pages\add">Add Page</a></li>
+
                       </ul>
                   </li>
 -->
@@ -59,6 +60,8 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="/class">Manage Classes</a></li>
                           <li><a href="/schedule">Manage Schedules</a></li>                          
+                          <li><a href="view_courses.php">Manage Courses</a></li>
+                          <li><a href="\registeration">Registeration</a></li>
                       </ul>
                   </li>
 
