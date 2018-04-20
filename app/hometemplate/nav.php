@@ -54,10 +54,11 @@
                     <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-bars"></i>
-                          <span>Courses</span>
+                          <span>Classes</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
-                          <li><a href="view_courses.php">Manage Courses</a></li>
+                          <li><a href="/class">Manage Classes</a></li>
+                          <li><a href="/schedule">Manage Schedules</a></li>                          
                       </ul>
                   </li>
 

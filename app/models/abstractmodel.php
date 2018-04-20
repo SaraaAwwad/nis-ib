@@ -24,16 +24,16 @@ class AbstractModel
             }
         }
     }
-    private function buildNameParametersSQL()
-    {
+    
+    private function buildNameParametersSQL(){
         $namedParams = '';
         foreach (static::$tableSchema as $columnName => $type) {
             $namedParams .= $columnName . ' = :' . $columnName . ', ';
         }
         return trim($namedParams, ', ');
     }
-    private function create()
-    {
+
+    private function create(){
         $sql = 'INSERT INTO ' . static::$tableName . ' SET ' . $this->buildNameParametersSQL();
         $stmt = DatabaseHandler::factory()->prepare($sql);
         $this->prepareValues($stmt);
@@ -43,28 +43,28 @@ class AbstractModel
         }
         return false;
     }
-    private function update()
-    {
+
+    private function update(){
         $sql = 'UPDATE ' . static::$tableName . ' SET ' . $this->buildNameParametersSQL() . ' WHERE ' . static::$primaryKey . ' = ' . $this->{static::$primaryKey};
         $stmt = DatabaseHandler::factory()->prepare($sql);
         $this->prepareValues($stmt);
         return $stmt->execute();
     }
-    public function save($primaryKeyCheck = true)
-    {
+
+    public function save($primaryKeyCheck = true){
         if(false === $primaryKeyCheck) {
             return $this->create();
         }
         return $this->{static::$primaryKey} === null ? $this->create() : $this->update();
     }
-    public function delete()
-    {
+
+    public function delete(){
         $sql = 'DELETE FROM ' . static::$tableName . '  WHERE ' . static::$primaryKey . ' = ' . $this->{static::$primaryKey};
         $stmt = DatabaseHandler::factory()->prepare($sql);
         return $stmt->execute();
     }
-    public static function getAll()
-    {
+
+    public static function getAll(){
         $sql = 'SELECT * FROM ' . static::$tableName;
         $stmt = DatabaseHandler::factory()->prepare($sql);
         $stmt->execute();
@@ -78,8 +78,8 @@ class AbstractModel
         };
         return false;
     }
-    public static function getByPK($pk)
-    {
+
+    public static function getByPK($pk){
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE ' . static::$primaryKey . ' = "' . $pk . '"';
         $stmt = DatabaseHandler::factory()->prepare($sql);
         if ($stmt->execute() === true) {
@@ -92,8 +92,8 @@ class AbstractModel
         }
         return false;
     }
-    public static function getBy($columns, $options = array())
-    {
+
+    public static function getBy($columns, $options = array()){
         $whereClauseColumns = array_keys($columns);
         $whereClauseValues = array_values($columns);
         $whereClause = [];
@@ -104,8 +104,8 @@ class AbstractModel
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE ' . $whereClause;
         return static::get($sql, $options);
     }
-    public static function get($sql, $options = array())
-    {
+
+    public static function get($sql, $options = array()){
         $stmt = DatabaseHandler::factory()->prepare($sql);
         if (!empty($options)) {
             foreach ($options as $columnName => $type) {
@@ -134,11 +134,12 @@ class AbstractModel
         };
         return false;
     }
-    public static function getOne($sql, $options = array())
-    {
+
+    public static function getOne($sql, $options = array()){
         $result = static::get($sql, $options);
         return $result === false ? false : $result->current();
     }
+    
     public static function getModelTableName()
     {
         return static::$tableName;

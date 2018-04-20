@@ -23,10 +23,6 @@ class UserController extends AbstractController
          $output .= "<option value='".$row->id."'>".$row->address."</option>";  
       }  
       echo $output;
-
-
    }  
-
-
   
 }

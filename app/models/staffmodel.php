@@ -26,7 +26,7 @@ class StaffModel extends AbstractModel {
         'fname'               => self::DATA_TYPE_STR,
         'lname'               => self::DATA_TYPE_STR,
         'gender'              => self::DATA_TYPE_STR,
-        'DBO'                 => self::DATA_TYPE_DATE,
+        'DOB'                 => self::DATA_TYPE_DATE,
         'username'            => self::DATA_TYPE_STR,
         'pwd'                 => self::DATA_TYPE_STR,
         'email'               => self::DATA_TYPE_STR,
