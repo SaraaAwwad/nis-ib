@@ -35,12 +35,12 @@
                 <div class="col-lg-4">                
                 ';
                 if ($found){
-                    echo '<input type="checkbox" id="cb" name="content[]" value="'.$ap->id.'" checked>';
+                    echo '<input type="checkbox" id="cb'.$ap->id.'" name="content[]" value="'.$ap->id.'" checked>';
                 }else{
-                    echo '<input type="checkbox" id="cb" name="content[]" value="'.$ap->id.'">';
+                    echo '<input type="checkbox" id="cb'.$ap->id.'" name="content[]" value="'.$ap->id.'">';
                 }
                 
-                echo'<label for="cb">'.$ap->id.'- '.$ap->friendlyname.'</label>
+                echo'<label for="cb'.$ap->id.'">'.$ap->id.'- '.$ap->friendlyname.'</label>
                 </div>';
             }
 

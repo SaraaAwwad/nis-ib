@@ -39,7 +39,7 @@
             }
         }
     ?>
-                    <li class="sub-menu dcjq-parent-li">
+              <!--      <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-book"></i>
                           <span>Control</span>
@@ -50,7 +50,7 @@
                           <li><a href="\pages\add">Add Page</a></li>                        
                       </ul>
                   </li>
-
+-->
                     <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-bars"></i>

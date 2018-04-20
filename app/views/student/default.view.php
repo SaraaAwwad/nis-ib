@@ -20,7 +20,6 @@
           <th>DOB</th>
           <th>Telephone</th>
           <th>Username</th>
-          <th>Password</th>
           <th>Email</th>
           <th><i class=" fa fa-edit"></i> Status</th>
           <th>Action</th>
@@ -38,7 +37,6 @@ echo '  <tr>
         <td>'.$st->DOB.'</td>
         <td>'.$st->phone.'</td>
         <td>'.$st->username.'</td>
-        <td>'.$st->password.'</td>
         <td>'.$st->email.'</td>
         <td>'.$st->status.'</td>
         <td> <a href="student\edit\\'.$st->id.'">Edit</a></td>

@@ -48,7 +48,6 @@ class UserController extends AbstractController
       //set selected country id from POST 
       $id_country = $_POST['id'];
       $this->_data['datas']= AddressModel::getCity($id_country);  
-      var_dump($this->_data['datas']);
       $output = null;  
       foreach ($this->_data['datas'] as $row)  
       {   

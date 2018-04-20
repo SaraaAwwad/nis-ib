@@ -27,7 +27,6 @@
           <th>Gender</th>
           <th>DOB</th>
           <th>Username</th>
-          <th>Password</th> 
           <th>Email</th>
           <th>Telephone</th>
           <th>User</th>
@@ -49,7 +48,6 @@
           <td><?php echo $user->gender; ?></td>
           <td><?php echo $user->DOB; ?></td>
           <td><a href="teacherspanel.php#"><?php echo $user->username;?></a></td>
-          <td><?php echo $user->pwd; ?></td>
           <td><?php echo $user->email;?></td>
           <td><?php echo $user->number;?></td>
           <td><?php echo $user->title;?></td>

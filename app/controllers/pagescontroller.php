@@ -9,14 +9,6 @@ class PagesController extends AbstractController{
 
     public function defaultAction(){
         $pages = PagesModel::getAll();
-        //show parent name instead of id
-        /*for($i=0; $i<count($pages); $i++){
-            $pgObj = new PagesModel($pages[$i]->pageid);
-            $pages[$i]->parent = $pgObj->friendlyname;
-            if($pages[$i]->pageid == 0)
-            $pages[$i]->parent = "None";
-        }*/
-      
         $this->_data['pages'] = $pages;
         $this->_view();
     }
@@ -29,8 +21,7 @@ class PagesController extends AbstractController{
             $physicalname = $_POST['physicalname'];
             $status_id = $_POST['status']; 
 
-            $parentid=-1;
-
+            
             switch($_POST['optradio']) {
                 case "exist":
                     $parentid = $_POST['grouppicker'];
