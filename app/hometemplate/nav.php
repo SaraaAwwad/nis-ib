@@ -47,7 +47,8 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="\usertypes">User Types</a></li>
                           <li><a href="\pages">View Pages</a></li>
-                          <li><a href="\pages\add">Add Page</a></li>                        
+                          <li><a href="\pages\add">Add Page</a></li>
+
                       </ul>
                   </li>
 
@@ -58,6 +59,7 @@
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="view_courses.php">Manage Courses</a></li>
+                          <li><a href="\registeration">Registeration</a></li>
                       </ul>
                   </li>
 

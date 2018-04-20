@@ -34,3 +34,15 @@ $(document).on('change', '#Area', function() {
    $("#Street").html(data);  
 }  
 });  }); });
+
+$(document).on('change', '#grade', function() {
+    var url = '/registeration/add';
+    $.ajax({
+        url: url,
+        data: {id:
+                $(this).val() , cityName:'Area'},
+        type: "POST",
+        success:function(data){
+            $("#grade").html(data);
+        }
+    }); });
