@@ -1,7 +1,8 @@
 <?php
 namespace PHPMVC\Controllers;
-
 use PHPMVC\Models\ScheduleModel;
+use PHPMVC\Models\SemesterModel;
+use PHPMVC\Models\ClassModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
@@ -18,22 +19,26 @@ class ScheduleController extends AbstractController
     }
 
     public function addAction()
-    {   
-    	/*if(isset($_POST['addclass']))
-    	{
-            $class = new ClassModel();
-            $class->name = $this->filterString($_POST['name']);
-            $class->grade_id_fk = $this->filterInt($_POST['grade']);
-            $class->status_id_fk = $this->filterInt($_POST['status']);
+    { 
+        if(isset($_POST['action']))  {
+            $schedule = new ScheduleModel();
+            $schedule->class_id_fk = $_POST['class'];
+            $schedule->semester_id_fk = $_POST['semester'];
+            $schedule->status_id_fk = 1;
+            $schedule->save();
 
-           if($class->save()){
-                $this->redirect('\class');
-            }   
-    	}
+                $output = array(  
+                    'back' => 'yes'  
+                  );    
+             echo json_encode($output);  
+             return;
+            
+
+        }
     
-        $this->_data['status'] = StatusModel::getAll();
-        $this->_data['grade'] = SclGradeModel::getAll();
-        $this->_view();*/
+        $this->_data['class'] = ClassModel::getAll();
+        $this->_data['semester'] = SemesterModel::getSemesters();
+        $this->_view();
     }
   
 }

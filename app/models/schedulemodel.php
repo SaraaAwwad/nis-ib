@@ -12,7 +12,8 @@ class ScheduleModel extends AbstractModel {
     protected static $tableSchema = array(
         'id'                  => self::DATA_TYPE_INT,
         'class_id_fk'               => self::DATA_TYPE_INT,
-        'semester_id_fk'          => self::DATA_TYPE_INT
+        'semester_id_fk'          => self::DATA_TYPE_INT,
+        'status_id_fk'   => self::DATA_TYPE_INT
     );
 
     protected static $primaryKey = 'id';
@@ -28,7 +29,4 @@ class ScheduleModel extends AbstractModel {
         );
     }
 
-    public static function addClass(){
-
-    }
 }
