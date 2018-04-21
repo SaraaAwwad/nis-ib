@@ -12,8 +12,7 @@ class SclGradeController extends AbstractController
     }
     public function addAction(){
 
-        $types = AddressModel::getAll();
-        $this->_data['address'] = $types;
+        
         $this->_view();
     }
 

@@ -5,6 +5,7 @@ use PHPMVC\Models\LevelModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\AddressModel;
 use PHPMVC\Models\UserTypesModel;
+use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\InputFilter;
 
@@ -27,7 +28,7 @@ class StudentController extends AbstractController{
 
         // $Usertype = UserTypesModel::getAll();
         // $this->_data['usertype'] = $Usertype;
-
+        $this->_data['address'] = SclGradeModel::getAll();
         // $this->_data['usertype'] = UserTypesModel::getUsers();
 
         if(isset($_POST['addstudent'])){

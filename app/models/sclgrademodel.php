@@ -14,27 +14,29 @@ class SclGradeModel extends AbstractModel{
 
     protected static $primaryKey = 'id';
 
-    public static function getGrade()
-    {
+    
 
-        $sql = "SELECT * FROM scl_grade";
-        $db = DatabaseHandler::getConnection();
-        $gradeinfo = mysqli_query($db,$sql);
-        $Grade = array();
-        $i=0;
+    // public static function getAll()
+    // {
+    //     $db = DatabaseHandler::getConnection();
+    //     $sql = "SELECT * FROM scl_grade";
+    //     $gradeinfo = mysqli_query($db,$sql);
+    //     $Grade = array();
+    //     $i=0;
 
-        if($gradeinfo){
+    //     if($gradeinfo){
 
-            while($row = mysqli_fetch_array($gradeinfo)){
+    //         while($row = mysqli_fetch_array($gradeinfo)){
 
-                $Grade[$i] = new SclGradeModel();
-                $Grade[$i]->id = $row['id'];
-                $Grade[$i]->grade_name = $row['grade_name'];
-                $i++; 
-            }
-        }
+    //             $Grade[$i] = new SclGradeModel();
+    //             $Grade[$i]->id = $row['id'];
+    //             $Grade[$i]->grade_name = $row['grade_name'];
+    //             $i++; 
+    //         }
+    //     }
 
-            return $Grade;
-    }
+    //         return $Grade;
+    // }
+
 
 }
