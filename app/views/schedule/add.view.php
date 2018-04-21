@@ -37,7 +37,7 @@
                           <div class="form-group">                               
                               <label class="col-sm-2 col-sm-2 control-label">Semester</label>
                               <div class="col-sm-8">
-                                <select name="status" class="form-control semester" id="status">
+                                <select name="semester" class="form-control semester" >
                                     <option value="" disabled>Select Semester</option>
                                     <?php 
                                         foreach($semester as $st){
@@ -57,7 +57,7 @@
 <script>
     $(document).ready(function(data){
 
-        $('.addSched').on('click',function(e){
+/*        $('.addSched').on('click',function(e){
             e.preventDefault();
             e.stopPropagation();
             
@@ -73,10 +73,9 @@
                 },  
                 success:function(data)  
                 {  
-                    alert("Product has been Added into Cart");
                     $('.class').attr('disabled', true);
                     $('.semester').attr('disabled', true);
-                    $('.info').hide();
+                    $('.addSched').attr('disabled', true);
                 },
                 
                 error: function (jqXHR, exception) {
@@ -99,7 +98,7 @@
 				        alert(msg);
    				    },  
                 });  
-        });
+        });*/
     });
 
 </script>    

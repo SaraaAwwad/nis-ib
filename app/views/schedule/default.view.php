@@ -32,12 +32,14 @@
       <tbody>
         <tr>
             <?php
+            //echo count($schedule);
                 foreach ($schedule as $s){
                     echo '<tr>
                     <td>'.$s->id.'</td>
                     <td>'.$s->name.'</td>
                     <td>'.$s->season_name .' - '. $s->year.'</td>
-                    <td> <a href="\class\edit\\'.$s->id.'">Edit </a></td>
+                    <td> <a href="\schedule\edit\\'.$s->id.'">Edit ,  </a>
+                     <a href="\schedule\details\\'.$s->id.'">View Details </a></td>
                     </tr>';
                 }
             ?>

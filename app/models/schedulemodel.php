@@ -29,4 +29,7 @@ class ScheduleModel extends AbstractModel {
         );
     }
 
+    public function getDetails(){
+
+    }
 }

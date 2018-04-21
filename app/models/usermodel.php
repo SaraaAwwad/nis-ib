@@ -97,4 +97,14 @@ class UserModel extends AbstractModel {
         }
         return $Res;
     }
+
+    static function getTeachers(){
+        //add: where they are available at the given day and slot
+        return self::get(
+            'SELECT user.* FROM ' . self::$tableName .
+             ' INNER JOIN user_type ON user.type_id = user_type.id 
+               where user_type.title = "teacher" '
+            );
+
+    }
 }
