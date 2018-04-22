@@ -61,6 +61,7 @@
                           <li><a href="/class">Manage Classes</a></li>
                           <li><a href="/schedule">Manage Schedules</a></li>                          
                           <li><a href="/course">Manage Courses</a></li>
+                          <li><a href="/semester">Manage Semesters</a></li>                          
                           <li><a href="\registeration">Registeration</a></li>
                       </ul>
                   </li>

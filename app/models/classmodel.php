@@ -28,4 +28,12 @@ class ClassModel extends AbstractModel {
         );
     }
 
+    public function isExist(){
+        return self::get(
+            'SELECT * FROM ' . self::$tableName . '
+            WHERE name = '.$this->name.' AND 
+            grade_id_fk = '.$this->grade_id_fk .' '
+        );
+    }
+
 }

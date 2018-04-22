@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b7462f1e-39e8-486a-9e77-e48b220a675d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/controllers/coursecontroller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/coursegroupcontroller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/controllers/levelcontroller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/fileupload.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/coursegroupmodel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/salarymodel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/telephonemodel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/class/edit.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/classview.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/course/add.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/course/default.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/course/edit.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/schedule/edit.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/scheduleview.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/staff/activate.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/FAQ.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/changelog.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/__construct.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/acceptpagebreak.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/addfont.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/addlink.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/addpage.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/aliasnbpages.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/cell.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/close.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/error.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/footer.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getpageheight.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getpagewidth.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getstringwidth.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getx.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/gety.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/header.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/image.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/index.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/line.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/link.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/ln.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/multicell.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/output.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/pageno.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/rect.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setauthor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setautopagebreak.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setcompression.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setcreator.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setdisplaymode.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setdrawcolor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setfillcolor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setfont.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setfontsize.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setkeywords.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setleftmargin.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setlinewidth.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setlink.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setmargins.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setrightmargin.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setsubject.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/settextcolor.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/settitle.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/settopmargin.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setx.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setxy.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/sety.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/text.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/write.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courier.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courierb.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courierbi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courieri.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helvetica.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helveticab.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helveticabi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helveticai.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/symbol.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/times.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/timesb.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/timesbi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/timesi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/font/zapfdingbats.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/fpdf.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/fpdf.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/install.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1250.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1251.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1252.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1253.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1254.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1255.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1257.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1258.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp874.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-1.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-11.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-15.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-16.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-2.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-4.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-5.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-7.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-9.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/koi8-r.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/koi8-u.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/makefont.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/ttfparser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/20k_c1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/20k_c2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/calligra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/calligra.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/calligra.z" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/countries.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/index.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/makefont.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto1.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto1.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto2.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto2.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto3.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto3.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto4.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto4.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto5.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto5.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto6.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto6.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto7.htm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto7.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pdf/jspdf.debug.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pdf/jspdf.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/images/mtcuan_bnjdjh_jda3jh_lltknt_tndscf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/images/ndquan_bnjdjh_jda3jh_lltknt_tndscf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/images/oc5wbm_ckmmek_mdckew_voq1no_d1jwww.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/images/y2hlzx_jpbmcu_cg5njd_jhjda3_jhlltk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/images/ymfubm_vylmpw_zyqyys_qwnyr5_zu5du0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/images/yxj0cy_5wbmck_mmekmd_ckewvo_q1nod1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/nis-ib.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/classcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/classcontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/schedulecontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/schedulecontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/staffcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/staffcontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/studentcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/studentcontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/usercontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/usercontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/hometemplate/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/hometemplate/nav.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/abstractmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstractmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/addressmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/addressmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/classmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/classmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/coursemodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/coursemodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/levelmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/levelmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/registrationmodel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/roommodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/roommodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/scheduledetailsmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/scheduledetailsmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/schedulemodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/schedulemodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/staffmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/staffmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/schedule/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/schedule/add.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/schedule/default.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/schedule/default.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/schedule/details.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/schedule/details.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/staff/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staff/add.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/staff/default.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staff/default.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/staff/edit.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staff/edit.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/user/add.view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/staff.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/staff.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/user.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="registerationmodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="studentmodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2159">
+              <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registerationcontroller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+              <folding>
+                <element signature="e#37#74#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1088">
+              <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5355">
+              <caret line="315" column="45" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="studentcontroller.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+              <folding>
+                <element signature="e#36#66#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>actions</find>
+      <find>addsched</find>
+      <find>fnamein</find>
+      <find>semest</find>
+      <find>lnamein</find>
+      <find>insert</find>
+      <find>getall</find>
+      <find>create</find>
+      <find>level</find>
+      <find>insertInto</find>
+      <find>insertingto</find>
+      <find>parents</find>
+      <find>gradein</find>
+      <find>$status</find>
+      <find>phone</find>
+      <find>pass</find>
+      <find>status</find>
+      <find>grade</find>
+      <find>country</find>
+      <find>city</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/hometemplate/nav.php" />
+        <option value="$PROJECT_DIR$/app/views/registeration/default.view.php" />
+        <option value="$PROJECT_DIR$/public/js/user.js" />
+        <option value="$PROJECT_DIR$/app/views/schedule/add.view.php" />
+        <option value="$PROJECT_DIR$/app/models/parentmodel.php" />
+        <option value="$PROJECT_DIR$/app/models/sclgrademodel.php" />
+        <option value="$PROJECT_DIR$/app/controllers/usertypescontroller.php" />
+        <option value="$PROJECT_DIR$/app/models/studentlevel.php" />
+        <option value="$PROJECT_DIR$/app/models/studentlevelmodel.php" />
+        <option value="$PROJECT_DIR$/app/views/student/add.view.php" />
+        <option value="$PROJECT_DIR$/app/views/registeration/add.view.php" />
+        <option value="$PROJECT_DIR$/app/models/registerationmodel.php" />
+        <option value="$PROJECT_DIR$/app/models/studentmodel.php" />
+        <option value="$PROJECT_DIR$/app/controllers/registerationcontroller.php" />
+        <option value="$PROJECT_DIR$/app/controllers/studentcontroller.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="student" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="usertypes" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b7462f1e-39e8-486a-9e77-e48b220a675d" name="Default" comment="" />
+      <created>1524249171239</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1524249171239</updated>
+      <workItem from="1524249189553" duration="9123000" />
+      <workItem from="1524338696238" duration="5524000" />
+      <workItem from="1524352996880" duration="24479000" />
+      <workItem from="1524429208244" duration="146000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="39272000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="127" column="22" lean-forward="true" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5355">
+          <caret line="315" column="45" lean-forward="true" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="e#36#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="e#37#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/schedule/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4488">
+          <caret line="264" column="8" lean-forward="true" selection-start-line="264" selection-start-column="8" selection-end-line="264" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/hometemplate/nav.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="66" column="38" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/levelmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/usertypes/default.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="49" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/staff/default.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="15" column="88" selection-start-line="15" selection-start-column="82" selection-end-line="15" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/registeration/default.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="89" selection-start-line="16" selection-start-column="89" selection-end-line="16" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/student/default.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="54" column="2" lean-forward="true" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/js/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/staff/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="34" column="36" lean-forward="true" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/staffcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/usertypes/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-398">
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/sclgrademodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/usertypesmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/staffmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="22" column="42" lean-forward="true" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/usertypescontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="70" column="41" selection-start-line="70" selection-start-column="41" selection-end-line="70" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/lib/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/statusmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/parentmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="117" column="33" lean-forward="true" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/studentlevelmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/schedulecontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/schedule/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5355">
+          <caret line="315" column="45" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <element signature="e#37#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+          <folding>
+            <element signature="e#36#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -28,7 +28,6 @@ class RegisterationModel{
             $this->datetime = $row['datetime'];
         }
     }
-
     public static function getAll()
     {
         $sql = "SELECT * FROM registration";

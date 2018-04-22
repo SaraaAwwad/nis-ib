@@ -44,49 +44,45 @@ function randomPassword() {
         <input name="lnamein" type="text" class="form-control" required>
         </div>
         </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Level</label>
+                <div class="col-sm-10">
+                    <?php for($i=0; $i<count($Levels); $i++){ ?>
+                        <label class="containerradio"><?php echo $Levels[$i]->level; ?>
+                            <input type="radio" checked="checked" value ="<?php echo $Levels[$i]->id; ?>" name="level">
+                            <span class="checkmark"></span>
+                        </label>
+                    <?php } ?>
+                </div>
+            </div>
 
-<<<<<<< HEAD
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Level</label>
-                              <div class="col-sm-10">
-                                  <?php for($i=0; $i<count($Levels); $i++){ ?>
-                                      <label class="containerradio"><?php echo $Levels[$i]->level; ?>
-                                          <input type="radio" checked="checked" value ="<?php echo $Levels[$i]->id; ?>" name="level">
-                                          <span class="checkmark"></span>
-                                      </label>
-                                  <?php } ?>
-                              </div>
-                          </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Grade</label>
+                <div class="styled-select slate">
+                    <select name="gradein" id="gradein">
+                        <option value="">Select Grade</option>
+                        <?php foreach($grade as $grad){ ?>
+                            <option value="<?php echo $grad->id; ?>"><?php echo $grad->grade_name; ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
 
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Grade</label>
-                              <div class="styled-select slate">
-                                  <select name="gradein" id="gradein">
-                                      <option value="">Select Grade</option>
-                                      <?php foreach($grade as $grad){ ?>
-                                          <option value="<?php echo $grad->id; ?>"><?php echo $grad->grade_name; ?></option>
-                                      <?php } ?>
-                                  </select>
-                              </div>
-                          </div>
-
-
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
-                              <div class="col-sm-8">
-                                  <input id="date" type="date" name="datein">
-                              </div>
-                          </div>
-=======
         <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
         <div class="col-sm-8">
         <input id="date" type="date" name="datein">
         </div>
         </div>
->>>>>>> 42d5a0e89aa4266fe5533b16540ce2f9938058c8
 
-        <div class="form-group">
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
+                <div class="col-sm-8">
+                    <input name="numberin" type="text" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
         <label class="col-sm-2 col-sm-2 control-label">Gender</label>
         <div class="col-sm-8">
         <label class="containerradio">Male
@@ -100,62 +96,6 @@ function randomPassword() {
         </div>
         </div>
 
-        <div class="form-group">
-        <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
-        <div class="col-sm-8">
-        <input name="numberin" type="text" class="form-control" required>
-        </div>
-        </div>
-
-
-<<<<<<< HEAD
-                          <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                            <div class="col-sm-10">
-                            <?php foreach($status as $status){ ?>
-                            <label class="containerradio"><?php echo $status->code; ?>
-                            <input type="radio" checked="checked" value="<?php echo $status->id; ?>" name="statusinput">
-                            <span class="checkmark"></span>
-                            </label>
-                            <?php } ?>
-                          </div>
-                          </div>
-=======
-        <div class="form-group">
-        <label class="col-sm-2 col-sm-2 control-label">Level</label>
-        <div class="col-sm-8">
-        <?php for($i=0; $i<count($Levels); $i++){ ?>
-        <label class="containerradio"><?php echo $Levels[$i]->level; ?>
-        <input type="radio" checked="checked" value ="<?php echo $Levels[$i]->id; ?>" name="levelin">
-        <span class="checkmark"></span>
-        </label>
-        <?php } ?>
-        </div>
-        </div>
-
-        <!-- <div class="form-group">
-        <label class="col-sm-2 col-sm-2 control-label">Grade</label>
-        <div class="col-sm-8">
-        <?php for($i=0; $i<count($Grade); $i++){ ?>
-        <label class="containerradio"><?php echo $Grade[$i]->grade_name; ?>
-        <input type="radio" checked="checked" value ="<?php echo $Grade[$i]->id; ?>" name="grade">
-        <span class="checkmark"></span>
-        </label>
-        <?php } ?>
-        </div>
-        </div> -->
-
-        <div class="form-group">
-        <label class="col-sm-2 col-sm-2 control-label">Grade</label>
-        <div class="styled-select slate">
-        <select name="grade" id="grade">
-        <option value="">Select Grade</option>
-        <?php foreach($address as $gr){ ?>
-        <option value="<?php echo $gr->id; ?>"><?php echo $gr->grade_name; ?></option>
-        <?php } ?>
-        </select>
-        </div>
-        </div>
 
         <div class="form-group">
           <label class="col-sm-2 col-sm-2 control-label">Status</label>
@@ -168,9 +108,7 @@ function randomPassword() {
           <?php } ?>
         </div>
         </div>
->>>>>>> 42d5a0e89aa4266fe5533b16540ce2f9938058c8
 
-                          
                           <legend>Address Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Country</label>
