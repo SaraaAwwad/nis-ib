@@ -38,7 +38,7 @@
       <tbody>
         <tr>
             <?php
-                foreach ($courses as $cs){
+                foreach ($course as $cs){
                     echo '<tr>
                     <td>'.$cs->id.'</td>
                     <td>'.$cs->name.'</td>
