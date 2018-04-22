@@ -7,7 +7,10 @@ use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\AddressModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\SclGradeModel;
+<<<<<<< HEAD
 use PHPMVC\Models\StudentLevelModel;
+=======
+>>>>>>> 42d5a0e89aa4266fe5533b16540ce2f9938058c8
 use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\InputFilter;
 
@@ -28,11 +31,18 @@ class StudentController extends AbstractController{
 
     public function addAction(){
 
+<<<<<<< HEAD
         $Levels = LevelModel::getAll();
         $this->_data['Levels'] = $Levels;
 
         $Address = AddressModel::getCountry();
         $this->_data['country'] = $Address;
+=======
+        // $Usertype = UserTypesModel::getAll();
+        // $this->_data['usertype'] = $Usertype;
+        $this->_data['address'] = SclGradeModel::getAll();
+        // $this->_data['usertype'] = UserTypesModel::getUsers();
+>>>>>>> 42d5a0e89aa4266fe5533b16540ce2f9938058c8
 
         $stat = StatusModel::getAll();
         $this->_data['status'] = $stat;
