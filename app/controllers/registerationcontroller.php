@@ -4,6 +4,7 @@ namespace PHPMVC\Controllers;
 use PHPMVC\Models\RegisterationModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\LevelModel;
+use PHPMVC\Models\SclGradeModel;
 
 use PHPMVC\LIB\InputFilter;
 
@@ -21,11 +22,13 @@ class RegisterationController extends AbstractController
 
     public function addAction()
     {
-
         $Levels = LevelModel::getAll();
         $this->_data['Levels'] = $Levels;
-        $this->_view();
 
+        $grade = SclGradeModel::getAll();
+        $this->_data['grade'] = $grade;
+
+        $this->_view();
 
     }
 }

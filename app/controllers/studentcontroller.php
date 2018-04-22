@@ -7,10 +7,8 @@ use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\AddressModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\SclGradeModel;
-<<<<<<< HEAD
 use PHPMVC\Models\StudentLevelModel;
-=======
->>>>>>> 42d5a0e89aa4266fe5533b16540ce2f9938058c8
+
 use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\InputFilter;
 
@@ -31,18 +29,11 @@ class StudentController extends AbstractController{
 
     public function addAction(){
 
-<<<<<<< HEAD
         $Levels = LevelModel::getAll();
         $this->_data['Levels'] = $Levels;
 
         $Address = AddressModel::getCountry();
         $this->_data['country'] = $Address;
-=======
-        // $Usertype = UserTypesModel::getAll();
-        // $this->_data['usertype'] = $Usertype;
-        $this->_data['address'] = SclGradeModel::getAll();
-        // $this->_data['usertype'] = UserTypesModel::getUsers();
->>>>>>> 42d5a0e89aa4266fe5533b16540ce2f9938058c8
 
         $stat = StatusModel::getAll();
         $this->_data['status'] = $stat;
@@ -55,10 +46,7 @@ class StudentController extends AbstractController{
         if(isset($_POST['addStudent'])){
             //validate then (could use inputfilter trait or js)
                             //testing w/ any data
-            //ex:
-                //$objUser->fname = $this->filterString($_POST['fname']);
-                //$levels = Level::getAllLevel();
-                //$this->_data['levels'] = $levels;
+
                 $stud = new StudentModel();
                 $stud->fname = $_POST['fnamein'];
                 $stud->lname = $_POST['lnamein'];
@@ -77,12 +65,11 @@ class StudentController extends AbstractController{
                 $stud->address_id_fk = $_POST['street'];
 
                 $stud->email = $_POST['emailin'];
-                $stud->pwd = $_POST['passwordin'];
+                $stud->password = $_POST['passwordin'];
                 $stud->username = $_POST['usernamein'];
                 $stud->img = $_POST['imagein'];
 
                 $objParent = new ParentModel();
-
                 $objParent->parentsearch = $_POST['parentsearch'];
                 $objParent->fname = $_POST['parentfname'];
                 $objParent->lname = $_POST['parentlname'];
@@ -96,23 +83,25 @@ class StudentController extends AbstractController{
                 $objParent->img = $_POST['parentimage'];
                 $objParent->parent = 0;
 
-
-
-                switch($_POST['pickradio']) {
+            switch($_POST['pickradio']) {
                         case "exist":
                             $idresult = ParentModel::getExistingParent($objParent->parentsearch);
+                            $stud->user_id_fk = $idresult;
                             break;
                         case "notexist":
                             $idresult = ParentModel::InsertinDB($objParent);
+                            $stud->user_id_fk  = $idresult;
                             break;
                     }
 
-                $stud->user_id_fk = 0;
-                    if (StudentModel::insertInDB($stud)){
-                        $this->redirect("/student");
-                    }else{
-                        // handle error
-                    }
+                ////////////// Lama b3mel el direct dah bytl3 error en el helper model by3mel direct lw7do ///////////
+//                    if (StudentModel::insertInDB($stud)){
+//                        $this->redirect("/student/");
+//                    }else{
+//                        // handle error
+//                    }
+
+                StudentModel::insertInDB($stud);
         }
 
     }

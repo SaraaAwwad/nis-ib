@@ -125,4 +125,24 @@ class StudentModel {
 
     }
 
+    public function getStudents($level_id , $grade_id){
+        $db = DatabaseHandler::getConnection();
+        $sql = "SELECT user.id, user.fname, user.lname FROM
+                user INNER JOIN student_level
+                ON user.id = student_level.user_id_fk
+                WHERE (scl_level_id_fk = '$level_id' AND scl_grade_id_fk = '$grade_id' )";
+        $result = mysqli_query($db,$sql);
+        $Res= false;
+        $i=0;
+        while ($row = mysqli_fetch_assoc($result)) {
+                $MyObj = new StudentModel($row["id"]);
+                $MyObj->id = $row["id"];
+                $MyObj->fname = $row["fname"];
+                $MyObj->lname = $row["lname"];
+                $Res[$i]=$MyObj;
+                $i++;
+        }
+        return $Res;
+    }
+
 }

@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b7462f1e-39e8-486a-9e77-e48b220a675d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/registerationcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/registerationcontroller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/studentcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/studentcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/parentmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/parentmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/sclgrademodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sclgrademodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/registerationmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/registerationmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/studentmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/studentmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/registeration/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/registeration/add.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/student/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/student/add.view.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +19,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="registerationmodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="studentmodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="127" column="22" lean-forward="true" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registerationcontroller.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="482">
+              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+              <folding>
+                <element signature="e#37#74#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+              <folding>
+                <element signature="e#2413#2434#0#HTML" expanded="true" />
+                <element signature="e#2389#2413#0#HTML" expanded="true" />
+                <element signature="e#2633#2674#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="234" column="36" lean-forward="true" selection-start-line="234" selection-start-column="36" selection-end-line="234" selection-end-column="36" />
+            <state relative-caret-position="520">
+              <caret line="315" column="45" lean-forward="true" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -29,38 +75,11 @@
       <file leaf-file-name="studentcontroller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="95" column="63" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="63" />
+            <state relative-caret-position="520">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#36#66#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parentmodel.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/models/parentmodel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="abstractmodel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="studentlevelmodel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/studentlevelmodel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -80,8 +99,15 @@
       <find>level</find>
       <find>insertInto</find>
       <find>insertingto</find>
-      <find>gradein</find>
       <find>parents</find>
+      <find>gradein</find>
+      <find>$status</find>
+      <find>phone</find>
+      <find>pass</find>
+      <find>status</find>
+      <find>grade</find>
+      <find>country</find>
+      <find>city</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -91,19 +117,20 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/hometemplate/nav.php" />
-        <option value="$PROJECT_DIR$/app/models/registerationmodel.php" />
         <option value="$PROJECT_DIR$/app/views/registeration/default.view.php" />
-        <option value="$PROJECT_DIR$/app/controllers/registerationcontroller.php" />
-        <option value="$PROJECT_DIR$/app/views/registeration/add.view.php" />
         <option value="$PROJECT_DIR$/public/js/user.js" />
         <option value="$PROJECT_DIR$/app/views/schedule/add.view.php" />
         <option value="$PROJECT_DIR$/app/models/parentmodel.php" />
         <option value="$PROJECT_DIR$/app/models/sclgrademodel.php" />
         <option value="$PROJECT_DIR$/app/controllers/usertypescontroller.php" />
         <option value="$PROJECT_DIR$/app/models/studentlevel.php" />
-        <option value="$PROJECT_DIR$/app/views/student/add.view.php" />
         <option value="$PROJECT_DIR$/app/models/studentlevelmodel.php" />
+        <option value="$PROJECT_DIR$/app/views/student/add.view.php" />
         <option value="$PROJECT_DIR$/app/controllers/studentcontroller.php" />
+        <option value="$PROJECT_DIR$/app/views/registeration/add.view.php" />
+        <option value="$PROJECT_DIR$/app/models/registerationmodel.php" />
+        <option value="$PROJECT_DIR$/app/models/studentmodel.php" />
+        <option value="$PROJECT_DIR$/app/controllers/registerationcontroller.php" />
       </list>
     </option>
   </component>
@@ -116,7 +143,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -155,6 +182,20 @@
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="student" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="usertypes" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -190,15 +231,15 @@
       <updated>1524249171239</updated>
       <workItem from="1524249189553" duration="9123000" />
       <workItem from="1524338696238" duration="5524000" />
-      <workItem from="1524352996880" duration="11560000" />
+      <workItem from="1524352996880" duration="24479000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26207000" />
+    <option name="totallyTimeSpent" value="39126000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
@@ -325,27 +366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/old/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -367,13 +387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="91">
@@ -391,29 +404,12 @@
     <entry file="file://$PROJECT_DIR$/app/models/currencymodel.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/schedule/add.view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/sclgrademodel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="234" column="36" lean-forward="true" selection-start-line="234" selection-start-column="36" selection-end-line="234" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/statusmodel.php">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/usertypesmodel.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -439,6 +435,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/lib/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/statusmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/parentmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="117" column="33" lean-forward="true" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/studentlevelmodel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -446,27 +470,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="95" column="63" selection-start-line="95" selection-start-column="53" selection-end-line="95" selection-end-column="63" />
+        <state relative-caret-position="520">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#36#66#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/parentmodel.php">
+    <entry file="file://$PROJECT_DIR$/app/controllers/schedulecontroller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+        <state relative-caret-position="17">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/schedule/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="315" column="45" lean-forward="true" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+          <folding>
+            <element signature="e#2413#2434#0#HTML" expanded="true" />
+            <element signature="e#2389#2413#0#HTML" expanded="true" />
+            <element signature="e#2633#2674#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="127" column="22" lean-forward="true" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="e#37#74#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
