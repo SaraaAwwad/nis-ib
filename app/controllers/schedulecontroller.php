@@ -40,13 +40,6 @@ class ScheduleController extends AbstractController
                 //or redirect to the details
             }
 
-         /*       $output = array(  
-                    'back' => 'yes'  
-                  );    
-             echo json_encode($output);  
-             return;
-           */ 
-
         }
     
         $this->_data['class'] = ClassModel::getAll();
@@ -95,9 +88,30 @@ class ScheduleController extends AbstractController
                 echo json_encode($output);
                 return;
             }
+
+            else if($_POST['action'] == 'deleteDetail'){
+                $d_id = $_POST['id'];
+                $s = ScheduleDetailsModel::getByPK($d_id);
+                $s->delete();
+             $output = array(
+                 'back' => 'yes'
+             );
+                echo json_encode($output);                
+                return;
+            }
            }
           
             $this->_view();
+        }
+    }
+
+    public function deletedetailAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+            $s = ScheduleDetailsModel::getByPK($id);
+            if($s->delete())
+            {//$this->redirect('/schedule/details/');
+            }
         }
     }
   

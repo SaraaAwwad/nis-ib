@@ -124,7 +124,7 @@
                     <td>'.$s->fname .' - '. $s->lname.'</td>
                     <td>'.$s->room_name.'</td>
                     <td> <a href="\schedule\editdetail\\'.$s->id.'">Edit ,  </a>
-                     <a href="\schedule\delete\\'.$s->id.'">Delete </a></td>
+                     <a class="delete" id="'.$s->id.'" href="#" >Delete </a></td>
                     </tr>';    
                 }
             }
@@ -138,11 +138,47 @@
     $(document).ready(function(data){
         var pathname = window.location.pathname;
 
-    $("#slot").on('change',function(e){
+    $(".delete").on('click', function(e){
+        var id = $(this).attr("id");
+         $.ajax({  
+                url:pathname,  
+                method:'POST',  
+                dataType:'json',
+                data:{  
+                    id: id,
+                    action:"deleteDetail"
+                },  
+                success:function(data)  
+                {  //alert("is deleted !!");
+                    window.location.reload(true);
+                
+                }, 
+                error: function (jqXHR, exception) {
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        alert(msg);
+   				    },  
+                });  
+        });
 
+    $("#slot").on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
-         $.ajax({  
+        $.ajax({  
                 url:pathname,  
                 method:'POST',  
                 dataType:'json',
