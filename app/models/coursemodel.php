@@ -27,4 +27,10 @@ class CourseModel extends AbstractModel {
 
     protected static $primaryKey = 'id';
 
+    public static function getCourse()
+    {
+        return self::get(
+        'SELECT course.*, course_group.id, scl_level.id FROM ' . self::$tableName . ' INNER JOIN course_group ON course.group_id_fk = course_group.id INNER JOIN scl_level ON course.level_id_fk = scl_level.id'
+        );
+    }
 }
