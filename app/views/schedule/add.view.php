@@ -52,56 +52,7 @@
                       </form>
                   </div>
               </div>      
-            </div>
-
-<script>
-    $(document).ready(function(data){
-
-/*        $('.addSched').on('click',function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            
-            $.ajax({  
-                url:"/schedule/add",  
-                method:'POST',  
-                dataType:'json',
-                data:{  
-                    semester: $(".semester").val(),
-                    class: $(".class").val(),
-                    action:"ajax",
-                    status:1
-                },  
-                success:function(data)  
-                {  
-                    $('.class').attr('disabled', true);
-                    $('.semester').attr('disabled', true);
-                    $('.addSched').attr('disabled', true);
-                },
-                
-                error: function (jqXHR, exception) {
-				        var msg = '';
-				        if (jqXHR.status === 0) {
-				            msg = 'Not connect.\n Verify Network.';
-				        } else if (jqXHR.status == 404) {
-				            msg = 'Requested page not found. [404]';
-				        } else if (jqXHR.status == 500) {
-				            msg = 'Internal Server Error [500].';
-				        } else if (exception === 'parsererror') {
-				            msg = 'Requested JSON parse failed.';
-				        } else if (exception === 'timeout') {
-				            msg = 'Time out error.';
-				        } else if (exception === 'abort') {
-				            msg = 'Ajax request aborted.';
-				        } else {
-				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-				        }
-				        alert(msg);
-   				    },  
-                });  
-        });*/
-    });
-
-</script>    
+            </div> 
 
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';

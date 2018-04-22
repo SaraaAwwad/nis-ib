@@ -32,4 +32,14 @@ class ScheduleModel extends AbstractModel {
     public function getDetails(){
 
     }
+
+    public function getFreeDays($slot){
+        return self::getArr(
+            'SELECT weekdays.* FROM weekdays
+            WHERE  weekdays.id NOT IN (SELECT day_id_fk
+            FROM  schedule_details
+            WHERE sched_id_fk = '.$this->id.'
+            AND slot_id_fk = '.$slot.' )  '
+        );
+    }
 }

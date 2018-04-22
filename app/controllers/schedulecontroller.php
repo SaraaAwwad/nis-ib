@@ -10,9 +10,11 @@ use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\WeekdaysModel;
 use PHPMVC\Models\RoomModel;
 use PHPMVC\Models\UserModel;
+use PHPMVC\Models\StaffModel;
 
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
+
 
 class ScheduleController extends AbstractController
 {
@@ -55,12 +57,46 @@ class ScheduleController extends AbstractController
     public function detailsAction(){
         if(isset($this->_params[0])){
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+            $s = ScheduleModel::getByPK($id);
+
+            if(isset($_POST['addDetail'])){
+                $sDetail = new ScheduleDetailsModel();
+    
+                $sDetail->sched_id_fk = $id;
+                $sDetail->slot_id_fk = $_POST['slot'];
+                $sDetail->course_id_fk = $_POST['course'];
+                $sDetail->teacher_id_fk = $_POST['teacher'];
+                $sDetail->room_id_fk = $_POST['room'];
+                $sDetail->day_id_fk = $_POST['day'];
+                $sDetail->save();
+            }
+
             $this->_data['details'] = ScheduleDetailsModel::getDetails($id);
             $this->_data['courses'] = CourseModel::getAll();
             $this->_data['slots'] = SlotModel::getAll();
-            $this->_data['days'] = WeekdaysModel::getAll();
-            $this->_data['rooms'] = RoomModel::getAll();
-            $this->_data['teacher'] = UserModel::getTeachers();
+
+           if(isset($_POST['action']))  {
+            if($_POST['action']== 'getDays'){
+                $slot = $_POST['slot'];
+                $days =  $s->getFreeDays($slot);
+                echo json_encode($days);  
+                return;    
+            }
+
+            else if($_POST['action'] == 'getRooms'){
+                $slot = $_POST['slot'];
+                $day = $_POST['day'];    
+                $rooms = RoomModel::getFreeRooms($day, $slot, $s->semester_id_fk);
+                $teachers = StaffModel::getFreeTeachers($day, $slot, $s->semester_id_fk);
+                $output = array(
+                    'rooms' => $rooms, 
+                    'teachers' => $teachers
+                );
+                echo json_encode($output);
+                return;
+            }
+           }
+          
             $this->_view();
         }
     }
