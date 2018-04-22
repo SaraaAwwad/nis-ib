@@ -42,4 +42,15 @@ $(document).ready(function(){
 	});
 });
 
+    $.ajax({
+        url:"fetch_data.php",
+        method: "POST",
+        data:{cityId:city_id, cityName:'Street'},
+        dataType:"text",
+        success:function(data)
+        {
+            $('#street').html(data);
+        }
+    });
+
 });	

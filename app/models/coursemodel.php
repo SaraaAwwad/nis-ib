@@ -27,4 +27,26 @@ class CourseModel extends AbstractModel {
 
     protected static $primaryKey = 'id';
 
+    public static function getCourse()
+    {
+        return self::get(
+        'SELECT course.*, course_group.id, scl_level.id FROM ' . self::$tableName . ' INNER JOIN course_group ON course.group_id_fk = course_group.id INNER JOIN scl_level ON course.level_id_fk = scl_level.id'
+        );
+    }
+
+    public static function insertInDB($course){
+
+        $db = DatabaseHandler::getConnection();
+
+        $sql = "INSERT INTO course ('name', 'course_code', 'descr, level_id_fk', 'group_id_fk', 'status', 'teaching_hours') 
+        VALUES ('$course->name','$course->course_code', '$course->descr', '$course->level_id_fk',
+        '$course->group_id_fk', '$course->status', '$course->teaching_hours' )";
+
+        if (mysqli_query($db, $sql)){
+            return true;
+        }else{
+            return false;
+        // die(mysqli_error($db));
+        }
+    }
 }
