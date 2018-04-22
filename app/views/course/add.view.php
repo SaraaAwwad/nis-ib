@@ -21,21 +21,21 @@
                     <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Course Name</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="coursename">
+                    <input type="text" class="form-control" name="coursename" required>
                     </div>
             </div>
                           
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Course Code</label>
                   <div class="col-sm-10">
-                  <input type="text" class="form-control" name="coursecode">
+                  <input type="text" class="form-control" name="coursecode" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="description">
+                        <input type="text" class="form-control" name="description" required>
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Teaching Hours</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="teaching">
+                        <input type="text" class="form-control" name="teaching" required>
                     </div>
                 </div>
                       
