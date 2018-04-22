@@ -6,7 +6,7 @@
                   <h5 class="centered"> User</h5>
     
       <?php 
-      use PHPMVC\Models\usertypesmodel;
+      use PHPMVC\Models\UserTypesModel;
       use PHPMVC\Lib\Database\DatabaseHandler;
 
         if(!isset($_SESSION["userID"])){
@@ -39,7 +39,7 @@
             }
         }
     ?>
-                    <li class="sub-menu dcjq-parent-li">
+              <!--      <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-book"></i>
                           <span>Control</span>
@@ -47,17 +47,21 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="\usertypes">User Types</a></li>
                           <li><a href="\pages">View Pages</a></li>
-                          <li><a href="\pages\add">Add Page</a></li>                        
+                          <li><a href="\pages\add">Add Page</a></li>
+
                       </ul>
                   </li>
-
+-->
                     <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-bars"></i>
-                          <span>Courses</span>
+                          <span>Classes</span>
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
-                          <li><a href="view_courses.php">Manage Courses</a></li>
+                          <li><a href="/class">Manage Classes</a></li>
+                          <li><a href="/schedule">Manage Schedules</a></li>                          
+                          <li><a href="/course">Manage Courses</a></li>
+                          <li><a href="\registeration">Registeration</a></li>
                       </ul>
                   </li>
 

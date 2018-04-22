@@ -7,35 +7,39 @@
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1>Pages</h1>
+            <h1>Classes</h1>
 		</div>
 	</div>		
+
+  <section class="tabcontent">    
+    <div class="row">
+    <div class="col-lg-12 main-chart">
+    <a class="buttonlink btn btn-theme04 left" href="/class/add"><i class="fa fa-plus"></i>Add Class</a>
+    </div>
+  </div>
+  </section>
 
   <section class="tabcontent">
     <table class="order-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Friendly Name</th>
-          <th>Physical Name</th>
-          <th>Parent Page</th>
+          <th>Name</th>
+          <th>Grade</th>
           <th>Status</th>
-          <th>Action</th>
+          <th>Actions</th>                              
         </tr>
       </thead>
       <tbody>
         <tr>
             <?php
-                foreach ($pages as $pt){
+                foreach ($class as $ut){
                     echo '<tr>
-                    <td>'.$pt->id.'</td>
-                    <td>'.$pt->friendlyname.'</td>                    
-                    <td>'.$pt->physicalname.'</td>                    
-                    <td>'.$pt->pageid.'</td>                    
-                    <td>'.$pt->status.'</td>    
-                    <td><a href="\pages\edit\\'.$pt->id.'"</a> Edit ,
-                    <a href="\pages\delete\\'.$pt->id.'"</a>Delete ,
-                    <a href="\pages\viewpermissions\\'.$pt->id.'"</a>View Permissions </td>
+                    <td>'.$ut->id.'</td>
+                    <td>'.$ut->name.'</td>
+                    <td>'.$ut->grade_name.'</td>
+                    <td>'.$ut->code.'</td>
+                    <td> <a href="\class\edit\\'.$ut->id.'">Edit </a></td>
                     </tr>';
                 }
             ?>

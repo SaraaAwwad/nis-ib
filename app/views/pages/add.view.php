@@ -54,7 +54,7 @@
                             <label class="radio-inline">
                             <div class="col-lg-12">
                             <div class="col-lg-8">
-                                <input type="radio" name="optradio" value="1" >Add to an Existing Group:
+                                <input type="radio" name="optradio" value="exist" >Add to an Existing Group:
                                  <select class="selectpicker" name="grouppicker">
                                     <?php 
                                      foreach ($pages as $pt){

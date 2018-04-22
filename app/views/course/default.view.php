@@ -7,14 +7,14 @@
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1>User Types</h1>
+            <h1>Courses</h1>
 		</div>
 	</div>		
 
   <section class="tabcontent">    
     <div class="row">
     <div class="col-lg-12 main-chart">
-    <a class="buttonlink btn btn-theme04 left" href="/usertypes/add"><i class="fa fa-plus"></i>User Type</a>
+    <a class="buttonlink btn btn-theme04 left" href="/course/add"><i class="fa fa-plus"></i>Add Course</a>
     </div>
   </div>
   </section>
@@ -24,22 +24,31 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>User Type</th>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Description</th>
+          <th>Level</th>
+          <th>Group</th>
+          <th>Teaching Hours</th>
           <th>Status</th>
-          <th>Action</th>
+          <th>Actions</th>
+
         </tr>
       </thead>
       <tbody>
         <tr>
             <?php
-                foreach ($usertypes as $ut){
+                foreach ($courses as $cs){
                     echo '<tr>
-                    <td>'.$ut->id.'</td>
-                    <td>'.$ut->title.'</td>
-                    <td>'.$ut->status.'</td>
-                    <td> <a href="\usertypes\edit\\'.$ut->id.'">Edit , </a>
-                        <a href="\usertypes\managepages\\'.$ut->id.'">Permissions</a>
-                    </td>
+                    <td>'.$cs->id.'</td>
+                    <td>'.$cs->name.'</td>
+                    <td>'.$cs->course_code.'</td>
+                    <td>'.$cs->descr.'</td>
+                    <td>'.$cs->level_id_fk.'</td>
+                    <td>'.$cs->group_id_fk.'</td>
+                    <td>'.$cs->teaching_hours.'</td>
+                    <td>'.$cs->status.'</td>
+                    <td> <a href="\course\edit\\'.$cs->id.'">Edit </a></td>
                     </tr>';
                 }
             ?>
