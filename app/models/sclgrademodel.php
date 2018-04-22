@@ -9,7 +9,7 @@ class SclGradeModel extends AbstractModel{
     protected static $tableName = 'scl_grade';
     protected static $tableSchema = array(
         'id'                  => self::DATA_TYPE_INT,
-        'grade_name'               => self::DATA_TYPE_STR
+        'grade_name'          => self::DATA_TYPE_STR
     );
 
     protected static $primaryKey = 'id';
