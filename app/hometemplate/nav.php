@@ -6,7 +6,7 @@
                   <h5 class="centered"> User</h5>
     
       <?php 
-      use PHPMVC\Models\usertypesmodel;
+      use PHPMVC\Models\UserTypesModel;
       use PHPMVC\Lib\Database\DatabaseHandler;
 
         if(!isset($_SESSION["userID"])){
@@ -60,7 +60,7 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="/class">Manage Classes</a></li>
                           <li><a href="/schedule">Manage Schedules</a></li>                          
-                          <li><a href="view_courses.php">Manage Courses</a></li>
+                          <li><a href="/course">Manage Courses</a></li>
                           <li><a href="\registeration">Registeration</a></li>
                       </ul>
                   </li>

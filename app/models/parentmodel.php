@@ -3,7 +3,9 @@ namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
 class ParentModel{
-    
+
+    public $concatenate = "@nis.edu.eg";
+
     public function __construct($id=""){
 		if($id != ""){
             parent::__construct($id);
