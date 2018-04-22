@@ -6,7 +6,8 @@ class ScheduleModel extends AbstractModel {
 
     public $id;
     public $semester_id_fk;
-    public $class_id_fk;
+    public $class_id_fk ;
+    public $status_id_fk;
 
     protected static $tableName = 'schedule';
     protected static $tableSchema = array(
@@ -31,6 +32,14 @@ class ScheduleModel extends AbstractModel {
 
     public function getDetails(){
 
+    }
+
+    public function isExist(){
+        return self::get(
+            'SELECT * FROM ' . self::$tableName . '
+            WHERE class_id_fk = '.$this->class_id_fk.' AND 
+            semester_id_fk = '.$this->semester_id_fk .' '
+        );
     }
 
     public function getFreeDays($slot){

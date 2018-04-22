@@ -1,5 +1,10 @@
 <?php
     require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
+    
+?>  
+
+    <script type="text/javascript" src="<?=PDF?>jspdf.debug.js"></script>
+<?php
     require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
     require_once HOME_TEMPLATE_PATH . 'header.php';
     require_once HOME_TEMPLATE_PATH . 'nav.php';
@@ -98,21 +103,30 @@
               </div>      
             </div>
 
-  <section class="tabcontent">
-    <table class="order-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Course</th>
-          <th>Slot</th>
-          <th>Day</th>                              
-          <th>Teacher</th>                              
-          <th>Room</th>  
-          <th>Actions</th>                            
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
+<div id="sched">
+    <table id="tab_sched" class="table table-striped">
+        <colgroup>
+            <col width="5%">
+                <col width="20%">
+                    <col width="10%">
+                        <col width="15%">
+                            <col width="20%">
+                                <col width="10%">
+                                    <col width="20%">
+        </colgroup>
+        <thead>
+            <tr class='warning'>
+                <th>ID</th>
+                <th>Course</th>
+                <th>Slot</th>
+                <th>Day</th>
+                <th>Teacher</th>
+                <th>Room</th>
+                <th>Actions</th>                
+            </tr>
+        </thead>
+        <tbody>
+        
             <?php
             if(!empty($details)){
                 foreach ($details as $s){
@@ -123,57 +137,46 @@
                     <td>'.$s->day.'</td>                    
                     <td>'.$s->fname .' - '. $s->lname.'</td>
                     <td>'.$s->room_name.'</td>
-                    <td> <a href="\schedule\editdetail\\'.$s->id.'">Edit ,  </a>
-                     <a class="delete" id="'.$s->id.'" href="\schedule\deletedetail\\'.$s->id.'" >Delete </a></td>
+                    <td> 
+                        <a class="delete" id="'.$s->id.'" href="\schedule\deletedetail\\'.$s->id.'" >Delete </a></td>
                     </tr>';    
                 }
             }
             ?>
-        </tr>
+        
         </tbody>
     </table>
-  </section>	
+</div>
+
+<button id="toPDF" >PDF</button>
 
 <script>
     $(document).ready(function(data){
-        var pathname = window.location.pathname;
+    var pathname = window.location.pathname;
 
-    /*($(".delete").on('click', function(e){
-        var id = $(this).attr("id");
-         $.ajax({  
-                url:pathname,  
-                method:'POST',  
-                dataType:'json',
-                data:{  
-                    id: id,
-                    action:"deleteDetail"
-                },  
-                success:function(data)  
-                {   
-                    alert(data.delete);
-                    window.location.reload(true);
-                }, 
-                error: function (jqXHR, exception) {
-				        var msg = '';
-				        if (jqXHR.status === 0) {
-				            msg = 'Not connect.\n Verify Network.';
-				        } else if (jqXHR.status == 404) {
-				            msg = 'Requested page not found. [404]';
-				        } else if (jqXHR.status == 500) {
-				            msg = 'Internal Server Error [500].';
-				        } else if (exception === 'parsererror') {
-				            msg = 'Requested JSON parse failed.';
-				        } else if (exception === 'timeout') {
-				            msg = 'Time out error.';
-				        } else if (exception === 'abort') {
-				            msg = 'Ajax request aborted.';
-				        } else {
-				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-				        }
-				        alert(msg);
-   				    },  
-                });  
-        });*/
+$("#toPDF").click(function(){
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    source = $('#sched')[0];
+    margins = {
+        top: 80,
+        bottom: 60,
+        left: 40,
+        width: 522
+    };
+
+    pdf.fromHTML(
+    source, // HTML string or DOM elem ref.
+    margins.left, // x coord
+    margins.top, { // y coord
+        'width': margins.width
+    },
+
+    function (dispose) {
+        pdf.save('Schedule.pdf');
+    }, margins);
+
+});
+
 
     $("#slot").on('change',function(e){
         e.preventDefault();

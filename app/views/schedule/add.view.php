@@ -47,6 +47,21 @@
                                 </select>
                               </div>
                           </div>
+
+                          <div class="form-group">                               
+                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                              <div class="col-sm-8">
+                                <select name="status" class="form-control semester" >
+                                    <option value="" disabled>Select Status</option>
+                                    <?php 
+                                        foreach($status as $st){
+                                            echo '<option value='.$st->id.'>'.$st->code.'</option>';
+                                        }
+                                    ?>
+                                </select>
+                              </div>
+                          </div>
+                        
                         </fieldset>
                         <input type="submit" class="addSched" name="addSchedule" id="main">
                       </form>

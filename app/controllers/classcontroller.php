@@ -26,14 +26,37 @@ class ClassController extends AbstractController
             $class->grade_id_fk = $this->filterInt($_POST['grade']);
             $class->status_id_fk = $this->filterInt($_POST['status']);
 
-           if($class->save()){
-                $this->redirect('\class');
+
+            if($class->save()){
+                $this->redirect('/class');
             }   
     	}
     
         $this->_data['status'] = StatusModel::getAll();
         $this->_data['grade'] = SclGradeModel::getAll();
         $this->_view();
+    }
+
+    public function editAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+
+            $class = ClassModel::getByPK($id);
+            $this->_data['class'] = $class;
+
+            if(isset($_POST['editclass'])){
+                $class->name = $this->filterString($_POST['name']);
+                $class->grade_id_fk = $this->filterInt($_POST['grade']);
+                $class->status_id_fk = $this->filterInt($_POST['status']);
+
+                if($class->save()){
+                    $this->redirect('\class');
+                }
+            }
+        $this->_data['status'] = StatusModel::getAll();
+        $this->_data['grade'] = SclGradeModel::getAll();
+        $this->_view();
+        }
     }
   
 }

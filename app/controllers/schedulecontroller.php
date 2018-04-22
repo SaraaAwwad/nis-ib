@@ -33,17 +33,22 @@ class ScheduleController extends AbstractController
             $schedule = new ScheduleModel();
             $schedule->class_id_fk = $_POST['name'];
             $schedule->semester_id_fk = $_POST['semester'];
-            $schedule->status_id_fk = 1;
-            //to do: check if there's a schedule already
+            $schedule->status_id_fk = $_POST['status'];
+
+            if($schedule->isExist()){
+                $this->redirect('/schedule');
+                //message = already added
+            }
+
             if($schedule->save()){
                 $this->redirect('/schedule');
-                //or redirect to the details
             }
 
         }
     
         $this->_data['class'] = ClassModel::getAll();
         $this->_data['semester'] = SemesterModel::getSemesters();
+        $this->_data['status'] = StatusModel::getAll();
         $this->_view();
     }
 
@@ -70,20 +75,6 @@ class ScheduleController extends AbstractController
                         'teachers' => $teachers
                     );
                     echo json_encode($output);
-                    return;
-                }
-    
-                else if($_POST['action'] == 'deleteDetail'){
-                    $d_id = $_POST['id'];
-                    $s = ScheduleDetailsModel::getByPK($d_id);
-                    $del=false;
-                    if($s->delete()){
-                        $del = true;
-                    }
-                 $output = array(
-                     'delete' => $del
-                 );
-                    echo json_encode($output);                
                     return;
                 }
             }
@@ -116,6 +107,32 @@ class ScheduleController extends AbstractController
             if($s->delete()){
                 $this->redirect('/schedule/details/'.$sched);
             }
+        }
+    }
+
+    public function editAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+            $s = ScheduleModel::getByPK($id);
+          if($s){
+            $this->_data['sched'] = $s;
+
+            if(isset($_POST['editSched'])){
+                $s->class_id_fk = $_POST['class'];
+                $s->status_id_fk = $_POST['status'];
+                $s->semester_id_fk = $_POST['semester'];
+                
+                if($s->save()){
+                    $this->redirect('/schedule');
+                }
+            }
+
+            $this->_data['class'] = ClassModel::getAll();
+            $this->_data['semester'] = SemesterModel::getSemesters();
+            $this->_data['status'] = StatusModel::getAll();
+
+            $this->_view();
+          }
         }
     }
 }
