@@ -124,7 +124,7 @@
                     <td>'.$s->fname .' - '. $s->lname.'</td>
                     <td>'.$s->room_name.'</td>
                     <td> <a href="\schedule\editdetail\\'.$s->id.'">Edit ,  </a>
-                     <a class="delete" id="'.$s->id.'" href="#" >Delete </a></td>
+                     <a class="delete" id="'.$s->id.'" href="\schedule\deletedetail\\'.$s->id.'" >Delete </a></td>
                     </tr>';    
                 }
             }
@@ -138,7 +138,7 @@
     $(document).ready(function(data){
         var pathname = window.location.pathname;
 
-    $(".delete").on('click', function(e){
+    /*($(".delete").on('click', function(e){
         var id = $(this).attr("id");
          $.ajax({  
                 url:pathname,  
@@ -149,9 +149,9 @@
                     action:"deleteDetail"
                 },  
                 success:function(data)  
-                {  //alert("is deleted !!");
+                {   
+                    alert(data.delete);
                     window.location.reload(true);
-                
                 }, 
                 error: function (jqXHR, exception) {
 				        var msg = '';
@@ -173,7 +173,7 @@
 				        alert(msg);
    				    },  
                 });  
-        });
+        });*/
 
     $("#slot").on('change',function(e){
         e.preventDefault();
@@ -192,7 +192,8 @@
                   $('#days').append($('<option>', { 
                             text : "Select Day",
                             selected: true,
-                            disabled: true 
+                            disabled: true,
+                            value: ""
                         }));
                   $.each(data, function (i, data) {
                         $('#days').append($('<option>', { 
@@ -246,7 +247,8 @@
                 $('#rooms').append($('<option>', { 
                     text : "Select Room",
                     selected: true,
-                    disabled: true, 
+                    disabled: true,
+                    value: ""
                 }));
                   $.each(rooms, function (i, rooms) {
                         $('#rooms').append($('<option>', { 
@@ -262,6 +264,7 @@
                     text : "Select Teacher",
                     selected: true,
                     disabled: true, 
+                    value: ""
                 }));
                   $.each(teachers, function (i, teachers) {
                         $('#teachers').append($('<option>', { 

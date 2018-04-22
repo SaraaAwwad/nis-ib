@@ -52,6 +52,42 @@ class ScheduleController extends AbstractController
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
             $s = ScheduleModel::getByPK($id);
 
+            if(isset($_POST['action']))  {
+                if($_POST['action']== 'getDays'){
+                    $slot = $_POST['slot'];
+                    $days =  $s->getFreeDays($slot);
+                    echo json_encode($days);  
+                    return;    
+                }
+    
+                else if($_POST['action'] == 'getRooms'){
+                    $slot = $_POST['slot'];
+                    $day = $_POST['day'];    
+                    $rooms = RoomModel::getFreeRooms($day, $slot, $s->semester_id_fk);
+                    $teachers = StaffModel::getFreeTeachers($day, $slot, $s->semester_id_fk);
+                    $output = array(
+                        'rooms' => $rooms, 
+                        'teachers' => $teachers
+                    );
+                    echo json_encode($output);
+                    return;
+                }
+    
+                else if($_POST['action'] == 'deleteDetail'){
+                    $d_id = $_POST['id'];
+                    $s = ScheduleDetailsModel::getByPK($d_id);
+                    $del=false;
+                    if($s->delete()){
+                        $del = true;
+                    }
+                 $output = array(
+                     'delete' => $del
+                 );
+                    echo json_encode($output);                
+                    return;
+                }
+            }
+
             if(isset($_POST['addDetail'])){
                 $sDetail = new ScheduleDetailsModel();
     
@@ -67,39 +103,6 @@ class ScheduleController extends AbstractController
             $this->_data['details'] = ScheduleDetailsModel::getDetails($id);
             $this->_data['courses'] = CourseModel::getAll();
             $this->_data['slots'] = SlotModel::getAll();
-
-           if(isset($_POST['action']))  {
-            if($_POST['action']== 'getDays'){
-                $slot = $_POST['slot'];
-                $days =  $s->getFreeDays($slot);
-                echo json_encode($days);  
-                return;    
-            }
-
-            else if($_POST['action'] == 'getRooms'){
-                $slot = $_POST['slot'];
-                $day = $_POST['day'];    
-                $rooms = RoomModel::getFreeRooms($day, $slot, $s->semester_id_fk);
-                $teachers = StaffModel::getFreeTeachers($day, $slot, $s->semester_id_fk);
-                $output = array(
-                    'rooms' => $rooms, 
-                    'teachers' => $teachers
-                );
-                echo json_encode($output);
-                return;
-            }
-
-            else if($_POST['action'] == 'deleteDetail'){
-                $d_id = $_POST['id'];
-                $s = ScheduleDetailsModel::getByPK($d_id);
-                $s->delete();
-             $output = array(
-                 'back' => 'yes'
-             );
-                echo json_encode($output);                
-                return;
-            }
-           }
           
             $this->_view();
         }
@@ -107,12 +110,12 @@ class ScheduleController extends AbstractController
 
     public function deletedetailAction(){
         if(isset($this->_params[0])){
-            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
-            $s = ScheduleDetailsModel::getByPK($id);
-            if($s->delete())
-            {//$this->redirect('/schedule/details/');
+        $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+        $s = ScheduleDetailsModel::getByPK($id);
+        $sched = $s->sched_id_fk;
+            if($s->delete()){
+                $this->redirect('/schedule/details/'.$sched);
             }
         }
     }
-  
 }
