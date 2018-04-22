@@ -8,7 +8,7 @@
 
   <h3><i class="fa fa-angle-right"></i> View Students</h3>
   <section class="tabcontent">
-    <a class="buttonlink btn btn-theme04 left" href="add_student.php"><i class="fa fa-plus"></i> Add Student</a>
+    <a class="buttonlink btn btn-theme04 left" href="/student/add"><i class="fa fa-plus"></i> Add Student</a>
     <input type="search" class="light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
     <table class="order-table">
       <thead>
