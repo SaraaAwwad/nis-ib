@@ -270,7 +270,7 @@ ul.top-menu > li > .logout {
     height:17px;
     width:17px;
     display:inline-block;
-    background: url("../img/nav-expand.png") no-repeat top;
+    /*background: url("../img/nav-expand.png") no-repeat top;*/
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -279,7 +279,7 @@ ul.top-menu > li > .logout {
     top:15px;
 }
 .active .dcjq-icon {
-    background: url("../img/nav-expand.png") no-repeat bottom;
+   /* background: url("../img/nav-expand.png") no-repeat bottom;*/
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -523,7 +523,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     /* Safari and Chrome */
     .dropdown-menu.extended  {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176) !important;
-    };
+    }
     }
 
 .dropdown-menu.extended li p {
@@ -1332,7 +1332,7 @@ PANELS CONFIGURATIONS
 #spotify {
 	background: url(../img/lorde.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 220px;
 	width: 100%;
@@ -1376,7 +1376,7 @@ PANELS CONFIGURATIONS
 #blog-bg {
 	background: url(../img/blog-bg.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 150px;
 	width: 100%;
@@ -1501,7 +1501,7 @@ PANELS CONFIGURATIONS
 #profile-01 {
 	background: url(../img/profile-01.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 150px;
 	width: 100%;
@@ -1549,7 +1549,7 @@ PANELS CONFIGURATIONS
 #profile-02 {
 	background: url(../img/profile-02.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 200px;
 	width: 100%;
@@ -2114,7 +2114,7 @@ label {
     /* Safari and Chrome */
     .panel-footer.revenue-foot {
         margin-bottom: -4px;
-    };
+    }
     }
 
 
@@ -2318,6 +2318,7 @@ label {
   border: none;
 }
 
+/*
 input[type="search"] {
     border:1px solid #d1d1d1;
     font: bold 12px Arial, Helvetica, Sans-serif;
@@ -2336,7 +2337,29 @@ input[type="search"] {
 input[type="search"]:focus{
     width:300px;
     outline:0;
+} */
+
+.searchtab {
+    border:1px solid #d1d1d1;
+    font: bold 12px Arial, Helvetica, Sans-serif;
+    color:#bebebe;
+    width:200px;
+    float: left;
+    margin-bottom: 20px;
+    padding:6px 15px 6px 35px;
+    border-radius:20px;
+    text-shadow:0 2px 3px rgba(0,0,0,0.1);
+    box-shadow:0 1px 3px rgba(0,0,0,0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
 }
+
+.searchtab:focus{
+    width:300px;
+    outline:0;
+}
+
+
+
 
 input[type="date"]{
     line-height: 10px;
@@ -2472,6 +2495,32 @@ input[type="time"]{
    width: 470px;
 }
 
+#cancel {
+    width: 200px;
+    padding: 1px 20px;
+    text-align: center;
+    font-size: 28px;
+    color: white;
+    font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-weight: 100;
+    background-color: #424a5d;
+    border-radius: 10px;
+    margin-left: 480px;
+    transition: border-radius 0.3s;
+    transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-radius 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#cancel:hover{
+    cursor:pointer;
+    background-color: indianred;
+    color: #fff;
+    border-radius:50px;
+    color:#eee;
+    transition:border-radius 0.3s;
+    transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-radius 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1),border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+}
+
 #main{
     width: 200px;
     text-align: center;
@@ -2528,4 +2577,10 @@ select[multiple]{
   height: 150px;
   width: 41%;
   margin-left: 15px;
+}
+
+.tablenumber{
+    border: none;
+    width: 135%;
+    margin-bottom: 20px;
 }

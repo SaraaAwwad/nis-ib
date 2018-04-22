@@ -34,7 +34,7 @@ class StaffModel extends AbstractModel {
         'img'                 => self::DATA_TYPE_STR,
         'user_id_fk'          => self::DATA_TYPE_INT,
         'add_id_fk'           => self::DATA_TYPE_INT,
-        'phone'               => self::DATA_TYPE_INT
+        'phone'               => self::DATA_TYPE_INT,
     );
     protected static $primaryKey = 'id';
 
@@ -64,5 +64,13 @@ class StaffModel extends AbstractModel {
             AND schedule_details.slot_id_fk = '.$slot.' )  '
         );
     }
+
+    public function cryptPassword($password)
+    {
+        $this->pwd = crypt($password, APP_SALT);
+    }
+
+
+
 
 }
