@@ -36,5 +36,20 @@
     }
   });
 
-})(document);
+    var i = 1;
+    $(document).one('click','#addmore', function(){
+        $('#dynamic_field').append('<tr id="row'+i+'"><td>' +
+            '<input type="text" class="form-control" name="numberinput[]" placeholder="Alternative Phone Number" required></td>' +
+            '<td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+    });
+    $(document).on('click','.btn_remove', function(){
+        var button_id = $(this).attr("id");
+        $("#row"+button_id+'').remove();
+        $(document).one('click','#addmore', function(){
+            $('#dynamic_field').append('<tr id="row'+i+'"><td>' +
+                '<input type="text" class="form-control" name="numberinput[]" placeholder="Alternative Phone Number" required></td>' +
+                '<td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+    });
 
+})(document);

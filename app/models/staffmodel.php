@@ -26,7 +26,7 @@ class StaffModel extends AbstractModel {
         'fname'               => self::DATA_TYPE_STR,
         'lname'               => self::DATA_TYPE_STR,
         'gender'              => self::DATA_TYPE_STR,
-        'DBO'                 => self::DATA_TYPE_DATE,
+        'DOB'                 => self::DATA_TYPE_DATE,
         'username'            => self::DATA_TYPE_STR,
         'pwd'                 => self::DATA_TYPE_STR,
         'email'               => self::DATA_TYPE_STR,
@@ -34,15 +34,23 @@ class StaffModel extends AbstractModel {
         'img'                 => self::DATA_TYPE_STR,
         'user_id_fk'          => self::DATA_TYPE_INT,
         'add_id_fk'           => self::DATA_TYPE_INT,
-        'phone'               => self::DATA_TYPE_INT
+        'phone'               => self::DATA_TYPE_INT,
     );
     protected static $primaryKey = 'id';
 
     public static function getUsers()
     {
         return self::get(
-        'SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM ' . self::$tableName . ' INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk INNER JOIN status ON user.status = status.id INNER JOIN telephone ON user.id = telephone.user_id_fk where title NOT IN ("student","parent")'
+        'SELECT user.*, user_type.title, salary.amount, status.code FROM ' . self::$tableName . ' INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk INNER JOIN status ON user.status = status.id where title NOT IN ("student","parent")'
         );
     }
+
+    public function cryptPassword($password)
+    {
+        $this->pwd = crypt($password, APP_SALT);
+    }
+
+
+
 
 }
