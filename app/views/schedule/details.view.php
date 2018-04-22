@@ -1,5 +1,10 @@
 <?php
     require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
+    
+?>  
+
+    <script type="text/javascript" src="<?=PDF?>jspdf.debug.js"></script>
+<?php
     require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
     require_once HOME_TEMPLATE_PATH . 'header.php';
     require_once HOME_TEMPLATE_PATH . 'nav.php';
@@ -22,7 +27,7 @@
                          <div class="form-group">                               
                               <label class="col-sm-2 col-sm-2 control-label">Course</label>
                               <div class="col-sm-4">
-                                <select name="courses" class="form-control class" required>
+                                <select name="course" class="form-control class" required>
                                     <option value="" disabled>Select Course</option>
                                     <?php 
                                         foreach($courses as $c){
@@ -32,13 +37,13 @@
                                 </select>
                               </div>
 
-                           <label class="col-sm-2 col-sm-2 control-label">Day</label>
+                               <label class="col-sm-2 col-sm-2 control-label">Slot</label>
                               <div class="col-sm-4">
-                                <select name="day" class="form-control semester" required>
-                                    <option value="" disabled>Select Day</option>
+                                <select name="slot" id="slot" class="form-control semester" required>
+                                    <option value="" disabled selected >Select Slot</option>
                                     <?php 
-                                        foreach($days as $d){
-                                            echo '<option value='.$d->id.'>'.$d->day .'</option>';
+                                        foreach($slots as $st){
+                                            echo '<option value='.$st->id.'>'.$st->slot_name .'</option>';
                                         }
                                     ?>
                                 </select>
@@ -48,21 +53,22 @@
 
 
                         <div class="form-group">                               
-                              <label class="col-sm-2 col-sm-2 control-label">Slot</label>
+                             
+                        <label class="col-sm-2 col-sm-2 control-label">Day</label>
                               <div class="col-sm-4">
-                                <select name="slot" class="form-control semester" required>
-                                    <option value="" disabled>Select Slot</option>
+                                <select name="day" id="days" class="form-control semester" required>
+                                    <option value="" disabled>Select Day</option>
                                     <?php 
-                                        foreach($slots as $st){
-                                            echo '<option value='.$st->id.'>'.$st->slot_name .'</option>';
+                                        foreach($days as $d){
+                                            echo '<option value='.$d->id.'>'.$d->day .'</option>';
                                         }
                                     ?>
                                 </select>
                               </div>
-                              
+
                               <label class="col-sm-2 col-sm-2 control-label">Room</label>
                               <div class="col-sm-4">
-                                <select name="room" class="form-control semester" required>
+                                <select name="room" id="rooms" class="form-control semester" required>
                                     <option value="" disabled>Select Room</option>
                                     <?php 
                                         foreach($rooms as $r){
@@ -77,8 +83,9 @@
                             <div class="form-group">                               
                             <label class="col-sm-2 control-label">Teacher</label>
                               <div class="col-sm-4">
-                                <select name="teacher" class="form-control semester" required>
+                                <select name="teacher" id="teachers" class="form-control semester" required>
                                     <option value="" disabled>Select Teacher</option>
+
                                     <?php 
                                         foreach($teacher as $t){
                                             echo '<option value='.$t->id.'>'.$t->fname .', '. $t->lname .'</option>';
@@ -90,26 +97,36 @@
                             </div>
                         
                         </fieldset>
-                        <input type="submit" class="addSched" name="addSchedule" id="main">
+                        <input type="submit" name="addDetail" id="main">
                       </form>
                   </div>
               </div>      
             </div>
 
-  <section class="tabcontent">
-    <table class="order-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Course</th>
-          <th>Slot</th>
-          <th>Day</th>                              
-          <th>Teacher</th>                              
-          <th>Room</th>                              
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
+<div id="sched">
+    <table id="tab_sched" class="table table-striped">
+        <colgroup>
+            <col width="5%">
+                <col width="20%">
+                    <col width="10%">
+                        <col width="15%">
+                            <col width="20%">
+                                <col width="10%">
+                                    <col width="20%">
+        </colgroup>
+        <thead>
+            <tr class='warning'>
+                <th>ID</th>
+                <th>Course</th>
+                <th>Slot</th>
+                <th>Day</th>
+                <th>Teacher</th>
+                <th>Room</th>
+                <th>Actions</th>                
+            </tr>
+        </thead>
+        <tbody>
+        
             <?php
             if(!empty($details)){
                 foreach ($details as $s){
@@ -120,17 +137,171 @@
                     <td>'.$s->day.'</td>                    
                     <td>'.$s->fname .' - '. $s->lname.'</td>
                     <td>'.$s->room_name.'</td>
-                    <td> <a href="\schedule\edit\\'.$s->id.'">Edit ,  </a>
-                     <a href="\schedule\details\\'.$s->id.'">View Details </a></td>
+                    <td> 
+                        <a class="delete" id="'.$s->id.'" href="\schedule\deletedetail\\'.$s->id.'" >Delete </a></td>
                     </tr>';    
                 }
             }
             ?>
-        </tr>
+        
         </tbody>
     </table>
-  </section>	
+</div>
 
+<button id="toPDF" >PDF</button>
+
+<script>
+    $(document).ready(function(data){
+    var pathname = window.location.pathname;
+
+$("#toPDF").click(function(){
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    source = $('#sched')[0];
+    margins = {
+        top: 80,
+        bottom: 60,
+        left: 40,
+        width: 522
+    };
+
+    pdf.fromHTML(
+    source, // HTML string or DOM elem ref.
+    margins.left, // x coord
+    margins.top, { // y coord
+        'width': margins.width
+    },
+
+    function (dispose) {
+        pdf.save('Schedule.pdf');
+    }, margins);
+
+});
+
+
+    $("#slot").on('change',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $.ajax({  
+                url:pathname,  
+                method:'POST',  
+                dataType:'json',
+                data:{  
+                    slot: $("#slot").val(),
+                    action:"getDays"
+                },  
+                success:function(data)  
+                {  
+                  $('#days').html('');
+                  $('#days').append($('<option>', { 
+                            text : "Select Day",
+                            selected: true,
+                            disabled: true,
+                            value: ""
+                        }));
+                  $.each(data, function (i, data) {
+                        $('#days').append($('<option>', { 
+                            value: data.id,
+                            text : data.day, 
+                        }));
+                    });
+                
+                }, 
+                error: function (jqXHR, exception) {
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        alert(msg);
+   				    },  
+                });  
+        });
+
+        $("#days").on('change',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+         $.ajax({  
+                url:pathname,  
+                method:'POST',  
+                dataType:'json',
+                data:{  
+                    slot: $("#slot").val(),
+                    day: $("#days").val(),
+                    action:"getRooms"
+                },  
+                success:function(data)  
+                {  
+                    var rooms = data.rooms;
+                    var teachers = data.teachers;
+
+                $('#rooms').html('');
+                $('#rooms').append($('<option>', { 
+                    text : "Select Room",
+                    selected: true,
+                    disabled: true,
+                    value: ""
+                }));
+                  $.each(rooms, function (i, rooms) {
+                        $('#rooms').append($('<option>', { 
+                            value: rooms.id,
+                            text : rooms.room_name 
+                        }));
+                    });
+                
+                    //----------------------
+
+                $('#teachers').html('');
+                $('#teachers').append($('<option>', { 
+                    text : "Select Teacher",
+                    selected: true,
+                    disabled: true, 
+                    value: ""
+                }));
+                  $.each(teachers, function (i, teachers) {
+                        $('#teachers').append($('<option>', { 
+                            value: teachers.id,
+                            text : teachers.fname 
+                        }));
+                    });
+                
+                }, 
+                error: function (jqXHR, exception) {
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        alert(msg);
+   				    },  
+                });  
+        });
+
+    });
+
+</script>   
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
     require_once HOME_TEMPLATE_PATH . 'templatefooter.php';
