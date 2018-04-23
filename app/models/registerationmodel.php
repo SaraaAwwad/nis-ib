@@ -2,52 +2,32 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class RegisterationModel{
+class RegisterationModel extends AbstractModel{
 
     public $id;
     public $student_id;
     public $class_id;
     public $datetime;
 
-    public function __construct($id=""){
+    protected static $tableName = 'registration';
 
-        if($id != ""){
-            $this->getInfo($id);
-        }
-    }
+    protected static $tableSchema = array(
+        'id'                  => self::DATA_TYPE_INT,
+        'student_id_fk'               => self::DATA_TYPE_INT,
+        'class_id_fk'          => self::DATA_TYPE_INT,
+        'semester_id_fk'           => self::DATA_TYPE_INT,
+        'datetime'  =>        self::DATA_TYPE_DATE
+    );
+    protected static $primaryKey = 'id';
 
-    public function getInfo($id){
-        $sql = "SELECT * FROM registration";
-        $db = DatabaseHandler::getConnection();
-        $reginfo = mysqli_query($db,$sql);
-        if($reginfo){
-            $row = mysqli_fetch_array($reginfo);
-            $this->id = $row['id'];
-            $this->student_id = $row['student_id_fk'];
-            $this->class_id = $row['class_id_fk'];
-            $this->datetime = $row['datetime'];
-        }
-    }
-    public static function getAll()
+    public static function getReg()
     {
-        $sql = "SELECT * FROM registration";
-        $db = DatabaseHandler::getConnection();
-        $Reginfo = mysqli_query($db,$sql);
-        $reg = array();
-        $i=0;
-
-        if($Reginfo){
-
-            while($row = mysqli_fetch_array($Reginfo)){
-                $regObj = new RegisterationModel($row['id']);
-                $reg[$i] = $regObj;
-                $i++;
-            }
-        }
-
-        return $reg;
+        return self::get(
+        'SELECT registration.* , user.fname, user.lname, class.name, season.season_name, semester.year FROM ' . self::$tableName . ' INNER JOIN
+          class ON registration.class_id_fk = class.id INNER JOIN semester ON registration.semester_id_fk = semester.id
+          INNER JOIN season on season.id = semester.season_id_fk INNER JOIN user ON registration.student_id_fk = user.id'
+        );
     }
-
 }
 
 

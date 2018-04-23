@@ -150,8 +150,9 @@
     </table>
 </div>
 
-<table id="cloned">
-</table>
+<div id="cloned">
+<div id="tab_cloned"></div>
+</div>
 
 <script>
     $(document).ready(function(data){
@@ -159,14 +160,14 @@
     $('#cloned').hide();
     
     var clone = jQuery("#tab_sched").clone(true);
-    $('#cloned').html('');
-    $('#cloned').append(clone[0]);
+    $('#tab_cloned').html('');
+    $('#tab_cloned').append(clone[0]);
     $("#cloned th:last-child, #cloned td:last-child").remove();
 
     $("#toPDF").click(function(){
     var pdf = new jsPDF('p', 'pt', 'letter');
 
-    source = $('#cloned')[0];
+    source = $('#sched')[0];
     margins = {
         top: 80,
         bottom: 60,
