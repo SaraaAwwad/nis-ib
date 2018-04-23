@@ -103,8 +103,10 @@
               </div>      
             </div>
 
+<button type="button" class="btn btn-danger" id="toPDF" > Export as PDF </button>
+
 <div id="sched">
-    <table id="tab_sched" class="table table-striped">
+    <table id="tab_sched" class="table table-striped text-center">
         <colgroup>
             <col width="5%">
                 <col width="20%">
@@ -148,15 +150,23 @@
     </table>
 </div>
 
-<button id="toPDF" >PDF</button>
+<table id="cloned">
+</table>
 
 <script>
     $(document).ready(function(data){
     var pathname = window.location.pathname;
+    $('#cloned').hide();
+    
+    var clone = jQuery("#tab_sched").clone(true);
+    $('#cloned').html('');
+    $('#cloned').append(clone[0]);
+    $("#cloned th:last-child, #cloned td:last-child").remove();
 
-$("#toPDF").click(function(){
+    $("#toPDF").click(function(){
     var pdf = new jsPDF('p', 'pt', 'letter');
-    source = $('#sched')[0];
+
+    source = $('#cloned')[0];
     margins = {
         top: 80,
         bottom: 60,
