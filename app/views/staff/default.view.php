@@ -35,37 +35,35 @@
         <?php if (is_array($users) || is_object($users)){
         foreach($users as $user){ ?>
         <tr>
-          <td><?php echo $user->id; ?></td>
-          <td><?php echo $user->fname; ?></td>
-          <td><?php echo $user->lname; ?></td>
-          <td><?php echo $user->gender; ?></td>
-          <td><?php echo $user->DOB; ?></td>
-          <td><a href="#"><?php echo $user->username;?></a></td>
-          <td><?php echo $user->email;?></td>
-                <td><?php echo $user->phone;?><br>
+            <td><?php echo $user->id; ?></td>
+            <td><?php echo $user->fname; ?></td>
+            <td><?php echo $user->lname; ?></td>
+            <td><?php echo $user->gender; ?></td>
+            <td><?php echo $user->DOB; ?></td>
+            <td><a href="#"><?php echo $user->username;?></a></td>
+            <td><?php echo $user->email;?></td>
+            <td><?php echo $user->phone;?><br>
 
                     <!-- Extra Number Display -->
-                    <?php foreach($telephones as $telephone){
+                <?php foreach($telephones as $telephone){
                     if ($user->id == $telephone->user_id_fk){ ?>
                 <?php echo $telephone->number;?></td>
                 <?php } } ?>
 
-          <td><?php echo $user->title;?></td>
-          <td><?php echo $user->amount;?></td>
-          <td><span class="label label-info label-mini"><?php echo $user->code;?></span></td>
-          <td  colspan="2">
+            <td><?php echo $user->title;?></td>
+            <td><?php echo $user->amount;?></td>
+            <td><span class="label label-info label-mini"><?php echo $user->code;?></span></td>
+            <td  colspan="2">
             <a class="btn btn-success btn-xs" href="/staff/edit/<?= $user->id ?>"><i class="fa fa-pencil-square-o"></i></a>
             <a class="btn btn-success btn-xs" href="/staff/activate/<?= $user->id ?>"><i class="fa fa-unlock"></i></a>
-          </td>
-        </tr>
+            </td>
+            </tr>
         <?php }} ?>
       </tbody>
-    </table>
-  </section>
-
-               
-    </section>
+      </table>
       </section>
-  </section>
+      </section>
+      </section>
+      </section>
                 <?php
                 require_once HOME_TEMPLATE_PATH . 'templatefooter.php';

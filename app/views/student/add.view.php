@@ -28,7 +28,7 @@ function randomPassword() {
         <div class="row mt">
         <div class="col-lg-12">
         <div class="form-panel">
-        <form class="form-horizontal style-form" method="post">
+        <form class="form-horizontal style-form" method="post" enctype="multipart/form-data">
                         
         <legend>Student Info</legend>
         <div class="form-group">
@@ -166,12 +166,11 @@ function randomPassword() {
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Image</label>
+                          <label class="col-sm-2 col-sm-2 control-label">Image</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" name="imagein">
-                              </div>
+                              <input type="file" name="imageinput" accept="image/*" required>
                           </div>
-
+                          </div>
                           <legend>Parent Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Add Parent Info</label>
@@ -261,7 +260,7 @@ function randomPassword() {
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Image</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentimage">
+                                      <input type="file" name="parentimage" accept="image/*" required>
                                   </div>
                               </div>
                           </fieldset>

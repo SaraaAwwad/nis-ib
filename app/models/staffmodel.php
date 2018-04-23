@@ -42,7 +42,7 @@ class StaffModel extends AbstractModel {
     {
         return self::get(
         'SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM ' . self::$tableName .
-         'INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk 
+         ' INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk 
          INNER JOIN status ON user.status = status.id INNER JOIN telephone ON user.id = telephone.user_id_fk 
          where title NOT IN ("student","parent")'
         );

@@ -10,6 +10,9 @@
     
     <script type="text/javascript" src="<?= ASSETS_JS ?>gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="<?= ASSETS_JS ?>gritter-conf.js"></script>
+    <script src="<?= ASSETS_JS ?>jquery.scrollTo.min.js"></script>
+    <script src="<?= ASSETS_JS ?>jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="<?= ASSETS_JS ?>jquery.sparkline.js"></script>
 
     <!--script for this page-->
     <script src="<?= ASSETS_JS ?>sparkline-chart.js"></script>    

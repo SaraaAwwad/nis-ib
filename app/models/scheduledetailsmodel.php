@@ -36,11 +36,9 @@ public static function getDetails($sched_id)
     INNER JOIN weekdays ON schedule_details.day_id_fk = weekdays.id
     INNER JOIN user ON schedule_details.teacher_id_fk = user.id
     INNER JOIN room ON schedule_details.room_id_fk = room.id
-    WHERE schedule_details.sched_id_fk = '.$sched_id.' '
+    WHERE schedule_details.sched_id_fk = '.$sched_id.' 
+    ORDER BY weekdays.id, slot.id'
     );
 }
-
-
-
 
 }

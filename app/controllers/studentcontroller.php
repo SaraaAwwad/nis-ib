@@ -9,6 +9,7 @@ use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentLevelModel;
 use PHPMVC\Lib\Helper;
+use PHPMVC\Lib\FileUpload;
 use PHPMVC\Lib\InputFilter;
 
 class StudentController extends AbstractController{
@@ -30,21 +31,41 @@ class StudentController extends AbstractController{
 
         $Levels = LevelModel::getAll();
         $this->_data['Levels'] = $Levels;
-
         $Address = AddressModel::getCountry();
         $this->_data['country'] = $Address;
-
         $stat = StatusModel::getAll();
         $this->_data['status'] = $stat;
-
         $grade = SclGradeModel::getAll();
         $this->_data['grade'] = $grade;
 
-        $this->_view();
 
         if(isset($_POST['addStudent'])){
-            //validate then (could use inputfilter trait or js)
-                            //testing w/ any data
+
+            if(!empty($_POST['parentsearch'])) {
+                $objParent = ParentModel::getByUsername($_POST['parentsearch']);
+
+            }else
+                {
+                    $objParent = new ParentModel();
+                    $objParent->fname = $_POST['parentfname'];
+                    $objParent->lname = $_POST['parentlname'];
+                    $objParent->phone = $_POST['parentnumber'];
+                    $objParent->DOB = $_POST['parentdate'];
+                    $objParent->gender = $_POST['parentradio'];
+                    $objParent->add_id_fk = $_POST['street'];
+                    $objParent->email = $_POST['parentemail'] . $objParent->concatenate;
+                    $objParent->pwd = $_POST['parentpassword'];
+                    $objParent->username = $_POST['parentusername'];
+                    $objParent->user_id_fk = 0;
+                    if (isset($_FILES['parentimage']["name"])) {
+                        $uploader = new FileUpload($_FILES['parentimage']);
+                        $uploader->upload();
+                        $objParent->img = $uploader->getFileName();
+                    }
+                    $objParent->type_id = 3;
+                    $objParent->status = 1;
+                    $objParent->save();
+                }
 
                 $stud = new StudentModel();
                 $stud->fname = $_POST['fnamein'];
@@ -53,55 +74,29 @@ class StudentController extends AbstractController{
                 $stud->gender = $_POST['radioin'];
                 $stud->phone = $_POST['numberin'];
                 $stud->status = $_POST['statusinput'];
+                $stud->add_id_fk = $_POST['street'];
+                $stud->email = $_POST['emailin'];
+                $stud->pwd = $_POST['passwordin'];
+                $stud->username = $_POST['usernamein'];
+                $stud->type_id = 1;
+
+                if (isset($_FILES["imageinput"]["name"])) {
+                $uploader = new FileUpload($_FILES['imageinput']);
+                $uploader->upload();
+                $stud->img = $uploader->getFileName();
+                }
+                $stud->user_id_fk = $objParent->id;
+                $stud->save();
 
                 //student Level
                 $stlevel = new StudentLevelModel();
-                $stlevel->scl_level_id = $_POST['level'];
-                $stlevel->scl_grade_id = $_POST['gradein'];
-                $stlevel->user_id = $stud->id;
-                $stlevel->InsertinDB();
+                $stlevel->scl_level_id_fk = $_POST['level'];
+                $stlevel->scl_grade_id_fk = $_POST['gradein'];
+                $stlevel->user_id_fk = $stud->id;
+                $stlevel->save();
 
-                $stud->address_id_fk = $_POST['street'];
-
-                $stud->email = $_POST['emailin'];
-                $stud->password = $_POST['passwordin'];
-                $stud->username = $_POST['usernamein'];
-                $stud->img = $_POST['imagein'];
-
-                $objParent = new ParentModel();
-                $objParent->parentsearch = $_POST['parentsearch'];
-                $objParent->fname = $_POST['parentfname'];
-                $objParent->lname = $_POST['parentlname'];
-                $objParent->phone = $_POST['parentnumber'];
-                $objParent->DOB = $_POST['parentdate'];
-                $objParent->gender = $_POST['parentradio'];
-                $objParent->address_id_fk = $_POST['street'];
-                $objParent->email = $_POST['parentemail'].$objParent->concatenate;
-                $objParent->pwd = $_POST['parentpassword'];
-                $objParent->username = $_POST['parentusername'];
-                $objParent->img = $_POST['parentimage'];
-                $objParent->parent = 0;
-
-            switch($_POST['pickradio']) {
-                        case "exist":
-                            $idresult = ParentModel::getExistingParent($objParent->parentsearch);
-                            $stud->user_id_fk = $idresult;
-                            break;
-                        case "notexist":
-                            $idresult = ParentModel::InsertinDB($objParent);
-                            $stud->user_id_fk  = $idresult;
-                            break;
-                    }
-
-                ////////////// Lama b3mel el direct dah bytl3 error en el helper model by3mel direct lw7do ///////////
-//                    if (StudentModel::insertInDB($stud)){
-//                        $this->redirect("/student/");
-//                    }else{
-//                        // handle error
-//                    }
-
-                StudentModel::insertInDB($stud);
         }
+        $this->_view();
 
     }
 

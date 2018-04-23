@@ -51,6 +51,12 @@ class AbstractModel
         return $stmt->execute();
     }
 
+    public function diff($sql){
+        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $this->prepareValues($stmt);
+        return $stmt->execute();
+    }
+
     public function save($primaryKeyCheck = true){
         if(false === $primaryKeyCheck) {
             return $this->create();

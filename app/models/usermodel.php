@@ -17,6 +17,7 @@ class UserModel extends AbstractModel {
     public $img;
     public $user_id_fk;
     public $add_id_fk;
+    public $phone;
 
     protected static $tableName = 'user';
     protected static $tableSchema = array(
@@ -25,14 +26,16 @@ class UserModel extends AbstractModel {
         'fname'               => self::DATA_TYPE_STR,
         'lname'               => self::DATA_TYPE_STR,
         'gender'              => self::DATA_TYPE_STR,
-        'DBO'                 => self::DATA_TYPE_DATE,
+        'DOB'                 => self::DATA_TYPE_DATE,
         'username'            => self::DATA_TYPE_STR,
         'pwd'                 => self::DATA_TYPE_STR,
         'email'               => self::DATA_TYPE_STR,
         'status'              => self::DATA_TYPE_INT,
         'img'                 => self::DATA_TYPE_STR,
         'user_id_fk'          => self::DATA_TYPE_INT,
-        'add_id_fk'           => self::DATA_TYPE_INT
+        'add_id_fk'           => self::DATA_TYPE_INT,
+        'phone'           => self::DATA_TYPE_INT
+
     );
     protected static $primaryKey = 'id';
 
@@ -50,8 +53,8 @@ class UserModel extends AbstractModel {
 
         if ($result){
             $row = mysqli_fetch_array($result);
-            //if(password_verify($pw, $row['pwd'])){
-            if($password== $row['pwd']){
+            if(password_verify($pw, $row['pwd'])){
+           //if($password== $row['pwd']){
                 session_start();
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];

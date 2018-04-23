@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class StatusModel{
+class StatusModel extends AbstractModel {
     public $id;
     public $code;
 
@@ -12,15 +12,15 @@ class StatusModel{
         }
     }
 
+
     public function getInfo($id){
         $sql = "SELECT * FROM status Where id = '$id' ";
         $db = DatabaseHandler::getConnection();
         $statusinfo = mysqli_query($db,$sql);
-        
         if($statusinfo){
             $row = mysqli_fetch_array($statusinfo);
             $this->id = $row['id'];
-            $this->code = $row['code']; 
+            $this->code = $row['code'];
         }
     }
 
@@ -35,7 +35,7 @@ class StatusModel{
                 $Stat[$i] = new StatusModel();
                 $Stat[$i]->id = $row['id'];
                 $Stat[$i]->code = $row['code'];
-                $i++; 
+                $i++;
             }
         }
     return $Stat;
