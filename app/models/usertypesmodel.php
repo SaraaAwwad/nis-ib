@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class UserTypesModel{
+class UserTypesModel extends AbstractModel {
     public $id;
     public $title;
     public $status_id_fk;
@@ -36,7 +36,6 @@ class UserTypesModel{
         $db = DatabaseHandler::getConnection();
         $sql = "INSERT INTO user_type (title, status_id_fk) 
         VALUES ('$title', '$statusId')";
-
         if (mysqli_query($db, $sql)){
             return true;
         }else{
@@ -57,6 +56,7 @@ class UserTypesModel{
         }
         return $Types;
     }
+
 
     public function update($title, $statusId){
         $this->title = $title;

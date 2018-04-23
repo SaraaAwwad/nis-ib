@@ -3,32 +3,8 @@ namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
 
-class StudentModel {
-    public $id;
-    public $username;
-    public $fname;
-    public $lname;
-    public $DOB;
-    public $email;
-    public $gender;
-    public $img;
-    //public $OtherPhones;
-    public $type_id;
-    public $phone;
-    public $address_id_fk;
-    public $status;
-    public $password;
-    public $user_id_fk;
-    //const tableName = 'user';
-    //public $dbfields = array('type_id', 'fname', 'lname', 'gender', 'DOB', 'username',
-    //                        'pwd', 'email', 'status', 'img', 'user_id_fk', 'add_id_fk');
+class StudentModel extends UserModel {
 
-    public function __construct($id=""){
-
-		if($id != ""){
-            $this->id = $id;
-        }
-    }
 
     public static function getAll(){
 
@@ -45,11 +21,11 @@ class StudentModel {
             $MyObj->lname=$row["lname"];
             $MyObj->gender=$row["gender"];
             $MyObj->DOB=$row["DOB"];
-            $MyObj->password=$row["pwd"];  
+            $MyObj->password=$row["pwd"];
             $MyObj->username=$row["username"];
             $MyObj->email=$row["email"];
             $MyObj->phone=$row["phone"];
-            $MyObj->status=$row["status"];  
+            $MyObj->status=$row["status"];
             $Res[$i]=$MyObj;
             $i++;
         }
@@ -104,7 +80,7 @@ class StudentModel {
         $sql = "UPDATE user SET fname= '$this->fname' ,lname='$this->lname', DOB='$this->DOB', phone = '$this->phone',
          gender='$this->gender', email='$this->email'
         , pwd = '$this->password', username = '$this->username', img = '$this->img' WHERE id='$this->id'";
-                
+
                 if (mysqli_query($db, $sql)){
                     return true;
                 }else{
