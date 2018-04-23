@@ -44,5 +44,36 @@ class RegisterationController extends AbstractController
         $this->_view();
 
     }
+
+    public function editAction(){
+
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+            $reg = new RegisterationModel();
+            $regist = $reg->getInfo($id);
+
+            if($regist == false){
+                $this->redirect("/registeration");
+            }
+
+            //to send to view
+            $this->_data['regist'] = $regist;
+
+            if(isset($_POST['updateReg'])){
+                $objReg = new RegisterationModel($id);
+                $objReg->student_id = $_POST['st_id'];
+                $objReg->class_id = $_POST['cl_id'];
+                $objReg->datetime = $_POST['dt'];
+                $objReg->Semester_id_fk = $_POST['sem_id'];
+
+                if ($objReg->update()){
+                    $this->redirect("/registeration");
+                }else{
+
+                }
+            }
+            $this->_view();
+        }
+    }
 }
 ?>

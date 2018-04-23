@@ -27,6 +27,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 <th>Student id</th>
                 <th>Class id</th>
                 <th>Datetime</th>
+                <th>Semester id</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -39,6 +40,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     <td>'.$reg->student_id.'</td>
                     <td>'.$reg->class_id.'</td>
                     <td>'.$reg->datetime.'</td>
+                    <td>'.$reg->Semester_id_fk.'</td>
                     <td  colspan="2">
                     <a class="btn btn-success btn-xs" href="registeration\edit\\'.$reg->id.'"><i class="fa fa-pencil-square-o"></i></a>
                     </td>

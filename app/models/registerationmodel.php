@@ -8,6 +8,7 @@ class RegisterationModel{
     public $student_id;
     public $class_id;
     public $datetime;
+    public $Semester_id_fk;
 
     public function __construct($id=""){
 
@@ -26,7 +27,10 @@ class RegisterationModel{
             $this->student_id = $row['student_id_fk'];
             $this->class_id = $row['class_id_fk'];
             $this->datetime = $row['datetime'];
+            $this->Semester_id_fk = $row['Semester_id_fk'];
+            return $this;
         }
+        return false;
     }
     public static function getAll()
     {
@@ -46,6 +50,18 @@ class RegisterationModel{
         }
 
         return $reg;
+    }
+    public function update(){
+        $db = DatabaseHandler::getConnection();
+        $sql = "UPDATE registration SET student_id_fk = '$this->student_id' ,class_id_fk=$this->class_id,
+                datetime='$this->datetime', Semester_id_fk = $this->Semester_id_fk WHERE id='$this->id'";
+
+        if (mysqli_query($db, $sql)){
+            return true;
+        }else{
+            return false;
+            //die(mysqli_error($db));
+        }
     }
 
 }
