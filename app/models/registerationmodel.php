@@ -39,7 +39,6 @@ class RegisterationModel{
         if($Reginfo){
 
             while($row = mysqli_fetch_array($Reginfo)){
-
                 $regObj = new RegisterationModel($row['id']);
                 $reg[$i] = $regObj;
                 $i++;

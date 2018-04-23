@@ -2,176 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7462f1e-39e8-486a-9e77-e48b220a675d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/controllers/coursecontroller.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controllers/coursegroupcontroller.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/controllers/levelcontroller.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/fileupload.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/coursegroupmodel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/salarymodel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/telephonemodel.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/class/edit.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/classview.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/course/add.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/course/default.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/course/edit.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/schedule/edit.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/scheduleview.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/staff/activate.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/FAQ.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/changelog.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/__construct.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/acceptpagebreak.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/addfont.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/addlink.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/addpage.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/aliasnbpages.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/cell.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/close.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/error.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/footer.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getpageheight.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getpagewidth.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getstringwidth.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/getx.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/gety.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/header.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/image.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/index.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/line.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/link.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/ln.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/multicell.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/output.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/pageno.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/rect.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setauthor.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setautopagebreak.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setcompression.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setcreator.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setdisplaymode.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setdrawcolor.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setfillcolor.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setfont.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setfontsize.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setkeywords.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setleftmargin.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setlinewidth.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setlink.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setmargins.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setrightmargin.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setsubject.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/settextcolor.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/settitle.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/settopmargin.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setx.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/setxy.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/sety.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/text.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/doc/write.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courierb.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courierbi.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/courieri.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helvetica.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helveticab.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helveticabi.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/helveticai.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/symbol.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/times.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/timesb.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/timesbi.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/timesi.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/font/zapfdingbats.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/fpdf.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/fpdf.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/install.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/license.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1250.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1251.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1252.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1253.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1254.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1255.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1257.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp1258.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/cp874.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-1.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-11.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-15.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-16.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-2.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-4.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-5.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-7.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/iso-8859-9.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/koi8-r.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/koi8-u.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/makefont.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/makefont/ttfparser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/20k_c1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/20k_c2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/calligra.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/calligra.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/calligra.z" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/countries.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/index.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/makefont.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto1.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto1.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto2.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto2.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto3.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto3.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto4.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto4.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto5.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto5.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto6.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto6.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto7.htm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fpdf/tutorial/tuto7.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pdf/jspdf.debug.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pdf/jspdf.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/images/mtcuan_bnjdjh_jda3jh_lltknt_tndscf.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/images/ndquan_bnjdjh_jda3jh_lltknt_tndscf.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/images/oc5wbm_ckmmek_mdckew_voq1no_d1jwww.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/images/y2hlzx_jpbmcu_cg5njd_jhjda3_jhlltk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/images/ymfubm_vylmpw_zyqyys_qwnyr5_zu5du0.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/images/yxj0cy_5wbmck_mmekmd_ckewvo_q1nod1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/nis-ib.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/classcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/classcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/schedulecontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/schedulecontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/staffcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/staffcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/studentcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/studentcontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/usercontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/usercontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/hometemplate/nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/hometemplate/nav.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstractmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstractmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/addressmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/addressmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/classmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/classmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/coursemodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/coursemodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/levelmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/levelmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/registrationmodel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/roommodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/roommodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/scheduledetailsmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/scheduledetailsmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/schedulemodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/schedulemodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/staffmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/staffmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/schedule/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/schedule/add.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/schedule/default.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/schedule/default.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/schedule/details.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/schedule/details.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/staff/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staff/add.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/staff/default.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staff/default.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/staff/edit.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/staff/edit.view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/user/add.view.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/staff.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/staff.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/registerationcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/registerationcontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/registerationmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/registerationmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/studentmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/studentmodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/registeration/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/registeration/add.view.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -185,17 +20,17 @@
       <file leaf-file-name="registerationmodel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+            <state relative-caret-position="17">
+              <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="studentmodel.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="studentmodel.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2159">
-              <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+            <state relative-caret-position="244">
+              <caret line="129" column="16" lean-forward="true" selection-start-line="129" selection-start-column="16" selection-end-line="132" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -203,10 +38,10 @@
       <file leaf-file-name="registerationcontroller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+            <state relative-caret-position="17">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
               <folding>
-                <element signature="e#37#74#0#PHP" expanded="true" />
+                <element signature="e#36#73#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -215,8 +50,11 @@
       <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+            <state relative-caret-position="221">
+              <caret line="90" column="22" lean-forward="true" selection-start-line="90" selection-start-column="22" selection-end-line="90" selection-end-column="22" />
+              <folding>
+                <element signature="e#2713#2754#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -224,20 +62,8 @@
       <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5355">
-              <caret line="315" column="45" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="studentcontroller.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-              <folding>
-                <element signature="e#36#66#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="272">
+              <caret line="298" column="51" lean-forward="true" selection-start-line="298" selection-start-column="51" selection-end-line="298" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -254,7 +80,6 @@
       <find>insert</find>
       <find>getall</find>
       <find>create</find>
-      <find>level</find>
       <find>insertInto</find>
       <find>insertingto</find>
       <find>parents</find>
@@ -266,6 +91,12 @@
       <find>grade</find>
       <find>country</find>
       <find>city</find>
+      <find>students</find>
+      <find>level</find>
+      <find>getStudents</find>
+      <find>get</find>
+      <find>addClass</find>
+      <find>addGrade</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -283,12 +114,12 @@
         <option value="$PROJECT_DIR$/app/controllers/usertypescontroller.php" />
         <option value="$PROJECT_DIR$/app/models/studentlevel.php" />
         <option value="$PROJECT_DIR$/app/models/studentlevelmodel.php" />
+        <option value="$PROJECT_DIR$/app/controllers/studentcontroller.php" />
+        <option value="$PROJECT_DIR$/app/models/studentmodel.php" />
+        <option value="$PROJECT_DIR$/app/models/registerationmodel.php" />
+        <option value="$PROJECT_DIR$/app/controllers/registerationcontroller.php" />
         <option value="$PROJECT_DIR$/app/views/student/add.view.php" />
         <option value="$PROJECT_DIR$/app/views/registeration/add.view.php" />
-        <option value="$PROJECT_DIR$/app/models/registerationmodel.php" />
-        <option value="$PROJECT_DIR$/app/models/studentmodel.php" />
-        <option value="$PROJECT_DIR$/app/controllers/registerationcontroller.php" />
-        <option value="$PROJECT_DIR$/app/controllers/studentcontroller.php" />
       </list>
     </option>
   </component>
@@ -390,18 +221,18 @@
       <workItem from="1524249189553" duration="9123000" />
       <workItem from="1524338696238" duration="5524000" />
       <workItem from="1524352996880" duration="24479000" />
-      <workItem from="1524429208244" duration="146000" />
+      <workItem from="1524429208244" duration="17050000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39272000" />
+    <option name="totallyTimeSpent" value="56176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25256222" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -473,6 +304,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1088">
           <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
+          <folding>
+            <element signature="e#2713#2754#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -498,7 +332,7 @@
         <state relative-caret-position="459">
           <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
           <folding>
-            <element signature="e#37#74#0#PHP" expanded="true" />
+            <element signature="e#36#73#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -601,13 +435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/usertypes/add.view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/sclgrademodel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -657,13 +484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="117" column="33" lean-forward="true" selection-start-line="117" selection-start-column="33" selection-end-line="117" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/studentlevelmodel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -685,51 +505,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+    <entry file="file://$PROJECT_DIR$/app/views/usertypes/add.view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5355">
-          <caret line="315" column="45" selection-start-line="315" selection-start-column="45" selection-end-line="315" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" column="67" selection-start-line="64" selection-start-column="67" selection-end-line="64" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-          <folding>
-            <element signature="e#37#74#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="550">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/studentcontroller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+        <state relative-caret-position="17">
+          <caret line="53" column="50" lean-forward="true" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
           <folding>
             <element signature="e#36#66#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/classmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="10" column="43" lean-forward="true" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/registerationcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#36#73#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/registerationmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/registeration/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="90" column="22" lean-forward="true" selection-start-line="90" selection-start-column="22" selection-end-line="90" selection-end-column="22" />
+          <folding>
+            <element signature="e#2713#2754#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/student/add.view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="298" column="51" lean-forward="true" selection-start-line="298" selection-start-column="51" selection-end-line="298" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="129" column="16" lean-forward="true" selection-start-line="129" selection-start-column="16" selection-end-line="132" selection-end-column="52" />
         </state>
       </provider>
     </entry>
