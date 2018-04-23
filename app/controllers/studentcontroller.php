@@ -45,7 +45,7 @@ class StudentController extends AbstractController{
                 $objParent = ParentModel::getByUsername($_POST['parentsearch']);
 
             }else
-                {
+                { //New parent
                     $objParent = new ParentModel();
                     $objParent->fname = $_POST['parentfname'];
                     $objParent->lname = $_POST['parentlname'];
@@ -57,12 +57,14 @@ class StudentController extends AbstractController{
                     $objParent->pwd = $_POST['parentpassword'];
                     $objParent->username = $_POST['parentusername'];
                     $objParent->user_id_fk = 0;
-                    if (isset($_FILES['parentimage']["name"])) {
-                        $uploader = new FileUpload($_FILES['parentimage']);
-                        $uploader->upload();
-                        $objParent->img = $uploader->getFileName();
-                    }
-                    $objParent->type_id = 3;
+//                    if (isset($_FILES['parentimage']["name"])) {
+//                        $uploader = new FileUpload($_FILES['parentimage']);
+//                        $uploader->upload();
+//                        $objParent->img = $uploader->getFileName();
+//                    }
+                    $objParent->img = 'hi';
+                    $objParent->type_id = UserTypesModel::getUserTypeId();
+                    $objParent->user_id_fk = 0;
                     $objParent->status = 1;
                     $objParent->save();
                 }
@@ -80,20 +82,21 @@ class StudentController extends AbstractController{
                 $stud->username = $_POST['usernamein'];
                 $stud->type_id = 1;
 
-                if (isset($_FILES["imageinput"]["name"])) {
-                $uploader = new FileUpload($_FILES['imageinput']);
-                $uploader->upload();
-                $stud->img = $uploader->getFileName();
-                }
+//                if (isset($_FILES["imageinput"]["name"])) {
+//                $uploader = new FileUpload($_FILES['imageinput']);
+//                $uploader->upload();
+//                $stud->img = $uploader->getFileName();
+//                }
+                $stud->img = 'hi';
                 $stud->user_id_fk = $objParent->id;
                 $stud->save();
-
-                //student Level
+//                //student Level
                 $stlevel = new StudentLevelModel();
                 $stlevel->scl_level_id_fk = $_POST['level'];
                 $stlevel->scl_grade_id_fk = $_POST['gradein'];
                 $stlevel->user_id_fk = $stud->id;
                 $stlevel->save();
+
 
         }
         $this->_view();

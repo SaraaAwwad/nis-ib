@@ -53,7 +53,7 @@ class UserModel extends AbstractModel {
 
         if ($result){
             $row = mysqli_fetch_array($result);
-            if(password_verify($pw, $row['pwd'])){
+            if(password_verify($password, $row['pwd'])){
            //if($password== $row['pwd']){
                 session_start();
                 $_SESSION["userID"] = $row['id'];

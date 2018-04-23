@@ -162,18 +162,18 @@ class UserTypesModel extends AbstractModel {
         }
     }
     
-    /*
+
     Static function getUserTypeId(){
-        $dbobj= new dbconnect;
         $title = 'parent';
         $sql = "SELECT id FROM user_type WHERE title = '$title'";
-        $qresult = $dbobj->selectsql($sql);
+        $db = DatabaseHandler::getConnection();
+        $qresult =  mysqli_query($db,$sql);
         while($row = mysqli_fetch_array($qresult)){
             $result = $row['id'];
         }
         return $result;
     }
-
+/*
     Static function getStudentId(){
         $dbobj= new dbconnect;
         $title = 'student';
