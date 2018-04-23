@@ -5,6 +5,7 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class StudentModel extends UserModel {
 
+    public $concatenate = "@nis.edu.eg";
 
     public static function getAll(){
 

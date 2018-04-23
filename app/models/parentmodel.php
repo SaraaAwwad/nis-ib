@@ -6,7 +6,6 @@ class ParentModel extends UserModel {
 
     public $concatenate = "@nis.edu.eg";
 
-
     public static function getByUsername($pk){
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE username = "' . $pk . '"';
         $stmt = DatabaseHandler::factory()->prepare($sql);

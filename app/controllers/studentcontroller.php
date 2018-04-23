@@ -77,7 +77,7 @@ class StudentController extends AbstractController{
                 $stud->phone = $_POST['numberin'];
                 $stud->status = $_POST['statusinput'];
                 $stud->add_id_fk = $_POST['street'];
-                $stud->email = $_POST['emailin'];
+                $stud->email = $_POST['emailin'] . $stud->concatenate;
                 $stud->pwd = $_POST['passwordin'];
                 $stud->username = $_POST['usernamein'];
                 $stud->type_id = 1;
