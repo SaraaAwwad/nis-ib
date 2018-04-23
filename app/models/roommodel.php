@@ -21,7 +21,6 @@ class RoomModel extends AbstractModel {
     
 public static function getFreeRooms($day, $slot, $semester){
     //rooms that are free in that day - slot - semester, 
-    //and is active.
     return self::getArr(
         'SELECT room.* FROM '.self::$tableName.'
         WHERE  room.id NOT IN (SELECT room_id_fk
@@ -31,7 +30,7 @@ public static function getFreeRooms($day, $slot, $semester){
         WHERE schedule.semester_id_fk= '.$semester.' AND schedule_details.day_id_fk = '.$day.' 
         AND schedule_details.slot_id_fk = '.$slot.' )  '
     );
-    
+    //check active
 }
 
 }

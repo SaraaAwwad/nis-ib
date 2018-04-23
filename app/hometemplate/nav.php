@@ -66,7 +66,7 @@
                       </ul>
                   </li>
 
-                       <li class="sub-menu dcjq-parent-li">
+                    <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-user"></i>
                           <span>Students</span>
@@ -74,6 +74,17 @@
                       <ul class="sub" style="display: block;">
                           <li><a href="\student">View Students</a></li>
                           <li><a href="\student\add">Add Student</a></li>
+                      </ul>
+                  </li>
+
+                    <li class="sub-menu dcjq-parent-li">
+                      <a class="dcjq-parent" href="javascript:;">
+                          <i class="fa fa-user"></i>
+                          <span>Resources</span>
+                        <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="display: block;">
+                          <li><a href="\room">View Rooms</a></li>
+                          <li><a href="\room\add">Add Room</a></li>
                       </ul>
                   </li>
 

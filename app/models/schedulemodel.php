@@ -9,6 +9,8 @@ class ScheduleModel extends AbstractModel {
     public $class_id_fk ;
     public $status_id_fk;
 
+    public $sched_details ;
+
     protected static $tableName = 'schedule';
     protected static $tableSchema = array(
         'id'                  => self::DATA_TYPE_INT,
@@ -31,7 +33,7 @@ class ScheduleModel extends AbstractModel {
     }
 
     public function getDetails(){
-
+       $this->sched_details = ScheduleDetailsModel::getDetails($this->id);
     }
 
     public function isExist(){

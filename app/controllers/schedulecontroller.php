@@ -88,10 +88,16 @@ class ScheduleController extends AbstractController
                 $sDetail->teacher_id_fk = $_POST['teacher'];
                 $sDetail->room_id_fk = $_POST['room'];
                 $sDetail->day_id_fk = $_POST['day'];
-                $sDetail->save();
+                if($sDetail->save()){
+                    $this->redirect('/schedule/details/'.$id.'');
+                }
+
             }
 
-            $this->_data['details'] = ScheduleDetailsModel::getDetails($id);
+            $s = ScheduleModel::getByPK($id);
+            $s->getDetails();
+
+            $this->_data['details'] = $s->sched_details; // ScheduleDetailsModel::getDetails($id);
             $this->_data['courses'] = CourseModel::getAll();
             $this->_data['slots'] = SlotModel::getAll();
           
