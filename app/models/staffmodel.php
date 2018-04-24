@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class StaffModel extends AbstractModel {
+class StaffModel extends AbstractModel implements IpayModel {
 
     public $id;
     public $type_id;
@@ -71,6 +71,13 @@ class StaffModel extends AbstractModel {
     }
 
 
+    public function addPayment()
+    {
+        // TODO: Implement addPayment() method.
+    }
 
-
+    public function viewPayment()
+    {
+        // TODO: Implement viewPayment() method.
+    }
 }
