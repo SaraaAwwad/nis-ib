@@ -66,6 +66,17 @@ class UserModel extends AbstractModel {
         return false;
     }
 
+    Static function isExist($username){
+        $db = DatabaseHandler::getConnection();
+        $sql = "SELECT * FROM user Where username = '$username' ";
+        $qresult = $db->query($sql);
+        if($qresult->num_rows > 0 ) {
+            return $qresult;
+        }else{
+            return false;
+        }
+    }
+
     static function getTeachers(){
         //add: where they are available at the given day and slot
         return self::get(
