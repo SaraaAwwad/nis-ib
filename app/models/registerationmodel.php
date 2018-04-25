@@ -8,6 +8,7 @@ class RegisterationModel extends AbstractModel{
     public $student_id;
     public $class_id;
     public $datetime;
+    public $Semester_id_fk;
 
     protected static $tableName = 'registration';
 

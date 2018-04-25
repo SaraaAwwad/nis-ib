@@ -28,7 +28,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 <th>Class</th>
                 <th>Semester</th>
                 <th>Datetime</th>
-                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -41,9 +40,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     <td>'.$reg->name.'</td>
                     <td>'.$reg->season_name .' - '. $reg->year .'</td>                    
                     <td>'.$reg->datetime.'</td>
-                    <td  colspan="2">
-                    <a class="btn btn-success btn-xs" href="registeration\edit\\'.$reg->id.'"><i class="fa fa-pencil-square-o"></i></a>
-                    </td>
+                    
                     </tr>';
                 }
                 ?>

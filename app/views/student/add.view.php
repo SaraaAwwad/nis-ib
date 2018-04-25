@@ -165,12 +165,12 @@ function randomPassword() {
                                   <input type="text" class="form-control" name="usernamein">
                               </div>
                           </div>
-                          <div class="form-group">
-                          <label class="col-sm-2 col-sm-2 control-label">Image</label>
-                              <div class="col-sm-10">
-                              <input type="file" name="imageinput" accept="image/*" required>
-                          </div>
-                          </div>
+<!--                          <div class="form-group">-->
+<!--                          <label class="col-sm-2 col-sm-2 control-label">Image</label>-->
+<!--                              <div class="col-sm-10">-->
+<!--                              <input type="file" name="imageinput" accept="image/*" required>-->
+<!--                          </div>
+                          </div>-->
                           <legend>Parent Information</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Add Parent Info</label>
@@ -257,12 +257,12 @@ function randomPassword() {
                                       <input type="text" class="form-control" name="parentusername">
                                   </div>
                               </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 col-sm-2 control-label">Image</label>
-                                  <div class="col-sm-10">
-                                      <input type="file" name="parentimage" accept="image/*" required>
-                                  </div>
-                              </div>
+<!--                              <div class="form-group">-->
+<!--                                  <label class="col-sm-2 col-sm-2 control-label">Image</label>-->
+<!--                                  <div class="col-sm-10">-->
+<!--                                      <input type="file" name="parentimage" accept="image/*" required>-->
+<!--                                  </div>-->
+<!--                              </div>-->
                           </fieldset>
 
 
@@ -282,6 +282,7 @@ function randomPassword() {
         document.getElementById("searchp").style.display="none";
         document.getElementById("pform").style.display="block";
     });
+
     $(document).ready(function(data){
 
                     $('.addStudent').on('click',function(e){

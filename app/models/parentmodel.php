@@ -6,7 +6,6 @@ class ParentModel extends UserModel {
 
     public $concatenate = "@nis.edu.eg";
 
-
     public static function getByUsername($pk){
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE username = "' . $pk . '"';
         $stmt = DatabaseHandler::factory()->prepare($sql);
@@ -24,8 +23,11 @@ class ParentModel extends UserModel {
     Static function InsertinDB($objParent)
     {
         
-        $result = UserType::getUserTypeId();
-        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk) VALUES ('$result', '$objParent->fname','$objParent->lname','$objParent->gender', '$objParent->DOB', '$objParent->username', '$objParent->pwd', '$objParent->email', '$objParent->status', '$objParent->img','$objParent->parent','$objParent->address_id_fk')";
+        $result = UserTypesModel::getUserTypeId();
+        $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk)
+                VALUES ('$result', '$objParent->fname','$objParent->lname','$objParent->gender', '$objParent->DOB',
+                 '$objParent->username', '$objParent->pwd', '$objParent->email', '$objParent->status',
+                  '$objParent->img','$objParent->user_id_fk','$objParent->add_id_fk')";
         $db = DatabaseHandler::getConnection();
         $idresult = mysqli_query($db,$sql);
         return $idresult;
