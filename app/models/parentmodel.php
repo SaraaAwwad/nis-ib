@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class ParentModel extends UserModel {
+class ParentModel extends UserModel implements IpayModel {
 
     public $concatenate = "@nis.edu.eg";
 
@@ -45,8 +45,23 @@ class ParentModel extends UserModel {
             return $result;
     }
 
+    public function getChildren(){
+        return self::get(
+            'SELECT *  FROM ' . self::$tableName . ' WHERE user_id_fk =' . $this->id
+        );
+    }
 
-    
+
+    public function addPayment()
+    {
+        // TODO: Implement addPayment() method.
+    }
+
+
+    public function viewPayment()
+    {
+        // TODO: Implement viewPayment() method.
+    }
 }
 
 ?>

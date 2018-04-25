@@ -3,7 +3,7 @@ namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
 
-class StudentModel extends UserModel {
+class StudentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
 
@@ -111,5 +111,6 @@ class StudentModel extends UserModel {
         scl_grade_id_fk = '. $grade_id_fk.' AND
         status.code="active"');
     }
+
 
 }

@@ -8,6 +8,7 @@ use PHPMVC\Lib\Helper;
 use PHPMVC\Lib\FileUpload;
 use PHPMVC\Models\AddressModel;
 use PHPMVC\Models\StatusModel;
+use PHPMVC\Models\UserModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\CurrencyModel;
 
@@ -94,19 +95,16 @@ class StaffController extends AbstractController
     public function editAction()
     {
         $id = $this->filterInt($this->_params[0]);
-        $user = StaffModel::getByPK($id);
+        $user = UserModel::getByPK($id);
         if($user === false)
         { $this->redirect('/staff/default'); }
         $salary = SalaryModel::getByUser($id);
-        $telephone = TelephoneModel::getByUser($id);
         $this->_data['users'] = $user;
         $this->_data['salary'] = $salary;
-        $this->_data['telephone'] = $telephone;
         $this->_data['country'] = AddressModel::getCountry();
         $this->_data['status'] = StatusModel::getAll();
         $this->_data['usertype'] = UserTypesModel::getUsers();
         $this->_data['currencies'] = CurrencyModel::getAll();
-
 
         if(isset($_POST['edit']))
         {
@@ -120,20 +118,18 @@ class StaffController extends AbstractController
             $user->status = $this->filterInt($_POST['statusinput']);
             $user->user_id_fk = $this->filterInt(0);
             $user->add_id_fk = $this->filterInt($_POST['street']);
+            $user->phone = $this->filterInt($_POST['numberinput']);
             if (isset($_FILES["imageinput"]["name"])) {
                 $uploader = new FileUpload($_FILES['imageinput']);
                 $uploader->upload();
                 $user->img = $uploader->getFileName();
             }
-
             $user->save();
 
             $salary->amount = $this->filterInt($_POST['salaryinput']);
             $salary->currency_id = $this->filterInt($_POST['currencyinput']);
             $salary->save();
 
-            $telephone->number = $this->filterInt($_POST['numberinput']);
-            $telephone->save();
 
             $this->redirect('/staff/default');
         }
