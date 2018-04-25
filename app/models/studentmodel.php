@@ -3,7 +3,7 @@ namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
 
-class StudentModel extends UserModel implements IpayModel {
+class StudentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
 
@@ -122,13 +122,5 @@ class StudentModel extends UserModel implements IpayModel {
         return $Res;
     }
 
-    public function addPayment()
-    {
-        // TODO: Implement addPayment() method.
-    }
 
-    public function viewPayment()
-    {
-        // TODO: Implement viewPayment() method.
-    }
 }

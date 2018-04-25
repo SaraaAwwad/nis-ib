@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-abstract class FeesModel implements IpayModel
+abstract class PaymentModel extends AbstractModel implements IpayModel
 {
 //reference to the object that will be created from one of the basic classes
 protected $ref_obj;
