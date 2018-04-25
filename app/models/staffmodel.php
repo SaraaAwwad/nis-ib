@@ -2,8 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class StaffModel extends UserModel {
-
+class StaffModel extends UserModel implements IpayModel {
 
     public static function getUsers()
     {
@@ -48,6 +47,13 @@ class StaffModel extends UserModel {
     }
 
 
+    public function addPayment()
+    {
+        // TODO: Implement addPayment() method.
+    }
 
-
+    public function viewPayment()
+    {
+        // TODO: Implement viewPayment() method.
+    }
 }
