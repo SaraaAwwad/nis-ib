@@ -64,33 +64,6 @@ class UserModel extends AbstractModel {
         return false;
     }
 
-//
-//    public static function getByPK($id){
-//        $db = DatabaseHandler::getConnection();
-//        $sql ="SELECT * FROM `user` WHERE id = '$id'"; //and status == active
-//        $result = mysqli_query($db,$sql);
-//        $Res= false;
-//        $i=0;
-//        while ($row = mysqli_fetch_assoc($result))
-//        {
-//            //$MyObj= new StudentModel($row["id"]);
-//            $Res['id']=$row["id"];
-//            $Res['fname']=$row["fname"];
-//            $Res['lname']=$row["lname"];
-//            $Res['gender']=$row["gender"];
-//            $Res['DOB']=$row["DOB"];
-//            $Res['username']=$row["username"];
-//            $Res['email']=$row["email"];
-//            $Res['img']=$row["img"];
-//            $Res['password']=$row["pwd"];
-//            $Res['phone']=$row["phone"];
-//            $Res['address_id_fk'] = $row["add_id_fk"];
-//            $Res['status'] = $row["status"];
-//            //$Res=$MyObj;
-//        }
-//        return $Res;
-//    }
-
     static function getTeachers(){
         //add: where they are available at the given day and slot
         return self::get(
