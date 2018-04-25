@@ -33,7 +33,7 @@ require_once HOME_TEMPLATE_PATH . 'nav.php';
                                 <div class="form-group">
                                     <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="numberinput" value="<?php echo $telephone->number; ?>" required>
+                                        <input type="text" class="form-control" name="numberinput" value="<?php echo $users->phone; ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
