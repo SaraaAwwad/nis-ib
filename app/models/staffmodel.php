@@ -12,18 +12,7 @@ class StaffModel extends UserModel implements IpayModel {
          INNER JOIN status ON user.status = status.id where title NOT IN ("student","parent")'
         );
     }
-
-    public Static function isUser($username){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT * FROM user Where id = '$username' ";
-        $result = $db->query($sql);
-        if($result->num_rows > 0 ) {
-            return $result;
-        }else{
-            return false;
-        }
-    }
-
+    
     public static function getFreeTeachers($day, $slot, $semester_id_fk){
         
         return self::getArr(
