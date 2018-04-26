@@ -68,6 +68,17 @@
 
                     <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
+                          <i class="fa fa-table"></i>
+                          <span>Exams</span>
+                        <span class="dcjq-icon"></span></a>
+                      <ul class="sub" style="display: block;">
+                          <li><a href="/exam">Manage Exams</a></li>
+                          <li><a href="/examschedule">Manage Schedules</a></li>
+                      </ul>
+                  </li>
+
+                    <li class="sub-menu dcjq-parent-li">
+                      <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-user"></i>
                           <span>Students</span>
                         <span class="dcjq-icon"></span></a>
