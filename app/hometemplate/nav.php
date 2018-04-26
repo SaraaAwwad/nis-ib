@@ -99,17 +99,6 @@
                       </ul>
                   </li>
 
-                     <li class="sub-menu dcjq-parent-li">
-                      <a class="dcjq-parent" href="javascript:;">
-                          <i class="fa fa-male"></i>
-                          <span>Staff</span>
-                        <span class="dcjq-icon"></span></a>
-                      <ul class="sub" style="display: block;">
-                          <li><a href="/staff">View Staff</a></li>
-                          <li><a href="/staff/add">Add Staff</a></li>
-                      </ul>
-                  </li>
-
               </ul>
               <!-- sidebar menu end-->
           </div>

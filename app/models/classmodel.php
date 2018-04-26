@@ -36,4 +36,7 @@ class ClassModel extends AbstractModel {
         );
     }
 
+    public static function getClassesByGrade($grade_id_fk){
+       return self::getArr('SELECT * FROM ' . self::$tableName . ' WHERE grade_id_fk = '. $grade_id_fk .''); 
+    }
 }

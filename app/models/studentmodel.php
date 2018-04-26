@@ -3,7 +3,7 @@ namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
 
-class StudentModel extends UserModel implements IpayModel {
+class StudentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
 
@@ -102,33 +102,15 @@ class StudentModel extends UserModel implements IpayModel {
 
     }
 
-    public static function getStudents($grade_id){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT user.id, user.fname, user.lname FROM
-                user INNER JOIN student_level
-                ON user.id = student_level.user_id_fk
-                WHERE (scl_grade_id_fk = $grade_id )";
-        $result = mysqli_query($db,$sql);
-        $Res= false;
-        $i=0;
-        while ($row = mysqli_fetch_assoc($result)) {
-                $MyObj = new StudentModel($row["id"]);
-                $MyObj->id = $row["id"];
-                $MyObj->fname = $row["fname"];
-                $MyObj->lname = $row["lname"];
-                $Res[$i]=$MyObj;
-                $i++;
-        }
-        return $Res;
+    public static function getNonRegisteredStudents($grade_id_fk, $semester_id_fk){
+        //that are not in a class and are active
+        return self::getArr('SELECT user.* FROM '.self::$tableName.' INNER JOIN student_level
+        ON  user.id = student_level.user_id_fk
+        INNER JOIN status ON status.id = user.status
+        WHERE user.id NOT IN (select student_id_fk FROM registration) AND 
+        scl_grade_id_fk = '. $grade_id_fk.' AND
+        status.code="active"');
     }
 
-    public function addPayment()
-    {
-        // TODO: Implement addPayment() method.
-    }
 
-    public function viewPayment()
-    {
-        // TODO: Implement viewPayment() method.
-    }
 }

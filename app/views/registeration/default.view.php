@@ -24,11 +24,10 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Student id</th>
-                <th>Class id</th>
+                <th>Student</th>
+                <th>Class</th>
+                <th>Semester</th>
                 <th>Datetime</th>
-                <th>Semester id</th>
-                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -37,13 +36,11 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 foreach ($details as $reg){
                     echo '<tr>
                     <td>'.$reg->id.'</td>
-                    <td>'.$reg->student_id.'</td>
-                    <td>'.$reg->class_id.'</td>
+                    <td>'.$reg->fname .' - '. $reg->lname.'</td>
+                    <td>'.$reg->name.'</td>
+                    <td>'.$reg->season_name .' - '. $reg->year .'</td>                    
                     <td>'.$reg->datetime.'</td>
-                    <td>'.$reg->Semester_id_fk.'</td>
-                    <td  colspan="2">
-                    <a class="btn btn-success btn-xs" href="registeration\edit\\'.$reg->id.'"><i class="fa fa-pencil-square-o"></i></a>
-                    </td>
+                    
                     </tr>';
                 }
                 ?>

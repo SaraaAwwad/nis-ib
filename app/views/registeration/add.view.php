@@ -1,14 +1,4 @@
 <?php
-function randomPassword() {
-    $alphabet = "0123456789";
-    $pass = array(); //remember to declare $pass as an array
-    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-    for ($i = 0; $i < 8; $i++) {
-        $n = rand(0, $alphaLength);
-        $pass[] = $alphabet[$n];
-    }
-    return implode($pass); //turn the array into a string
-}
 require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
 require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
 require_once HOME_TEMPLATE_PATH . 'header.php';
@@ -16,7 +6,6 @@ require_once HOME_TEMPLATE_PATH . 'nav.php';
 require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
 
-    <script src="../../../public/js/user.js"></script>
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>Registeration</h1>
@@ -29,10 +18,22 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 <form class="form-horizontal style-form" method="post">
 
                     <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Semester</label>
+                        <div class="col-sm-8">
+                            <select name="semester" class="form-control" id="semester">
+                                <option value="" disabled selected>Select Semester</option>
+                                <?php foreach($semester as $s){ ?>
+                                    <option value="<?php echo $s->id; ?>"><?php echo $s->season_name .' - '. $s->year; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Grade</label>
                         <div class="col-sm-8">
                             <select name="grade" class="form-control addGrade" id="grade">
-                                <option value="" disabled>Select Grade</option>
+                                <option value="" disabled selected>Select Grade</option>
                                 <?php foreach($grade as $grad){ ?>
                                     <option value="<?php echo $grad->id; ?>"><?php echo $grad->grade_name; ?></option>
                                 <?php } ?>
@@ -44,8 +45,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         <label class="col-sm-2 col-sm-2 control-label">Classes</label>
                         <div class="col-sm-8">
                             <select name="class" class="form-control addClass" id="class">
-                                <option value="" disabled>Select Class</option>
-
                             </select>
                         </div>
                     </div>
@@ -62,9 +61,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             </div>
                     </fieldset>
 
-
-
-
                     <input type="submit" name="addReg" id="main">
                 </form>
             </div>
@@ -73,10 +69,8 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
     <script>
 
-        $("#grade").change(function () {
-            document.getElementById("studentform").style.display="block";
-        });
         $(document).ready(function(data){
+            $('#studentform').hide();
 
             $('.addGrade').on('change',function(e){
                 e.preventDefault();
@@ -87,21 +81,38 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     method:'POST',
                     dataType:'json',
                     data:{
-                        grade: $("#grade").val(),
-                        class: $("#class").val(),
-                        action:"getStudents"
-
+                        grade:$('#grade').val(),
+                        semester:$('#semester').val(),
+                        action:"getClasses"
                     },
                     success:function(data)
                     {
-                        $('.students').html('');
-                        $.each(data, function (i, data) {
+                        classes = data.class;
+                        students = data.students;
 
-                            $('.students').append($('<tr></tr>').append($('<td></td>').append($('<input>').attr({
-                                type: 'checkbox', value: data.id})).append(
-                                $('<label>').text(data.fname))));
-                        });
+                            $('#class').html('');
+                            $('#class').append($('<option>', { 
+                                text : "Select Class",
+                                selected: true,
+                                disabled: true,
+                                value: ""
+                            }));
+                            $.each(classes, function (i, classes) {
+                                $('#class').append($('<option>', { 
+                                    value: classes.id,
+                                    text : classes.name 
+                                }));
+                            });
 
+                            $("#studentform").show();
+
+                            $('.students').html('');
+                            $.each(students, function (i, students) {
+                            $('.students').append($('<input>').attr({
+                                type: 'checkbox', value: students.id, name: 'studentsCB[]'})).append(
+                                $('<label>').text(students.fname));
+                            });
+                
                     },
 
                     error: function (jqXHR, exception) {
@@ -125,6 +136,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                 });
             });
+            
         });
     </script>
 <?php

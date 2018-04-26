@@ -45,6 +45,12 @@ class ParentModel extends UserModel implements IpayModel {
             return $result;
     }
 
+    public function getChildren(){
+        return self::get(
+            'SELECT *  FROM ' . self::$tableName . ' WHERE user_id_fk =' . $this->id
+        );
+    }
+
 
     public function addPayment()
     {
