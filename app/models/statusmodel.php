@@ -14,7 +14,6 @@ class StatusModel extends AbstractModel {
         }
     }
 
-
     public function getInfo(){
         $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
         $stmt = $this->prepareStmt($query);  
