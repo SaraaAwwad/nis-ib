@@ -52,11 +52,9 @@ class UserModel extends AbstractModel {
         $result = self::isExist($username);
 
         if ($result){
-            $row = mysqli_fetch_array($result);
-           // if(password_verify($pw, $row['pwd'])){
+            $row = $result->fetch(\PDO::FETCH_ASSOC);
            if($password== $row['pwd']){
           //  if(password_verify($password, $row['pwd'])){
-           //if($password== $row['pwd']){
                 session_start();
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
@@ -67,11 +65,19 @@ class UserModel extends AbstractModel {
     }
 
     Static function isExist($username){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT * FROM user Where username = '$username' ";
-        $qresult = $db->query($sql);
-        if($qresult->num_rows > 0 ) {
-            return $qresult;
+
+        $sql = "SELECT * FROM user Where username = :username";
+
+        $stmt = self::prepareStmt($sql); 
+        $username = self::test_input($username);
+
+        $stmt->bindParam(':username', $username, \PDO::PARAM_STR);         
+
+        if($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
+        }
+        if($numofrows > 0 ) {
+            return $stmt;
         }else{
             return false;
         }
