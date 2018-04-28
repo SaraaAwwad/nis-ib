@@ -13,6 +13,7 @@ class AbstractModel
     const VALIDATE_DATE_NUMERIC = '^\d{6,8}$';
     const DEFAULT_MYSQL_DATE = '1970-01-01';
     private static $db;
+
     private function prepareValues(\PDOStatement &$stmt)
     {
         foreach (static::$tableSchema as $columnName => $type) {
@@ -35,10 +36,10 @@ class AbstractModel
 
     private function create(){
         $sql = 'INSERT INTO ' . static::$tableName . ' SET ' . $this->buildNameParametersSQL();
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         $this->prepareValues($stmt);
         if($stmt->execute()) {
-            $this->{static::$primaryKey} = DatabaseHandler::factory()->lastInsertId();
+            $this->{static::$primaryKey} = DatabaseHandler::getConnection()->lastInsertId();
             return true;
         }
         return false;
@@ -46,13 +47,13 @@ class AbstractModel
 
     private function update(){
         $sql = 'UPDATE ' . static::$tableName . ' SET ' . $this->buildNameParametersSQL() . ' WHERE ' . static::$primaryKey . ' = ' . $this->{static::$primaryKey};
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         $this->prepareValues($stmt);
         return $stmt->execute();
     }
 
     public function diff($sql){
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         $this->prepareValues($stmt);
         return $stmt->execute();
     }
@@ -66,13 +67,13 @@ class AbstractModel
 
     public function delete(){
         $sql = 'DELETE FROM ' . static::$tableName . '  WHERE ' . static::$primaryKey . ' = ' . $this->{static::$primaryKey};
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         return $stmt->execute();
     }
 
     public static function getAll(){
         $sql = 'SELECT * FROM ' . static::$tableName;
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         $stmt->execute();
         if(method_exists(get_called_class(), '__construct')) {
             $results = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
@@ -87,7 +88,7 @@ class AbstractModel
 
     public static function getByPK($pk){
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE ' . static::$primaryKey . ' = "' . $pk . '"';
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         if ($stmt->execute() === true) {
             if(method_exists(get_called_class(), '__construct')) {
                 $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
@@ -112,7 +113,7 @@ class AbstractModel
     }
 
     public static function get($sql, $options = array()){
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         if (!empty($options)) {
             foreach ($options as $columnName => $type) {
                 if ($type[0] == 4) {
@@ -141,9 +142,8 @@ class AbstractModel
         return false;
     }
 
-    
     public static function getArr($sql, $options = array()){
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
         if (!empty($options)) {
             foreach ($options as $columnName => $type) {
                 if ($type[0] == 4) {
@@ -181,4 +181,18 @@ class AbstractModel
     {
         return static::$tableName;
     }
+
+
+    public static function prepareStmt($sql){
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
+        return $stmt;
+    }
+
+    public static function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+  }
+
 }

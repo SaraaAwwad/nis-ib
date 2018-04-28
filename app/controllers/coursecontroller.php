@@ -63,8 +63,6 @@ class CourseController extends AbstractController
        
         if(isset($_POST['updatecourse']))
         {
-          
-
             $course->name = $this->filterString($_POST['coursename']);
             $course->course_code = $this->filterString($_POST['coursecode']);
             $course->descr = $this->filterString($_POST['description']);

@@ -12,6 +12,7 @@ class CourseModel extends AbstractModel {
     public $level_id_fk;
     public $name;
     public $teaching_hours;
+    public $group;
 
     protected static $tableName = 'course';
     protected static $tableSchema = array(
@@ -27,8 +28,7 @@ class CourseModel extends AbstractModel {
 
     protected static $primaryKey = 'id';
 
-    public static function getCourse()
-    {
+    public static function getCourse() {
         return self::get(
         'SELECT course.*, course_group.id, scl_level.id FROM ' . self::$tableName . ' INNER JOIN course_group ON course.group_id_fk = course_group.id INNER JOIN scl_level ON course.level_id_fk = scl_level.id'
         );
@@ -49,4 +49,61 @@ class CourseModel extends AbstractModel {
         // die(mysqli_error($db));
         }
     }
+
+    public function __construct($id=""){
+		if($id != ""){
+            $this->id = $id;
+			$this->getInfo();
+		}
+    }
+
+    public function getInfo(){
+        $query = "SELECT * FROM course Where id = '$this->id' ";
+        $stmt = $this->prepareStmt($query);
+
+          if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+
+                $this->id=$row["id"];
+                $this->name = $row["name"];
+                $this->course_code = $row["course_code"];
+                $this->descr = $row["descr"];
+                $this->level_id_fk = $row["level_id_fk"]; //no use
+                $this->teaching_hours = $row["teaching_hours"];
+                $this->group_id_fk = $row["group_id_fk"];
+                $this->group = new CourseGroupModel($this->group_id_fk);
+                $this->status = $row["status"];
+
+                //
+            }
+        }
+      //  var_dump($this);
+    }
+
+    public static function getCourseByGrade($grade_id_fk)
+    {
+        //get all courses for this grade and active
+
+        $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
+         WHERE group_id_fk = $grade_id_fk AND status.code='active' ";
+
+        $stmt = self::prepareStmt($sql);  
+
+        $Res = array();
+        $i=0;
+        
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){  
+                $courseObj = new CourseModel($row['id']);
+                $Res[$i] = $courseObj;
+                $i++;
+               // var_dump($courseObj);
+            }
+        }
+       // var_dump($Res);
+//exit();
+        return $Res;
+        
+    }
+    
 }
