@@ -5,33 +5,33 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 class StatusModel extends AbstractModel {
     public $id;
     public $code;
-
+    private $tableName = "status";
+    
     public function __construct($id=""){
         if($id != ""){
-            $this->getInfo($id);
+            $this->id = $id;
+            $this->getInfo();
         }
     }
 
 
-    public function getInfo($id){
-        $sql = "SELECT * FROM status Where id = '$id' ";
-        $db = DatabaseHandler::getConnection();
-        $statusinfo = mysqli_query($db,$sql);
-        if($statusinfo){
-            $row = mysqli_fetch_array($statusinfo);
-            $this->id = $row['id'];
+    public function getInfo(){
+        $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
+        $stmt = $this->prepareStmt($query);  
+
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             $this->code = $row['code'];
         }
     }
 
     public static function getAll(){
-        $sql = "SELECT * FROM status";
-        $db = DatabaseHandler::getConnection();
-        $statusinfo = mysqli_query($db,$sql);
+        $query = "SELECT * FROM status";
+        $stmt = self::prepareStmt($query);
         $Stat = array();
         $i=0;
-        if($statusinfo){
-            while($row = mysqli_fetch_array($statusinfo)){
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $Stat[$i] = new StatusModel();
                 $Stat[$i]->id = $row['id'];
                 $Stat[$i]->code = $row['code'];

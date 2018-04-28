@@ -2,50 +2,49 @@
 namespace PHPMVC\Lib\Database;
 
  class DatabaseHandler{
-    const DATABASE_DRIVER_POD       = 1;
-    const DATABASE_DRIVER_MYSQLI    = 2;
 
     //Singleton design pattern
 
-    static private $_db = null; // you have only one copy
+    static private $_db = null; 
 
-    private function __construct() {} // private to disallow calling the class via new DBConn  
+    private function __construct() {}
    
-    private function __clone() {} // disallow cloning the class
+    private function __clone() {} 
 
     static public function getConnection(){ 
         
-        if (self::$_db == null) { // No PDO exists yet, so make one and send it back.
-          //di el pdo::
-           /* try {
-            self::$_db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-            } catch (PDOException $e) {
-            // Use next line for debugging only, remove or comment out before going live.
-             echo 'PDO says: ' . $e->getMessage() . '<br />';
-      
-            //die('<h1>Sorry. The Database connection is temporarily unavailable.</h1>');
-            }*/
-
-            //di el sqli::
-            self::$_db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-            
-            if(self::$_db->connect_error){
-                die("Failed to connect" .$this->con->connect_error);
+        if (self::$_db == null) {
+            try {
+            self::$_db = new \PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS, array(
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+            ));
+            } catch (\PDOException $e) {
+            die('<h1>Sorry. The Database connection is temporarily unavailable.</h1>');
             }
 
+           /* self::$_db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);          
+            if(self::$_db->connect_error){
+                die("Failed to connect" .$this->con->connect_error);
+            }*/
+
           return self::$_db;
-        } else { // There is already a PDO, so just send it back.
+        } else {
             return self::$_db;
         }
     }
     
     public static function factory()
     {
-        $driver = DATABASE_CONN_DRIVER;
-        if ($driver == self::DATABASE_DRIVER_POD) {
-            return PDODatabaseHandler::getInstance();
-        } elseif ($driver == self::DATABASE_DRIVER_MYSQLI) {
-            return MySQLiDatabaseHandler::getInstance();
+        if (self::$_db == null) {
+            try {
+                self::$_db = new \PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+            } catch (\PDOException $e) {
+                die('<h1>Sorry. The Database connection is temporarily unavailable.</h1>');
+            }
+          return self::$_db;
+        } else {
+            return self::$_db;
         }
     }
 
@@ -101,12 +100,5 @@ namespace PHPMVC\Lib\Database;
     /*function disconnect(){
         return $this->con->close();
     }*/
-
-    function test_input($data) {
-          $data = trim($data);
-          $data = stripslashes($data);
-          $data = htmlspecialchars($data);
-          return $data;
-    }
 
 }

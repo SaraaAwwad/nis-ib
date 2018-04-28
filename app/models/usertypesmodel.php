@@ -10,33 +10,48 @@ class UserTypesModel extends AbstractModel {
     public $UserParentPages = array();
     public $pages = array();
 
+    private $tableName = 'user_type';
+    
     public function __construct($id=""){
         if($id != ""){
-            $this->getInfo($id);
+            $this->id = $id;
+            $this->getInfo();
         }
     }
 
-    public function getInfo($id){
-        $sql = "SELECT * FROM user_type Where id = '$id' ";
-        $db = DatabaseHandler::getConnection();
-        $userinfo = mysqli_query($db,$sql);
-        if($userinfo){
-            $row = mysqli_fetch_array($userinfo);
-            $this->id = $row['id'];
-            $this->title = $row['title'];
-            $this->status_id_fk = $row['status_id_fk'];
-            $st = new StatusModel( $this->status_id_fk);
-            $this->status = $st->code;
-            }   
-        $this->getUserParentPages();
+    public function getInfo(){
+        $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
+        $stmt =self::prepareStmt($query);        
+       
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+              $this->title =  $row['title'];
+              $this->status_id_fk = $row['status_id_fk'];
+              $st= new StatusModel($this->status_id_fk);
+              $this->status = $st->code;       
+            }
+        }
+
+        $this->getUserParentPages();     
         $this->getAllPages();
+    
     }
 
     public static function addUserType($title, $statusId){
-        $db = DatabaseHandler::getConnection();
-        $sql = "INSERT INTO user_type (title, status_id_fk) 
-        VALUES ('$title', '$statusId')";
-        if (mysqli_query($db, $sql)){
+
+        $query = "INSERT INTO
+                user_type (title, status_id_fk)
+                VALUES(:title, :status_id_fk)";
+
+        $stmt = self::prepareStmt($query);  
+
+        $title = self::test_input($title);  
+        $statusId = self::test_input($statusId);  
+        
+        $stmt->bindParam(":title", $title, \PDO::PARAM_STR);
+        $stmt->bindParam(":status_id_fk", $statusId,  \PDO::PARAM_INT);
+
+        if ($stmt->execute()){
             return true;
         }else{
             return false;
@@ -44,118 +59,139 @@ class UserTypesModel extends AbstractModel {
     }
     
     Static function getAll(){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT * FROM user_type";
-        $result = mysqli_query($db,$sql);
+        $query = "SELECT * FROM user_type";
+        $stmt = self::prepareStmt($query);        
         $Types= array();
         $i=0;
-        while ($row = mysqli_fetch_assoc($result)){
-            $UserTypeObj = new UserTypesModel($row['id']);
-            $Types[$i] = $UserTypeObj;
-            $i++;
-        }
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $UserTypeObj = new UserTypesModel($row['id']);
+                $Types[$i] = $UserTypeObj;
+                $i++;
+            }
         return $Types;
-    }
+        }else{
+            return false;
+        }
 
+    }
 
     public function update($title, $statusId){
-        $this->title = $title;
-        $this->status_id_fk = $statusId;
-
-        $db = DatabaseHandler::getConnection();
-        $sql = "UPDATE user_type SET title= '$this->title' , status_id_fk= '$this->status_id_fk' WHERE id='$this->id'";
-                
-                if (mysqli_query($db, $sql)){
-                    return true;
-                }else{
-                   return false;
-               // die(mysqli_error($db));
-                }
-    }
-
-    public function getUserParentPages(){
-
-        $sql = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
-        WHERE typeid_fk = '$this->id' AND pages.pageid = 0 order by ordervalue ";
+        $sql = "UPDATE user_type SET title = :title, status_id_fk = :status_id_fk WHERE id = :id";
         
-        $db = DatabaseHandler::getConnection();
-        $result = mysqli_query($db,$sql);
-        $i=0;
-        if($result){
-            while ($row = mysqli_fetch_assoc($result)){
-                $this->UserParentPages[$i] = new PagesModel($row['pageid_fk']);
-                $i++;
-            }
-        }
-    }
-
-    public function getUserPages($parentid){
-        $sql = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
-        WHERE typeid_fk = '$this->id' AND pages.pageid = '$parentid' order by ordervalue";
-
-        $db = DatabaseHandler::getConnection();
-        $result = mysqli_query($db,$sql);
-        $i=0;
-        $UserPages  = array();
-        while ($row = mysqli_fetch_assoc($result)){
-            $PageObj = new PagesModel($row['pageid_fk']);
-            $UserPages[$i] = $PageObj;
-            $i++;
-        }
-
-        return $UserPages;
-    }
-
-
-    Static function getUsers(){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT * FROM user_type WHERE title NOT IN ('student','Student')";
-        $result = mysqli_query($db,$sql);
-        $Types= array();
-        $i=0;
-        while ($row = mysqli_fetch_assoc($result)){
-            $UserTypeObj = new UserTypesModel($row['id']);
-            $Types[$i] = $UserTypeObj;
-            $i++;
-        }
-        return $Types;
-    }
-
-
-    public function getAllPages(){
-        $sql = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
-        WHERE typeid_fk = '$this->id'
-        order by ordervalue";
-
-        $db = DatabaseHandler::getConnection();
-        $result = mysqli_query($db,$sql);
-        $i=0;
+        $stmt = self::prepareStmt($sql);  
         
-        if($result){
-            while ($row = mysqli_fetch_assoc($result)){
-                $this->pages[$i] = new PagesModel($row['pageid_fk']);      
-                $i++;
-            }
-        }
-    }
+        $this->title = self::test_input($title);  
+        $this->status_id_fk = self::test_input($statusId);
 
-   
-    public function insertUserPages($pageid, $ordervalue){
-        $sql = "INSERT INTO user_type_pages (typeid_fk, pageid_fk, ordervalue) VALUES ('$this->id', '$pageid', '$ordervalue')";
-        $db = DatabaseHandler::getConnection();
-        $result = mysqli_query($db,$sql);
-        if($result){
+        $stmt->bindParam(':id', $this->id, \PDO::PARAM_INT); 
+        $stmt->bindParam(':title', $this->title, \PDO::PARAM_STR);
+        $stmt->bindParam(':status_id_fk', $this->status_id_fk,  \PDO::PARAM_INT);
+
+        if ($stmt->execute()){
             return true;
         }else{
             return false;
         }
     }
 
+    public function getUserParentPages(){
+
+        $query = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
+        WHERE typeid_fk = '$this->id' AND pages.pageid = 0 order by ordervalue ";
+
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            $i=0;
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->UserParentPages[$i] = new PagesModel($row['pageid_fk']);
+                $i++;
+            
+            }
+        }
+    }
+
+    public function getUserPages($parentid){
+        $query = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
+        WHERE typeid_fk = '$this->id' AND pages.pageid = '$parentid' order by ordervalue";
+        
+        $stmt = $this->prepareStmt($query);
+        if($stmt->execute()){
+            $i=0;
+            $UserPages  = array();
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $PageObj = new PagesModel($row['pageid_fk']);
+                $UserPages[$i] = $PageObj;
+                $i++;
+            }
+
+            return $UserPages;
+        }
+    }
+
+
+    Static function getUsers(){
+        $query = "SELECT * FROM user_type WHERE title NOT IN ('student','Student')";
+        $stmt = self::prepareStmt($query);        
+        $Types= array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $UserTypeObj = new UserTypesModel($row['id']);
+                $Types[$i] = $UserTypeObj;
+                $i++;
+            }
+        return $Types;
+        }else{
+            return false;
+        }
+    }
+
+
+    public function getAllPages(){
+        $query = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
+        WHERE typeid_fk = '$this->id'
+        order by ordervalue";
+        
+        $stmt = $this->prepareStmt($query);
+        if($stmt->execute()){
+            $i=0;
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->pages[$i] = new PagesModel($row['pageid_fk']);      
+                $i++;
+            }
+        }
+        
+    }
+
+   
+    public function insertUserPages($pageid, $ordervalue){
+
+        $query = "INSERT INTO user_type_pages (typeid_fk, pageid_fk, ordervalue)
+        VALUES(:id, :pageid, :ordervalue)";
+
+        $stmt = self::prepareStmt($query);  
+
+        $pageid = self::test_input($pageid);  
+        $ordervalue = self::test_input($ordervalue);  
+
+        $stmt->bindParam(':id', $this->id, \PDO::PARAM_INT);         
+        $stmt->bindParam(":pageid", $pageid, \PDO::PARAM_INT);
+        $stmt->bindParam(":ordervalue", $ordervalue,  \PDO::PARAM_INT);
+
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     public function deleteAllPermissions(){
-        $sql = "DELETE FROM user_type_pages WHERE typeid_fk ='$this->id'";
-        $db = DatabaseHandler::getConnection();
-        $result = mysqli_query($db,$sql);
-        if($result){
+        $sql = "DELETE FROM user_type_pages WHERE typeid_fk = :id";
+        $stmt = self::prepareStmt($sql); 
+        $stmt->bindParam(':id', $this->id, \PDO::PARAM_INT);         
+        if($stmt->execute()){
             return true;
         }else{
             return false;
@@ -165,13 +201,18 @@ class UserTypesModel extends AbstractModel {
 
     Static function getUserTypeId(){
         $title = 'parent';
-        $sql = "SELECT id FROM user_type WHERE title = '$title'";
-        $db = DatabaseHandler::getConnection();
-        $qresult =  mysqli_query($db,$sql);
-        while($row = mysqli_fetch_array($qresult)){
-            $result = $row['id'];
-        }
+
+        $query = "SELECT id FROM user_type WHERE title = '$title'";
+        $stmt = self::prepareStmt($query);        
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result = $row['id'];
+            }
         return $result;
+        }else{
+            return false;
+        }
     }
 /*
     Static function getStudentId(){

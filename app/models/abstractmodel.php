@@ -13,6 +13,7 @@ class AbstractModel
     const VALIDATE_DATE_NUMERIC = '^\d{6,8}$';
     const DEFAULT_MYSQL_DATE = '1970-01-01';
     private static $db;
+
     private function prepareValues(\PDOStatement &$stmt)
     {
         foreach (static::$tableSchema as $columnName => $type) {
@@ -141,7 +142,6 @@ class AbstractModel
         return false;
     }
 
-    
     public static function getArr($sql, $options = array()){
         $stmt = DatabaseHandler::factory()->prepare($sql);
         if (!empty($options)) {
@@ -181,4 +181,16 @@ class AbstractModel
     {
         return static::$tableName;
     }
+
+    public function prepareStmt($sql){
+        $stmt = DatabaseHandler::getConnection()->prepare($sql);
+        return $stmt;
+    }
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+  }
 }
