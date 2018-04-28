@@ -49,4 +49,20 @@ class CourseModel extends AbstractModel {
         // die(mysqli_error($db));
         }
     }
+    public static function getCourseByGrade($semester_id_fk)
+    {
+        return self::getArr(
+            'SELECT $this->id, $this->course_code, registration.class_id_fk, 
+            registration.semester_id_fk, schedule.semester_id_fk, 
+            schedule.class_id_fk, schedule.id, schedule_details.sched_id_fk, 
+            schedule_details.course_id_fk FROM course INNER JOIN schedule_details ON 
+            schedule_details.course_id_fk = course.id INNER JOIN schedule ON 
+            schedule_details.sched_id_fk = schedule.id INNER JOIN registration ON 
+            schedule.class_id_fk = registration.class_id_fk 
+            AND schedule.semester_id_fk = registration.semester_id_fk'
+
+        );
+        
+    }
+    
 }
