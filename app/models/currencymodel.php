@@ -2,40 +2,45 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class CurrencyModel{
+class CurrencyModel extends AbstractModel{
     public $id;
     public $code;
+    private $tableName = "currency";
 
     public function __construct($id=""){
         if($id != ""){
-            $this->getInfo($id);
+            $this->id = $id;
+            $this->getInfo();
         }
     }
 
-    public function getInfo($id){
-        $sql = "SELECT * FROM currency Where id = '$id' ";
-         $db = DatabaseHandler::getConnection();
-        $userinfo = mysqli_query($db,$sql);
-         if($userinfo){
-            $row = mysqli_fetch_array($userinfo);
-            $this->id = $row['id'];
-            $this->code = $row['code'];
+    public function getInfo(){
+
+        $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
+        $stmt = $this->prepareStmt($query);
+
+          if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->id = $row['id'];
+                $this->code = $row['code'];
+            }
         }
     }
 
     Static function getAll(){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT * FROM currency";
-        $result = mysqli_query($db,$sql);
+        $query = "SELECT * FROM currency";
+        $stmt = self::prepareStmt($query);
         $Types= array();
         $i=0;
-        while ($row = mysqli_fetch_assoc($result)){
-            $CurrencyObj = new CurrencyModel($row['id']);
-            $Types[$i] = $CurrencyObj;
-            $i++;
-        }
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $CurrencyObj = new CurrencyModel($row['id']);
+                $Types[$i] = $CurrencyObj;
+                $i++;
+            }
         return $Types;
+        }
+    
     }
-
 
 }

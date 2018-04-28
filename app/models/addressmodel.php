@@ -2,61 +2,83 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class AddressModel{
+class AddressModel extends AbstractModel{
     public $id;
     public $address;
     public $add_id;
+    private $tableName = "address";
 
     public function __construct($id=""){
         if($id != ""){
-            $this->getInfo($id);
+            $this->id = $id;
+            $this->getInfo();
         }
     }
 
-    public function getInfo($id){
-        $sql = "SELECT * FROM address Where id = '$id' ";
-         $db = DatabaseHandler::getConnection();
-        $userinfo = mysqli_query($db,$sql);
-         if($userinfo){
-            $row = mysqli_fetch_array($userinfo);
-            $this->id = $row['id'];
-            $this->address = $row['address'];
-            $this->add_id = $row['add_id'];
+    public function getInfo(){
+        $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
+        $stmt = $this->prepareStmt($query);
+
+          if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->id = $row['id'];
+                $this->address = $row['address'];
+                $this->add_id = $row['add_id'];
+            }
         }
+       
     }
 
     Static function getCountry(){
-        $db = DatabaseHandler::getConnection();
+        
         $sql = "SELECT * FROM address WHERE address in ('Egypt','egypt')";
-        $result = mysqli_query($db,$sql);
+        $stmt = self::prepareStmt($sql);
         $Types= array();
         $i=0;
-        while ($row = mysqli_fetch_assoc($result)){
-            $AddressObj = new AddressModel($row['id']);
-            $Types[$i] = $AddressObj; 
-            $i++;
+        if($stmt->execute()){
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $AddressObj = new AddressModel($row['id']);
+                $Types[$i] = $AddressObj; 
+                $i++;
+            }
+            return $Types;
+        }else{
+            return false;
         }
-        return $Types;
+       
     }
 
     Static function getCity($cityid){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT * FROM address WHERE add_id = '" . $cityid . "'";
-        $result = mysqli_query($db,$sql);
+
+        $sql = "SELECT * FROM address WHERE add_id = :cityid";
+        $stmt = self::prepareStmt($sql);
+
+        $cityid = self::test_input($cityid);  
+      
+        $stmt->bindParam(':cityid', $cityid, \PDO::PARAM_INT);         
+
         $Types= array();
         $i=0;
-        while ($row = mysqli_fetch_assoc($result)){
+        if($stmt->execute()){
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
             $AddressObj = new AddressModel($row['id']);
             $Types[$i] = $AddressObj; 
             $i++;
+            }
         }
         return $Types;
     }
 
+    //check this fn
     public static function getByUser($userk)
     {
-        $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE user_id_fk = "' . $userk . '"';
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $sql = 'SELECT * FROM address  WHERE user_id_fk = :userk ';
+        $stmt = self::prepareStmt($sql);
+
+        $userk = self::test_input($userk);  
+      
+        $stmt->bindParam(':userk', $userk, \PDO::PARAM_INT);         
+
         if ($stmt->execute() === true) {
             if(method_exists(get_called_class(), '__construct')) {
                 $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
@@ -71,10 +93,25 @@ class AddressModel{
 
     Static function InsertinDB($objUser)
     {
-        $db = DatabaseHandler::getConnection();
         $sql = "INSERT INTO address (address, add_id)
-        VALUES ('$objUser->address', '$objUser->add_id')";
-        $dbobj->executesql2($sql);
+        VALUES (:address, :add_id)";
+        
+        $address = $objUser->address;
+        $add_id = $objUser->add_id;
+
+        $stmt = self::prepareStmt($sql);
+
+        $address = self::test_input($address);  
+        $add_id = self::test_input($add_id);  
+
+        $stmt->bindParam(':address', $address);  
+        $stmt->bindParam(':add_id', $add_is);  
+
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    
     }
 
 }
