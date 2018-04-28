@@ -5,8 +5,6 @@ require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
 require_once HOME_TEMPLATE_PATH . 'header.php';
 require_once HOME_TEMPLATE_PATH . 'nav.php';
 require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
-$schedView = new ScheduleView();
-$schedView->schedulePDF();
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
@@ -18,24 +16,21 @@ $schedView->schedulePDF();
         <table class="order-table">
             <thead>
             <tr>
-                <th>ID</th>
+
                 <th>Name</th>
-                <th>Status</th>
+                <th>Grade</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <?php
-                if(!empty($schedule)){
-                    foreach ($schedule as $s){
+                if(!empty($children)){
+                    foreach ($children as $c){
                         echo '<tr>
-                    <td>'.$s->id.'</td>
-                    <td>'.$s->name.'</td>
-                    <td>'.$s->season_name .' - '. $s->year.'</td>
-                    <td>'.$s->code.'</td>
-                    <td> <a href="\schedule\edit\\'.$s->id.'">Edit ,  </a>
-                     <a href="\schedule\details\\'.$s->id.'">View Details </a></td>
+                    <td>'.$c->fname . ' ' . $c->lname.'</td>
+                    <td>'.$grade->name .'</td>
+                    <td> <a href="\payment\details\\'.$c->id.'">View</a></td>
                     </tr>';
                     }
                 }

@@ -78,7 +78,6 @@ class PagesModel{
         $db= DatabaseHandler::getConnection();
         $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
         $result = mysqli_query($db,$sql);
-        
         $Res = array();
         $i=0;
         if($result){

@@ -181,4 +181,8 @@ class AbstractModel
     {
         return static::$tableName;
     }
+
+
+
+
 }

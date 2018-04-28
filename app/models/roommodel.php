@@ -12,7 +12,7 @@ class RoomModel extends AbstractModel {
 
     protected static $tableSchema = array(
         'id'                 => self::DATA_TYPE_INT,
-        'room_name'               => self::DATA_TYPE_STR,
+        'room_name'          => self::DATA_TYPE_STR,
         'size'               => self::DATA_TYPE_INT,
     );
 
