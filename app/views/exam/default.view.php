@@ -1,4 +1,5 @@
 <?php
+    use PHPMVC\Views\ScheduleView;
     require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
     require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
     require_once HOME_TEMPLATE_PATH . 'header.php';
@@ -7,14 +8,14 @@
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1>Classes</h1>
+            <h1>Exams</h1>
 		</div>
 	</div>		
 
   <section class="tabcontent">    
     <div class="row">
     <div class="col-lg-12 main-chart">
-    <a class="buttonlink btn btn-theme04 left" href="/class/add"><i class="fa fa-plus"></i>Add Class</a>
+    <a class="buttonlink btn btn-theme04 left" href="/exam/add"><i class="fa fa-plus"></i>Add Exam</a>
     </div>
   </div>
   </section>
@@ -24,24 +25,27 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
           <th>Grade</th>
-          <th>Status</th>
+          <th>Semester</th>
+          <th>Status</th>          
           <th>Actions</th>                              
         </tr>
       </thead>
       <tbody>
         <tr>
             <?php
-                foreach ($class as $ut){
+            if(!empty($exams)){
+                foreach ($exams as $exam){
                     echo '<tr>
-                    <td>'.$ut->id.'</td>
-                    <td>'.$ut->name.'</td>
-                    <td>'.$ut->grade_name.'</td>
-                    <td>'.$ut->code.'</td>
-                    <td> <a href="\class\edit\\'.$ut->id.'">Edit </a></td>
+                    <td>'.$exam->id.'</td>
+                    <td>'.$exam->grade_name.' Grade</td>
+                    <td>'.$exam->season_name .' - '. $exam->year.'</td>
+                    <td>'.$exam->code.'</td>
+                    <td> <a href="\exam\edit\\'.$exam->id.'">Edit ,  </a>
+                     <a href="\exam\details\\'.$exam->id.'">View Details </a></td>
                     </tr>';
                 }
+            }
             ?>
         </tr>
         </tbody>
