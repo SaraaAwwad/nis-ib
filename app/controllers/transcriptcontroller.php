@@ -3,6 +3,8 @@ namespace PHPMVC\Controllers;
 use PHPMVC\Models\RegisterationModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\ClassModel;
+use PHPMVC\Models\CourseModel;
+
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
@@ -20,6 +22,7 @@ class TranscriptController extends AbstractController
     }
 
     public function addAction(){
+
         $semester = SemesterModel::getSemesters();
         $grade = SclGradeModel::getAll();
         
@@ -43,19 +46,14 @@ class TranscriptController extends AbstractController
             }
             $this->redirect('/transcript');
         }
+
         if(isset($_POST['action']))
         {
-            if($_POST['action'] == 'getClasses'){
+            if($_POST['action'] == 'getCourses'){
                 $g = $_POST['grade'];
-                $sem = $_POST['semester'];
-                $class = ClassModel::getClassesByGrade($g);
-                $students = StudentModel::getNonRegisteredStudents($g, $sem);
-          
-                $output = array(
-                    'course' => $course, 
-                    'students' => $students
-                );        
-                echo json_encode($output);
+                $courses = CourseModel::getCourseByGrade($g);
+
+                echo json_encode($courses);
                 return;
             }
         }

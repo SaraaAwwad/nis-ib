@@ -44,7 +44,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Course</label>
                         <div class="col-sm-8">
-                            <select name="course" class="form-control addGrade" id="course">
+                            <select name="course" class="form-control" id="course">
                                 <option value="" disabled selected>Select Course</option>
                                 <?php foreach($course as $cr){ ?>
                                     <option value="<?php echo $cr->id; ?>"><?php echo $cr->course_code; ?></option>
@@ -81,18 +81,15 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 e.stopPropagation();
 
                 $.ajax({
-                    url:"/course/add",
+                    url:"/transcript/add",
                     method:'POST',
                     dataType:'json',
                     data:{
-                        grade:$('#semester').val(),
-                        semester:$('#course').val(),
-                        action:"getClasses"
+                        grade:$('#grade').val(),
+                        action:"getCourses"
                     },
                     success:function(data)
                     {
-                        courses = data.course;
-                        students = data.students;
 
                             $('#course').html('');
                             $('#course').append($('<option>', { 
@@ -101,10 +98,10 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 disabled: true,
                                 value: ""
                             }));
-                            $.each(course, function (i, course) {
+                            $.each(data, function (i, course) {
                                 $('#course').append($('<option>', { 
                                     value: course.id,
-                                    text : classes.code_name 
+                                    text : course.course_code + " - "+ course.name
                                 }));
                             });
 

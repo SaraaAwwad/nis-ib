@@ -183,12 +183,12 @@ class AbstractModel
     }
 
 
-    public function prepareStmt($sql){
+    public static function prepareStmt($sql){
         $stmt = DatabaseHandler::getConnection()->prepare($sql);
         return $stmt;
     }
 
-    function test_input($data) {
+    public static function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
