@@ -24,13 +24,21 @@
                           <legend>Course Work Info</legend>
 
                          <div class="form-group">                               
-                              <label class="col-sm-2 col-sm-2 control-label">Course Work Requirement</label>
+                              <label class="col-sm-3 col-sm-3 control-label">Course Work Requirement</label>
                               <div class="col-sm-4">
                                   <input name="coursework" type="text" class="form-control" required>                                    
                               </div>
-
-
                         </div>
+
+        <div class="form-group">
+        <label class="col-sm-3 col-sm-3 control-label">Select From Existing Attributes</label>
+        <div class="col-lg-9">
+            <select class="form-control" style="height:100px;" name="attr[]" multiple>
+                <option value="" disabled>(Optional)</option>            
+                 <?= $cv->preCourseWorkAttr($preAttr); ?>
+            </select>
+        </div>
+    </div>
 
 
                         <div class="form-group container" id="dynamic_field"> 
@@ -39,7 +47,7 @@
                                 <div class="col-lg-12">
                                   <label class="col-sm-1 col-sm-1 control-label">Label</label>
                                     <div class="col-sm-4">
-                                        <input name="label" type="text" class="form-control" required>
+                                        <input name="name[]" type="text" class="form-control" required>
                                     </div>
 
                                     <label class="col-sm-1 col-sm-1 control-label">Type</label>
@@ -59,7 +67,7 @@
                         </div>
                       
                         </fieldset>
-                        <input type="submit" id="main">
+                        <input type="submit" name="newcoursework" id="main">
                       </form>
                   </div>
               </div>      
@@ -90,21 +98,7 @@
            $('#row'+button_id+'').remove();  
       });
 
-       $('#insert_form').on('submit', function(event){
-        event.preventDefault();
-        var form_data = $(this).serialize();
-
-         $.ajax({
-            url:"coursework/add",
-            method:"POST",
-            action:"newCourseWork", 
-            data:form_data,
-            success:function(data){
-                alert("success");
-            }
-         });
-
-        });  
+      
  });
 
  </script>

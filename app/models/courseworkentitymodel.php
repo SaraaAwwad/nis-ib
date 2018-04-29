@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class courseworkentityModel extends AbstractModel{
+class CourseWorkEntityModel extends AbstractModel{
     protected static $tableName = 'coursework_requir';
 
     public $id;
@@ -16,31 +16,49 @@ class courseworkentityModel extends AbstractModel{
     }
     
     public function getInfo(){
-        $query = "SELECT * FROM ". $this->tableName ." WHERE id = :id ";
-        $stmt = prepareStmt($query);
-        $this->id = test_input($this->id);
+        $query = "SELECT * FROM coursework_requir WHERE id = :id ";
+        $stmt = self::prepareStmt($query);
+        $this->id = self::test_input($this->id);
         
         $stmt->bindParam(':id', $this->id);
 
         if($stmt->execute()){
-            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
               $this->requirement_name =  $row['requirement_name'];       
             }
         }   
     }
 
-    public static function create(){
+    public static function add($requirement_name){
         $query = "INSERT INTO
-        " . $this->tableName . "
-        SET
-        requirement_name=:requirement_name";
+        coursework_requir(requirement_name)
+        VALUES (:requirement_name)";
 
-        $stmt = prepareStmt($query);
+        $stmt = self::prepareStmt($query);
         
-        $this->requirement_name = test_input($this->requirement_name);
+        $requirement_name = self::test_input($requirement_name);
 
-        $stmt->bindParam(":requirement_name", $this->requirement_name);
+        $stmt->bindParam(":requirement_name", $requirement_name);
 
+        if($stmt->execute()){
+            return self::getLastId();
+        }
+
+        return false;
+
+    }
+    
+    public function addSelected($attr_id_fk, $req_id_fk){
+        
+        $query = "INSERT INTO
+        coursework_selected_attr(attr_id_fk, req_id_fk)
+        VALUES (:attr_id_fk, :req_id_fk)";
+
+        $stmt = self::prepareStmt($query);
+        
+        $stmt->bindParam(":attr_id_fk", $attr_id_fk);
+        $stmt->bindParam(":req_id_fk", $req_id_fk);
+        
         if($stmt->execute()){
             return true;
         }

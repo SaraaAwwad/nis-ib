@@ -15,10 +15,11 @@
     <link href="<?= ASSETS_FONT_AWESOME ?>css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="<?= ASSETS_CSS ?>zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="<?= ASSETS_JS ?>gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="<?= ASSETS_ICONS ?>style.css">    
+    <link rel="stylesheet" type="text/css" href="<?= ASSETS_ICONS ?>style.css">     
     
     <!-- Custom styles for this template -->
     <link href="<?= ASSETS_CSS ?>style.css" rel="stylesheet">
     <link href="<?= ASSETS_CSS ?>style-responsive.css" rel="stylesheet">
     <script src="<?= ASSETS_JS ?>chart-master/Chart.js"></script>
     <script src="<?= JS ?>jquery.min.js"></script>
+

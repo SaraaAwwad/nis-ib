@@ -188,6 +188,10 @@ class AbstractModel
         return $stmt;
     }
 
+    public static function getLastId(){
+        return DatabaseHandler::getConnection()->lastInsertId();
+    }
+
     public static function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
