@@ -17,17 +17,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
             <div class="form-panel">
                 <form class="form-horizontal style-form" method="post">
 
-                    <div class="form-group">
-                        <label class="col-sm-2 col-sm-2 control-label">Semester</label>
-                        <div class="col-sm-8">
-                        <select name="semester" class="form-control" id="semester">
-                        <option value="" disabled selected>Select Semester</option>
-                        <?php foreach($semester as $s){ ?>
-                        <option value="<?php echo $s->id; ?>"><?php echo $s->season_name .' - '. $s->year; ?></option>
-                        <?php } ?>
-                            </select>
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Grade</label>
@@ -49,6 +39,18 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 <?php foreach($course as $cr){ ?>
                                     <option value="<?php echo $cr->id; ?>"><?php echo $cr->course_code; ?></option>
                                 <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Semester</label>
+                        <div class="col-sm-8">
+                        <select name="semester" class="form-control" id="semester">
+                        <option value="" disabled selected>Select Semester</option>
+                        <?php foreach($semester as $s){ ?>
+                        <option value="<?php echo $s->id; ?>"><?php echo $s->season_name .' - '. $s->year; ?></option>
+                        <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -90,29 +92,47 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                     success:function(data)
                     {
-
-                            $('#course').html('');
+                        
+                        $('#course').html('');
+                        $('#course').append($('<option>', { 
+                            text : "Select Course",
+                            selected: true,
+                            disabled: true,
+                            value: ""
+                        }));
+                        $.each(data, function (i, course) {
                             $('#course').append($('<option>', { 
-                                text : "Select Course",
-                                selected: true,
-                                disabled: true,
-                                value: ""
+                                value: course.id,
+                                text : course.course_code + " - "+ course.name
                             }));
-                            $.each(data, function (i, course) {
-                                $('#course').append($('<option>', { 
-                                    value: course.id,
-                                    text : course.course_code + " - "+ course.name
-                                }));
-                            });
+                        });
 
-                            $("#studentform").show();
+                    $.ajax({
 
-                            $('.students').html('');
-                            $.each(students, function (i, students) {
-                            $('.students').append($('<input>').attr({
-                                type: 'text', value: students.id, name: 'studentsCB[]'})).append(
-                                $('<label>').text(students.fname));
-                            });
+                            url:"/transcript/add",
+                            method:'POST',
+                            dataType:'json',
+                            data:{
+                                semester:$('#semester').val(),
+                                course:$('#course').val(),
+                                action:"getStudents"
+                            },
+                               success:function(data){
+
+                               $("#studentform").show();
+
+                               $('.students').html('');
+                               $.each(students, function (i, students) {
+                               $('.students').append($('<input>').attr({
+                                   type: 'text', value: students.id, name: 'studentsCB[]'})).append(
+                                   $('<label>').text(students.fname));
+                               });
+
+                               }
+
+                             });
+
+                            
                 
                     },
 
