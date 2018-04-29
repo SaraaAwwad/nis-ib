@@ -22,4 +22,3 @@
     <link href="<?= ASSETS_CSS ?>style-responsive.css" rel="stylesheet">
     <script src="<?= ASSETS_JS ?>chart-master/Chart.js"></script>
     <script src="<?= JS ?>jquery.min.js"></script>
-
