@@ -6,11 +6,13 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 class StudentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
+    public $gradeObj;
+
 
     public static function getAll(){
 
         $db = DatabaseHandler::getConnection();
-        $sql ="SELECT * FROM user ";
+        $sql ="SELECT * FROM user";
         $result = mysqli_query($db,$sql);
         $Res = array();
         $i=0;
@@ -27,6 +29,7 @@ class StudentModel extends UserModel{
             $MyObj->email=$row["email"];
             $MyObj->phone=$row["phone"];
             $MyObj->status=$row["status"];
+            $MyObj->gradeObj = new SclGradeModel();
             $Res[$i]=$MyObj;
             $i++;
         }
@@ -99,6 +102,23 @@ class StudentModel extends UserModel{
             $Res[] = $row;
         }
         return $Res;
+
+    }
+
+    //aggregates Scl_grade class
+    public function getGrade(){
+
+        $query = "SELECT scl_grade_id_fk from student_level WHERE user_id_fk = ". $this->id;
+        $stmt = self::prepareStmt($query);
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->gradeObj = new SclGradeModel($row['scl_grade_id_fk']);
+            }
+            return true;
+        }else{
+            return false;
+        }
 
     }
 

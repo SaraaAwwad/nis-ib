@@ -29,8 +29,8 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     foreach ($children as $c){
                         echo '<tr>
                     <td>'.$c->fname . ' ' . $c->lname.'</td>
-                    <td>'.$grade->name .'</td>
-                    <td> <a href="\payment\details\\'.$c->id.'">View</a></td>
+                    <td>'.$c->gradeObj->grade_name .'</td>
+                    <td> <a href="\payment\add\\'.$c->id.'">View</a></td>
                     </tr>';
                     }
                 }

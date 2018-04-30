@@ -9,7 +9,6 @@ use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
 use PHPMVC\Lib\Helper;
 
-
 class RegisterationController extends AbstractController
 {   use Helper;
     use InputFilter;
@@ -93,11 +92,11 @@ class RegisterationController extends AbstractController
                 $objReg->datetime = $_POST['dt'];
                 $objReg->Semester_id_fk = $_POST['sem_id'];
 
-                if ($objReg->save()){
-                    $this->redirect("/registeration");
-                }else{
-
-                }
+//                if ($objReg->save()){
+//                    $this->redirect("/registeration");
+//                }else{
+//
+//                }
             }
             $this->_view();
         }
