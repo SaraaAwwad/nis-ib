@@ -2,14 +2,15 @@
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\RegisterationModel;
 use PHPMVC\Models\UserTypesModel;
+use PHPMVC\Models\UserModel;
 use PHPMVC\Models\ClassModel;
 use PHPMVC\Models\CourseModel;
-
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
+use PHPMVC\Models\TranscriptModel;
 use PHPMVC\Lib\Helper;
 
 
@@ -18,7 +19,8 @@ class TranscriptController extends AbstractController
     use InputFilter;
 
     public function defaultAction(){
-       // $this->_data['']
+        $this->_data['transcript'] = TranscriptModel::getTranscript($_SESSION["userID"]);
+        $this->_view();
     }
 
     public function addAction(){
@@ -74,4 +76,12 @@ class TranscriptController extends AbstractController
 
         $this->_view();
         }
+
+        
+    
+        
+    
+    
+    
+    
     }

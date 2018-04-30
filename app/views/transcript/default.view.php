@@ -1,23 +1,21 @@
 <?php
-    use PHPMVC\Views\ScheduleView;
-    require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
-    require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
-    require_once HOME_TEMPLATE_PATH . 'header.php';
-    require_once HOME_TEMPLATE_PATH . 'nav.php';
-    require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
-    
+require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
+require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
+require_once HOME_TEMPLATE_PATH . 'header.php';
+require_once HOME_TEMPLATE_PATH . 'nav.php';
+require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1>Schedules</h1>
+            <h1>Transcript</h1>
 		</div>
 	</div>		
 
   <section class="tabcontent">    
     <div class="row">
-    <div class="col-lg-12 main-chart">
-    <a class="buttonlink btn btn-theme04 left" href="/schedule/add"><i class="fa fa-plus"></i>Add Schedule</a>
-    </div>
+    <!-- <div class="col-lg-12 main-chart">
+<a class="buttonlink btn btn-theme04 left" href="/schedule/add"><i class="fa fa-plus"></i>Add Schedule</a>
+    </div> -->
   </div>
   </section>
 
@@ -26,23 +24,24 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>User ID</th>
           <th>Semester</th>
-          <th>Status</th>          
-          <th>Transcript</th>                              
+          <th>Course</th>          
+          <th>Grade</th>                              
         </tr>
       </thead>
       <tbody>
         <tr>
             <?php
-            if(!empty($schedule)){
-                foreach ($schedule as $s){
+            if(!empty($transcript)){
+                foreach ($transcript as $t){
                     echo '<tr>
-                    <td>'.$s->id.'</td>
-                    <td>'.$s->name.'</td>
-                    <td>'.$s->season_name .' - '. $s->year.'</td>
-                    <td>'.$s->code.'</td>
-                    <td> <a href="\schedule\edit\\'.$s->id.'">Edit ,  </a>
-                     <a href="\schedule\details\\'.$s->id.'">View Details </a></td>
+                    <td>'.$t->id.'</td>
+                    <td>'.$t->user_id_fk.'</td>
+                    <td>'.$t->semester_id_fk.'</td>
+                    <td>'.$t->course_id_fk.'</td>
+                    <td>'.$t->LetterGrade.'</td>
+                    
                     </tr>';
                 }
             }
