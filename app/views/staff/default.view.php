@@ -25,7 +25,7 @@
           <th>Username</th>
           <th>Email</th>
           <th>Telephone</th>
-          <th>User Type</th>
+          <th>Position</th>
           <th><i class="fa fa-bookmark"></i> Salary</th>
           <th><i class=" fa fa-edit"></i> Status</th>
           <th>Action</th>

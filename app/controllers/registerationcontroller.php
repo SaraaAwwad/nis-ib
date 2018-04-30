@@ -92,7 +92,7 @@ class RegisterationController extends AbstractController
                 $objReg->datetime = $_POST['dt'];
                 $objReg->Semester_id_fk = $_POST['sem_id'];
 
-//                if ($objReg->update()){
+//                if ($objReg->save()){
 //                    $this->redirect("/registeration");
 //                }else{
 //
