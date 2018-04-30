@@ -67,5 +67,44 @@ class CourseWorkEntityModel extends AbstractModel{
 
     }
 
+    public static function getAll(){
+        
+        $query = "SELECT * FROM coursework_requir";
+        $stmt = self::prepareStmt($query);        
+        $Res = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $MyObj= new CourseWorkEntityModel($row['id']);
+                $Res[$i]=$MyObj;
+                $i++;
+            }
+        return $Res;
+        }else{
+            return false;
+        }
+    }
+
+    public function getSelectedAttr(){
+        $query = "SELECT coursework_selected_attr.id as sid, coursework_attr.* FROM coursework_selected_attr 
+        INNER JOIN coursework_attr ON coursework_selected_attr.attr_id_fk = coursework_attr.id WHERE req_id_fk = '$this->id'";
+         $stmt = self::prepareStmt($query);        
+         $Res = array();
+         $i=0;
+         if($stmt->execute()){
+             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                 $MyObj= new CourseWorkAttrModel($row['id']);
+                 $MyObj->sid = $row['sid'];
+                 $Res[$i]=$MyObj;
+                 $i++;
+             }
+         return $Res;
+         }else{
+             return false;
+         }
+
+    }
+
+
 }
 ?>
