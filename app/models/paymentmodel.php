@@ -12,6 +12,7 @@ class PaymentModel extends AbstractModel
     public $currency_id;
 
     protected static $tableName = 'payment';
+
     protected static $tableSchema = array(
         'id' => self::DATA_TYPE_INT,
         'user_id_fk' => self::DATA_TYPE_INT,

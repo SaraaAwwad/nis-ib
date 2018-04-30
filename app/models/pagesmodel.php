@@ -41,7 +41,7 @@ class PagesModel extends AbstractModel{
     public static function insertPage($friendlyname, $physicalname, $status_id, $parentid, $html){
 
         $sql = "INSERT INTO pages (friendlyname, physicalname, status_id_fk, pageid, HTML, layout_id_fk) 
-        VALUES (:friendlyname, :physicalname, :status_id, :parentid, :html, 1)";
+                VALUES (:friendlyname, :physicalname, :status_id, :parentid, :html, 1)";
 
         $stmt = self::prepareStmt($sql);  
 
@@ -89,13 +89,9 @@ class PagesModel extends AbstractModel{
     }
     
     public function getAllPermissions(){
-        $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
-<<<<<<< HEAD
-        $result = mysqli_query($db,$sql);
-=======
-        $stmt = self::prepareStmt($sql);  
-
->>>>>>> af3ac641884192f98d8a48b7a328dcbd86f7bba3
+        $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type
+                ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
+        $stmt = self::prepareStmt($sql);
         $Res = array();
         $i=0;
         if($stmt->execute()){

@@ -182,11 +182,7 @@ class AbstractModel
         return static::$tableName;
     }
 
-<<<<<<< HEAD
 
-
-
-=======
     public function prepareStmt($sql){
         $stmt = DatabaseHandler::getConnection()->prepare($sql);
         return $stmt;
@@ -198,5 +194,4 @@ class AbstractModel
         $data = htmlspecialchars($data);
         return $data;
   }
->>>>>>> af3ac641884192f98d8a48b7a328dcbd86f7bba3
 }
