@@ -182,7 +182,6 @@ class AbstractModel
         return static::$tableName;
     }
 
-
     public static function prepareStmt($sql){
         $stmt = DatabaseHandler::getConnection()->prepare($sql);
         return $stmt;

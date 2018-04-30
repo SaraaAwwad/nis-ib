@@ -1,9 +1,13 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\CourseWorkEntityModel;
+use PHPMVC\Models\CourseWorkAttrModel;
+use PHPMVC\Models\CourseWorkModel;
+use PHPMVC\Models\SemesterModel;
+
+
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
-use PHPMVC\Models\CourseWorkAttrModel;
 
 class CourseWorkController extends AbstractController
 {
@@ -46,4 +50,53 @@ class CourseWorkController extends AbstractController
         $this->_view();
     }
 
+    public function addcwAction(){
+        if(isset($this->_params[0])){
+            $id = $this->filterInt($this->_params[0]);
+            if($id!=""){
+                //id of course 
+                if(isset($_POST["submitdynamicform"])){
+                    $req = $_POST['req'];
+                    $cw = new CourseWorkEntityModel($req);
+                    $formArr  = $cw->getSelectedAttr();
+
+                    foreach($formArr as $f){
+                        //values here 
+                        var_dump($_POST[''.$f->sid.'']);
+                    }
+                    exit();
+
+                    $cwObj = new CourseWorkModel("");
+                    $cwObj->course_id_fk = $id;
+                    $cwObj->name = $_POST["cwName"];
+                    $cwObj->date = date("Y/m/d");
+                    $cwObj->req_id_fk = $_POST["req"];
+                    $cwObj->semester_id_fk = $_POST["semester"];
+                    
+                   if($cwObj->add()){
+                       $this->redirect("/course");
+                   }
+                }
+
+                //seleted from the ajax -->
+                if(isset($_POST["action"]))
+                {
+                    if($_POST["action"] == "getForm"){
+
+                        $req = $_POST['req'];
+                        $cw = new CourseWorkEntityModel($req);
+                        $formArr  = $cw->getSelectedAttr();
+                        echo json_encode($formArr);
+                        return;
+                    }
+                }
+                
+                $this->_data['semester'] = SemesterModel::getSemesters();
+                $this->_data["Req"] = CourseWorkEntityModel::getAll();
+                $this->_view();
+            }
+
+        }
+       
+    }
 }
