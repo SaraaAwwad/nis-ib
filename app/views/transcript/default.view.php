@@ -23,8 +23,8 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
     <table class="order-table">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>User ID</th>
+          <!-- <th>ID</th>
+          <th>User ID</th> -->
           <th>Semester</th>
           <th>Course</th>          
           <th>Grade</th>                              
@@ -36,10 +36,8 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
             if(!empty($transcript)){
                 foreach ($transcript as $t){
                     echo '<tr>
-                    <td>'.$t->id.'</td>
-                    <td>'.$t->user_id_fk.'</td>
-                    <td>'.$t->semester_id_fk.'</td>
-                    <td>'.$t->course_id_fk.'</td>
+                    <td>'.$t->season_name .' - '. $t->year.'</td>
+                    <td>'.$t->course_code.'</td>
                     <td>'.$t->LetterGrade.'</td>
                     
                     </tr>';
