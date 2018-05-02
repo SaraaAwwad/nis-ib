@@ -3,12 +3,14 @@ namespace PHPMVC\Controllers;
 use PHPMVC\Models\CourseWorkEntityModel;
 use PHPMVC\Models\CourseWorkAttrModel;
 use PHPMVC\Models\CourseWorkModel;
+use PHPMVC\Models\CourseWorkValueModel;
 use PHPMVC\Models\SemesterModel;
 
 
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 use PHPMVC\Models\TypeModel;
+use PHPMVC\Models\FormModel;
 
 class CourseWorkController extends AbstractController
 {
@@ -73,12 +75,6 @@ class CourseWorkController extends AbstractController
                     $cw = new CourseWorkEntityModel($req);
                     $formArr  = $cw->attr;
 
-                    foreach($formArr as $f){
-                        //values here 
-                        var_dump($_POST[''.$f->id.'']);
-                    }
-                    exit();
-
                     $cwObj = new CourseWorkModel("");
                     $cwObj->course_id_fk = $id;
                     $cwObj->name = $_POST["cwName"];
@@ -87,9 +83,12 @@ class CourseWorkController extends AbstractController
                     $cwObj->semester_id_fk = $_POST["semester"];
                     
                    if($cwObj->add()){
-                    //   $this->redirect("/course");
+                   
                         foreach($formArr as $f){
-                            
+                         if(isset($_POST[''.$f->sid.''])){
+                             $value = $_POST[''.$f->sid.''];
+                            CourseWorkValueModel::add($cwObj, $f->sid, $value);
+                         }   
                         }
                     }
                 }
@@ -102,7 +101,14 @@ class CourseWorkController extends AbstractController
                         $req = $_POST['req'];
                         $cw = new CourseWorkEntityModel($req);
                         $formArr  = $cw->attr;
-                        echo json_encode($formArr);
+                        $html=array();
+                        $i=0;
+                        foreach($formArr as $f){
+                            $html[$i]= FormModel::createElement($f);
+                            $i++;
+                        }
+
+                        echo json_encode($html);
                         return;
                     }
                 }

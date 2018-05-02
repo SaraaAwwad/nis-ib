@@ -6,7 +6,7 @@ class CourseWorkValueModel extends AbstractModel{
     protected static $tableName = 'coursework_value';
 
     public $id;
-    public $attr_id_fk;
+    public $selected_id_fk;
     public $coursework_id_fk;
     public $value;
 
@@ -32,19 +32,22 @@ class CourseWorkValueModel extends AbstractModel{
         }   
     }
 
-    public static function add($cw, $attr, $value){
+    public static function add($cw, $selected_id_fk, $value){
       
       $query = "INSERT INTO
-        coursework_value(coursework_id_fk, attr_id_fk, value)
-        VALUES (:coursework_id_fk, :attr_id_fk, :value)";
+        coursework_value(coursework_id_fk, selected_id_fk, value)
+        VALUES (:coursework_id_fk, :selected_id_fk, :value)";
 
         $stmt = self::prepareStmt($query);
         
-        $attr_name = self::test_input($attr_name);
-        $type = self::test_input($type);
+        $value = self::test_input($value);
 
-        $stmt->bindParam(":attr_name", $attr_name);
-        $stmt->bindParam(":type_id_fk", $type);
+        $coursework_id_fk = $cw->id;
+
+        $stmt->bindParam(":value", $value);
+        $stmt->bindParam(":selected_id_fk", $selected_id_fk);
+        $stmt->bindParam(":coursework_id_fk", $coursework_id_fk);
+
         
         if($stmt->execute()){
             return self::getLastId();

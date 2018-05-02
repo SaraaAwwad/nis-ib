@@ -54,7 +54,6 @@ class TranscriptController extends AbstractController
             if($_POST['action'] == 'getCourses'){
 
                 $grade = $_POST['grade'];
-
                 $courses = CourseModel::getCourseByGrade($grade);
                 echo json_encode($courses);
                 return;
