@@ -90,6 +90,14 @@ class UserModel extends AbstractModel {
              ' INNER JOIN user_type ON user.type_id = user_type.id 
                where user_type.title = "teacher" '
             );
-
     }
+
+    public static function getStudents($exam){
+
+        return self::getArr(
+            'select user.id, user.fname, user.lname, user.phone, user.email
+            From ' . self::$tableName . ' inner JOIN exam_registration on exam_registration.user_id_fk = user.id
+            INNER JOIN exam_details ON exam_details.id = exam_registration.exam_id_fk
+            WHERE exam_details.id = '.$exam.'
+            GROUP BY user.id'); }
 }
