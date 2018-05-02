@@ -105,5 +105,35 @@ class CourseModel extends AbstractModel {
         return $Res;
         
     }
+
+    public static function getStudentsByCourse($course, $semester){
+
+        $sql = 'SELECT user.id, user.fname, user.lname
+        From user inner JOIN registration on registration.student_id_fk = user.id 
+        INNER JOIN schedule on schedule.class_id_fk = registration.class_id_fk 
+        INNER JOIN schedule_details ON schedule_details.sched_id_fk = schedule.id 
+        AND schedule_details.course_id_fk = ' .$course. '
+        INNER JOIN semester ON schedule.semester_id_fk = ' .$semester. '
+        AND schedule.semester_id_fk = registration.semester_id_fk 
+        WHERE user.status = (SELECT id FROM status WHERE code = "active")';
+
+        $stmt = self::prepareStmt($sql);  
+
+        $Res = array();
+        $i=0;
+        
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){  
+                $st = new CourseModel($row['id']);
+                $Res[$i] = $st;
+                $i++;
+               //var_dump($st);
+            }
+        }
+        //var_dump($Res);
+        //exit();
+        return $Res;
+
+    }
     
 }

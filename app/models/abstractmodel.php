@@ -182,10 +182,13 @@ class AbstractModel
         return static::$tableName;
     }
 
-
     public static function prepareStmt($sql){
         $stmt = DatabaseHandler::getConnection()->prepare($sql);
         return $stmt;
+    }
+
+    public static function getLastId(){
+        return DatabaseHandler::getConnection()->lastInsertId();
     }
 
     public static function test_input($data) {

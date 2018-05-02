@@ -1,12 +1,10 @@
 <?php
 namespace PHPMVC\Controllers;
-use PHPMVC\Models\SclGradeModel;
-use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\ParentModel;
-use PHPMVC\Models\StudentLevelModel;
-
+use PHPMVC\Models\PaymentmethodModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
+use PHPMVC\Models\PaymentselectedattrModel;
 
 class PaymentController extends AbstractController
 {
@@ -15,32 +13,36 @@ class PaymentController extends AbstractController
 
     public function defaultAction()
     {
-        $st = new StudentLevelModel(1);
-        var_dump($st);
-//        $st->getGrade('1');
 
-//        $this->_data['children'] = ParentModel::getChildren();
-//        $children[] = ParentModel::getChildren();
-//        //var_dump($children);
-//        $grades[] = StudentLevelModel::getGrades($children);
-//        var_dump($grades);
-//        if(!empty($children))
-//        {
-//
-//
-//            if(!empty($childrenID))
-//            {
-                //var_dump($childrenID);
-                //$grades[] = StudentLevelModel::getArr($childrenID);
-                //var_dump($grades);
-                //var_dump($child);
-//            }
-//        }
+        $this->_data['children'] = ParentModel::getChildren();
+        $this->_view();
 
-      //  $child = ParentModel::getChildren();
-       // $this->_data['grade'] = SclGradeModel::getByPK($child->scl_id_fk);
+    }
+    public function addAction()
+    {
+        $this->_data['methods'] = PaymentmethodModel::getAll();
+        if(isset($_POST['action']))
+        {
+            if($_POST['action'] == 'getAttributes'){
+                $m = $_POST['methodd'];
+                $paymentSelectedObj = new PaymentselectedattrModel();
+                $paymentSelectedObj->getAttr($m);
+                alert("hi");
+
+                $output = array(
+                    'SelectedAttr' => $paymentSelectedObj,
+                    'Attributes' => $paymentSelectedObj->attrObj
+                );
+                var_dump($output);
+                echo json_encode($output);
+                return;
+            }
+        }
+
         $this->_view();
     }
+
+
 }
 
 ?>

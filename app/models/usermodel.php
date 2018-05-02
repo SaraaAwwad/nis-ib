@@ -18,6 +18,8 @@ class UserModel extends AbstractModel {
     public $user_id_fk;
     public $add_id_fk;
     public $phone;
+    private $table_name = 'user';
+
 
     protected static $tableName = 'user';
     protected static $tableSchema = array(
@@ -39,6 +41,37 @@ class UserModel extends AbstractModel {
     );
     protected static $primaryKey = 'id';
 
+    public function __construct($id=""){
+        if($id != ""){
+            $this->id = $id;
+            $this->getInfo();
+        }
+    }
+
+    public function getInfo(){
+        $query = "SELECT * FROM ".$this->table_name ." Where id = '$this->id' ";
+        $stmt =self::prepareStmt($query);
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->type_id = $row['type_id'];
+                $this->fname = $row['fname'];
+                $this->lname = $row['lname'];
+                $this->gender = $row['gender'];
+                $this->DOB = $row['DOB'];
+                $this->username = $row['username'];
+                $this->pwd = $row['pwd'];
+                $this->email = $row['email'];
+                $this->status = $row['status'];
+                $this->img = $row['img'];
+                $this->user_id_fk = $row['user_id_fk'];
+                $this->add_id_fk = $row['add_id_fk'];
+                $this->phone = $row['phone'];
+
+            }
+        }
+
+    }
     public static function getUsers(){
         return self::get(
         'SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM ' . self::$tableName .
@@ -49,13 +82,15 @@ class UserModel extends AbstractModel {
 
     
     Static function Login($username, $password){
+
         $result = self::isExist($username);
 
         if ($result){
+         //   if($password== $result['pwd']){
             $row = $result->fetch(\PDO::FETCH_ASSOC);
            if($password== $row['pwd']){
           //  if(password_verify($password, $row['pwd'])){
-                session_start();
+              //  session_start();
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
                 return true;
@@ -80,7 +115,9 @@ class UserModel extends AbstractModel {
             return $stmt;
         }else{
             return false;
+
         }
+
     }
 
     static function getTeachers(){

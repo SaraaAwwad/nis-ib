@@ -2,14 +2,15 @@
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\RegisterationModel;
 use PHPMVC\Models\UserTypesModel;
+use PHPMVC\Models\UserModel;
 use PHPMVC\Models\ClassModel;
 use PHPMVC\Models\CourseModel;
-
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
+use PHPMVC\Models\TranscriptModel;
 use PHPMVC\Lib\Helper;
 
 
@@ -18,12 +19,13 @@ class TranscriptController extends AbstractController
     use InputFilter;
 
     public function defaultAction(){
-       // $this->_data['']
+        $this->_data['transcript'] = TranscriptModel::getTranscript($_SESSION["userID"]);
+        $this->_view();
     }
 
     public function addAction(){
 
-        $semester = SemesterModel::getSemesters();
+        $semester = SemesterModel::getInfo();
         $grade = SclGradeModel::getAll();
         
         $this->_data['semester'] = $semester;
@@ -35,12 +37,12 @@ class TranscriptController extends AbstractController
             $sem = $_POST['semester'];
 
             if(!empty($_POST['studentsCB'])){
-                foreach($_POST['studentsCB'] as $gr){
-                   $trans = new TranscriptModel();
-                   $trans->semester_id_fk = $sem;
-                   $trans->NumericGrade = $gr;
-                   $trans->course_id_fk = $course;
-                   $trans->save();
+                foreach($_POST['studentsCB'] as $ss){
+                   $ss = new TranscriptModel();
+                   $ss->semester_id_fk = $sem;
+                   $ss->NumericGrade = $gr;
+                   $ss->course_id_fk = $course;
+                   $ss->save();
                 }
 
             }
@@ -50,14 +52,44 @@ class TranscriptController extends AbstractController
         if(isset($_POST['action']))
         {
             if($_POST['action'] == 'getCourses'){
-                $g = $_POST['grade'];
-                $courses = CourseModel::getCourseByGrade($g);
 
+                $grade = $_POST['grade'];
+
+                $courses = CourseModel::getCourseByGrade($grade);
                 echo json_encode($courses);
                 return;
             }
+
+            else if($_POST['action'] == 'getSemesters'){
+
+                $course = $_POST['course'];
+<<<<<<< HEAD
+                
+=======
+>>>>>>> dc3a80f63d51bd0cc16a0f5128e8d8e29dd536bd
+                $semesters = SemesterModel::getSemestersByCourse($course);
+                echo json_encode($semesters);
+                return;
+
+            }
+
+            else if($_POST['action'] == 'getStudents'){
+
+                $semester = $_POST['semester'];
+                $course = $_POST['course'];
+
+                $students = CourseModel::getStudentsByCourse($course, $semester);
+                echo json_encode($students);
+                return;
+
+            }
         }
+
+        
 
         $this->_view();
         }
+
+        
+    
     }

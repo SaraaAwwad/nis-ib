@@ -48,7 +48,8 @@
                     <td>'.$cs->group_id_fk.'</td>
                     <td>'.$cs->teaching_hours.'</td>
                     <td>'.$cs->status.'</td>
-                    <td> <a href="\course\edit\\'.$cs->id.'">Edit </a></td>
+                    <td> <a href="\course\edit\\'.$cs->id.'">Edit , </a>
+                     <a href="\coursework\addcw\\'.$cs->id.'">Add CourseWork </a></td>
                     </tr>';
                 }
             ?>
