@@ -2,14 +2,15 @@
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\RegisterationModel;
 use PHPMVC\Models\UserTypesModel;
+use PHPMVC\Models\UserModel;
 use PHPMVC\Models\ClassModel;
 use PHPMVC\Models\CourseModel;
-
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
+use PHPMVC\Models\TranscriptModel;
 use PHPMVC\Lib\Helper;
 
 
@@ -18,7 +19,8 @@ class TranscriptController extends AbstractController
     use InputFilter;
 
     public function defaultAction(){
-       // $this->_data['']
+        $this->_data['transcript'] = TranscriptModel::getTranscript($_SESSION["userID"]);
+        $this->_view();
     }
 
     public function addAction(){
@@ -51,19 +53,29 @@ class TranscriptController extends AbstractController
         {
             if($_POST['action'] == 'getCourses'){
 
-                $g = $_POST['grade'];
+                $grade = $_POST['grade'];
 
-                $courses = CourseModel::getCourseByGrade($g);
+                $courses = CourseModel::getCourseByGrade($grade);
                 echo json_encode($courses);
                 return;
             }
 
-            if($_POST['action'] == 'getStudents'){
+            else if($_POST['action'] == 'getSemesters'){
 
-                $s = $_POST['semester'];
-                $c = $_POST['course'];
+                $course = $_POST['course'];
+                $grade = $_POST['grade'];
+                $semesters = SemesterModel::getSemestersByCourse($grade,$course);
+                echo json_encode($semesters);
+                return;
 
-                $students = CourseModel::getStudentsByCourse($c, $s);
+            }
+
+            else if($_POST['action'] == 'getStudents'){
+
+                $semester = $_POST['semester'];
+                $course = $_POST['course'];
+
+                $students = CourseModel::getStudentsByCourse($course, $semester);
                 echo json_encode($students);
                 return;
 
@@ -74,4 +86,7 @@ class TranscriptController extends AbstractController
 
         $this->_view();
         }
+
+        
+    
     }
