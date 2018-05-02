@@ -2,12 +2,13 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class CourseWorkAttrModel extends AbstractModel{
-    protected static $tableName = 'coursework_attr';
+class CourseWorkValueModel extends AbstractModel{
+    protected static $tableName = 'coursework_value';
 
     public $id;
-    public $attr_name;
-    public $type;
+    public $attr_id_fk;
+    public $coursework_id_fk;
+    public $value;
 
     public function  __construct($id=""){
         if($id != ""){
@@ -31,10 +32,11 @@ class CourseWorkAttrModel extends AbstractModel{
         }   
     }
 
-    public static function add($attr_name, $type){
-        $query = "INSERT INTO
-        coursework_attr(attr_name, type_id_fk)
-        VALUES (:attr_name, :type_id_fk)";
+    public static function add($cw, $attr, $value){
+      
+      $query = "INSERT INTO
+        coursework_value(coursework_id_fk, attr_id_fk, value)
+        VALUES (:coursework_id_fk, :attr_id_fk, :value)";
 
         $stmt = self::prepareStmt($query);
         
@@ -49,12 +51,11 @@ class CourseWorkAttrModel extends AbstractModel{
         }
 
         return false;
-
     }
 
     public static function getAll(){
 
-        $query = "SELECT * FROM coursework_attr";
+  /*      $query = "SELECT * FROM coursework_attr";
         $stmt = self::prepareStmt($query);        
         $Res = array();
         $i=0;
@@ -68,9 +69,8 @@ class CourseWorkAttrModel extends AbstractModel{
         }else{
             return false;
         }
-
+    */
 
     }
-
 
 }

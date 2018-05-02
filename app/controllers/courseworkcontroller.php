@@ -8,6 +8,7 @@ use PHPMVC\Models\SemesterModel;
 
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
+use PHPMVC\Models\TypeModel;
 
 class CourseWorkController extends AbstractController
 {
@@ -18,7 +19,7 @@ class CourseWorkController extends AbstractController
 
         if(isset($_POST["newcoursework"])){
 
-            //to add to the cw req model (ُEntity)
+         /*   //to add to the cw req model (ُEntity)
             $req = $this->filterString($_POST["coursework"]);
             $ReqId = CourseWorkEntityModel::add($req);
             $cwEntityObj = new CourseWorkEntityModel($ReqId);
@@ -28,24 +29,39 @@ class CourseWorkController extends AbstractController
                 foreach($attr as $key => $value){
                     $cwEntityObj->addSelected($value, $ReqId);
                 }
-            }
+            }*/
 
             //to add to the cw attr model (Attr)
             $name = $_POST["name"];
             $type = $_POST["type"]; // to be changed if its fk id
 
             foreach($name as $key => $value){
-                $attr = $this->filterString($value);
-                $ty = $this->filterString($type[$key]);
+              /*  $attr = $this->filterString($value);
+                $ty = $type[$key];
                 $AttId = CourseWorkAttrModel::add($attr, $ty); 
 
                 //add in the m2m table
-                $cwEntityObj->addSelected($AttId, $ReqId);
-            }
+                $cwEntityObj->addSelected($AttId, $ReqId);*/
+                var_dump($key." (key)- ". $type[$key]. " (type) - ".$value." <br>");
+                var_dump($key."options: <br>");
 
+               if(isset($_POST[$key."options"])){
+                    $s =$_POST[$key."options"];
+                    foreach($s as $keyopt => $valueopt){
+                        var_dump("options>????");
+                        var_dump($keyopt." (key)-  ".$valueopt." <br>");
+                    }
+                }else{
+                    var_dump("mesh ary <br>");
+                }
+
+                
+            }
+exit();
             //$this->redirect("/user");
         }
         
+        $this->_data["type"] = TypeModel::getAll();
         $this->_data["preAttr"] = CourseWorkAttrModel::getAll(); 
         $this->_view();
     }
@@ -55,14 +71,15 @@ class CourseWorkController extends AbstractController
             $id = $this->filterInt($this->_params[0]);
             if($id!=""){
                 //id of course 
+
                 if(isset($_POST["submitdynamicform"])){
                     $req = $_POST['req'];
                     $cw = new CourseWorkEntityModel($req);
-                    $formArr  = $cw->getSelectedAttr();
+                    $formArr  = $cw->attr;
 
                     foreach($formArr as $f){
                         //values here 
-                        var_dump($_POST[''.$f->sid.'']);
+                        var_dump($_POST[''.$f->id.'']);
                     }
                     exit();
 
@@ -74,8 +91,11 @@ class CourseWorkController extends AbstractController
                     $cwObj->semester_id_fk = $_POST["semester"];
                     
                    if($cwObj->add()){
-                       $this->redirect("/course");
-                   }
+                    //   $this->redirect("/course");
+                        foreach($formArr as $f){
+                            
+                        }
+                    }
                 }
 
                 //seleted from the ajax -->
@@ -85,7 +105,7 @@ class CourseWorkController extends AbstractController
 
                         $req = $_POST['req'];
                         $cw = new CourseWorkEntityModel($req);
-                        $formArr  = $cw->getSelectedAttr();
+                        $formArr  = $cw->attr;
                         echo json_encode($formArr);
                         return;
                     }

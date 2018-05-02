@@ -47,7 +47,15 @@
 <script>  
  $(document).ready(function(){  
     var pathname = window.location.pathname;
-     
+    
+  /*  $("#dynamicform").append(
+    $('<input>', {
+        type: 'number',
+        min: 10,
+        required: 'yes'
+    })
+);*/
+
     $("#Req").on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -68,7 +76,7 @@
                        $('<div class="form-group col-lg-12">'+                               
                               '<label class="col-sm-3 col-sm-3 control-label">'+data.attr_name+'</label>'+
                               '<div class="col-sm-4">'+
-                                  '<input name="'+data.sid+'" type="'+data.type+'" class="form-control" required>'+                                    
+                                  '<input name="'+data.id+'" type="'+data.type+'" class="form-control" required>'+                                    
                               '</div>'+
                         '</div>').appendTo("#dynamicform");
                     });
