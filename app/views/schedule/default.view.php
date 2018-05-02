@@ -25,7 +25,6 @@
     <table class="order-table">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Class</th>
           <th>Semester</th>
           <th>Status</th>          
@@ -38,7 +37,6 @@
             if(!empty($schedule)){
                 foreach ($schedule as $s){
                     echo '<tr>
-                    <td>'.$s->id.'</td>
                     <td>'.$s->class_name.'</td>
                     <td>'.$s->season_name .' - '. $s->year.'</td>
                     <td>'.$s->code.'</td>

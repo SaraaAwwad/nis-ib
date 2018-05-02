@@ -54,8 +54,11 @@ class ScheduleController extends AbstractController
     public function detailsAction(){
         if(isset($this->_params[0])){
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
-            $s = ScheduleModel::getByPK($id);
-
+            $s = new ScheduleModel($id);
+            
+           // $w = $s->getFreeDays(1);
+           // var_dump($w);
+            //exit();
             if(isset($_POST['action']))  {
                 if($_POST['action']== 'getDays'){
                     $slot = $_POST['slot'];
@@ -93,8 +96,8 @@ class ScheduleController extends AbstractController
 
             }
 
-            $s = ScheduleModel::getByPK($id);
-            $s->getDetails();
+            //$s = ScheduleModel::getByPK($id);
+            //$s->getDetails();
 
             $this->_data['details'] = $s->sched_details; // ScheduleDetailsModel::getDetails($id);
             $this->_data['courses'] = CourseModel::getAll();

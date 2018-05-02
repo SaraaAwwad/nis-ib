@@ -26,7 +26,7 @@ class WeekdaysModel extends AbstractModel {
     }
 
     public function getInfo(){
-        $query="";
+        $query='Select * from weekdays where id = '.$this->id.'';
         $stmt = $this->prepareStmt($query);  
 
         if($stmt->execute()){

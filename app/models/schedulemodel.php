@@ -74,11 +74,11 @@ class ScheduleModel extends AbstractModel {
     }
 
     public function getFreeDays($slot){ 
-        $query = "SELECT weekdays.* FROM weekdays
+        $query = 'SELECT weekdays.* FROM weekdays
         WHERE  weekdays.id NOT IN (SELECT day_id_fk
         FROM  schedule_details
         WHERE sched_id_fk = '.$this->id.'
-        AND slot_id_fk = '.$slot.'";
+        AND slot_id_fk = '.$slot.')';
 
         
         $stmt = $this->prepareStmt($query);  
@@ -92,6 +92,7 @@ class ScheduleModel extends AbstractModel {
                $i++;
             }
         }
+        return $weekdays;
     }
 
     public function __construct($id=""){
