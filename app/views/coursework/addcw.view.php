@@ -48,14 +48,6 @@
  $(document).ready(function(){  
     var pathname = window.location.pathname;
     
-  /*  $("#dynamicform").append(
-    $('<input>', {
-        type: 'number',
-        min: 10,
-        required: 'yes'
-    })
-);*/
-
     $("#Req").on('change',function(e){
         e.preventDefault();
         e.stopPropagation();

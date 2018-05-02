@@ -43,8 +43,6 @@ class CourseWorkController extends AbstractController
                 //add in the m2m table
                 $cwEntityObj->addSelected($AttId, $ReqId);
 
-          //      var_dump($key." (key)- ". $type[$key]. " (type) - ".$value." <br>");
-          //      var_dump($key."options: <br>");
 
                if(isset($_POST[$key."options"])){
                     
