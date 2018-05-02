@@ -19,7 +19,7 @@ class CourseWorkController extends AbstractController
 
         if(isset($_POST["newcoursework"])){
 
-         /*   //to add to the cw req model (ُEntity)
+            //to add to the cw req model (ُEntity)
             $req = $this->filterString($_POST["coursework"]);
             $ReqId = CourseWorkEntityModel::add($req);
             $cwEntityObj = new CourseWorkEntityModel($ReqId);
@@ -29,36 +29,34 @@ class CourseWorkController extends AbstractController
                 foreach($attr as $key => $value){
                     $cwEntityObj->addSelected($value, $ReqId);
                 }
-            }*/
+            }
 
-            //to add to the cw attr model (Attr)
             $name = $_POST["name"];
-            $type = $_POST["type"]; // to be changed if its fk id
+            $type = $_POST["type"]; 
 
             foreach($name as $key => $value){
-              /*  $attr = $this->filterString($value);
+                $attr = $this->filterString($value);
                 $ty = $type[$key];
                 $AttId = CourseWorkAttrModel::add($attr, $ty); 
 
+                $cwAttrObj = new CourseWorkAttrModel($AttId);
                 //add in the m2m table
-                $cwEntityObj->addSelected($AttId, $ReqId);*/
-                var_dump($key." (key)- ". $type[$key]. " (type) - ".$value." <br>");
-                var_dump($key."options: <br>");
+                $cwEntityObj->addSelected($AttId, $ReqId);
+
+          //      var_dump($key." (key)- ". $type[$key]. " (type) - ".$value." <br>");
+          //      var_dump($key."options: <br>");
 
                if(isset($_POST[$key."options"])){
+                    
                     $s =$_POST[$key."options"];
-                    foreach($s as $keyopt => $valueopt){
-                        var_dump("options>????");
-                        var_dump($keyopt." (key)-  ".$valueopt." <br>");
+                     
+                    foreach($s as $keyopt => $valueopt){ 
+                        $cwAttrObj->addOption($valueopt);
                     }
-                }else{
-                    var_dump("mesh ary <br>");
                 }
-
                 
             }
-exit();
-            //$this->redirect("/user");
+            $this->redirect("/coursework/add");
         }
         
         $this->_data["type"] = TypeModel::getAll();

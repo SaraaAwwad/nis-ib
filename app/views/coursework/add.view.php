@@ -160,15 +160,16 @@
 
      $(document).on('change', '.choice', function(){
         var id = $(this).attr('id');
-        alert("change in choice type combo "+id);
        
         var divId = "#div"+id;
         $(divId).html('');
     
 
         var val =  $(this).val(); 
-        //change 
-        if(val == 5 || val == 6){
+
+        var txt = $(this).find("option:selected").text();
+
+        if(txt == 'radiobutton' || txt == 'combobox'){
             $(divId).css('display', 'block');
          
             $(divId).append('<div><button type="button" class="btn btn-success btn-sm addopt" id="add'+i+'"> Add option </button></div>'

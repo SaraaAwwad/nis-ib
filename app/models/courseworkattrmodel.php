@@ -72,5 +72,24 @@ class CourseWorkAttrModel extends AbstractModel{
 
     }
 
+    public function addOption($valueOpt){
+       
+        $query = "INSERT INTO
+        attr_options(attr_id_fk, value)
+        VALUES (:attr_id_fk, :value)";
+
+        $stmt = self::prepareStmt($query);
+        
+        $value = self::test_input($value);
+
+        $stmt->bindParam(":attr_id_fk", $this->id);
+        $stmt->bindParam(":value", $valueOpt);
+        
+        if($stmt->execute()){
+            return true;
+        }
+
+        return false;
+    }
 
 }
