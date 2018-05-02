@@ -5,7 +5,7 @@ require_once HOME_TEMPLATE_PATH . 'header.php';
 require_once HOME_TEMPLATE_PATH . 'nav.php';
 require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>Transcript</h1>
@@ -22,7 +22,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Grade</label>
                         <div class="col-sm-8">
-                            <select name="grade" class="form-control addGrade" id="grade">
+                            <select name="grade" class="form-control" id="grade">
                                 <option value="" disabled selected>Select Grade</option>
                                 <?php foreach($grade as $grad){ ?>
                                     <option value="<?php echo $grad->id; ?>"><?php echo $grad->grade_name; ?></option>
@@ -78,7 +78,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
         $(document).ready(function(data){
             $('#transcriptform').hide();
 
-            $('.addGrade').on('change',function(e){
+            $('#grade').on('change',function(e){
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -106,33 +106,63 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 text : course.course_code + " - "+ course.name
                             }));
                         });
+     
+                
+                    },
 
-                    $.ajax({
+                    
 
-                            url:"/transcript/add",
-                            method:'POST',
-                            dataType:'json',
-                            data:{
-                                semester:$('#semester').val(),
-                                course:$('#course').val(),
-                                action:"getStudents"
-                            },
-                               success:function(data){
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        alert(msg);
+                    },
+                });
+            });
+            
+            $('#course').on('change',function(e){
+                e.preventDefault();
+                e.stopPropagation();
 
-                               $("#studentform").show();
-
-                               $('.students').html('');
-                               $.each(students, function (i, students) {
-                               $('.students').append($('<input>').attr({
-                                   type: 'text', value: students.id, name: 'studentsCB[]'})).append(
-                                   $('<label>').text(students.fname));
-                               });
-
-                               }
-
-                             });
-
-                            
+                $.ajax({
+                    url:"/transcript/add",
+                    method:'POST',
+                    dataType:'json',
+                    data:{
+                        course:$('#course').val(),
+                        action:"getSemesters"
+                    },
+                    success:function(data)
+                    {
+                        
+                        $('#semester').html('');
+                        $('#semester').append($('<option>', { 
+                            text : "Select Semester",
+                            selected: true,
+                            disabled: true,
+                            value: ""
+                        }));
+                        $.each(data, function (i, semester) {
+                            $('#semester').append($('<option>', { 
+                                value: semester.id,
+                                text : season.season_name + " - "+ semester.year
+                            }));
+                        });
+    
                 
                     },
 
@@ -157,8 +187,11 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                 });
             });
+
             
         });
+
+
     </script>
 <?php
 require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
