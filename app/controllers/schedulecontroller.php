@@ -23,12 +23,11 @@ class ScheduleController extends AbstractController
 
     public function defaultAction()
     {
-        $this->_data['schedule'] =ScheduleModel::getSchedules();
+        $this->_data['schedule'] =ScheduleModel::getAll();
         $this->_view();
     }
 
-    public function addAction()
-    { 
+    public function addAction(){ 
         if(isset($_POST['addSchedule']))  {
             $schedule = new ScheduleModel();
             $schedule->class_id_fk = $_POST['name'];
@@ -140,5 +139,11 @@ class ScheduleController extends AbstractController
             $this->_view();
           }
         }
+    }
+
+    public function studentAction(){
+        $sched = ScheduleModel::getAllStudentSched();
+        $this->_data['sched'] = $sched;
+        $this->_view();
     }
 }
