@@ -63,7 +63,10 @@ class TranscriptController extends AbstractController
             else if($_POST['action'] == 'getSemesters'){
 
                 $course = $_POST['course'];
+<<<<<<< HEAD
                 
+=======
+>>>>>>> dc3a80f63d51bd0cc16a0f5128e8d8e29dd536bd
                 $semesters = SemesterModel::getSemestersByCourse($course);
                 echo json_encode($semesters);
                 return;

@@ -48,9 +48,12 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         <div class="col-sm-8">
                         <select name="semester" class="form-control" id="semester">
                         <option value="" disabled selected>Select Semester</option>
+<<<<<<< HEAD
                         <!-- <?php foreach($semester as $s){ ?>
                         <option value="<?php echo $s->id; ?>"><?php echo $s->season_name .' - '. $s->year; ?></option>
                         <?php } ?> -->
+=======
+>>>>>>> dc3a80f63d51bd0cc16a0f5128e8d8e29dd536bd
                             </select>
                         </div>
                     </div>

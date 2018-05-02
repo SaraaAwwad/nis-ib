@@ -4,9 +4,7 @@ namespace PHPMVC\Models;
 class selectbox{
     private $html;
     public function __construct($attributes=array()){
-      /*  if(count($attributes)<1){
-            throw new Exception ('Invalid number of attributes');
-        }
+      /* 
         $this->html='<select class="form-control"';
         $options="";
         foreach($attributes as $attribute=>$value){
