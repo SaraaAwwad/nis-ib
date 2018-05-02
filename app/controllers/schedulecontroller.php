@@ -100,6 +100,8 @@ class ScheduleController extends AbstractController
             //$s->getDetails();
 
             $this->_data['details'] = $s->sched_details; // ScheduleDetailsModel::getDetails($id);
+          //  var_dump($s->sched_details);
+         //   exit();
             $this->_data['courses'] = CourseModel::getAll();
             $this->_data['slots'] = SlotModel::getAll();
           
@@ -110,9 +112,13 @@ class ScheduleController extends AbstractController
     public function deletedetailAction(){
         if(isset($this->_params[0])){
         $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+
         $s = ScheduleDetailsModel::getByPK($id);
+
         $sched = $s->sched_id_fk;
             if($s->delete()){
+                $this->redirect('/schedule/details/'.$sched);
+            }else{
                 $this->redirect('/schedule/details/'.$sched);
             }
         }

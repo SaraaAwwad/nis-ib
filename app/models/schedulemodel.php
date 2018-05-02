@@ -127,8 +127,8 @@ class ScheduleModel extends AbstractModel {
 
     public static function getAllStudentSched(){
         //change to session_id; and order desc
-        $query = "SELECT schedule.* FROM SCHEDULE INNER JOIN class on schedule.class_id_fk = class.id
-        Inner join registration on registration.class_id_fk = class.id Where registration.student_id_fk = 7";
+        $query = 'SELECT schedule.* FROM SCHEDULE INNER JOIN class on schedule.class_id_fk = class.id
+        Inner join registration on registration.class_id_fk = class.id Where registration.student_id_fk = '.$_SESSION["userID"].'';
         
         $stmt = self::prepareStmt($query);  
         $sched = array();
