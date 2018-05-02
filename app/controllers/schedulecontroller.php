@@ -39,7 +39,7 @@ class ScheduleController extends AbstractController
                 //message = already added
             }
 
-            if($schedule->save()){
+            if($schedule->add()){
                 $this->redirect('/schedule');
             }
 
@@ -118,7 +118,7 @@ class ScheduleController extends AbstractController
     public function editAction(){
         if(isset($this->_params[0])){
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
-            $s = ScheduleModel::getByPK($id);
+            $s = new ScheduleModel($id);
           if($s){
             $this->_data['sched'] = $s;
 
@@ -127,7 +127,7 @@ class ScheduleController extends AbstractController
                 $s->status_id_fk = $_POST['status'];
                 $s->semester_id_fk = $_POST['semester'];
                 
-                if($s->save()){
+                if($s->edit()){
                     $this->redirect('/schedule');
                 }
             }

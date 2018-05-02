@@ -8,16 +8,50 @@ class ScheduleModel extends AbstractModel {
     public $semester_id_fk;
     public $class_id_fk ;
     public $status_id_fk;
-    public $sched_details ;
 
+    public $sched_details ;
     public $class_name;
     public $year;
     public $season_name;
     public $code; 
 
+    public function add(){
+        
+        $sql = "INSERT INTO schedule (semester_id_fk, class_id_fk, status_id_fk) 
+                VALUES (:semester_id_fk, :class_id_fk, :status_id_fk)";
 
-    public function getDetails(){
-       $this->sched_details = ScheduleDetailsModel::getDetails($this->id);
+        $stmt = self::prepareStmt($sql);  
+
+        
+        $stmt->bindParam(':semester_id_fk', $this->semester_id_fk);         
+        $stmt->bindParam(":class_id_fk", $this->class_id_fk);
+        $stmt->bindParam(":status_id_fk", $this->status_id_fk);
+
+        if ($stmt->execute()){
+            return true;
+        }else{
+        //    exit();
+            return false;
+        }
+
+    }
+
+    public function edit(){
+        $sql = "UPDATE schedule SET semester_id_fk = :semester_id_fk, status_id_fk = :status_id_fk, 
+        class_id_fk = :class_id_fk WHERE id = :id";
+        
+        $stmt = self::prepareStmt($sql);  
+
+        $stmt->bindParam(':id', $this->id); 
+        $stmt->bindParam(':semester_id_fk', $this->semester_id_fk);
+        $stmt->bindParam(':class_id_fk', $this->class_id_fk);        
+        $stmt->bindParam(':status_id_fk', $this->status_id_fk);
+
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function isExist(){
@@ -36,7 +70,7 @@ class ScheduleModel extends AbstractModel {
         if ($sched!=""){
             return true;
         }
-    return false;
+     return false;
     }
 
     public function getFreeDays($slot){ 
@@ -58,9 +92,7 @@ class ScheduleModel extends AbstractModel {
                $i++;
             }
         }
-
     }
-//end
 
     public function __construct($id=""){
         if($id != ""){
@@ -89,7 +121,6 @@ class ScheduleModel extends AbstractModel {
             $this->season_name = $row['season_name'];
             $this->code = $row['code'];
         }
-       // $this->getDetails();
        $this->sched_details = ScheduleDetailsModel::getDet($this->id);
     }
 

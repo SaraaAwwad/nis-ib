@@ -58,7 +58,7 @@ class PagesModel extends AbstractModel{
         if ($stmt->execute()){
             return true;
         }else{
-            exit();
+          //  exit();
             return false;
         }
     }
