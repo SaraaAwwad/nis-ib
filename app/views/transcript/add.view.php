@@ -48,9 +48,9 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         <div class="col-sm-8">
                         <select name="semester" class="form-control" id="semester">
                         <option value="" disabled selected>Select Semester</option>
-                        <?php foreach($semester as $s){ ?>
+                        <!-- <?php foreach($semester as $s){ ?>
                         <option value="<?php echo $s->id; ?>"><?php echo $s->season_name .' - '. $s->year; ?></option>
-                        <?php } ?>
+                        <?php } ?> -->
                             </select>
                         </div>
                     </div>
@@ -148,7 +148,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                     success:function(data)
                     {
-                        
                         $('#semester').html('');
                         $('#semester').append($('<option>', { 
                             text : "Select Semester",
@@ -156,11 +155,13 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             disabled: true,
                             value: ""
                         }));
+
                         $.each(data, function (i, semester) {
-                            $('#semester').append($('<option>', { 
+                           $('#semester').append($('<option>', { 
                                 value: semester.id,
-                                text : season.season_name + " - "+ semester.year
+                                text : semester.season_name + " - "+ semester.year
                             }));
+                           // alert(semester.id);
                         });
     
                 

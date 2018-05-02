@@ -25,7 +25,7 @@ class TranscriptController extends AbstractController
 
     public function addAction(){
 
-        $semester = SemesterModel::getSemesters();
+        $semester = SemesterModel::getInfo();
         $grade = SclGradeModel::getAll();
         
         $this->_data['semester'] = $semester;
@@ -63,8 +63,8 @@ class TranscriptController extends AbstractController
             else if($_POST['action'] == 'getSemesters'){
 
                 $course = $_POST['course'];
-                $grade = $_POST['grade'];
-                $semesters = SemesterModel::getSemestersByCourse($grade,$course);
+                
+                $semesters = SemesterModel::getSemestersByCourse($course);
                 echo json_encode($semesters);
                 return;
 
