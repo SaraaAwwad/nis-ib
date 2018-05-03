@@ -71,5 +71,3 @@ class SemesterModel extends AbstractModel {
         return $sem;
         }
     }
-
-
