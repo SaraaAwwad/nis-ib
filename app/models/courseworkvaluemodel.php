@@ -18,7 +18,8 @@ class CourseWorkValueModel extends AbstractModel{
     }
     
     public function getInfo(){
-        $query = "SELECT coursework_attr.*, type.type FROM coursework_attr INNER JOIN type ON type.id = coursework_attr.type_id_fk WHERE coursework_attr.id = :id ";
+        //$query = "SELECT coursework_attr.*, type.type FROM coursework_attr INNER JOIN type ON type.id = coursework_attr.type_id_fk WHERE coursework_attr.id = :id ";
+        $query="select * from coursework_value where id = :id";
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         
@@ -26,8 +27,9 @@ class CourseWorkValueModel extends AbstractModel{
 
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-              $this->attr_name =  $row['attr_name'];
-              $this->type = $row['type'];       
+              $this->selected_id_fk =  $row['selected_id_fk'];
+              $this->coursework_id_fk = $row['coursework_id_fk'];  
+              $this->value = $row['value'];     
             }
         }   
     }
@@ -56,15 +58,17 @@ class CourseWorkValueModel extends AbstractModel{
         return false;
     }
 
-    public static function getAll(){
+    public static function getAll($selected_id_fk, $coursework_id_fk){
 
-  /*      $query = "SELECT * FROM coursework_attr";
+       $query = 'SELECT * FROM coursework_value where coursework_id_fk = '.$coursework_id_fk.'
+        and selected_id_fk = '.$selected_id_fk.'';
+
         $stmt = self::prepareStmt($query);        
         $Res = array();
         $i=0;
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                $MyObj= new CourseWorkAttrModel($row['id']);
+                $MyObj= new CourseWorkValueModel($row['id']);
                 $Res[$i]=$MyObj;
                 $i++;
             }
@@ -72,7 +76,20 @@ class CourseWorkValueModel extends AbstractModel{
         }else{
             return false;
         }
-    */
+ 
+    }
+
+    public static function getOpt($id){
+        $query = 'select * from attr_options where id = :id';
+        $stmt = self::prepareStmt($query);
+        
+        $stmt->bindParam(':id', $id);
+        
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $value =  $row['value'];     
+        return $value;
+        }   
 
     }
 

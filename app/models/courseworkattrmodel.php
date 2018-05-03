@@ -22,6 +22,7 @@ class CourseWorkAttrModel extends AbstractModel{
         $query = "SELECT coursework_attr.*, type.type FROM coursework_attr 
         INNER JOIN type ON type.id = coursework_attr.type_id_fk
         WHERE coursework_attr.id = :id ";
+        
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         

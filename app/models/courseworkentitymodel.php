@@ -4,10 +4,10 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class CourseWorkEntityModel extends AbstractModel{
     protected static $tableName = 'coursework_requir';
-
     public $id;
     public $requirement_name;
 
+    //its attributes
     public $attr = array();
 
     public function  __construct($id=""){

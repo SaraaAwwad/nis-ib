@@ -117,8 +117,63 @@ class CourseWorkController extends AbstractController
                 $this->_data["Req"] = CourseWorkEntityModel::getAll();
                 $this->_view();
             }
-
         }
-       
+    }
+
+    public function viewcwAction(){
+        if(isset($this->_params[0]) && isset($this->_params[1])){
+            $course_id = $this->filterInt($this->_params[0]);
+            $sem_id = $this->filterInt($this->_params[1]);
+            if($course_id!="" && $sem_id!=""){
+                //get all the course work (at the time the student was enrolled) + permission
+
+                $coursework = CourseWorkModel::getAll($course_id, $sem_id);
+                //var_dump($coursework);
+                //echo "<br>";
+
+                foreach($coursework as $c){
+                
+                    $entity = $c->req;
+                    
+                    $options;
+                    $j=0;
+
+                    foreach($entity->attr as $t){
+
+                        //get all values for this cw with this sid
+                        $value = CourseWorkValueModel::getAll($t->sid, $c->id);
+                        $options = array();
+                        $j=0;
+
+                        if($value!=""){
+                            
+                            if($t->type == "combobox" || $t->type == "radiobutton" || $t->type == "checkbox" ){
+                                $opt=array();
+                                $i=0;
+                                foreach($value as $v){
+                                    $opt[$i] = CourseWorkValueModel::getOpt($v->value);
+                                    $i++;
+                                }
+                                $t->options = $opt;
+                            }else{
+                                $op=array();
+                                $k=0;
+                                foreach($value as $v){
+                                   $op[$k]= $v->value;
+                                   $k++;
+                                }
+                                $t->options = $op;
+                           }
+                        }    
+                    }
+
+                }
+                
+//                exit();
+                
+                $this->_data['coursework'] = $coursework;
+                $this->_view();
+            }
+        }
     }
 }
