@@ -96,6 +96,24 @@ class CourseModel extends AbstractModel {
         return $Res;
     }
 
+    public static function getByGrade($grade){
+        //get all courses for this grade and active
+        $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
+         WHERE group_id_fk = '.$grade.' AND status.code='active' 
+         AND course.id NOT IN (SELECT course_id_fk FROM exam_details)";
+        $stmt = self::prepareStmt($sql);
+        $Res = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $courseObj = new CourseModel($row['id']);
+                $Res[$i] = $courseObj;
+                $i++;
+            }
+        }
+        return $Res;
+    }
+
     public static function getStudentsByCourse($grade){
 
         $sql = "SELECT user.* FROM user 

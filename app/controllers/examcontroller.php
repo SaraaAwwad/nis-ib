@@ -54,7 +54,7 @@ class ExamController extends AbstractController
 
                 }else if($_POST['action'] == 'getCourseByGrade'){
                     $grade = $_POST['grade'];
-                    $courses = CourseModel::getCourseByGrade($grade);
+                    $courses = CourseModel::getByGrade($grade);
                     echo json_encode($courses);
                     return;
                 }
@@ -89,7 +89,7 @@ class ExamController extends AbstractController
                     $exam_reg->save();
                 }
 
-                $this->redirect('exam/default');
+                $this->redirect('/exam');
             }
 
             $this->_data['grades'] = GradeModel::getAll();

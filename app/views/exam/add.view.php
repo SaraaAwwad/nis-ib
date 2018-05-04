@@ -285,7 +285,13 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             action : "getRooms"
                         },
                         success: function (data) {
-
+                            $('#room').html('');
+                            $('#room').append($('<option>', {
+                                value: "",
+                                text: "Select Room",
+                                selected: true,
+                                disabled: true
+                            }));
                             $.each(JSON.parse(data), function (i, data) {
                                 $('#room').append($('<option>', {
                                     value: data.id,
@@ -308,6 +314,13 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         action : "getCourseByGrade"
                     },
                     success: function (data) {
+                        $('#course').html('');
+                        $('#course').append($('<option>', {
+                            value: "",
+                            text: "Select Course",
+                            selected: true,
+                            disabled: true
+                        }));
                         $.each(JSON.parse(data), function (i, data) {
                             $('#course').append($('<option>', {
                                 value: data.id,
