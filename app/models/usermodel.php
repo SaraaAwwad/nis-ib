@@ -84,6 +84,7 @@ class UserModel extends AbstractModel {
 
         $result = self::isExist($username);
         if ($result){
+<<<<<<< HEAD
             if($password == $result['pwd']){
 
                 //  if(password_verify($password, $row['pwd'])){
@@ -92,6 +93,17 @@ class UserModel extends AbstractModel {
                     $_SESSION["userType"] = $result['type_id'];
                     return true;
                 }
+=======
+         //   if($password== $result['pwd']){
+            $row = $result->fetch(\PDO::FETCH_ASSOC);
+           if($password== $row['pwd']){
+          //  if(password_verify($password, $row['pwd'])){
+              //  session_start();
+                $_SESSION["userID"] = $row['id'];
+                $_SESSION["userType"] = $row['type_id'];
+                return true;
+            }
+>>>>>>> 9bef89b6bbbe0a3e08f70280c13fe692d5192e02
         }
         return false;
     }
@@ -99,6 +111,7 @@ class UserModel extends AbstractModel {
 
     Static function isExist($username){
 
+<<<<<<< HEAD
         $query = "SELECT * FROM user Where username = '$username' ";
         $stmt =self::prepareStmt($query);
         if($stmt->execute()){
@@ -113,6 +126,25 @@ class UserModel extends AbstractModel {
             }
 
         }
+=======
+        $sql = "SELECT * FROM user Where username = :username";
+
+        $stmt = self::prepareStmt($sql); 
+        $username = self::test_input($username);
+
+        $stmt->bindParam(':username', $username, \PDO::PARAM_STR);         
+
+        if($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
+        }
+        if($numofrows > 0 ) {
+            return $stmt;
+        }else{
+            return false;
+
+        }
+
+>>>>>>> 9bef89b6bbbe0a3e08f70280c13fe692d5192e02
     }
 
     static function getTeachers(){
@@ -122,6 +154,14 @@ class UserModel extends AbstractModel {
              ' INNER JOIN user_type ON user.type_id = user_type.id 
                where user_type.title = "teacher" '
             );
-
     }
+
+    public static function getStudents($exam){
+
+        return self::getArr(
+            'select user.id, user.fname, user.lname, user.phone, user.email
+            From ' . self::$tableName . ' inner JOIN exam_registration on exam_registration.user_id_fk = user.id
+            INNER JOIN exam_details ON exam_details.id = exam_registration.exam_id_fk
+            WHERE exam_details.id = '.$exam.'
+            GROUP BY user.id'); }
 }

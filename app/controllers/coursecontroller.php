@@ -13,14 +13,12 @@ class CourseController extends AbstractController
     use InputFilter;
     use Helper;
 
-    public function defaultAction()
-    {
+    public function defaultAction(){
         $this->_data['course'] = CourseModel::getCourse();
         $this->_view();
     }
 
-    public function addAction()
-    {   
+    public function addAction(){   
 
         $this->_data['Levels'] = LevelModel::getAll();
         $this->_data['group'] = CourseGroupModel::getAll();
@@ -76,6 +74,12 @@ class CourseController extends AbstractController
 
             $this->redirect('/course/default');
         }
+        $this->_view();
+    }
+
+    public function studentAction(){
+        $course = CourseModel::getStudentCourses();
+        $this->_data['course']=$course;
         $this->_view();
     }
   

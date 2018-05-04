@@ -4,9 +4,11 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class CourseWorkEntityModel extends AbstractModel{
     protected static $tableName = 'coursework_requir';
-
     public $id;
     public $requirement_name;
+
+    //its attributes
+    public $attr = array();
 
     public function  __construct($id=""){
         if($id != ""){
@@ -26,7 +28,9 @@ class CourseWorkEntityModel extends AbstractModel{
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
               $this->requirement_name =  $row['requirement_name'];       
             }
-        }   
+        }
+        
+       $this->getSelectedAttr();
     }
 
     public static function add($requirement_name){
@@ -89,16 +93,15 @@ class CourseWorkEntityModel extends AbstractModel{
         $query = "SELECT coursework_selected_attr.id as sid, coursework_attr.* FROM coursework_selected_attr 
         INNER JOIN coursework_attr ON coursework_selected_attr.attr_id_fk = coursework_attr.id WHERE req_id_fk = '$this->id'";
          $stmt = self::prepareStmt($query);        
-         $Res = array();
          $i=0;
          if($stmt->execute()){
              while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                  $MyObj= new CourseWorkAttrModel($row['id']);
                  $MyObj->sid = $row['sid'];
-                 $Res[$i]=$MyObj;
+                 $this->attr[$i]=$MyObj;
                  $i++;
              }
-         return $Res;
+            return true;
          }else{
              return false;
          }

@@ -8,6 +8,12 @@ class StudentModel extends UserModel{
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
 
+    // public function __construct($id=""){
+    //     if($id != ""){
+    //         $this->id = $id;
+    //         $this->getAll();
+    //     }
+    // }
 
     public static function getAll(){
 
@@ -134,5 +140,25 @@ class StudentModel extends UserModel{
         status.code="active"');
     }
 
+    public static function getStudentsBySemester($semester){
+        $query = "SELECT user.fname FROM user 
+        INNER JOIN registration ON registration.student_id_fk = user.id
+        INNER JOIN semester ON registration.semester_id_fk = $semester";
 
+        $stmt = self::prepareStmt($query);
+        $stud = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $st = new StudentModel($row['id']);
+                $stud[$i] = $st;
+                $i++;
+            }
+        }
+        return $stud;
 }
+
+
+    }
+
+

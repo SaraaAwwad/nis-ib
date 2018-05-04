@@ -3,11 +3,14 @@ namespace PHPMVC\Controllers;
 use PHPMVC\Models\CourseWorkEntityModel;
 use PHPMVC\Models\CourseWorkAttrModel;
 use PHPMVC\Models\CourseWorkModel;
+use PHPMVC\Models\CourseWorkValueModel;
 use PHPMVC\Models\SemesterModel;
 
 
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
+use PHPMVC\Models\TypeModel;
+use PHPMVC\Models\FormModel;
 
 class CourseWorkController extends AbstractController
 {
@@ -30,22 +33,33 @@ class CourseWorkController extends AbstractController
                 }
             }
 
-            //to add to the cw attr model (Attr)
             $name = $_POST["name"];
-            $type = $_POST["type"]; // to be changed if its fk id
+            $type = $_POST["type"]; 
 
             foreach($name as $key => $value){
                 $attr = $this->filterString($value);
-                $ty = $this->filterString($type[$key]);
+                $ty = $type[$key];
                 $AttId = CourseWorkAttrModel::add($attr, $ty); 
 
+                $cwAttrObj = new CourseWorkAttrModel($AttId);
                 //add in the m2m table
                 $cwEntityObj->addSelected($AttId, $ReqId);
-            }
 
-            //$this->redirect("/user");
+
+               if(isset($_POST[$key."options"])){
+                    
+                    $s =$_POST[$key."options"];
+                     
+                    foreach($s as $keyopt => $valueopt){ 
+                        $cwAttrObj->addOption($valueopt);
+                    }
+                }
+                
+            }
+            $this->redirect("/coursework/add");
         }
         
+        $this->_data["type"] = TypeModel::getAll();
         $this->_data["preAttr"] = CourseWorkAttrModel::getAll(); 
         $this->_view();
     }
@@ -55,16 +69,11 @@ class CourseWorkController extends AbstractController
             $id = $this->filterInt($this->_params[0]);
             if($id!=""){
                 //id of course 
+
                 if(isset($_POST["submitdynamicform"])){
                     $req = $_POST['req'];
                     $cw = new CourseWorkEntityModel($req);
-                    $formArr  = $cw->getSelectedAttr();
-
-                    foreach($formArr as $f){
-                        //values here 
-                        var_dump($_POST[''.$f->sid.'']);
-                    }
-                    exit();
+                    $formArr  = $cw->attr;
 
                     $cwObj = new CourseWorkModel("");
                     $cwObj->course_id_fk = $id;
@@ -74,8 +83,14 @@ class CourseWorkController extends AbstractController
                     $cwObj->semester_id_fk = $_POST["semester"];
                     
                    if($cwObj->add()){
-                       $this->redirect("/course");
-                   }
+                   
+                        foreach($formArr as $f){
+                         if(isset($_POST[''.$f->sid.''])){
+                             $value = $_POST[''.$f->sid.''];
+                            CourseWorkValueModel::add($cwObj, $f->sid, $value);
+                         }   
+                        }
+                    }
                 }
 
                 //seleted from the ajax -->
@@ -85,8 +100,15 @@ class CourseWorkController extends AbstractController
 
                         $req = $_POST['req'];
                         $cw = new CourseWorkEntityModel($req);
-                        $formArr  = $cw->getSelectedAttr();
-                        echo json_encode($formArr);
+                        $formArr  = $cw->attr;
+                        $html=array();
+                        $i=0;
+                        foreach($formArr as $f){
+                            $html[$i]= FormModel::createElement($f);
+                            $i++;
+                        }
+
+                        echo json_encode($html);
                         return;
                     }
                 }
@@ -95,8 +117,63 @@ class CourseWorkController extends AbstractController
                 $this->_data["Req"] = CourseWorkEntityModel::getAll();
                 $this->_view();
             }
-
         }
-       
+    }
+
+    public function viewcwAction(){
+        if(isset($this->_params[0]) && isset($this->_params[1])){
+            $course_id = $this->filterInt($this->_params[0]);
+            $sem_id = $this->filterInt($this->_params[1]);
+            if($course_id!="" && $sem_id!=""){
+                //get all the course work (at the time the student was enrolled) + permission
+
+                $coursework = CourseWorkModel::getAll($course_id, $sem_id);
+                //var_dump($coursework);
+                //echo "<br>";
+
+                foreach($coursework as $c){
+                
+                    $entity = $c->req;
+                    
+                    $options;
+                    $j=0;
+
+                    foreach($entity->attr as $t){
+
+                        //get all values for this cw with this sid
+                        $value = CourseWorkValueModel::getAll($t->sid, $c->id);
+                        $options = array();
+                        $j=0;
+
+                        if($value!=""){
+                            
+                            if($t->type == "combobox" || $t->type == "radiobutton" || $t->type == "checkbox" ){
+                                $opt=array();
+                                $i=0;
+                                foreach($value as $v){
+                                    $opt[$i] = CourseWorkValueModel::getOpt($v->value);
+                                    $i++;
+                                }
+                                $t->options = $opt;
+                            }else{
+                                $op=array();
+                                $k=0;
+                                foreach($value as $v){
+                                   $op[$k]= $v->value;
+                                   $k++;
+                                }
+                                $t->options = $op;
+                           }
+                        }    
+                    }
+
+                }
+                
+//                exit();
+                
+                $this->_data['coursework'] = $coursework;
+                $this->_view();
+            }
+        }
     }
 }

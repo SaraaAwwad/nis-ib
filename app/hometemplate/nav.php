@@ -73,7 +73,6 @@
                         <span class="dcjq-icon"></span></a>
                       <ul class="sub" style="display: block;">
                           <li><a href="/exam">Manage Exams</a></li>
-                          <li><a href="/examschedule">Manage Schedules</a></li>
                       </ul>
                   </li>
 

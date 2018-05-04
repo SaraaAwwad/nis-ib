@@ -74,48 +74,73 @@ class CourseModel extends AbstractModel {
                 $this->group = new CourseGroupModel($this->group_id_fk);
                 $this->status = $row["status"];
 
-                //
             }
         }
       //  var_dump($this);
     }
 
-    public static function getCourseByGrade($grade_id_fk)
-    {
+    public static function getCourseByGrade($grade){
         //get all courses for this grade and active
-
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
-         WHERE group_id_fk = $grade_id_fk AND status.code='active' ";
-
-        $stmt = self::prepareStmt($sql);  
-
+         WHERE group_id_fk = '.$grade.' AND status.code='active' ";
+        $stmt = self::prepareStmt($sql);
         $Res = array();
         $i=0;
-        
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){  
                 $courseObj = new CourseModel($row['id']);
                 $Res[$i] = $courseObj;
                 $i++;
-               // var_dump($courseObj);
             }
         }
-       // var_dump($Res);
-//exit();
         return $Res;
-        
     }
 
-    public static function getStudentsByCourse($course, $semester){
+    public static function getByGrade($grade){
+        //get all courses for this grade and active
+        $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
+         WHERE group_id_fk = '.$grade.' AND status.code='active' 
+         AND course.id NOT IN (SELECT course_id_fk FROM exam_details)";
+        $stmt = self::prepareStmt($sql);
+        $Res = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $courseObj = new CourseModel($row['id']);
+                $Res[$i] = $courseObj;
+                $i++;
+            }
+        }
+        return $Res;
+    }
 
-        $sql = 'SELECT user.id, user.fname, user.lname
-        From user inner JOIN registration on registration.student_id_fk = user.id 
-        INNER JOIN schedule on schedule.class_id_fk = registration.class_id_fk 
-        INNER JOIN schedule_details ON schedule_details.sched_id_fk = schedule.id 
-        AND schedule_details.course_id_fk = ' .$course. '
-        INNER JOIN semester ON schedule.semester_id_fk = ' .$semester. '
-        AND schedule.semester_id_fk = registration.semester_id_fk 
-        WHERE user.status = (SELECT id FROM status WHERE code = "active")';
+    public static function getStudentsByCourse($grade){
+
+        $sql = "SELECT user.* FROM user 
+        INNER JOIN student_level ON user.id = student_level.user_id_fk 
+        INNER JOIN status ON status.id = user.status 
+        INNER JOIN registration ON registration.student_id_fk =user.id 
+        AND scl_grade_id_fk = $grade AND status.code='active'";
+
+        // $sql="SELECT user.id, user.fname, user.lname
+        // From user inner JOIN registration ON registration.student_id_fk = user.id 
+        // INNER JOIN schedule ON schedule.class_id_fk = registration.class_id_fk 
+        // INNER JOIN schedule_details ON schedule_details.sched_id_fk = schedule.id 
+        // AND schedule_details.course_id_fk = $course
+        // AND schedule.semester_id_fk = registration.semester_id_fk 
+        // WHERE user.status = (SELECT id FROM status WHERE code = 'active')";
+
+        // select user.id, user.fname, user.lname
+        //     From user inner JOIN registration on registration.student_id_fk = user.id 
+        //     INNER JOIN schedule ON schedule.class_id_fk = registration.class_id_fk
+        //     AND registration.semester_id_fk = schedule.semester_id_fk 
+        //     AND schedule.semester_id_fk = $semester
+        
+        //     INNER JOIN student_level ON student_level.user_id_fk = user.id
+        //     AND student_level.scl_grade_id_fk IN ('.$grade.')
+        //     INNER JOIN schedule_details ON schedule.id = schedule_details.sched_id_fk
+        //     AND schedule_details.course_id_fk IN ('.$course.')
+        //     AND user.status = (SELECT id FROM status WHERE code = "active")'
 
         $stmt = self::prepareStmt($sql);  
 
@@ -134,6 +159,28 @@ class CourseModel extends AbstractModel {
         //exit();
         return $Res;
 
+    }
+
+    public static function getStudentCourses(){
+        $query2='SELECT course.* , schedule.semester_id_fk from course inner join schedule_details on schedule_details.course_id_fk = course.id 
+        inner join schedule on schedule_details.sched_id_fk = schedule.id inner join class on schedule.class_id_fk = class.id 
+        inner join registration on registration.class_id_fk = class.id where registration.student_id_fk = 7';
+
+        
+        $stmt = self::prepareStmt($query2);  
+        $Res = array();
+        $i=0;
+        
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $st = new CourseModel($row['id']);
+                $st->semester_id_fk = $row['semester_id_fk'];
+                $Res[$i] = $st;
+                $i++;     
+            }
+        }
+
+        return $Res;
     }
     
 }

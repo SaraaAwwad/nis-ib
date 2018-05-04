@@ -17,8 +17,10 @@ class RegisterationController extends AbstractController
     {
         //$lvl = LevelModel::getAll();
         //$this->_data['levels'] = $lvl;
+
         $this->_data['details'] = RegisterationModel::getReg();
         $this->_view();
+
     }
 
     public function addAction()
