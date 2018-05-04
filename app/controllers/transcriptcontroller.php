@@ -44,6 +44,7 @@ class TranscriptController extends AbstractController
             }
             $this->redirect('/transcript');
         }
+
         if(isset($_POST['action']))
         {
             if($_POST['action'] == 'getCourses'){
@@ -61,7 +62,6 @@ class TranscriptController extends AbstractController
             else if($_POST['action'] == 'getStudents'){
                 //$semester = $_POST['semester'];
                 $grade = $_POST['grade'];
-
                 $course = $_POST['course'];
                 $students = ExamModel::getStudentsInCourse($course,$grade);
                 echo json_encode($students);

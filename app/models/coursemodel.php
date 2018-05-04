@@ -8,7 +8,7 @@ class CourseModel extends AbstractModel {
     public $course_code;
     public $descr;
     public $status;
-    public $grade_id_fk;
+    public $group_id_fk;
     public $level_id_fk;
     public $name;
     public $teaching_hours;
@@ -22,7 +22,7 @@ class CourseModel extends AbstractModel {
         'descr'              => self::DATA_TYPE_STR,
         'level_id_fk'        => self::DATA_TYPE_INT,
         'teaching_hours'     => self::DATA_TYPE_INT,
-        'grade_id_fk'        => self::DATA_TYPE_INT,
+        'group_id_fk'        => self::DATA_TYPE_INT,
         'status'             => self::DATA_TYPE_INT
     );
 
@@ -70,20 +70,19 @@ class CourseModel extends AbstractModel {
                 $this->descr = $row["descr"];
                 $this->level_id_fk = $row["level_id_fk"]; //no use
                 $this->teaching_hours = $row["teaching_hours"];
-                $this->grade_id_fk = $row["grade_id_fk"];
+                $this->group_id_fk = $row["group_id_fk"];
                 $this->group = new CourseGroupModel($this->group_id_fk);
                 $this->status = $row["status"];
 
-                //
             }
         }
       //  var_dump($this);
     }
 
-    public static function getCourseByGrade($grade_id_fk){
+    public static function getCourseByGrade($grade){
         //get all courses for this grade and active
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
-         WHERE grade_id_fk = $grade_id_fk AND status.code='active' ";
+         WHERE group_id_fk = '.$grade.' AND status.code='active' ";
         $stmt = self::prepareStmt($sql);
         $Res = array();
         $i=0;

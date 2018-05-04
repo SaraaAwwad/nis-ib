@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7462f1e-39e8-486a-9e77-e48b220a675d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/app/views/exam/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/exam/add.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/transcriptcontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/transcriptcontroller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/coursemodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/coursemodel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/transcript/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/transcript/add.view.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +19,11 @@
       <file leaf-file-name="add.view.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/transcript/add.view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="192" column="49" lean-forward="true" selection-start-line="192" selection-start-column="49" selection-end-line="192" selection-end-column="49" />
+            <state relative-caret-position="-1175">
+              <caret line="60" column="108" selection-start-line="60" selection-start-column="108" selection-end-line="60" selection-end-column="108" />
+              <folding>
+                <element signature="e#2546#2567#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -26,8 +31,44 @@
       <file leaf-file-name="add.view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/exam/add.view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="245" column="27" selection-start-line="245" selection-start-column="25" selection-end-line="245" selection-end-column="49" />
+            <state relative-caret-position="288">
+              <caret line="64" column="34" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transcriptcontroller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/transcriptcontroller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="semestermodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/semestermodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coursemodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/coursemodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="82" column="23" lean-forward="true" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="exammodel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/exammodel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="61" column="74" lean-forward="true" selection-start-line="61" selection-start-column="74" selection-end-line="61" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -74,8 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/student/add.view.php" />
-        <option value="$PROJECT_DIR$/app/controllers/studentcontroller.php" />
         <option value="$PROJECT_DIR$/app/views/registeration/default.view.php" />
         <option value="$PROJECT_DIR$/app/views/registeration/edit.view.php" />
         <option value="$PROJECT_DIR$/app/controllers/registerationcontroller.php" />
@@ -120,10 +159,12 @@
         <option value="$PROJECT_DIR$/app/views/examview.php" />
         <option value="$PROJECT_DIR$/public/assets/css/jquery-ui.css" />
         <option value="$PROJECT_DIR$/public/assets/css/style.css" />
-        <option value="$PROJECT_DIR$/app/models/coursemodel.php" />
         <option value="$PROJECT_DIR$/app/models/exammodel.php" />
         <option value="$PROJECT_DIR$/app/controllers/examcontroller.php" />
         <option value="$PROJECT_DIR$/app/views/exam/add.view.php" />
+        <option value="$PROJECT_DIR$/app/controllers/transcriptcontroller.php" />
+        <option value="$PROJECT_DIR$/app/models/semestermodel.php" />
+        <option value="$PROJECT_DIR$/app/models/coursemodel.php" />
         <option value="$PROJECT_DIR$/app/views/transcript/add.view.php" />
       </list>
     </option>
@@ -160,6 +201,12 @@
               <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
               <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nis-ib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="nis-ib" type="b2602c69:ProjectViewProjectNode" />
@@ -243,7 +290,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177667000" />
+    <option name="totallyTimeSpent" value="181757000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -317,13 +364,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/studentmodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="115" column="1" lean-forward="true" selection-start-line="115" selection-start-column="1" selection-end-line="115" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/abstractmodel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -489,13 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/semestermodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/staff/default.view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -652,23 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/coursemodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="94" column="21" lean-forward="true" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/exammodel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-          <folding>
-            <element signature="e#2794#2854#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/examcontroller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
@@ -680,17 +696,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/semestermodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="46" column="33" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/exammodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="61" column="74" lean-forward="true" selection-start-line="61" selection-start-column="74" selection-end-line="61" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/transcriptcontroller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/coursemodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="82" column="23" lean-forward="true" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/exam/add.view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="245" column="27" selection-start-line="245" selection-start-column="25" selection-end-line="245" selection-end-column="49" />
+        <state relative-caret-position="288">
+          <caret line="64" column="34" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="108" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/transcript/add.view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="192" column="49" lean-forward="true" selection-start-line="192" selection-start-column="49" selection-end-line="192" selection-end-column="49" />
+        <state relative-caret-position="-1175">
+          <caret line="60" column="108" selection-start-line="60" selection-start-column="108" selection-end-line="60" selection-end-column="108" />
+          <folding>
+            <element signature="e#2546#2567#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
