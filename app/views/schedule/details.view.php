@@ -118,7 +118,6 @@
         </colgroup>
         <thead>
             <tr class='warning'>
-                <th>ID</th>
                 <th>Course</th>
                 <th>Slot</th>
                 <th>Day</th>
@@ -133,7 +132,6 @@
             if(!empty($details)){
                 foreach ($details as $s){
                     echo '<tr>
-                    <td>'.$s->id.'</td>
                     <td>'.$s->course_code.'</td>
                     <td>'.$s->slot_name.'</td>
                     <td>'.$s->day.'</td>                    

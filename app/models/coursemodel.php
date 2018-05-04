@@ -80,8 +80,7 @@ class CourseModel extends AbstractModel {
       //  var_dump($this);
     }
 
-    public static function getCourseByGrade($grade_id_fk)
-    {
+    public static function getCourseByGrade($grade_id_fk){
         //get all courses for this grade and active
 
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
@@ -101,7 +100,6 @@ class CourseModel extends AbstractModel {
             }
         }
        // var_dump($Res);
-//exit();
         return $Res;
         
     }
@@ -139,6 +137,28 @@ class CourseModel extends AbstractModel {
         //exit();
         return $Res;
 
+    }
+
+    public static function getStudentCourses(){
+        $query2='SELECT course.* , schedule.semester_id_fk from course inner join schedule_details on schedule_details.course_id_fk = course.id 
+        inner join schedule on schedule_details.sched_id_fk = schedule.id inner join class on schedule.class_id_fk = class.id 
+        inner join registration on registration.class_id_fk = class.id where registration.student_id_fk = 7';
+
+        
+        $stmt = self::prepareStmt($query2);  
+        $Res = array();
+        $i=0;
+        
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $st = new CourseModel($row['id']);
+                $st->semester_id_fk = $row['semester_id_fk'];
+                $Res[$i] = $st;
+                $i++;     
+            }
+        }
+
+        return $Res;
     }
     
 }
