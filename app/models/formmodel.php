@@ -1,16 +1,17 @@
 <?php
 namespace PHPMVC\Models;
 
-
-abstract class FormModel
+class FormModel
 {
-    public static function createElement($type){
+    public static function createElement($attrObj){
+        $type = $attrObj->type;
         $classpath  = "PHPMVC\\Models\\".$type;
         if(class_exists($classpath)){
-            $formElement=new $classpath();
-            return $formElement->getHTML();
+            $formElement=new $classpath($attrObj);  
         }else{
-          return false;
+            $input = "PHPMVC\\Models\\Input";
+            $formElement = new $input($attrObj);
         }
+        return $formElement->getHTML();
     }
 }

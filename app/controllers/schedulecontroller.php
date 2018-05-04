@@ -23,12 +23,11 @@ class ScheduleController extends AbstractController
 
     public function defaultAction()
     {
-        $this->_data['schedule'] =ScheduleModel::getSchedules();
+        $this->_data['schedule'] =ScheduleModel::getAll();
         $this->_view();
     }
 
-    public function addAction()
-    { 
+    public function addAction(){ 
         if(isset($_POST['addSchedule']))  {
             $schedule = new ScheduleModel();
             $schedule->class_id_fk = $_POST['name'];
@@ -40,7 +39,7 @@ class ScheduleController extends AbstractController
                 //message = already added
             }
 
-            if($schedule->save()){
+            if($schedule->add()){
                 $this->redirect('/schedule');
             }
 
@@ -55,8 +54,11 @@ class ScheduleController extends AbstractController
     public function detailsAction(){
         if(isset($this->_params[0])){
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
-            $s = ScheduleModel::getByPK($id);
-
+            $s = new ScheduleModel($id);
+            
+           // $w = $s->getFreeDays(1);
+           // var_dump($w);
+            //exit();
             if(isset($_POST['action']))  {
                 if($_POST['action']== 'getDays'){
                     $slot = $_POST['slot'];
@@ -94,10 +96,12 @@ class ScheduleController extends AbstractController
 
             }
 
-            $s = ScheduleModel::getByPK($id);
-            $s->getDetails();
+            //$s = ScheduleModel::getByPK($id);
+            //$s->getDetails();
 
             $this->_data['details'] = $s->sched_details; // ScheduleDetailsModel::getDetails($id);
+          //  var_dump($s->sched_details);
+         //   exit();
             $this->_data['courses'] = CourseModel::getAll();
             $this->_data['slots'] = SlotModel::getAll();
           
@@ -108,9 +112,13 @@ class ScheduleController extends AbstractController
     public function deletedetailAction(){
         if(isset($this->_params[0])){
         $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+
         $s = ScheduleDetailsModel::getByPK($id);
+
         $sched = $s->sched_id_fk;
             if($s->delete()){
+                $this->redirect('/schedule/details/'.$sched);
+            }else{
                 $this->redirect('/schedule/details/'.$sched);
             }
         }
@@ -119,7 +127,7 @@ class ScheduleController extends AbstractController
     public function editAction(){
         if(isset($this->_params[0])){
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
-            $s = ScheduleModel::getByPK($id);
+            $s = new ScheduleModel($id);
           if($s){
             $this->_data['sched'] = $s;
 
@@ -128,7 +136,7 @@ class ScheduleController extends AbstractController
                 $s->status_id_fk = $_POST['status'];
                 $s->semester_id_fk = $_POST['semester'];
                 
-                if($s->save()){
+                if($s->edit()){
                     $this->redirect('/schedule');
                 }
             }
@@ -140,5 +148,11 @@ class ScheduleController extends AbstractController
             $this->_view();
           }
         }
+    }
+
+    public function studentAction(){
+        $sched = ScheduleModel::getAllStudentSched();
+        $this->_data['sched'] = $sched;
+        $this->_view();
     }
 }

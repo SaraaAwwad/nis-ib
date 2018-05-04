@@ -48,12 +48,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         <div class="col-sm-8">
                         <select name="semester" class="form-control" id="semester">
                         <option value="" disabled selected>Select Semester</option>
-<<<<<<< HEAD
-                        <!-- <?php foreach($semester as $s){ ?>
-                        <option value="<?php echo $s->id; ?>"><?php echo $s->season_name .' - '. $s->year; ?></option>
-                        <?php } ?> -->
-=======
->>>>>>> dc3a80f63d51bd0cc16a0f5128e8d8e29dd536bd
                             </select>
                         </div>
                     </div>
@@ -77,14 +71,11 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
     </div>
 
     <script>
-
         $(document).ready(function(data){
             $('#transcriptform').hide();
-
             $('#grade').on('change',function(e){
                 e.preventDefault();
                 e.stopPropagation();
-
                 $.ajax({
                     url:"/transcript/add",
                     method:'POST',
@@ -95,7 +86,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                     success:function(data)
                     {
-                        
+                       
                         $('#course').html('');
                         $('#course').append($('<option>', { 
                             text : "Select Course",
@@ -112,9 +103,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
      
                 
                     },
-
                     
-
                     error: function (jqXHR, exception) {
                         var msg = '';
                         if (jqXHR.status === 0) {
@@ -140,7 +129,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
             $('#course').on('change',function(e){
                 e.preventDefault();
                 e.stopPropagation();
-
                 $.ajax({
                     url:"/transcript/add",
                     method:'POST',
@@ -158,7 +146,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             disabled: true,
                             value: ""
                         }));
-
                         $.each(data, function (i, semester) {
                            $('#semester').append($('<option>', { 
                                 value: semester.id,
@@ -169,7 +156,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
     
                 
                     },
-
                     error: function (jqXHR, exception) {
                         var msg = '';
                         if (jqXHR.status === 0) {
@@ -192,10 +178,107 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 });
             });
 
+            $('#semester').on('change',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                $.ajax({
+                    url:"/transcript/add",
+                    method:'POST',
+                    dataType:'json',
+                    data:{
+                        semester:$('#semester').val(),
+                        grade:$('#grade').val(),
+                        action:"getStudents"
+                    },
+                    success:function(data)
+                    {
+                        alert("whaaaat");
+
+                        $("#studentform").show();
+
+                          $('.students').html('');
+                          $.each(students, function (i, students) {
+                            $('#students').append($('<label>', {
+                            text : data.fname + ' ' + data.lname
+                        })).append($('<input>',{
+                            type:'text', 
+                            value:data.NumericGrade}));
+                          });
+    
+                
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        alert(msg);
+                    },
+                });
+            });
+
+            // $('#semester').on('change',function(e){
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            //     $.ajax({
+            //         url:"/transcript/add",
+            //         method:'POST',
+            //         dataType:'json',
+            //         data:{
+            //             semester:$('#semester').val(),
+            //             grade:$('#grade').val(),
+            //             action:"getStudents"
+            //         },
+            //         success:function(data)
+            //         {
+            //             // alert("whaaaat");
+
+            //             $("#studentform").show();
+
+            //               $('.students').html('');
+            //               $.each(students, function (i, students) {
+            //               $('.students').append($('<input>').attr({
+            //                   type: 'text', value: students.id, name: 'studentsCB[]'})).append(
+            //                   $('<label>').text(students.fname));
+            //               });
+    
+                
+            //         },
+            //         error: function (jqXHR, exception) {
+            //             var msg = '';
+            //             if (jqXHR.status === 0) {
+            //                 msg = 'Not connect.\n Verify Network.';
+            //             } else if (jqXHR.status == 404) {
+            //                 msg = 'Requested page not found. [404]';
+            //             } else if (jqXHR.status == 500) {
+            //                 msg = 'Internal Server Error [500].';
+            //             } else if (exception === 'parsererror') {
+            //                 msg = 'Requested JSON parse failed.';
+            //             } else if (exception === 'timeout') {
+            //                 msg = 'Time out error.';
+            //             } else if (exception === 'abort') {
+            //                 msg = 'Ajax request aborted.';
+            //             } else {
+            //                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            //             }
+            //             alert(msg);
+            //         },
+            //     });
+            // });
             
         });
-
-
     </script>
 <?php
 require_once HOME_TEMPLATE_PATH . 'wrapperend.php';

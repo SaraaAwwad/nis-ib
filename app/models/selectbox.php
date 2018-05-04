@@ -1,6 +1,5 @@
 <?php
 namespace PHPMVC\Models;
-
 class selectbox{
     private $html;
     public function __construct($attributes=array()){
@@ -25,7 +24,6 @@ class selectbox{
         return "this->html";
     }
 }
-
 class textinput{
     private $html;
     public function __construct($attributes=array()){

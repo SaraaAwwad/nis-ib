@@ -28,8 +28,40 @@ class CourseView{
     }
 
     public function addCourseWork(){
-
     }
+
+    public function viewCourseWork($coursework){
+        foreach($coursework as $cw){
+            $entity = $cw->req;
+            echo'  <div class="row">
+            <div class="col-lg-9 main-chart">
+                <h3> '.$entity->requirement_name.' ('.$cw->name.')</h3> 
+                <h4>'.$cw->date.'</h4>
+                <hr>
+            </div>
+            </div>';
+
+           echo'<div class="row mt">
+            <div class="col-lg-12">
+            <div class="form-panel"> 
+            <div class="form-horizontal style-form">
+            ';
+
+            foreach($entity->attr as $t){
+                echo '<div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">'.$t->attr_name.':</label><div class="col-sm-10 col-sm-10">';
+
+                foreach($t->options as $opt){
+                    echo $opt.' ';
+                }
+                echo '</div></div>';
+            }
+            
+            echo '</div></div></div></div><hr>';
+        }
+            
+    
+        }
 
     public function title(){
       echo'  <div class="row">

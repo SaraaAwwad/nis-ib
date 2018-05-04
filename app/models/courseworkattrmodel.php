@@ -8,6 +8,8 @@ class CourseWorkAttrModel extends AbstractModel{
     public $id;
     public $attr_name;
     public $type;
+    public $oid = array();
+    public $values = array();
 
     public function  __construct($id=""){
         if($id != ""){
@@ -17,7 +19,10 @@ class CourseWorkAttrModel extends AbstractModel{
     }
     
     public function getInfo(){
-        $query = "SELECT coursework_attr.*, type.type FROM coursework_attr INNER JOIN type ON type.id = coursework_attr.type_id_fk WHERE coursework_attr.id = :id ";
+        $query = "SELECT coursework_attr.*, type.type FROM coursework_attr 
+        INNER JOIN type ON type.id = coursework_attr.type_id_fk
+        WHERE coursework_attr.id = :id ";
+        
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         
@@ -28,7 +33,9 @@ class CourseWorkAttrModel extends AbstractModel{
               $this->attr_name =  $row['attr_name'];
               $this->type = $row['type'];       
             }
-        }   
+        }  
+        
+        $this->getOptions();
     }
 
     public static function add($attr_name, $type){
@@ -92,4 +99,21 @@ class CourseWorkAttrModel extends AbstractModel{
         return false;
     }
 
+    public function getOptions(){
+        $query = "SELECT attr_options.* FROM attr_options 
+        INNER JOIN coursework_attr ON coursework_attr.id = attr_options.attr_id_fk 
+        WHERE coursework_attr.id = '$this->id' ";
+        
+        $stmt = self::prepareStmt($query);
+        
+        $i=0;
+        
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+              $this->oid[$i] =  $row['id'];
+              $this->values[$i] = $row['value']; 
+              $i++;      
+            }
+        }
+    }
 }

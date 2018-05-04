@@ -20,7 +20,7 @@ class CourseWorkModel extends AbstractModel{
     }
     
     public function getInfo(){
-        $query = "SELECT * FROM coursework WHERE id = :id ";
+        $query = "SELECT * FROM coursework WHERE id = :id";
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         
@@ -31,6 +31,7 @@ class CourseWorkModel extends AbstractModel{
               $this->name =  $row['name'];
               $this->date = $row['date'];
               $this->req_id_fk = $row['req_id_fk'];
+              $this->req = new CourseWorkEntityModel($this->req_id_fk);
               $this->course_id_fk = $row['course_id_fk'];
               $this->semester_id_fk = $row['semester_id_fk'];       
             }
@@ -62,15 +63,15 @@ class CourseWorkModel extends AbstractModel{
         return false;
     }
 
-    public static function getAll(){
+    public static function getAll($course_id_fk, $semester_id_fk){
 
-        $query = "SELECT * FROM coursework_attr";
+        $query = "SELECT * FROM coursework where course_id_fk = '$course_id_fk' and semester_id_fk = '$semester_id_fk' ";
         $stmt = self::prepareStmt($query);        
         $Res = array();
         $i=0;
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                $MyObj= new CourseWorkAttrModel($row['id']);
+                $MyObj= new CourseWorkModel($row['id']);
                 $Res[$i]=$MyObj;
                 $i++;
             }
@@ -79,5 +80,7 @@ class CourseWorkModel extends AbstractModel{
             return false;
         }
     }
+
+
 
 }

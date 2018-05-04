@@ -3,9 +3,64 @@ namespace PHPMVC\Views;
 
 class ScheduleView{
 
-    public function schedulePDF(){
+    public function scheduleStudent($sched){
+        foreach ($sched as $s){
+            echo'<div class="row">
+            <div class="col-lg-9 main-chart">
+                <h1>'.$s->class_name.'</h1>
+                <h3>'.$s->season_name.' - '.$s->year.'</h3>
+                <hr>
+            </div>
+        </div>'	;
+        /*foreach($s->sched_details as $det){
+            var_dump($det->course_code);
 
+        }*/
+        
+        
+
+echo '<button type="button" class="btn btn-danger" id="toPDF" > Export as PDF </button>';
+
+echo '<div id="sched">
+    <table id="tab_sched" class="table table-striped text-center">
+        <colgroup>
+            <col width="5%">
+                <col width="20%">
+                    <col width="10%">
+                        <col width="15%">
+                            <col width="20%">
+                                <col width="10%">
+                                    <col width="20%">
+        </colgroup>
+        <thead>
+            <tr class="warning">
+                <th>Course</th>
+                <th>Slot</th>
+                <th>Day</th>
+                <th>Teacher</th>
+                <th>Room</th>     
+            </tr>
+        </thead>
+        <tbody>';
+        
+
+               foreach($s->sched_details as $det){
+                    echo '<tr>
+                    <td>'.$det->course_code.'</td>
+                    <td>'.$det->slot_name.'</td>
+                    <td>'.$det->day.'</td>                    
+                    <td>'.$det->fname .' - '. $det->lname.'</td>
+                    <td>'.$det->room_name.'</td>
+                    
+                    </tr>';    
+                }
+        echo'</tbody>
+    </table>
+</div>';
+
+echo '<hr>';
     } 
+}
 
     public function editSched($class, $semester, $status, $sched){
         
