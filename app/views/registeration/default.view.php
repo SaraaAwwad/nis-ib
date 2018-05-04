@@ -33,6 +33,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
             <tbody>
             <tr>
                 <?php
+                if(!empty($details)){
                 foreach ($details as $reg){
                     echo '<tr>
                     <td>'.$reg->id.'</td>
@@ -43,6 +44,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     
                     </tr>';
                 }
+            }
                 ?>
             </tr>
             </tbody>
