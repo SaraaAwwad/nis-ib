@@ -285,8 +285,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             action : "getRooms"
                         },
                         success: function (data) {
-                            // alert("by3ml");
-                            // $('#room').html('');
+
                             $.each(JSON.parse(data), function (i, data) {
                                 $('#room').append($('<option>', {
                                     value: data.id,

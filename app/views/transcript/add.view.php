@@ -54,14 +54,14 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
 
                     <fieldset id="studentform" style="display:none;">
-                    <div class="container" style="margin-top:20px;">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <h5>Students</h5>
-                                <div class="students" style="max-height: 300px;overflow: auto;">
-
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Students</label>
+                            <div class="col-sm-4">
+                                <select multiple = "multiple" name="students[]" id="students" class="form-control semester" required>
+                                    <option value="" disabled>Select Students</option>
+                                </select>
                             </div>
+                        </div>
                     </fieldset>
 
                     <input type="submit" name="addTran" id="main">
@@ -71,7 +71,8 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
     </div>
 
     <script>
-        $(document).ready(function(data){
+        $(document).ready(function(data) {
+            var pathname = window.location.pathname;
             $('#transcriptform').hide();
             $('#grade').on('change',function(e){
                 e.preventDefault();
@@ -151,10 +152,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 value: semester.id,
                                 text : semester.season_name + " - "+ semester.year
                             }));
-                           // alert(semester.id);
                         });
-    
-                
                     },
                     error: function (jqXHR, exception) {
                         var msg = '';
@@ -182,7 +180,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 e.preventDefault();
                 e.stopPropagation();
                 $.ajax({
-                    url:"/transcript/add",
+                    url: pathname,
                     method:'POST',
                     dataType:'json',
                     data:{
@@ -192,18 +190,12 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                     success:function(data)
                     {
-                        alert("whaaaat");
-
                         $("#studentform").show();
-
-                          $('.students').html('');
-                          $.each(students, function (i, students) {
-                            $('#students').append($('<label>', {
+                        $('#students').html('');
+                        $('#students').append($('<option>', {
+                            value: data.id,
                             text : data.fname + ' ' + data.lname
-                        })).append($('<input>',{
-                            type:'text', 
-                            value:data.NumericGrade}));
-                          });
+                        }));
     
                 
                     },
