@@ -46,29 +46,24 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
 
                                 <div class="row">
-<!--                                    <h4 class="pull-right">payment ID # 12345</h4>-->
                                     <div class="col-sm-4 col-md-4">
-                                        <address>
-                                            <strong>Billed To:</strong><br>
-                                            John Smith<br>
-                                            1234 Main<br>
-                                            Apt. 4B<br>
-                                            Springfield, ST 54321
-                                        </address>
+                                            <address>
+                                            <strong>Student Name:</strong><br>
+                                            <?php echo $st->fname ." ".  $st->lname ?><br>
+                                            </address>
                                     </div>
 
                                     <div class="col-sm-4 col-md-4">
-                                        <address>
-                                            <strong>Payment Method:</strong><br>
-                                            Visa ending **** 4242<br>
-                                            jsmith@email.com
+                                        </address>
+                                        <strong>Grade:</strong><br>
+                                        <?php echo $st->gradeObj->grade_name ?><br>
                                         </address>
                                     </div>
 
                                         <div class="col-sm-4 col-md-4">
-                                            <address>
+                                            </address>
                                                     <strong>Payment Date:</strong><br>
-                                                March 7, 2014<br><br>
+                                                <?php echo date("d-m-Y") ?><br>
                                             </address>
                                     </div>
                                 </div>
@@ -77,49 +72,31 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             <div class="col-md-9">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title"><strong>summary</strong></h3>
+                                        <h3 class="panel-title"><strong>Preview</strong></h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive">
-                                            <table class="table table-condensed">
+                                            <table class="table table-condensed table1">
                                                 <thead>
                                                 <tr>
                                                     <td><strong>Description</strong></td>
                                                     <td class="text-center"><strong>Price</strong></td>
-                                                    <td class="text-right"><strong>Totals</strong></td>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+
+                                                <?php
+                                                foreach($decorator as $dec){
+                                                    echo '<tr>
+                                                    <td><input type="checkbox"  name="myCheck[]" value="'.$dec->id.'"> '. $dec->decoratorObj->name.'</td>
+                                                    <td class="text-center checkprice" value="'.$dec->id.'">'.$dec->price.'</td>
+
+                                                </tr>';
+                                                }
+                                                ?>
                                                 <tr>
-                                                    <td>Year fees</td>
-                                                    <td class="text-center">$10.99</td>
-                                                    <td class="text-right">$10.99</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Bus</td>
-                                                    <td class="text-center">$20.00</td>
-                                                    <td class="text-right">$60.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Books</td>
-                                                    <td class="text-center">$600.00</td>
-                                                    <td class="text-right">$600.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="thick-line"></td>
-                                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                                    <td class="thick-line text-right">$670.99</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="no-line"></td>
-                                                    <td class="no-line text-center"><strong>Annual increase</strong></td>
-                                                    <td class="no-line text-right">$15</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="no-line"></td>
                                                     <td class="no-line text-center"><strong>Total</strong></td>
-                                                    <td class="no-line text-right">$685.99</td>
+                                                    <td class="text-center" id="tdTotal"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -129,7 +106,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             </div>
                         </div>
 
-                    <input type="submit" name="addusertype" id="main">
+                    <input type="submit" name="addPayment" id="main">
                 </form>
             </div>
         </div>
@@ -137,74 +114,24 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
 
     <script>
-        $(document).ready(function(data){
 
-            $('.selectMethod').on('change',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-
-                $.ajax({
-                    url:"/payment/add",
-                    method:'POST',
-                    dataType:'json',
-                    data:{
-                        methodd: $('#method').val(),
-                        action:"getAttributes"
-                    },
-                    success:function(data)
-                    {   alert("hii");
-                        attributesArr = data.attributesArr;
-
-
-                        $('.PaymentAttributes').append($('<option>', {
-                            text : "Select Class",
-                            selected: true,
-                            disabled: true,
-                            value: ""
-                        }));
-
-                        $.each(classes, function (i, classes) {
-                            $('#class').append($('<option>', {
-                                value: classes.id,
-                                text : classes.name
-                            }));
-                        });
-
-
-                        $('.PaymentAttributes').html('');
-                        $.each(SelectedAttr, function (i, SelectedAttr) {
-                            $inputDiv = '<div class="form-group">'+
-                                        '<label class="col-sm-2 col-sm-2 control-label">'.Attributes->attrname.'</label>'+
-                                        '<div class="col-sm-8">'+
-                                        '<input name="'.SelectedAttr->id.''" type="text" class="form-control" required>'+
-                                        '</div></div>';
-                            $('.PaymentAttributes').append($inputDiv);
-                            $(".PaymentAttributes").show();
-
-                    },
-
-                    error: function (jqXHR, exception) {
-                        var msg = '';
-                        if (jqXHR.status === 0) {
-                            msg = 'Not connect.\n Verify Network.';
-                        } else if (jqXHR.status == 404) {
-                            msg = 'Requested page not found. [404]';
-                        } else if (jqXHR.status == 500) {
-                            msg = 'Internal Server Error [500].';
-                        } else if (exception === 'parsererror') {
-                            msg = 'Requested JSON parse failed.';
-                        } else if (exception === 'timeout') {
-                            msg = 'Time out error.';
-                        } else if (exception === 'abort') {
-                            msg = 'Ajax request aborted.';
-                        } else {
-                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                        }
-                        alert(msg);
-                    },
-                });
+        $(".myCheck").on('change',function () {
+            //var checked = [];
+            var prices = [];
+            $(".myCheck").map(function() {
+                if( this.checked ) {
+                   // checked.push(this.id);
+                    var currentRow=$(this).closest("tr");
+                    var col=currentRow.find("td:eq(1)").html();
+                    prices.push(parseInt(col));
+                }
             });
 
+            var total=0;
+            for(var i in prices){
+                total +=  prices[i];
+            }
+            document.getElementById('tdTotal').innerHTML = total;
         });
 
     </script>

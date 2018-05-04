@@ -6,7 +6,7 @@ class StudentLevelModel extends AbstractModel{
     public $id;
     public $scl_grade_id_fk; //use grade only (remove level from database)
     public $user_id_fk;
-    private $table_name = "student_level";
+    protected static $tableName = "student_level";
 
     public function __construct($id=""){
         if($id != ""){
@@ -17,7 +17,7 @@ class StudentLevelModel extends AbstractModel{
 
     public function getInfo()
     {
-        $query = "SELECT * FROM ".$this->table_name." WHERE id =". $this->id;
+        $query = "SELECT * FROM ".self::$tableName ." WHERE id =". $this->id;
         $stmt =self::prepareStmt($query);
 
         if($stmt->execute()){
@@ -27,6 +27,22 @@ class StudentLevelModel extends AbstractModel{
                 $this->user_id_fk = $row["user_id_fk"];
             }
         }
+    }
+
+
+    public static function getGradeID($student_id)
+    {
+        $query =  "SELECT * FROM ". self::$tableName ." WHERE user_id_fk =" . $student_id;
+        $stmt =self::prepareStmt($query);
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $sclObj = new StudentLevelModel($row["id"]);
+            }
+            return $sclObj;
+        }else{
+            return false;
+        }
+
     }
 
 //    public function InsertinDB(){

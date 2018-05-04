@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class ParentModel extends UserModel implements IpayModel {
+class ParentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
 
@@ -67,18 +67,28 @@ class ParentModel extends UserModel implements IpayModel {
 
     }
 
+    static public function getParent(){
 
+        $query = "SELECT id , fname, lname FROM ".static::$tableName." WHERE user_id_fk = ". $_SESSION['userID'];
+        $stmt = self::prepareStmt($query);
+        $children = array();
+        $i=0;
+        if($stmt->execute()){
 
-    public function addPayment()
-    {
-        // TODO: Implement addPayment() method.
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                //echo $row['id'];
+                $childrenobj = new StudentModel($row['id']);
+                $childrenobj->getGrade();
+                $children[$i] = $childrenobj;
+                $i++;
+            }
+            return $children;
+        }else{
+            return false;
+        }
+
     }
 
-
-    public function viewPayment()
-    {
-        // TODO: Implement viewPayment() method.
-    }
 }
 
 ?>
