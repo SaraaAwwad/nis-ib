@@ -1,16 +1,13 @@
 <?php
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
-
 class SemesterModel extends AbstractModel {
-
     public $id;
     public $year;
     public $season_id_fk;
     public $start_date;
     public $end_date;
     public $season_name;
-
     protected static $tableName = 'semester';
     protected static $tableSchema = array(
         'id'                  => self::DATA_TYPE_INT,
@@ -19,9 +16,7 @@ class SemesterModel extends AbstractModel {
         'start_date'           => self::DATA_TYPE_DATE,
         'end_date'           => self::DATA_TYPE_DATE        
     );
-
     protected static $primaryKey = 'id';
-
     public static function getSemesters()
     {
         return self::get(
@@ -29,19 +24,16 @@ class SemesterModel extends AbstractModel {
           season ON semester.season_id_fk = season.id'
         );
     }
-
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
             $this->getInfo();
         }
     }
-
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
         season ON semester.season_id_fk = season.id";
         $stmt = $this->prepareStmt($query);  
-
         if($stmt->execute()){
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             $this->year = $row['year'];
@@ -50,10 +42,7 @@ class SemesterModel extends AbstractModel {
             $this->end_date = $row['end_date'];
         }
     }
-
-
-    public static function getSemestersByCourse( $course){
-
+    public static function getSemestersByCourse($course){
         $sql = "SELECT DISTINCT semester.* from semester
         INNER JOIN schedule ON schedule.semester_id_fk = semester.id INNER JOIN 
         schedule_details ON schedule_details.sched_id_fk = schedule.id 

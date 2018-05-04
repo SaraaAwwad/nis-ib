@@ -106,16 +106,21 @@ class CourseModel extends AbstractModel {
         
     }
 
-    public static function getStudentsByCourse($course, $semester){
+    public static function getStudentsByCourse($grade){
 
-        $sql = 'SELECT user.id, user.fname, user.lname
-        From user inner JOIN registration on registration.student_id_fk = user.id 
-        INNER JOIN schedule on schedule.class_id_fk = registration.class_id_fk 
-        INNER JOIN schedule_details ON schedule_details.sched_id_fk = schedule.id 
-        AND schedule_details.course_id_fk = ' .$course. '
-        INNER JOIN semester ON schedule.semester_id_fk = ' .$semester. '
-        AND schedule.semester_id_fk = registration.semester_id_fk 
-        WHERE user.status = (SELECT id FROM status WHERE code = "active")';
+        $sql = "SELECT user.* FROM user 
+        INNER JOIN student_level ON user.id = student_level.user_id_fk 
+        INNER JOIN status ON status.id = user.status 
+        INNER JOIN registration ON registration.student_id_fk =user.id 
+        AND scl_grade_id_fk = $grade AND status.code='active'";
+
+        // $sql="SELECT user.id, user.fname, user.lname
+        // From user inner JOIN registration ON registration.student_id_fk = user.id 
+        // INNER JOIN schedule ON schedule.class_id_fk = registration.class_id_fk 
+        // INNER JOIN schedule_details ON schedule_details.sched_id_fk = schedule.id 
+        // AND schedule_details.course_id_fk = $course
+        // AND schedule.semester_id_fk = registration.semester_id_fk 
+        // WHERE user.status = (SELECT id FROM status WHERE code = 'active')";
 
         $stmt = self::prepareStmt($sql);  
 
