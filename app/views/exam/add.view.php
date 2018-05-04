@@ -43,11 +43,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         <div class="col-sm-4">
                             <select name="course" id="course" class="form-control class" required>
                                 <option value="" selected="selected" disabled="disabled">Select Course</option>
-                                <?php
-                                foreach($courses as $c){
-                                    echo '<option value='.$c->id.'>'.$c->name.'</option>';
-                                }
-                                ?>
                             </select>
                         </div>
 
@@ -303,6 +298,28 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         }
                     });
                 });
+
+            $("#grade").on('change',function() {
+
+                $.ajax({
+                    url: pathname,
+                    method: 'POST',
+                    data: {
+                        grade: $("#grade").val(),
+                        action : "getCourseByGrade"
+                    },
+                    success: function (data) {
+                        $.each(JSON.parse(data), function (i, data) {
+                            $('#course').append($('<option>', {
+                                value: data.id,
+                                text: data.name
+                            }));
+                        });
+                    }, error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                    }
+                });
+            });
 
         });
 
