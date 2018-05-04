@@ -5,13 +5,16 @@ use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\UserModel;
 use PHPMVC\Models\ClassModel;
 use PHPMVC\Models\CourseModel;
+use PHPMVC\Models\GradeModel;
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentModel;
+use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
 use PHPMVC\Models\TranscriptModel;
 use PHPMVC\Lib\Helper;
+use PHPMVC\Models\ExamModel;
 class TranscriptController extends AbstractController
 {   use Helper;
     use InputFilter;
@@ -20,11 +23,7 @@ class TranscriptController extends AbstractController
         $this->_view();
     }
     public function addAction(){
-        $semester = SemesterModel::getSemesters();
-        $grade = SclGradeModel::getAll();
-        
-        $this->_data['semester'] = $semester;
-        $this->_data['grade'] = $grade;
+       
 
         if(isset($_POST['addTran'])){
 
@@ -62,13 +61,16 @@ class TranscriptController extends AbstractController
             else if($_POST['action'] == 'getStudents'){
                 //$semester = $_POST['semester'];
                 $grade = $_POST['grade'];
-                //$course = $_POST['course'];
-                $students = CourseModel::getStudentsByCourse($grade);
+
+                $course = $_POST['course'];
+                $students = ExamModel::getStudentsInCourse($course,$grade);
                 echo json_encode($students);
                 return;
             }
         }
-        
+        $this->_data['grade'] = GradeModel::getAll();
+        $this->_data['status'] = StatusModel::getAll();
+        $this->_data['semester'] = SemesterModel::getSemesters();
         $this->_view();
         }
         

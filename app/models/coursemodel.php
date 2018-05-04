@@ -8,7 +8,7 @@ class CourseModel extends AbstractModel {
     public $course_code;
     public $descr;
     public $status;
-    public $group_id_fk;
+    public $grade_id_fk;
     public $level_id_fk;
     public $name;
     public $teaching_hours;
@@ -22,7 +22,7 @@ class CourseModel extends AbstractModel {
         'descr'              => self::DATA_TYPE_STR,
         'level_id_fk'        => self::DATA_TYPE_INT,
         'teaching_hours'     => self::DATA_TYPE_INT,
-        'group_id_fk'        => self::DATA_TYPE_INT,
+        'grade_id_fk'        => self::DATA_TYPE_INT,
         'status'             => self::DATA_TYPE_INT
     );
 
@@ -70,7 +70,7 @@ class CourseModel extends AbstractModel {
                 $this->descr = $row["descr"];
                 $this->level_id_fk = $row["level_id_fk"]; //no use
                 $this->teaching_hours = $row["teaching_hours"];
-                $this->group_id_fk = $row["group_id_fk"];
+                $this->grade_id_fk = $row["grade_id_fk"];
                 $this->group = new CourseGroupModel($this->group_id_fk);
                 $this->status = $row["status"];
 
@@ -83,7 +83,7 @@ class CourseModel extends AbstractModel {
     public static function getCourseByGrade($grade_id_fk){
         //get all courses for this grade and active
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
-         WHERE group_id_fk = $grade_id_fk AND status.code='active' ";
+         WHERE grade_id_fk = $grade_id_fk AND status.code='active' ";
         $stmt = self::prepareStmt($sql);
         $Res = array();
         $i=0;
@@ -112,6 +112,18 @@ class CourseModel extends AbstractModel {
         // AND schedule_details.course_id_fk = $course
         // AND schedule.semester_id_fk = registration.semester_id_fk 
         // WHERE user.status = (SELECT id FROM status WHERE code = 'active')";
+
+        // select user.id, user.fname, user.lname
+        //     From user inner JOIN registration on registration.student_id_fk = user.id 
+        //     INNER JOIN schedule ON schedule.class_id_fk = registration.class_id_fk
+        //     AND registration.semester_id_fk = schedule.semester_id_fk 
+        //     AND schedule.semester_id_fk = $semester
+        
+        //     INNER JOIN student_level ON student_level.user_id_fk = user.id
+        //     AND student_level.scl_grade_id_fk IN ('.$grade.')
+        //     INNER JOIN schedule_details ON schedule.id = schedule_details.sched_id_fk
+        //     AND schedule_details.course_id_fk IN ('.$course.')
+        //     AND user.status = (SELECT id FROM status WHERE code = "active")'
 
         $stmt = self::prepareStmt($sql);  
 

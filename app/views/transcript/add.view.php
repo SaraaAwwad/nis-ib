@@ -89,12 +89,6 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     {
                        
                         $('#course').html('');
-                        $('#course').append($('<option>', { 
-                            text : "Select Course",
-                            selected: true,
-                            disabled: true,
-                            value: ""
-                        }));
                         $.each(data, function (i, course) {
                             $('#course').append($('<option>', { 
                                 value: course.id,
@@ -186,6 +180,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     data:{
                         semester:$('#semester').val(),
                         grade:$('#grade').val(),
+                        course:$('#course').val(),
                         action:"getStudents"
                     },
                     success:function(data)
