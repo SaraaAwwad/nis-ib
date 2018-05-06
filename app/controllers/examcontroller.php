@@ -157,4 +157,22 @@ class ExamController extends AbstractController
 //        }
 //        $this->_view();
 //    }
+
+    public function activationAction()
+    {
+        if(isset($this->_params[0])) {
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+            $exam = ExamModel::getByPK($id);
+            if($exam === false)
+            { $this->redirect('/exam/default'); }
+            if($exam->status_id_fk == StatusModel::getStatusID("active"))
+            { $exam->status_id_fk = $this->filterInt(StatusModel::getStatusID("inactive"));}
+            else{
+                $exam->status_id_fk = $this->filterInt(StatusModel::getStatusID("active"));
+            }
+            $exam->save();
+            $this->redirect('/exam/default');
+            }
+    }
+
 }
