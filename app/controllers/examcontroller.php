@@ -52,6 +52,11 @@ class ExamController extends AbstractController
                     echo json_encode($output);
                     return;
 
+                }else if($_POST['action'] == 'getCourseByGrade'){
+                    $grade = $_POST['grade'];
+                    $courses = CourseModel::getByGrade($grade);
+                    echo json_encode($courses);
+                    return;
                 }
 //                else if($_POST['action'] == 'getSlots'){
 //                    $students = $_POST['students'];
@@ -84,11 +89,10 @@ class ExamController extends AbstractController
                     $exam_reg->save();
                 }
 
-                $this->redirect('exam/default');
+                $this->redirect('/exam');
             }
 
             $this->_data['grades'] = GradeModel::getAll();
-            $this->_data['courses'] = CourseModel::getAll();
             $this->_data['days'] = WeekdaysModel::getAll();
             $this->_data['slots'] = SlotModel::getAll();
             $this->_data['status'] = StatusModel::getAll();

@@ -8,33 +8,42 @@ class StudentModel extends UserModel{
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
 
+    // public function __construct($id=""){
+    //     if($id != ""){
+    //         $this->id = $id;
+    //         $this->getAll();
+    //     }
+    // }
 
     public static function getAll(){
 
         $db = DatabaseHandler::getConnection();
         $sql ="SELECT * FROM user";
-        $result = mysqli_query($db,$sql);
+        $result = self::prepareStmt($sql);
         $Res = array();
         $i=0;
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $MyObj= new StudentModel($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->fname=$row["fname"];
-            $MyObj->lname=$row["lname"];
-            $MyObj->gender=$row["gender"];
-            $MyObj->DOB=$row["DOB"];
-            $MyObj->password=$row["pwd"];
-            $MyObj->username=$row["username"];
-            $MyObj->email=$row["email"];
-            $MyObj->phone=$row["phone"];
-            $MyObj->status=$row["status"];
-            $MyObj->gradeObj = new SclGradeModel();
-            $Res[$i]=$MyObj;
-            $i++;
-        }
+        if($result->execute()) {
+            while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+                $MyObj = new StudentModel($row["id"]);
+                $MyObj->id = $row["id"];
+                $MyObj->fname = $row["fname"];
+                $MyObj->lname = $row["lname"];
+                $MyObj->gender = $row["gender"];
+                $MyObj->DOB = $row["DOB"];
+                $MyObj->password = $row["pwd"];
+                $MyObj->username = $row["username"];
+                $MyObj->email = $row["email"];
+                $MyObj->phone = $row["phone"];
+                $MyObj->status = $row["status"];
+                $MyObj->getGrade();
+                $Res[$i] = $MyObj;
+                $i++;
+            }
+            return $Res;
+        }else {
+            return false;
 
-        return $Res;
+        }
     }
 
     public static function insertInDB($stud){
@@ -102,7 +111,6 @@ class StudentModel extends UserModel{
             $Res[] = $row;
         }
         return $Res;
-
     }
 
     //aggregates Scl_grade class
@@ -132,5 +140,25 @@ class StudentModel extends UserModel{
         status.code="active"');
     }
 
+    public static function getStudentsBySemester($semester){
+        $query = "SELECT user.fname FROM user 
+        INNER JOIN registration ON registration.student_id_fk = user.id
+        INNER JOIN semester ON registration.semester_id_fk = $semester";
 
+        $stmt = self::prepareStmt($query);
+        $stud = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $st = new StudentModel($row['id']);
+                $stud[$i] = $st;
+                $i++;
+            }
+        }
+        return $stud;
 }
+
+
+    }
+
+
