@@ -6,7 +6,6 @@ use PHPMVC\Models\CourseWorkModel;
 use PHPMVC\Models\CourseWorkValueModel;
 use PHPMVC\Models\SemesterModel;
 
-
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 use PHPMVC\Models\TypeModel;

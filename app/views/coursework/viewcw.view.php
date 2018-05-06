@@ -5,6 +5,7 @@
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
     use PHPMVC\Views\CourseView;
+    
     $cv = new CourseView();
     $cv->viewCourseWork($coursework);
 
