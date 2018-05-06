@@ -14,6 +14,7 @@ class PagesModel extends AbstractModel{
     public $parent;
     public $publisher;
     private $tableName = "pages";
+
     public function __construct($id=""){
 		if($id != ""){
             $this->id = $id;

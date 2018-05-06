@@ -19,28 +19,31 @@ class StudentModel extends UserModel{
 
         $db = DatabaseHandler::getConnection();
         $sql ="SELECT * FROM user";
-        $result = mysqli_query($db,$sql);
+        $result = self::prepareStmt($sql);
         $Res = array();
         $i=0;
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $MyObj= new StudentModel($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->fname=$row["fname"];
-            $MyObj->lname=$row["lname"];
-            $MyObj->gender=$row["gender"];
-            $MyObj->DOB=$row["DOB"];
-            $MyObj->password=$row["pwd"];
-            $MyObj->username=$row["username"];
-            $MyObj->email=$row["email"];
-            $MyObj->phone=$row["phone"];
-            $MyObj->status=$row["status"];
-            $MyObj->gradeObj = new SclGradeModel();
-            $Res[$i]=$MyObj;
-            $i++;
-        }
+        if($result->execute()) {
+            while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+                $MyObj = new StudentModel($row["id"]);
+                $MyObj->id = $row["id"];
+                $MyObj->fname = $row["fname"];
+                $MyObj->lname = $row["lname"];
+                $MyObj->gender = $row["gender"];
+                $MyObj->DOB = $row["DOB"];
+                $MyObj->password = $row["pwd"];
+                $MyObj->username = $row["username"];
+                $MyObj->email = $row["email"];
+                $MyObj->phone = $row["phone"];
+                $MyObj->status = $row["status"];
+                $MyObj->getGrade();
+                $Res[$i] = $MyObj;
+                $i++;
+            }
+            return $Res;
+        }else {
+            return false;
 
-        return $Res;
+        }
     }
 
     public static function insertInDB($stud){
@@ -108,7 +111,6 @@ class StudentModel extends UserModel{
             $Res[] = $row;
         }
         return $Res;
-
     }
 
     //aggregates Scl_grade class
