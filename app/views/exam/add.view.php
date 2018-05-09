@@ -132,10 +132,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 ?>
                             </select>
                         </div>
-
                     </div>
-
-
                     </fieldset>
                     <input type="submit" name="addDetail" id="main">
                     <a href="/exam/default" id="cancel">Cancel</a>

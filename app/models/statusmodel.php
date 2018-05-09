@@ -39,4 +39,17 @@ class StatusModel extends AbstractModel {
         }
     return $Stat;
     }
+
+    Static function getStatusID($status){
+        $query = "SELECT id FROM status WHERE code = '$status'";
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result = $row['id'];
+            }
+            return $result;
+        }else{
+            return false;
+        }
+    }
 }

@@ -4,8 +4,6 @@ namespace PHPMVC\Views;
 class CourseView{
 
     public function newCourseWorkType($type){
-     //   return "<option value='text'>text</option><option value='date'>date</option><option value='password'>password</option><option value='number'>number</option>";
-   
         foreach($type as $t){
             echo '<option value='.$t->id.'>'.$t->type.'</option>';
         }   
@@ -37,7 +35,6 @@ class CourseView{
             <div class="col-lg-9 main-chart">
                 <h3> '.$entity->requirement_name.' ('.$cw->name.')</h3> 
                 <h4>'.$cw->date.'</h4>
-                <hr>
             </div>
             </div>';
 
@@ -61,7 +58,7 @@ class CourseView{
         }
             
     
-        }
+    }
 
     public function title(){
       echo'  <div class="row">

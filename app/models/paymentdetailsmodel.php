@@ -10,7 +10,7 @@ class PaymentdetailsModel extends AbstractModel
     public $decorator_id_fk;
     public $amount;
 
-    protected static $tableName = 'payment_details';
+    protected static $tableName = 'payment_detail';
 
     public function __construct($id="")
     {
@@ -27,17 +27,20 @@ class PaymentdetailsModel extends AbstractModel
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                 $this->id = $row['id'];
-                $this->user_id_fk = $row['user_id_fk'];
                 $this->decorator_id_fk = $row['decorator_id_fk'];
                 $this->amount = $row['amount'];
-
+                $this->payment_id_fk = $row['payment_id_fk'];
             }
         }
     }
 
-    public static function insertDetail($uid,$did,$amount){
-        $query = "INSERT INTO". self::$tableName ." (user_id_fk, decorator_id_fk, amount) VALUES (".$uid.",".$did.",".$amount.")";
+    public function add(){
+        $query = "INSERT INTO ". self::$tableName ." (payment_id_fk, decorator_id_fk, amount) VALUES (:pay, :dec_id, :amount)";
         $stmt =self::prepareStmt($query);
+        
+        $stmt->bindParam(':pay', $this->payment_id_fk);         
+        $stmt->bindParam(":dec_id", $this->decorator_id_fk);
+        $stmt->bindParam(":amount", $this->amount);
 
         if($stmt->execute()){
             return true;
