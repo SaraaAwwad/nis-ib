@@ -39,6 +39,8 @@ $sm = new SemesterView();
                                     <?= $sm->getAllSemester($semester); ?>
                                     </div>
                                 </div>
+                                
+                                <div id="dynamicform" class="row"></div>
 
                                 <fieldset id="attributesform" style="display:none;">
                                     <div class="container" style="margin-top:20px;">
@@ -145,26 +147,12 @@ $sm = new SemesterView();
                 },  
                 success:function(data)  
                 { 
-                    alert(data.sid); 
+                    //alert(data.id); 
 
                     $('#semprice').html(data.price);
-                    $('#semlabel').val(data.sid);
+                    $('#semlabel').val(data.id);
                     $(".table1").show();
                     updatetotal();
-
-                  /*$('#days').html('');
-                  $('#days').append($('<option>', { 
-                            text : "Select Day",
-                            selected: true,
-                            disabled: true,
-                            value: ""
-                        }));
-                  $.each(data, function (i, data) {
-                        $('#days').append($('<option>', { 
-                            value: data.id,
-                            text : data.day, 
-                        }));
-                    });*/
                 
                 }, 
                 error: function (jqXHR, exception) {
@@ -206,6 +194,52 @@ $sm = new SemesterView();
             }
             document.getElementById('tdTotal').innerHTML = total;
         }
+
+        $("#method").on('change',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        $.ajax({  
+                url:pathname,  
+                method:'POST',  
+                dataType:'json',
+                data:{  
+                    req: $("#method").val(),
+                    action:"getForm"
+                },  
+                success:function(data)  
+                {  
+                  $('#dynamicform').html('');
+
+                  $.each(data, function (i, data) {
+                    
+                       $('<div class="form-group col-lg-12">'+                               
+                        data+
+                        '</div>').appendTo("#dynamicform");
+                    });
+                
+                }, 
+                error: function (jqXHR, exception) {
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        alert(msg);
+   				    },  
+                });  
+        });
     </script>
 <?php
 require_once HOME_TEMPLATE_PATH . 'wrapperend.php';

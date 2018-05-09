@@ -30,7 +30,7 @@
                                <div class="col-sm-3">
                                  <?= $s->getAllSemester($semester); ?>
                                  </div>
-                        </div>
+                            </div>
                     
 
                         <div id="dynamicform" class="row">

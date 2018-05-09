@@ -1,7 +1,7 @@
 <?php
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
-class SemesterModel extends AbstractModel implements IpayModel{
+class SemesterModel extends AbstractModel{
     public $id;
     public $year;
     public $season_id_fk;
@@ -44,17 +44,6 @@ class SemesterModel extends AbstractModel implements IpayModel{
         //$this->getFees();
     }
 
-    public function getFeesbyGrade($grade_id_fk){
-        $query = "SELECT * FROM semester_price WHERE semester_id_fk = '$this->id' AND scl_grade_id_fk = '$grade_id_fk' ";
-        $stmt = $this->prepareStmt($query);  
-        if($stmt->execute()){
-            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-            $this->sid = $row['id'];
-            $this->price = $row['price'];
-            $this->currency = $row['currency_id_fk'];
-        }
-    }
-
     public static function getSemestersByCourse($course){
         $sql = "SELECT DISTINCT semester.* from semester
         INNER JOIN schedule ON schedule.semester_id_fk = semester.id INNER JOIN 
@@ -73,8 +62,5 @@ class SemesterModel extends AbstractModel implements IpayModel{
         return $sem;
     }
 
-    public function cost(){
-        return $this->price;
-    }
 
 }

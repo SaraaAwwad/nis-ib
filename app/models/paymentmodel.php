@@ -8,8 +8,8 @@ class PaymentModel extends AbstractModel
     public $id;
     public $user_id_fk; //student id
     public $amount;
-    public $method_id;
-    public $currency_id;
+    public $method_id_fk;
+    public $currency_id_fk;
     public $semester_id_fk;
 
     protected static $tableName = 'payment';
@@ -38,9 +38,10 @@ class PaymentModel extends AbstractModel
 
     public function insertPayment(){
         $query = "INSERT INTO " .self::$tableName. " (user_id_fk, amount, method_id_fk, currency_id_fk, semester_id_fk)
-                  VALUES ($this->user_id_fk,$this->amount, $this->method_id, $this->currency_id, $this->semester_id_fk )";
+                  VALUES ($this->user_id_fk,$this->amount, $this->method_id_fk, $this->currency_id_fk, $this->semester_id_fk )";
         $stmt = self::prepareStmt($query);
         if ($stmt->execute()){
+            $this->id = self::getLastId();
             return true;
         }else{
             return false;
@@ -73,9 +74,9 @@ class PaymentModel extends AbstractModel
 
         $stmt = self::prepareStmt($query);
         
-        $this->name = self::test_input($this->name);
+        $this->date = date("Y/m/d");
 
-        $stmt->bindParam(":user_id_fk", $this->name);
+        $stmt->bindParam(":user_id_fk", $this->user_id_fk);
         $stmt->bindParam(":date", $this->date);
         $stmt->bindParam(":amount", $this->amount);                
         $stmt->bindParam(":method_id_fk", $this->method_id_fk);

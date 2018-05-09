@@ -32,8 +32,8 @@ class DecoratorpricesModel extends ExtrafeesModel
                 $this->id = $row['id'];
                 $this->decoratorObj = new DecoratorModel($row['decorator_id_fk']);
                 $this->gradeObj = new SclGradeModel($row['scl_grade_id_fk']);
-              
-                //^^objs leh? 
+
+                //^obj leh?
                 $this->scl_grade_id_fk = $row['scl_grade_id_fk'];
                 $this->decorator_id_fk = $row['decorator_id_fk'];
                 $this->currency_id_fk = $row['currency_id_fk'];
@@ -50,7 +50,7 @@ class DecoratorpricesModel extends ExtrafeesModel
         $i=0;
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                
+                //change 1st param
                 $DecoratorPricesObj = new DecoratorpricesModel("",$row['id']);
                 $decArr[$i] = $DecoratorPricesObj;
                 $i++;
@@ -59,12 +59,6 @@ class DecoratorpricesModel extends ExtrafeesModel
         }else{
             return false;
         }
-
-    }
-
-    function addPayment()
-    {
-        return $this->ref_obj->addPayment() + $this->price;
 
     }
 
