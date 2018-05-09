@@ -54,14 +54,26 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
 
                     <fieldset id="studentform" style="display:none;">
+                    
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Students</label>
                             <div class="col-sm-4">
-                                <select multiple = "multiple" name="students[]" id="students" class="form-control semester" required>
+                                <!-- <select  name="students" id="students" class="form-control semester" required>
                                     <option value="" selected="selected" disabled="disabled">Select Students</option>
-                                </select>
+                                </select> -->
+                                <label class="col-sm-2 col-sm-2 control-label" id="students"></label>
+                                <!-- <input type="text" class="form-control" id="studentid" disabled="disabled"> -->
                             </div>
+                        
+
+                        
+                            <!-- <label class="col-sm-2 col-sm-2 control-label">Grade</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="grade" name="grade">
+                            </div> -->
                         </div>
+                        </div>
+                        
                     </fieldset>
 
                     <input type="submit" name="addTran" id="main">
@@ -87,12 +99,21 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                     success:function(data)
                     {
-                        $.each(data, function (i, data) {
-                            $('#course').append($('<option>', { 
+
+                        $('#course').html('');
+                        $('#course').append($('<option>', { 
+                                text : "Select Course",
+                                selected: true,
+                                disabled: true,
+                                value: ""
+                            }));
+                            $.each(data, function (i, data) {
+                           $('#course').append($('<option>', { 
                                 value: data.id,
                                 text : data.course_code + " - "+ data.name
                             }));
                         });
+                       
                     },
                     
                     error: function (jqXHR, exception) {
@@ -130,12 +151,21 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     },
                     success:function(data)
                     {
-                        $.each(data, function (i, semester) {
+                        $('#semester').html('');
+                        $('#semester').append($('<option>', { 
+                                text : "Select Semester",
+                                selected: true,
+                                disabled: true,
+                                value: ""
+                            }));
+                            $.each(data, function (i, semester) {
                            $('#semester').append($('<option>', { 
                                 value: semester.id,
                                 text : semester.season_name + " - "+ semester.year
                             }));
                         });
+
+                        
                     },
                     error: function (jqXHR, exception) {
                         var msg = '';
@@ -176,63 +206,33 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         $("#studentform").show();
                         $('#students').html('');
                         $.each(data, function (i, data) {
-                            $('#students').append($('<option>', {
-                                value: data.id,
+                            $('#students').append($('<label>', {
+                                
                                 text : data.fname + ' ' + data.lname
-                            }));
+                            })).append($('<input>'),{
+                                name: data.id
+                               
+                            });
                         });
                     }
                 });
             });
 
-            // $('#semester').on('change',function(e){
+            // $("#students").on('click',function(e){
             //     e.preventDefault();
             //     e.stopPropagation();
             //     $.ajax({
-            //         url:"/transcript/add",
+            //         url: pathname,
             //         method:'POST',
             //         dataType:'json',
-            //         data:{
-            //             semester:$('#semester').val(),
-            //             grade:$('#grade').val(),
-            //             action:"getStudents"
-            //         },
-            //         success:function(data)
-            //         {
-            //             // alert("whaaaat");
 
-            //             $("#studentform").show();
+                    
+                    
 
-            //               $('.students').html('');
-            //               $.each(students, function (i, students) {
-            //               $('.students').append($('<input>').attr({
-            //                   type: 'text', value: students.id, name: 'studentsCB[]'})).append(
-            //                   $('<label>').text(students.fname));
-            //               });
-    
-                
-            //         },
-            //         error: function (jqXHR, exception) {
-            //             var msg = '';
-            //             if (jqXHR.status === 0) {
-            //                 msg = 'Not connect.\n Verify Network.';
-            //             } else if (jqXHR.status == 404) {
-            //                 msg = 'Requested page not found. [404]';
-            //             } else if (jqXHR.status == 500) {
-            //                 msg = 'Internal Server Error [500].';
-            //             } else if (exception === 'parsererror') {
-            //                 msg = 'Requested JSON parse failed.';
-            //             } else if (exception === 'timeout') {
-            //                 msg = 'Time out error.';
-            //             } else if (exception === 'abort') {
-            //                 msg = 'Ajax request aborted.';
-            //             } else {
-            //                 msg = 'Uncaught Error.\n' + jqXHR.responseText;
-            //             }
-            //             alert(msg);
-            //         },
+
             //     });
             // });
+
             
         });
     </script>
