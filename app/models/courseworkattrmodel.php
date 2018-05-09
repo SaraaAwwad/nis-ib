@@ -19,7 +19,7 @@ class CourseWorkAttrModel extends AbstractModel{
     }
     
     public function getInfo(){
-        $query = "SELECT coursework_attr.*, type.type FROM coursework_attr 
+        $query = "SELECT coursework_attr.*, type.type, type.option_flag FROM coursework_attr 
         INNER JOIN type ON type.id = coursework_attr.type_id_fk
         WHERE coursework_attr.id = :id ";
         
@@ -32,6 +32,7 @@ class CourseWorkAttrModel extends AbstractModel{
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
               $this->attr_name =  $row['attr_name'];
               $this->type = $row['type'];       
+              $this->flag = $row['option_flag'];
             }
         }  
         
@@ -81,22 +82,8 @@ class CourseWorkAttrModel extends AbstractModel{
 
     public function addOption($valueOpt){
        
-        $query = "INSERT INTO
-        attr_options(attr_id_fk, value)
-        VALUES (:attr_id_fk, :value)";
-
-        $stmt = self::prepareStmt($query);
-        
-        $value = self::test_input($value);
-
-        $stmt->bindParam(":attr_id_fk", $this->id);
-        $stmt->bindParam(":value", $valueOpt);
-        
-        if($stmt->execute()){
-            return true;
-        }
-
-        return false;
+        $aoptObj = new AttrOptionsModel("");
+        return ($aoptObj->addOption($valueOpt));
     }
 
     public function getOptions(){

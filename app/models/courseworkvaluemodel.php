@@ -80,17 +80,7 @@ class CourseWorkValueModel extends AbstractModel{
     }
 
     public static function getOpt($id){
-        $query = 'select * from attr_options where id = :id';
-        $stmt = self::prepareStmt($query);
-        
-        $stmt->bindParam(':id', $id);
-        
-        if($stmt->execute()){
-            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-            $value =  $row['value'];     
-        return $value;
-        }   
-
+        return (AttrOptionsModel::getOpt($id));
     }
 
 }

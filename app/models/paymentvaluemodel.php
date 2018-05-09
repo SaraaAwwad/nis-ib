@@ -2,12 +2,18 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class PaymentvalueModel extends AbstractModel implements IpayModel
+class PaymentValueModel extends AbstractModel implements IpayModel
 {
+    //public $id;
+    //public $value;            //price for each decorator
+   //? public $paymentObj;       // payment_id_fk
+   //? public $selectedAttrObj;  // selected_id_fk
+
     public $id;
-    public $value;            //price for each decorator
-    public $paymentObj;       // payment_id_fk
-    public $selectedAttrObj;  // selected_id_fk
+    public $selected_id_fk;
+    public $payment_id_fk;
+    public $value;
+
 
     public $totalPrice;
 
@@ -27,14 +33,40 @@ class PaymentvalueModel extends AbstractModel implements IpayModel
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $this->id = $row['id'];
-                $this->paymentObj = new PaymentModel($row['$payment_id_fk']);
-                $this->selectedAttrObj = new PaymentselectedattrModel($row['selected_id_fk']);
-                $this->value = $row['value'];
-//                $this->totalPrice = 0;
-
+               // $this->paymentObj = new PaymentModel($row['$payment_id_fk']);
+               // $this->selectedAttrObj = new PaymentselectedattrModel($row['selected_id_fk']);
+               $this->selected_id_fk = $row['selected_id_fk'];
+               $this->payment_id_fk = $row['payment_id_fk']; 
+               $this->value = $row['value'];
+                //$this->totalPrice = 0;
             }
         }
     }
+
+    public static function add($payment, $selected_id_fk, $value){
+      
+        $query = "INSERT INTO
+          payment_value(payment_id_fk, selected_id_fk, value)
+          VALUES (:payment_id_fk, :selected_id_fk, :value)";
+  
+          $stmt = self::prepareStmt($query);
+          
+          $value = self::test_input($value);
+  
+          $payment_id_fk = $payment->id;
+  
+          $stmt->bindParam(":value", $value);
+          $stmt->bindParam(":selected_id_fk", $selected_id_fk);
+          $stmt->bindParam(":payment_id_fk", $payment_id_fk);
+  
+          
+          if($stmt->execute()){
+              return self::getLastId();
+          }
+  
+          return false;
+    }
+
 
     public function getTotalPrice()
     {
@@ -80,6 +112,33 @@ class PaymentvalueModel extends AbstractModel implements IpayModel
         }else{
             return false;
         }
+    }
+
+    public static function getAll($selected_id_fk, $payment_id_fk){
+
+        //change to (assoc)
+
+        $query = 'SELECT * FROM payment_value where payment_id_fk = '.$payment_id_fk.'
+         and selected_id_fk = '.$selected_id_fk.'';
+ 
+         $stmt = self::prepareStmt($query);        
+         $Res = array();
+         $i=0;
+         if($stmt->execute()){
+             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                 $MyObj= new PaymentValueModel($row['id']);
+                 $Res[$i]=$MyObj;
+                 $i++;
+             }
+         return $Res;
+         }else{
+             return false;
+         }
+  
+    }
+
+    public static function getOpt($id){
+        return (AttrOptionsModel::getOpt($id));
     }
 }
 

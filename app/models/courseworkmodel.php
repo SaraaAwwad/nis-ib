@@ -38,7 +38,6 @@ class CourseWorkModel extends AbstractModel{
         }   
     }
 
-
     public function add(){
         $query = "INSERT INTO
         coursework(name, course_id_fk, date, req_id_fk, semester_id_fk)
@@ -64,8 +63,7 @@ class CourseWorkModel extends AbstractModel{
     }
 
     public static function getAll($course_id_fk, $semester_id_fk){
-
-        $query = "SELECT * FROM coursework where course_id_fk = '$course_id_fk' and semester_id_fk = '$semester_id_fk' ";
+        $query = "SELECT * FROM coursework where course_id_fk = '$course_id_fk' and semester_id_fk = '$semester_id_fk' ORDER BY date DESC ";
         $stmt = self::prepareStmt($query);        
         $Res = array();
         $i=0;
@@ -80,7 +78,5 @@ class CourseWorkModel extends AbstractModel{
             return false;
         }
     }
-
-
 
 }

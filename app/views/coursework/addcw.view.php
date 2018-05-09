@@ -63,7 +63,6 @@
                 success:function(data)  
                 {  
                   $('#dynamicform').html('');
-                 // $('#dynamicform').append(data.html);
 
                   $.each(data, function (i, data) {
                     
