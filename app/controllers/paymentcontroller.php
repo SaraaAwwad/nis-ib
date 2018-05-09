@@ -86,6 +86,7 @@ class PaymentController extends AbstractController
                     PaymentValueModel::add($paymentObj, $f->sid, $value);
                 }   
                }
+            $this->redirect("/payment/");
         }
 
         if(isset($_POST['action'])){

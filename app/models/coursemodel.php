@@ -8,7 +8,7 @@ class CourseModel extends AbstractModel {
     public $course_code;
     public $descr;
     public $status;
-    public $group_id_fk;
+    public $grade_id_fk;
     public $level_id_fk;
     public $name;
     public $teaching_hours;
@@ -22,7 +22,7 @@ class CourseModel extends AbstractModel {
         'descr'              => self::DATA_TYPE_STR,
         'level_id_fk'        => self::DATA_TYPE_INT,
         'teaching_hours'     => self::DATA_TYPE_INT,
-        'group_id_fk'        => self::DATA_TYPE_INT,
+        'grade_id_fk'        => self::DATA_TYPE_INT,
         'status'             => self::DATA_TYPE_INT
     );
 
@@ -30,7 +30,7 @@ class CourseModel extends AbstractModel {
 
     public static function getCourse() {
         return self::get(
-        'SELECT course.*, course_group.id, scl_level.id FROM ' . self::$tableName . ' INNER JOIN course_group ON course.group_id_fk = course_group.id INNER JOIN scl_level ON course.level_id_fk = scl_level.id'
+        'SELECT course.*, scl_grade.id, scl_level.id FROM ' . self::$tableName . ' INNER JOIN scl_grade ON course.grade_id_fk = scl_grade.id, INNER JOIN scl_level ON course.level_id_fk = scl_level.id'
         );
     }
 
@@ -38,9 +38,9 @@ class CourseModel extends AbstractModel {
 
         $db = DatabaseHandler::getConnection();
 
-        $sql = "INSERT INTO course ('name', 'course_code', 'descr, level_id_fk', 'group_id_fk', 'status', 'teaching_hours') 
+        $sql = "INSERT INTO course ('name', 'course_code', 'descr, level_id_fk', 'grade_id_fk', 'status', 'teaching_hours') 
         VALUES ('$course->name','$course->course_code', '$course->descr', '$course->level_id_fk',
-        '$course->group_id_fk', '$course->status', '$course->teaching_hours' )";
+        '$course->grade_id_fk', '$course->status', '$course->teaching_hours' )";
 
         if (mysqli_query($db, $sql)){
             return true;
@@ -70,8 +70,7 @@ class CourseModel extends AbstractModel {
                 $this->descr = $row["descr"];
                 $this->level_id_fk = $row["level_id_fk"]; //no use
                 $this->teaching_hours = $row["teaching_hours"];
-                $this->group_id_fk = $row["group_id_fk"];
-                $this->group = new CourseGroupModel($this->group_id_fk);
+                $this->grade_id_fk = $row["grade_id_fk"];
                 $this->status = $row["status"];
 
             }
@@ -82,7 +81,7 @@ class CourseModel extends AbstractModel {
     public static function getCourseByGrade($grade){
         //get all courses for this grade and active
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
-         WHERE group_id_fk = '.$grade.' AND status.code='active' ";
+         WHERE grade_id_fk = '.$grade.' AND status.code='active' ";
         $stmt = self::prepareStmt($sql);
         $Res = array();
         $i=0;
@@ -99,7 +98,7 @@ class CourseModel extends AbstractModel {
     public static function getByGrade($grade){
         //get all courses for this grade and active
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
-         WHERE group_id_fk = '.$grade.' AND status.code='active' 
+         WHERE grade_id_fk = '.$grade.' AND status.code='active' 
          AND course.id NOT IN (SELECT course_id_fk FROM exam_details)";
         $stmt = self::prepareStmt($sql);
         $Res = array();

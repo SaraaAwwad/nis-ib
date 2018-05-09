@@ -6,7 +6,6 @@ class DecoratorpricesModel extends ExtrafeesModel
     public $id;
     public $currency_id_fk;
     public $price;
-    //aggregation
     public $decoratorObj;      // $decorator_id_fk;
     public $gradeObj;         // $scl_grade_id_fk;
 

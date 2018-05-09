@@ -11,7 +11,7 @@
         <div class="col-lg-9 main-chart">
             <h1>Exams</h1>
 		</div>
-	</div>		
+	</div>
 
   <section class="tabcontent">
       <input type="search" class="searchtab light-table-filter" results="2" name="s" data-table="order-table" placeholder="Search.." />
@@ -53,8 +53,15 @@
                     <td>'.$exam->slot_name.' Slot</td>
                     <td>'.$exam->room_name.'</td>
                     <td>'.$exam->code.'</td>
-                    <td> <a href="\exam\edit\\'.$exam->id.'">Edit ,  </a>
-                     <a href="\exam\details\\'.$exam->id.'">Students Applied</a></td>
+                    <td> <!--<a href="\exam\edit\\'.$exam->id.'">Edit ,  </a> -->
+                     <a href="\exam\details\\'.$exam->id.'">Students Applied </a><br>';
+                     if($exam->code == "active")
+                     {echo '<a href="\exam\activation\\'.$exam->id.'">Deactivate</a><br>';}
+                     else{
+                         echo '<a href="\exam\activation\\'.$exam->id.'">Activate</a><br>';
+                     }
+
+                     echo '
                     </tr>';
                 }
             }
@@ -62,7 +69,7 @@
         </tr>
         </tbody>
     </table>
-  </section>	
+  </section>
 
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
