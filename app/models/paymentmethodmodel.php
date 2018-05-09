@@ -71,7 +71,7 @@ class PaymentmethodModel extends AbstractModel {
 
     public function getSelectedAttr(){
         $query = "SELECT payment_selected_attr.id as sid, payment_attr.* FROM payment_selected_attr 
-        INNER JOIN payment_attr ON payment_selected_attr.attr_id_fk = payment_attr.id WHERE req_id_fk = '$this->id'";
+        INNER JOIN payment_attr ON payment_selected_attr.attr_id_fk = payment_attr.id WHERE method_id_fk = '$this->id'";
          $stmt = self::prepareStmt($query);        
          $i=0;
          if($stmt->execute()){

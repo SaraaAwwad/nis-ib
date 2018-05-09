@@ -8,12 +8,38 @@ class StudentModel extends UserModel{
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
 
-    // public function __construct($id=""){
-    //     if($id != ""){
-    //         $this->id = $id;
-    //         $this->getAll();
-    //     }
-    // }
+     public function __construct($id=""){
+         if($id != ""){
+             $this->id = $id;
+             $this->getInfo();
+         }
+     }
+
+    public function getInfo(){
+        $query = "SELECT * FROM user WHERE id = :id ";
+        
+        $stmt = self::prepareStmt($query);
+        $this->id = self::test_input($this->id);
+        
+        $stmt->bindParam(':id', $this->id);
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+              $this->id = $row["id"];
+              $this->fname = $row["fname"];
+              $this->lname = $row["lname"];
+              $this->gender = $row["gender"];
+              $this->DOB = $row["DOB"];
+              $this->password = $row["pwd"];
+              $this->username = $row["username"];
+              $this->email = $row["email"];
+              $this->phone = $row["phone"];
+              $this->status = $row["status"];
+              $this->getGrade();
+            }
+        }  
+        
+    }
 
     public static function getAll(){
 

@@ -4,6 +4,9 @@ require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
 require_once HOME_TEMPLATE_PATH . 'header.php';
 require_once HOME_TEMPLATE_PATH . 'nav.php';
 require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
+
+use PHPMVC\Views\SemesterView;
+$sm = new SemesterView();
 ?>
 
 
@@ -20,16 +23,20 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 <hr>
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 col-sm-2 control-label"><strong>Payment Method</strong></label>
-                                    <div class="col-sm-8">
-                                        <select name="method" class="form-control selectMethod" id="method">
-                                            <option value="" disabled>Select Method</option>
+                                    <label class="col-sm-1 col-sm-1 control-label"><strong>Payment Method</strong></label>
+                                    <div class="col-sm-5">
+                                        <select name="method" class="form-control selectMethod" id="method" required>
+                                            <option value="" disabled selected="selected">Select Method</option>
                                             <?php
                                             foreach($methods as $meth){
                                                 echo '<option value='.$meth->id.'>'.$meth->method.'</option>';
                                             }
                                             ?>
                                         </select>
+                                    </div>
+                                    <label class="col-sm-1 col-sm-1 control-label"><strong>Semester</strong></label>
+                                    <div class="col-sm-5"> <!-- change it to non registered semesters -->
+                                    <?= $sm->getAllSemester($semester); ?>
                                     </div>
                                 </div>
 
@@ -56,7 +63,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                     <div class="col-sm-4 col-md-4">
                                         </address>
                                         <strong>Grade:</strong><br>
-                                        <?php echo $st->gradeObj->grade_name ?><br>
+                                        <?php  echo $st->gradeObj->grade_name ?><br>
                                         </address>
                                     </div>
 
@@ -83,12 +90,16 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                                     <td class="text-center"><strong>Price</strong></td>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-
+                                
+                                                <tr>
+                                                <td><input type="hidden"  name="concrete" value="" id="semlabel"/> <input type="checkbox"  class="myCheck" name="concrete"  disabled="disabled" checked="checked">Semester</td>
+                                                <td class="text-center checkprice" id="semprice"></td>
+                                                </tr>
+                                
                                                 <?php
                                                 foreach($decorator as $dec){
                                                     echo '<tr>
-                                                    <td><input type="checkbox"  name="myCheck[]" value="'.$dec->id.'"> '. $dec->decoratorObj->name.'</td>
+                                                    <td><input type="checkbox"  class="myCheck" name="myCheck[]" value="'.$dec->id.'"> '. $dec->decoratorObj->name.'</td>
                                                     <td class="text-center checkprice" value="'.$dec->id.'">'.$dec->price.'</td>
 
                                                 </tr>';
@@ -114,9 +125,71 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
 
     <script>
-
+    var pathname = window.location.pathname;
+    $(".table1").hide();
         $(".myCheck").on('change',function () {
             //var checked = [];
+           updatetotal();
+        });
+
+        $(".semester").on('change', function(){
+            var sem = $(this).val();
+
+            $.ajax({  
+                url:pathname,  
+                method:'POST',  
+                dataType:'json',
+                data:{  
+                    semester: sem,
+                    action:"getSemesterPrice"
+                },  
+                success:function(data)  
+                { 
+                    alert(data.sid); 
+
+                    $('#semprice').html(data.price);
+                    $('#semlabel').val(data.sid);
+                    $(".table1").show();
+                    updatetotal();
+
+                  /*$('#days').html('');
+                  $('#days').append($('<option>', { 
+                            text : "Select Day",
+                            selected: true,
+                            disabled: true,
+                            value: ""
+                        }));
+                  $.each(data, function (i, data) {
+                        $('#days').append($('<option>', { 
+                            value: data.id,
+                            text : data.day, 
+                        }));
+                    });*/
+                
+                }, 
+                error: function (jqXHR, exception) {
+				        var msg = '';
+				        if (jqXHR.status === 0) {
+				            msg = 'Not connect.\n Verify Network.';
+				        } else if (jqXHR.status == 404) {
+				            msg = 'Requested page not found. [404]';
+				        } else if (jqXHR.status == 500) {
+				            msg = 'Internal Server Error [500].';
+				        } else if (exception === 'parsererror') {
+				            msg = 'Requested JSON parse failed.';
+				        } else if (exception === 'timeout') {
+				            msg = 'Time out error.';
+				        } else if (exception === 'abort') {
+				            msg = 'Ajax request aborted.';
+				        } else {
+				            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+				        }
+				        alert(msg);
+   				    },  
+            }); 
+        });
+
+        function updatetotal(){
             var prices = [];
             $(".myCheck").map(function() {
                 if( this.checked ) {
@@ -132,8 +205,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 total +=  prices[i];
             }
             document.getElementById('tdTotal').innerHTML = total;
-        });
-
+        }
     </script>
 <?php
 require_once HOME_TEMPLATE_PATH . 'wrapperend.php';

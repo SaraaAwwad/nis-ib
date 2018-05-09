@@ -11,6 +11,7 @@ use PHPMVC\Models\PaymentselectedattrModel;
 use PHPMVC\Models\PaymentvalueModel;
 use PHPMVC\Models\StudentLevelModel;
 use PHPMVC\Models\StudentModel;
+use PHPMVC\Models\SemesterModel;
 
 class PaymentController extends AbstractController
 {
@@ -32,15 +33,30 @@ class PaymentController extends AbstractController
 
         $child_id = $this->filterInt($this->_params[0]);
         $child = new StudentModel($child_id);
-        $child->getGrade();
         $this->_data['st'] = $child;
-        $grade_id = StudentLevelModel::getGradeID($child_id);
-        $this->_data['decorator'] = DecoratorpricesModel::getPricesByGrade($grade_id->id);
+
+        $grade = $child->gradeObj->id;
+        $this->_data['decorator'] = DecoratorpricesModel::getPriceByGrade($grade);
+        $this->_data['semester'] = SemesterModel::getSemesters();
+        //$sem = new SemesterModel(1);
+        //$sem->getFeesbyGrade(2);
+        //var_dump($sem);
 
         if (isset($_POST['addPayment'])) {
+        
+            //get selected price
+           // $sel =  $_POST['concrete'];
+           //var_dump($sel);
+           //exit();
 
-            //payment
-            $paymentVal = new PaymentvalueModel();
+            $concreteSem = new SemesterModel(1);
+            $concreteSem->getFeesbyGrade(2);
+            $firstDec = new DecoratorpricesModel($concreteSem, 1);
+            echo " costs ";
+            echo $firstDec->cost();
+            exit();
+
+           /* $paymentVal = new PaymentvalueModel();
             $paymentVal->paymentObj = new PaymentModel();
             $paymentVal->paymentObj->user_id_fk = $child_id;
             $paymentVal->paymentObj->method_id = 2; // Bank
@@ -68,15 +84,24 @@ class PaymentController extends AbstractController
                 echo 'fatal error';
             }
             var_dump($paymentVal);
-
+*/
             //PaymentdetailsModel::insertDetail($child_id,$s,$decoratorObj->price);
 
         }
 
+        if(isset($_POST['action'])){
+            if($_POST['action'] == 'getSemesterPrice'){
+                $semid = $_POST['semester'];
+                $sem = new SemesterModel($semid);
+                $sem->getFeesbyGrade($grade);
+                echo json_encode($sem);
+                return;
+            }
+        }
 
-$this->_view();
+    $this->_view();
 
-}
+    }
 
 }
 

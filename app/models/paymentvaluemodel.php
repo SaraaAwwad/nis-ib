@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class PaymentValueModel extends AbstractModel implements IpayModel
+class PaymentValueModel extends AbstractModel
 {
     //public $id;
     //public $value;            //price for each decorator

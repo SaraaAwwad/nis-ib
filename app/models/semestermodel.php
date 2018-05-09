@@ -1,7 +1,7 @@
 <?php
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
-class SemesterModel extends AbstractModel {
+class SemesterModel extends AbstractModel implements IpayModel{
     public $id;
     public $year;
     public $season_id_fk;
@@ -17,13 +17,13 @@ class SemesterModel extends AbstractModel {
         'end_date'           => self::DATA_TYPE_DATE        
     );
     protected static $primaryKey = 'id';
-    public static function getSemesters()
-    {
+    public static function getSemesters(){
         return self::get(
         'SELECT semester.*, season.season_name FROM ' . self::$tableName . ' INNER JOIN
           season ON semester.season_id_fk = season.id'
         );
     }
+
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
@@ -41,7 +41,20 @@ class SemesterModel extends AbstractModel {
             $this->start_date = $row['start_date'];
             $this->end_date = $row['end_date'];
         }
+        //$this->getFees();
     }
+
+    public function getFeesbyGrade($grade_id_fk){
+        $query = "SELECT * FROM semester_price WHERE semester_id_fk = '$this->id' AND scl_grade_id_fk = '$grade_id_fk' ";
+        $stmt = $this->prepareStmt($query);  
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $this->sid = $row['id'];
+            $this->price = $row['price'];
+            $this->currency = $row['currency_id_fk'];
+        }
+    }
+
     public static function getSemestersByCourse($course){
         $sql = "SELECT DISTINCT semester.* from semester
         INNER JOIN schedule ON schedule.semester_id_fk = semester.id INNER JOIN 
@@ -58,5 +71,10 @@ class SemesterModel extends AbstractModel {
             }
         }
         return $sem;
-        }
     }
+
+    public function cost(){
+        return $this->price;
+    }
+
+}
