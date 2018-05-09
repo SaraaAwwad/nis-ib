@@ -1,6 +1,7 @@
 <?php
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
+use PHPMVC\Models\AttrOptionsModel;
 
 class CourseWorkValueModel extends AbstractModel{
     protected static $tableName = 'coursework_value';

@@ -70,7 +70,7 @@ class CourseModel extends AbstractModel {
                 $this->descr = $row["descr"];
                 $this->level_id_fk = $row["level_id_fk"]; //no use
                 $this->teaching_hours = $row["teaching_hours"];
-                $this->grade_id_fk = $row["grade_id_fk"];
+              //  $this->grade_id_fk = $row["grade_id_fk"];
                 $this->status = $row["status"];
 
             }

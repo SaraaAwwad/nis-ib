@@ -86,7 +86,6 @@
               </div>      
             </div>
 
-<!--<script src="<?= JS?>dynamicform.js"></script> -->
 <script>
 $(document).ready(function(){  
     var pathname = window.location.pathname;     
