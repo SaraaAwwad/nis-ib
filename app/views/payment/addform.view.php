@@ -19,7 +19,7 @@
 
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1> Add A New CourseWork </h1>
+            <h1> Add A New Payment Form </h1>
             <hr>
 		</div>
 	</div>	
@@ -30,12 +30,12 @@
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="post" id="insert_form">
                         
-                          <legend>Course Work Info</legend>
+                          <legend>Payment Info</legend>
 
                          <div class="form-group">                               
-                              <label class="col-sm-3 col-sm-3 control-label">Course Work Requirement</label>
+                              <label class="col-sm-3 col-sm-3 control-label">Payment Method</label>
                               <div class="col-sm-4">
-                                  <input name="coursework" type="text" class="form-control" required>                                    
+                                  <input name="method" type="text" class="form-control" required>                                    
                               </div>
                         </div>
 
@@ -55,13 +55,13 @@
                                 <div class="col-lg-12">
                                   <label class="col-sm-1 col-sm-1 control-label">Label</label>
                                     <div class="col-sm-4">
-                                        <input name="name[]" type="text" class="form-control" required>
+                                        <input name="name[]" type="text" class="form-control firstreq">
                                     </div>
 
                                     <label class="col-sm-1 col-sm-1 control-label">Type</label>
                                     <div class="col-sm-4">
-                                        <select name="type[]" id="0" class="form-control choice" required>
-                                            <option value="" disabled>Select Type</option>
+                                        <select name="type[]" id="0" class="form-control choice firstreq">
+                                            <option value="" disabled selected>Select Type</option>
                                             <?= $cv->newCourseWorkType($type); ?>
                                         </select>
                                     </div>
@@ -80,7 +80,7 @@
                         </div>
                       
                         </fieldset>
-                        <input type="submit" name="newcoursework" id="main">
+                        <input type="submit" name="newmethod" id="main">
                       </form>
                   </div>
               </div>      
@@ -107,7 +107,7 @@ $(document).ready(function(){
 
           i++;  
 
-        $(".firstreq").prop('required',true);
+          $(".firstreq").prop('required',true);
         });
 
       $(document).on('click', '.optrmv', function(){  

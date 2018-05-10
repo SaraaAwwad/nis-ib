@@ -31,8 +31,12 @@ class CourseWorkController extends AbstractController
                     $cwEntityObj->addSelected($value, $ReqId);
                 }
             }
-
             $name = $_POST["name"];
+            $emptytestarray = array_filter($name);
+
+            if(!empty($emptytestarray)){
+
+            //$name = $_POST["name"];
             $type = $_POST["type"]; 
 
             foreach($name as $key => $value){
@@ -55,11 +59,12 @@ class CourseWorkController extends AbstractController
                 }
                 
             }
-            $this->redirect("/coursework/add");
+            }
+                $this->redirect("/coursework/add");
+            
         }
 
-        if(isset($_POST["action"]))
-                {
+        if(isset($_POST["action"])){
                     if($_POST["action"] == "getType"){
 
                         $val = $_POST['txt'];
@@ -72,7 +77,7 @@ class CourseWorkController extends AbstractController
                         echo json_encode($output);
                         return;
                     }
-                }
+        }
         
         $this->_data["type"] = TypeModel::getAll();
         $this->_data["preAttr"] = CourseWorkAttrModel::getAll(); 

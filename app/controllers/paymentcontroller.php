@@ -4,10 +4,8 @@ use PHPMVC\Models\DecoratorModel;
 use PHPMVC\Models\DecoratorpricesModel;
 use PHPMVC\Models\ParentModel;
 use PHPMVC\Models\PaymentmethodModel;
-use PHPMVC\LIB\InputFilter;
-use PHPMVC\LIB\Helper;
 use PHPMVC\Models\PaymentModel;
-use PHPMVC\Models\PaymentselectedattrModel;
+use PHPMVC\Models\PaymentAttrModel;
 use PHPMVC\Models\PaymentvalueModel;
 use PHPMVC\Models\StudentLevelModel;
 use PHPMVC\Models\StudentModel;
@@ -15,6 +13,11 @@ use PHPMVC\Models\SemesterModel;
 use PHPMVC\Models\SemesterPricesModel;
 use PHPMVC\Models\FormModel;
 use PHPMVC\Models\PaymentdetailsModel;
+use PHPMVC\Models\TypeModel;
+
+use PHPMVC\LIB\InputFilter;
+use PHPMVC\LIB\Helper;
+
 
 class PaymentController extends AbstractController
 {
@@ -29,8 +32,7 @@ class PaymentController extends AbstractController
 
     }
 
-    public function addAction()
-    {
+    public function addAction(){
         //EAV
         $this->_data['methods'] = PaymentmethodModel::getAll();
 
@@ -114,8 +116,72 @@ class PaymentController extends AbstractController
             }
         }
 
-    $this->_view();
+        $this->_view();
+    }
 
+    public function addformAction(){
+        if(isset($_POST["newmethod"])){
+
+            $req = $this->filterString($_POST["method"]);
+            $ReqId = PaymentMethodModel::add($req);
+            $paymentEntityObj = new PaymentMethodModel($ReqId);
+
+            if(isset($_POST["attr"])){
+                $attr = $_POST["attr"];
+                foreach($attr as $key => $value){
+                    $paymentEntityObj->addSelected($value, $ReqId);
+                }
+            }
+
+            $name = $_POST["name"];
+            $emptytestarray = array_filter($name);
+
+            if(!empty($emptytestarray)){
+
+            //$name = $_POST["name"];
+            $type = $_POST["type"]; 
+
+            foreach($name as $key => $value){
+                $attr = $this->filterString($value);
+                $ty = $type[$key];
+                $AttId = PaymentAttrModel::add($attr, $ty); 
+
+                $paymentAttrObj = new PaymentAttrModel($AttId);
+                //add in the m2m table
+                $paymentEntityObj->addSelected($AttId, $ReqId);
+
+
+               if(isset($_POST[$key."options"])){
+                    
+                    $s =$_POST[$key."options"];
+                     
+                    foreach($s as $keyopt => $valueopt){ 
+                        $paymentAttrObj->addOption($valueopt);
+                    }
+                }
+            }
+            }
+            $this->redirect("/payment/addform");
+        }
+
+        if(isset($_POST["action"])){
+            if($_POST["action"] == "getType"){
+
+                $val = $_POST['txt'];
+                $type = TypeModel::getByName($val);
+                
+                $output = array(
+                    'typeflag' => $type->option_flag
+                );
+                
+                echo json_encode($output);
+                return;
+            }
+        }
+
+        $this->_data["preAttr"] = PaymentAttrModel::getAll(); 
+        $this->_data["type"] = TypeModel::getAll();
+        $this->_view();
     }
 
 }

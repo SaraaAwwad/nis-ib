@@ -39,6 +39,27 @@ class PaymentAttrModel extends AbstractModel {
         $this->getOptions();
     }
 
+    public static function add($attr_name, $type){
+        $query = "INSERT INTO
+        payment_attr(attr_name, type_id_fk)
+        VALUES (:attr_name, :type_id_fk)";
+
+        $stmt = self::prepareStmt($query);
+        
+        $attr_name = self::test_input($attr_name);
+        $type = self::test_input($type);
+
+        $stmt->bindParam(":attr_name", $attr_name);
+        $stmt->bindParam(":type_id_fk", $type);
+        
+        if($stmt->execute()){
+            return self::getLastId();
+        }
+
+        return false;
+
+    }
+
     public static function getAll(){
         $query = "SELECT * FROM ". static::$tableName ;
         $stmt =self::prepareStmt($query);

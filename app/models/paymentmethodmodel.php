@@ -8,7 +8,6 @@ class PaymentmethodModel extends AbstractModel {
 
     protected static $tableName = 'payment_method';
 
-    //its attributes
     public $attr = array();
 
     public function __construct($id=""){
@@ -53,7 +52,7 @@ class PaymentmethodModel extends AbstractModel {
     public function addSelected($attr_id_fk, $req_id_fk){
         
         $query = "INSERT INTO
-        payment_selected_attr(attr_id_fk, req_id_fk)
+        payment_selected_attr(attr_id_fk, method_id_fk)
         VALUES (:attr_id_fk, :req_id_fk)";
 
         $stmt = self::prepareStmt($query);
@@ -90,7 +89,7 @@ class PaymentmethodModel extends AbstractModel {
 
     public static function add($requirement_name){
         $query = "INSERT INTO
-        payment_method(method_name)
+        payment_method(method)
         VALUES (:requirement_name)";
 
         $stmt = self::prepareStmt($query);
