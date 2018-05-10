@@ -44,9 +44,34 @@ class StudentController extends AbstractController{
             if(!empty($_POST['parentsearch'])) {
                 $objParent = ParentModel::getByUsername($_POST['parentsearch']);
 
+                // $stud = new StudentModel();
+                // $stud->fname = $_POST['fnamein'];
+                // $stud->lname = $_POST['lnamein'];
+                // $stud->DOB = $_POST['datein'];
+                // $stud->gender = $_POST['radioin'];
+                // $stud->phone = $_POST['numberin'];
+                // $stud->status = $_POST['statusinput'];
+                // $stud->add_id_fk = $_POST['street'];
+                // $stud->email = $_POST['emailin'] . $stud->concatenate;
+                // $stud->pwd = $_POST['passwordin'];
+                // $stud->username = $_POST['usernamein'];
+                // $stud->type_id = 1;
+
+                // $stud->img = 'hi';
+                // $stud->user_id_fk = $objParent->id;
+                // $stud->save();
+
+                // $stlevel = new StudentLevelModel();
+                // $stlevel->scl_level_id_fk = $_POST['level'];
+                // $stlevel->scl_grade_id_fk = $_POST['gradein'];
+                // $stlevel->user_id_fk = $stud->id;
+                // $stlevel->save();
+
+
             }else
                 { //New parent
                     $objParent = new ParentModel();
+                    
                     $objParent->fname = $_POST['parentfname'];
                     $objParent->lname = $_POST['parentlname'];
                     $objParent->phone = $_POST['parentnumber'];
@@ -63,10 +88,10 @@ class StudentController extends AbstractController{
 //                        $objParent->img = $uploader->getFileName();
 //                    }
                     $objParent->img = 'hi';
-                    $objParent->type_id = UserTypesModel::getUserTypeId();
+                    $objParent->type_id = UserTypesModel::getParentId();
                     $objParent->user_id_fk = 0;
                     $objParent->status = 1;
-                    $objParent->save();
+                    $objParent->add();
                 }
 
                 $stud = new StudentModel();
@@ -87,9 +112,12 @@ class StudentController extends AbstractController{
 //                $uploader->upload();
 //                $stud->img = $uploader->getFileName();
 //                }
+
                 $stud->img = 'hi';
+                //????
                 $stud->user_id_fk = $objParent->id;
                 $stud->save();
+
 //                //student Level
                 $stlevel = new StudentLevelModel();
                 $stlevel->scl_level_id_fk = $_POST['level'];
@@ -99,6 +127,8 @@ class StudentController extends AbstractController{
 
 
         }
+        
+        //exit();
         $this->_view();
 
     }

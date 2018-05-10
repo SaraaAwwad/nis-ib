@@ -46,7 +46,7 @@ class TranscriptModel extends AbstractModel{
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $tran[$i] = new TranscriptModel();
                 // $tran[$i]->id = $row['id'];
-                // $tran[$i]->user_id_fk = $row['user_id_fk'];
+                $tran[$i]->user_id_fk = $row['user_id_fk'];
                 $tran[$i]->semester_id_fk = $row['semester_id_fk'];
                 $tran[$i]->season_name = $row['season_name'];
                 $tran[$i]->year = $row['year'];
