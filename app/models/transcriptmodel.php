@@ -14,36 +14,37 @@ class TranscriptModel extends AbstractModel{
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
-            $this->getTranscript($id);
+            $this->getInfo();
         }
     }
 
-    public static function getTranscript($id)
-    {
+    public function getInfo(){
         
-        $query = "SELECT transcript.*, semester.year, season.season_name, course.course_code FROM transcript 
+        /*$query = "SELECT transcript.*, semester.year, season.season_name, course.course_code FROM transcript 
         INNER JOIN semester ON transcript.semester_id_fk = semester.id
         INNER JOIN season ON semester.season_id_fk = season.id 
         INNER JOIN course ON transcript.course_id_fk = course.id
-        WHERE transcript.user_id_fk = '.$id.'";
+        WHERE transcript.user_id_fk = '.$id.'";*/
         
+        $query = "SELECT * FROM transcript 
+        WHERE id = :id ";
+
         $stmt = self::prepareStmt($query);
-        $tran = array();
-        $i=0;
+        $stmt->bindParam(':id', $this->id);
+
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                $tran[$i] = new TranscriptModel();
-                // $tran[$i]->id = $row['id'];
-                $tran[$i]->user_id_fk = $row['user_id_fk'];
-                $tran[$i]->semester_id_fk = $row['semester_id_fk'];
-                $tran[$i]->season_name = $row['season_name'];
-                $tran[$i]->year = $row['year'];
-                $tran[$i]->course_code = $row['course_code'];
-                $tran[$i]->LetterGrade = $row['LetterGrade'];
-                $i++;
+                $this->course_id_fk = $row['course_id_fk'];
+                $this->course = new CourseModel($row['course_id_fk']);
+                $this->user_id_fk = $row['user_id_fk'];
+                $this->semester_id_fk = $row['semester_id_fk'];
+                $this->semester = new SemesterModel($row['semester_id_fk']);
+                $this->NumericGrade = $row['NumericGrade'];
+                $this->date = $row['date'];
             }
         }
-        return $tran;
+
+        $this->decryptGrade();
     }
 
     public function add(){
@@ -83,6 +84,25 @@ class TranscriptModel extends AbstractModel{
         $dec = str_replace($this->semester_id_fk, "", $dec);
         $dec = str_replace($this->course_id_fk, "", $dec);
         $this->NumericGrade = $dec;
+    }
+
+    public static function getAll(){
+        $sql = "SELECT * FROM transcript group by course_id_fk, semester_id_fk";
+        $Trans = array();
+        $i=0;
+        
+        $stmt = self::prepareStmt($sql);  
+
+        if ($stmt->execute()){
+           while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $transObj = new TranscriptModel($row["id"]);
+                $Trans[$i] = $transObj;
+            $i++;
+            }
+            return $Trans;
+        }else{
+            return false;
+        }
     }
 }
 

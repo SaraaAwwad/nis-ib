@@ -88,5 +88,12 @@ class TranscriptController extends AbstractController
         $this->_data['grade'] = GradeModel::getAll();
        //??? $this->_data['semester'] = SemesterModel::getSemesters();
         $this->_view();
-        }
     }
+
+    public function viewAction(){
+        $trans = TranscriptModel::getAll();
+        $this->_data["trans"] = $trans;
+        $this->_view();
+    }
+
+}
