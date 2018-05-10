@@ -27,10 +27,38 @@ class TranscriptController extends AbstractController
 
         if(isset($_POST['addTran'])){
 
-            // $course = $_POST['course'];
-            // $sem = $_POST['semester'];
+            $grades = $_POST['grades'];
+            $course = $_POST['course'];
+            $sem = $_POST['semester'];
+
+            foreach($grades as $g){
+                //1st check they're all under the maximum limit
+                $maxgrade = ExamModel::getOutOfGrade($course, $sem);
+                if($g > $maxgrade){
+                    //exit with error message;
+                    $this->redirect("/transcript");
+                }
+            }
+
+            $students = StudentModel::getStudentsBySemAndCourse($sem, $course);
+            $i=0;
+            foreach($grades as $g){
+
+                $date = date("Y/m/d");
+                $transObj = new TranscriptModel("");
+                $transObj->course_id_fk = $course;
+                $transObj->semester_id_fk = $sem;
+                $transObj->NumericGrade = $g;
+                $transObj->date = $date;
+                $transObj->user_id_fk = $students[$i]->id;
+
+                $transObj->add();
+            }
+            exit();
+            //$course = $_POST['course'];
+            //$sem = $_POST['semester'];
             
-            if(!empty($_POST['students'])){
+           /* if(!empty($_POST['students'])){
 
                 foreach($_POST['students'] as $ss){
                     
@@ -53,40 +81,41 @@ class TranscriptController extends AbstractController
                    $trans->save();
                 
                 }
-            }
+            }*/
+
             $this->redirect('/transcript');
         }
 
-        if(isset($_POST['action']))
-        {
+        if(isset($_POST['action'])){
+
             if($_POST['action'] == 'getCourses'){
                 $grade = $_POST['grade'];
                 $courses = CourseModel::getCourseByGrade($grade);
                 echo json_encode($courses);
                 return;
             }
+            
             else if($_POST['action'] == 'getSemesters'){
                 $course = $_POST['course'];
                 $semesters = SemesterModel::getSemestersByCourse($course);
                 echo json_encode($semesters);
                 return;
             }
+
             else if($_POST['action'] == 'getStudents'){
-                //$semester = $_POST['semester'];
+                $semester = $_POST['semester'];
                 $grade = $_POST['grade'];
                 $course = $_POST['course'];
                 $students = ExamModel::getStudentsInCourse($course,$grade);
-                echo json_encode($students);
+                $maxgrade = ExamModel::getOutOfGrade($course, $semester);
+                $output = array("students"=> $students, "maxgrade" => $maxgrade);
+                echo json_encode($output);
                 return;
             }
         }
+
         $this->_data['grade'] = GradeModel::getAll();
-        $this->_data['status'] = StatusModel::getAll();
-        $this->_data['semester'] = SemesterModel::getSemesters();
+       //??? $this->_data['semester'] = SemesterModel::getSemesters();
         $this->_view();
         }
-
-
-        
-    
     }

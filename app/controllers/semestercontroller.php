@@ -30,7 +30,6 @@ class SemesterController extends AbstractController
   
             $currency = $_POST["currency"];
             $price = $_POST["price"];
-
             $arr_length = count($currency);
             $i=0;      
             for($i=0; $i<$arr_length; $i++){    
@@ -46,8 +45,8 @@ class SemesterController extends AbstractController
         $this->_view();
     }
 
-    public function editAction()  {  
-    if(isset($this->_params[0])){
+    public function editAction(){  
+        if(isset($this->_params[0])){
         $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
 
         $s = new SemesterModel($id);
@@ -70,13 +69,13 @@ class SemesterController extends AbstractController
             SemesterPricesModel::edit($priceid, $currency[$i], $price[$i]);  
         }
         $this->redirect("/semester");
-    }
+        }
 
         $this->_data['semester'] = $s;       
         $this->_data['season'] = SeasonModel::getAll();
         $this->_data['currency'] = CurrencyModel::getAll();
         $this->_view();
-    }  
+        }  
    }
   
 }

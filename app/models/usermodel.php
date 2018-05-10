@@ -100,20 +100,6 @@ class UserModel extends AbstractModel {
 
     Static function isExist($username){
 
-        /*$query = "SELECT * FROM user Where username = '$username' ";
-        $stmt =self::prepareStmt($query);
-        if($stmt->execute()){
-
-            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-            $num_rows = count($result);
-            if($num_rows > 0 ) {
-
-                return $result;
-            }else{
-                return false;
-            }
-
-        }*/
         $sql = "SELECT * FROM user Where username = :username";
 
         $stmt = self::prepareStmt($sql); 

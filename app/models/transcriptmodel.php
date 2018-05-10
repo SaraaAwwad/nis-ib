@@ -8,21 +8,9 @@ class TranscriptModel extends AbstractModel{
     public $user_id_fk;
     public $semester_id_fk;
     public $NumericGrade;
-    public $LetterGrade;
+    public $date;
     public $course_id_fk;
 
-    // protected static $tableName = "transcript";
-    // protected static $tableSchema = array(
-    //     'id'                  => self::DATA_TYPE_INT,
-    //     'user_id_fk'          => self::DATA_TYPE_INT,
-    //     'semester_id_fk'      => self::DATA_TYPE_INT,
-    //     'NumericGrade'        => self::DATA_TYPE_INT,
-    //     'LetterGrade'         => self::DATA_TYPE_STR,
-    //     'course_id_fk'        => self::DATA_TYPE_INT,
-        
-    // );
-
-    //SELECT transcript.*, 
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
@@ -55,8 +43,30 @@ class TranscriptModel extends AbstractModel{
                 $i++;
             }
         }
-    return $tran;
+        return $tran;
     }
+
+    public function add(){
+        $this->encryptGPA();
+        
     }
+
+    public function encryptGrade(){
+        $old = $this->user_id_fk;
+        $old .= $this->NumericGrade;
+        $old .= $this->semester_id_fk;
+        $old .= $this->course_id_fk;
+
+        $this->NumericGrade = self::encrypt($old);
+    }
+
+    public function decryptGrade(){
+        $dec = self::decrypt($this->NumericGrade);
+        $dec = str_replace($this->user_id_fk, "", $dec);
+        $dec = str_replace($this->semester_id_fk, "", $dec);
+        $dec = str_replace($this->course_id_fk, "", $dec);
+        $this->NumericGrade = $dec;
+    }
+}
 
 

@@ -16,8 +16,8 @@ class StudentModel extends UserModel{
      }
 
     public function getInfo(){
+
         $query = "SELECT * FROM user WHERE id = :id ";
-        
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         
@@ -35,10 +35,9 @@ class StudentModel extends UserModel{
               $this->email = $row["email"];
               $this->phone = $row["phone"];
               $this->status = $row["status"];
-              $this->getGrade();
+              //$this->getGrade();
             }
         }  
-        
     }
 
     public static function getAll(){
@@ -182,9 +181,34 @@ class StudentModel extends UserModel{
             }
         }
         return $stud;
-}
+    }
 
+    public static function getStudentsBySemAndCourse($sem, $course){
+        $query = "SELECT user.* FROM user inner join registration on  registration.student_id_fk = user.id inner join 
+        class on registration.class_id_fk = class.id inner join schedule on schedule.class_id_fk = class.id 
+        inner join  schedule_details on schedule_details.sched_id_fk = schedule.id
+        where registration.semester_id_fk = :sem and schedule.semester_id_fk = :sem and schedule_details.course_id_fk = :course";
+
+        $stmt = self::prepareStmt($query); 
+
+        $stmt->bindParam(':sem', $sem);         
+        $stmt->bindParam(':course', $course); 
+        $Stud = array();
+        $i=0;
+
+        if($stmt->execute()){
+           while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+            $s = new StudentModel($row["id"]);
+            $Stud[$i] = $s;
+            $i++;
+           }
+           return $Stud;
+        }else{
+            return false;
+        }        
 
     }
+
+}
 
 

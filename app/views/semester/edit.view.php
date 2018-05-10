@@ -57,7 +57,7 @@
                           </div>
 
          <div id="sched">
-    <table id="tab_sched" class="table table-striped text-center">
+        <table id="tab_sched" class="table table-striped text-center">
         <colgroup>
             <col width="33%">
                 <col width="33%">
