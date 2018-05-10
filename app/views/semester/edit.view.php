@@ -56,6 +56,49 @@
                               </div>
                           </div>
 
+         <div id="sched">
+    <table id="tab_sched" class="table table-striped text-center">
+        <colgroup>
+            <col width="33%">
+                <col width="33%">
+                    <col width="33%">
+        </colgroup>
+        <thead>
+            <tr class='warning'>
+                <th>Grade</th>
+                <th>Price</th>              
+                <th>Currency</th>              
+            </tr>
+        </thead>
+        <tbody>
+        
+            <?php
+            if(!empty($semester->prices)){
+                foreach ($semester->prices as $pr){
+                    echo '<tr>
+                    <td>'.$pr->grade_name.'</td>
+                    <td align="center"><input type="number" min="0" name="price[]" class="form-control" placeholder= "Enter Price" value="'.$pr->price.'" required></td>
+                    <td align="center"><select name="currency[]" class="form-control" required>
+                    <option value="" disabled >Select Currency</option>';
+                    
+                        foreach($currency as $c){
+                            if($c->id == $pr->currency_id_fk){
+                                echo '<option selected value='.$c->id.'>'.$c->code .'</option>';                                
+                            }else{
+                                echo '<option value='.$c->id.'>'.$c->code .'</option>';
+
+                            }
+                        }
+                    echo'    </select></td>
+                    </tr>';    
+                }
+            }
+            ?>
+        
+            </tbody>
+        </table>
+    </div>
+
                         </fieldset>
                         <input type="submit" name="editsemester" id="main">
                       </form>

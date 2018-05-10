@@ -27,22 +27,17 @@ class SemesterController extends AbstractController
             $s->end_date = $_POST['end_date'];
             $s->season_id_fk = $_POST['season'];
             $s->add();
-
-            /*if($s->save()){
-                $this->redirect("\semester");
-            }*/
-            
+  
             $currency = $_POST["currency"];
             $price = $_POST["price"];
 
-            foreach($currency as $key => $value){
-                $currency_id_fk = $value;
-                $price = $price[$key];
-                $scl_grade_id_fk = $grades[$key]->id;
-                $semester_id_fk = $s->id;
-                SemesterPricesModel::add($semester_id_fk, $currency_id_fk, $price, $scl_grade_id_fk);
+            $arr_length = count($currency);
+            $i=0;      
+            for($i=0; $i<$arr_length; $i++){    
+                 $scl_grade_id_fk = $grades[$i]->id;
+                 SemesterPricesModel::add($s->id, $currency[$i], $price[$i], $scl_grade_id_fk);  
             }
-
+            
             $this->redirect("/semester");
         }
         
@@ -51,27 +46,35 @@ class SemesterController extends AbstractController
         $this->_view();
     }
 
-    public function editAction()  
-   {  
+    public function editAction()  {  
     if(isset($this->_params[0])){
         $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
 
-        $s = SemesterModel::getByPK($id);
+        $s = new SemesterModel($id);
 
         if(isset($_POST['editsemester'])){
             $s->year = $_POST['year'];
             $s->start_date = $_POST['start_date'];
             $s->end_date = $_POST['end_date'];
             $s->season_id_fk = $_POST['season'];
-            if($s->save()){
-                $this->redirect("\semester");
-            }
+            $s->edit();
+
+        $currency = $_POST["currency"];
+        $price = $_POST["price"];
+        
+        $arr_length = count($currency);
+       $i=0; 
+
+        for($i=0; $i<$arr_length; $i++){    
+            $priceid = $s->prices[$i]->id;
+            SemesterPricesModel::edit($priceid, $currency[$i], $price[$i]);  
         }
+        $this->redirect("/semester");
+    }
 
-        $this->_data['semester'] = $s;
-        //$this->_data['year'] = 2019;        
+        $this->_data['semester'] = $s;       
         $this->_data['season'] = SeasonModel::getAll();
-
+        $this->_data['currency'] = CurrencyModel::getAll();
         $this->_view();
     }  
    }

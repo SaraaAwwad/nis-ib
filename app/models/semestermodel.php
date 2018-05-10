@@ -1,6 +1,9 @@
 <?php
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
+use PHPMVC\Models\SclGradeModel;
+use PHPMVC\Models\SemesterPricesModel;
+
 class SemesterModel extends AbstractModel{
     public $id;
     public $year;
@@ -8,6 +11,9 @@ class SemesterModel extends AbstractModel{
     public $start_date;
     public $end_date;
     public $season_name;
+
+    public $prices = array();
+
     protected static $tableName = 'semester';
     protected static $tableSchema = array(
         'id'                  => self::DATA_TYPE_INT,
@@ -29,6 +35,7 @@ class SemesterModel extends AbstractModel{
             $this->id = $id;
             $this->getInfo();
         }
+        $this->getAllPrices();
     }
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
@@ -83,5 +90,32 @@ class SemesterModel extends AbstractModel{
         return false;
     }
 
+    public function getAllPrices(){
+        $grades =  SclGradeModel::getAll();
+        $i=0;
+        foreach($grades as $g){
+            $this->prices[$i] =  new SemesterPricesModel($this->id,$g->id);
+            $i++;
+        }
+    }
+
+    public function edit(){
+        $sql = "UPDATE semester SET year = :year, season_id_fk = :season_id_fk, start_date = :start_date, end_date =:end_date
+        WHERE id = :id";
+        
+        $stmt = self::prepareStmt($sql);  
+
+        $stmt->bindParam(':id', $this->id, \PDO::PARAM_INT); 
+        $stmt->bindParam(':year', $this->year);
+        $stmt->bindParam(':season_id_fk', $this->season_id_fk);
+        $stmt->bindParam(':start_date', $this->start_date);
+        $stmt->bindParam(':end_date', $this->end_date);
+    
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }
