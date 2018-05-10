@@ -47,8 +47,25 @@ class TranscriptModel extends AbstractModel{
     }
 
     public function add(){
-        $this->encryptGPA();
+        $this->encryptGrade();
+
+        $sql = "INSERT INTO transcript (user_id_fk, semester_id_fk, NumericGrade, date, course_id_fk) 
+                VALUES (:user_id_fk, :semester_id_fk, :NumericGrade, :date, :course_id_fk)";
+
+        $stmt = self::prepareStmt($sql);  
+
         
+        $stmt->bindParam(':user_id_fk', $this->user_id_fk);         
+        $stmt->bindParam(":semester_id_fk", $this->semester_id_fk);
+        $stmt->bindParam(":NumericGrade", $this->NumericGrade);
+        $stmt->bindParam(":date", $this->date);
+        $stmt->bindParam(":course_id_fk", $this->course_id_fk);
+
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function encryptGrade(){

@@ -54,35 +54,6 @@ class TranscriptController extends AbstractController
 
                 $transObj->add();
             }
-            exit();
-            //$course = $_POST['course'];
-            //$sem = $_POST['semester'];
-            
-           /* if(!empty($_POST['students'])){
-
-                foreach($_POST['students'] as $ss){
-                    
-                   $trans = new TranscriptModel();
-                   $trans->user_id_fk = $ss->name;
-                   $trans->semester_id_fk = $_POST['semester'];
-                   $trans->NumericGrade = $ss;
-                   $trans->course_id_fk = $_POST['course'];
-                   if($ss < 4){
-                       $trans->LetterGrade = 'F';}
-                       else if($ss == 4){
-                        $trans->LetterGrade = 'D';}
-                       else if($ss == 5){
-                        $trans->LetterGrade = 'C';}
-                       else if($ss == 6){
-                        $trans->LetterGrade = 'B';}
-                        else if($ss == 7){
-                            $trans->LetterGrade = 'A';}
-
-                   $trans->save();
-                
-                }
-            }*/
-
             $this->redirect('/transcript');
         }
 
