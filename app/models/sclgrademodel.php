@@ -35,6 +35,24 @@ class SclGradeModel extends AbstractModel{
         }
     }
 
+    public static function getAll(){
+        $query = "SELECT * from scl_grade";
+        $stmt = self::prepareStmt($query);
+
+        $Grades = array();
+        $i = 0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $gradeObj = new SclGradeModel($row["id"]);
+                $Grades[$i] = $gradeObj;
+                $i++;
+            }
+            return $Grades;
+        }else{
+            return false;
+        }
+    }
+
 
 }
 ?>

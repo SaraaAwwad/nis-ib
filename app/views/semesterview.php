@@ -13,4 +13,14 @@ class SemesterView{
         echo'    </select>';
     } 
 
+    public function getAllCurrency($currency){
+        echo'<select name="currency[]" class="form-control" required>
+        <option value="" disabled selected>Select Currency</option>';
+        
+            foreach($currency as $c){
+                echo '<option value='.$c->id.'>'.$c->code .'</option>';
+            }
+        echo'    </select>';
+    }
+
 }

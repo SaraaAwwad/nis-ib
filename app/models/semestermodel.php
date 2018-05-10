@@ -62,5 +62,26 @@ class SemesterModel extends AbstractModel{
         return $sem;
     }
 
+    public function add(){
+
+        $query = "INSERT INTO
+        semester(year, season_id_fk, start_date, end_date)
+        VALUES (:year, :season_id_fk, :start_date, :end_date)";
+
+        $stmt = self::prepareStmt($query);
+
+        $stmt->bindParam(":year", $this->year);
+        $stmt->bindParam(":season_id_fk", $this->season_id_fk);
+        $stmt->bindParam(":start_date", $this->start_date);                
+        $stmt->bindParam(":end_date", $this->end_date);        
+
+        if($stmt->execute()){
+            $this->id = self::getLastId(); 
+            return self::getLastId();
+        }
+
+        return false;
+    }
+
 
 }

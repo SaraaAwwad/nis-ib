@@ -27,4 +27,27 @@ class SemesterPricesModel extends AbstractModel implements IpayModel{
         return $this->price;
     }
 
+    public static function add($semester_id_fk, $currency_id_fk, $price, $scl_grade_id_fk){
+        
+        $query = "INSERT INTO
+        semester_price(semester_id_fk, currency_id_fk, price, scl_grade_id_fk)
+        VALUES (:semester_id_fk, :currency_id_fk, :price, :scl_grade_id_fk)";
+
+        $stmt = self::prepareStmt($query);
+
+        $price = self::test_input($price);
+
+        $stmt->bindParam(":semester_id_fk", $semester_id_fk);
+        $stmt->bindParam(":currency_id_fk", $currency_id_fk);
+        $stmt->bindParam(":price", $price);                
+        $stmt->bindParam(":scl_grade_id_fk", $scl_grade_id_fk);        
+
+        if($stmt->execute()){
+            //$this->id = self::getLastId(); 
+            return self::getLastId();
+        }
+
+        return false;
+    }
+
 }

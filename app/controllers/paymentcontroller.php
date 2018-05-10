@@ -138,7 +138,6 @@ class PaymentController extends AbstractController
 
             if(!empty($emptytestarray)){
 
-            //$name = $_POST["name"];
             $type = $_POST["type"]; 
 
             foreach($name as $key => $value){

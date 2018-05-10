@@ -164,7 +164,6 @@ class CourseWorkController extends AbstractController
                         $j=0;
 
                         if($value!=""){
-                            //$t->flag ==1;
                             if($t->flag == 1){
                                 $opt=array();
                                 $i=0;
