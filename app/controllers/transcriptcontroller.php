@@ -15,11 +15,24 @@ use PHPMVC\Models\SemesterModel;
 use PHPMVC\Models\TranscriptModel;
 use PHPMVC\Lib\Helper;
 use PHPMVC\Models\ExamModel;
+
 class TranscriptController extends AbstractController
 {   use Helper;
     use InputFilter;
     public function defaultAction(){
-        $this->_data['transcript'] = TranscriptModel::getStudentTranscript($_SESSION["userID"]);
+
+        $student = new StudentModel($_SESSION["userID"]);
+
+        //$this->_data['transcript'] = TranscriptModel::getStudentTranscript($_SESSION["userID"]);
+        $semArr = TranscriptModel::getStudentSemesters($student);
+        $transArr = array();
+        $i=0;
+        foreach($semArr as $sem){
+            $transArr[$i] =  TranscriptModel::getBySemester($sem, $student);
+            $i++;
+        }
+        
+        $this->_data['transcript'] = $transArr;
         $this->_view();
     }
 

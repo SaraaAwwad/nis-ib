@@ -20,12 +20,6 @@ class TranscriptModel extends AbstractModel{
 
     public function getInfo(){
         
-        /*$query = "SELECT transcript.*, semester.year, season.season_name, course.course_code FROM transcript 
-        INNER JOIN semester ON transcript.semester_id_fk = semester.id
-        INNER JOIN season ON semester.season_id_fk = season.id 
-        INNER JOIN course ON transcript.course_id_fk = course.id
-        WHERE transcript.user_id_fk = '.$id.'";*/
-        
         $query = "SELECT * FROM transcript 
         WHERE id = :id ";
 
@@ -184,6 +178,63 @@ class TranscriptModel extends AbstractModel{
         $this->OutOfGrade = $maxgrade;
     }
 
+    public function getStudentSemesters($student){
+        $sql = "SELECT Distinct semester_id_fk from transcript where user_id_fk = :student_id_fk ORDER BY semester_id_fk DESC";
+
+        $stmt = self::prepareStmt($sql);
+        $student_id_fk = $student->id;
+
+        $stmt->bindParam(':student_id_fk', $student_id_fk);
+
+        $Sem = array();
+        $i=0;
+
+        if ($stmt->execute()){
+            $numofrows =  $stmt->rowCount();            
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                 $semObj = new SemesterModel($row["semester_id_fk"]);
+                 $Sem[$i] = $semObj;
+             $i++;
+             }
+
+         }else{
+             return false;
+         }
+    
+         if($numofrows > 0 ) {
+            return $Sem;
+        }else{
+            return false;
+        }
+    }
+
+    public function getBySemester($semester, $student){
+        $sql = "SELECT * from transcript where user_id_fk = :student_id_fk AND semester_id_fk = :semester_id_fk ";
+
+        $stmt = self::prepareStmt($sql);
+        $student_id_fk = $student->id;
+
+        $semester_id_fk = $semester->id;
+
+        $stmt->bindParam(':student_id_fk', $student_id_fk);
+        $stmt->bindParam(':semester_id_fk', $semester_id_fk);
+
+        $Trans = array();
+        $i=0;
+
+        if ($stmt->execute()){
+            $numofrows =  $stmt->rowCount();            
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $transObj = new TranscriptModel($row["id"]);
+                $Trans[$i] = $transObj;
+             $i++;
+             }
+             return $Trans;
+         }else{
+             return false;
+         }
+    
+    }
 
 }
 
