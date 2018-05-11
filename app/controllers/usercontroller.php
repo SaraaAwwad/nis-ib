@@ -1,5 +1,7 @@
 <?php
 namespace PHPMVC\Controllers;
+use PHPMVC\Models\MailerModel;
+use PHPMVC\Models\CreateModel;
 
 class UserController extends AbstractController
 {

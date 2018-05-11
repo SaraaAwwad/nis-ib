@@ -9,123 +9,24 @@
                 <!--  notification start -->
                 <ul class="nav top-menu">
                     <!-- settings start -->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme">4</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 4 pending tasks</p>
-                            </li>
-                            <li>
-                                <a href="index.php#">
-                                    <div class="task-info">
-                                        <div class="desc">DashGum Admin Panel</div>
-                                        <div class="percent">40%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.php#">
-                                    <div class="task-info">
-                                        <div class="desc">Database Update</div>
-                                        <div class="percent">60%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.php#">
-                                    <div class="task-info">
-                                        <div class="desc">Product Development</div>
-                                        <div class="percent">80%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.php#">
-                                    <div class="task-info">
-                                        <div class="desc">Payments Sent</div>
-                                        <div class="percent">70%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                            <span class="sr-only">70% Complete (Important)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="external">
-                                <a href="#">See All Tasks</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="">
                             <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
+                            <span class="badge bg-theme"></span>
                         </a>
+
                         <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
+
                             <li>
-                                <p class="green">You have 5 new messages</p>
+                                <p class="green">Messages</p>
+                            </li>
+                            <li class="dropdown2">
+
+
                             </li>
                             <li>
-                                <a href="index.php#">
-                                    <span class="photo"><img alt="avatar" src="<?= ASSETS_IMG ?>ui-zac.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Zac Snider</span>
-                                    <span class="time">Just now</span>
-                                    </span>
-                                    <span class="message">
-                                        Hi mate, how is everything?
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.php#">
-                                    <span class="photo"><img alt="avatar" src="<?= ASSETS_IMG ?>ui-divya.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Divya Manian</span>
-                                    <span class="time">40 mins.</span>
-                                    </span>
-                                    <span class="message">
-                                     Hi, I need your help with this.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.php#">
-                                    <span class="photo"><img alt="avatar" src="<?= ASSETS_IMG ?>ui-danro.jpg"></span>
-                                    <span class="subject">
-                                    <span class="from">Dan Rogers</span>
-                                    <span class="time">2 hrs.</span>
-                                    </span>
-                                    <span class="message">
-                                        Love your new Dashboard.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.php#">See all messages</a>
+                                <a href="/notification/default"><strong>See all messages</strong></a>
                             </li>
                         </ul>
                     </li>
@@ -139,3 +40,54 @@
               </ul>
             </div>
         </header>
+<script>
+
+    $(document).ready(function(){
+        setInterval(fetchUnseendata,10000);
+    });
+
+            function fetchUnseendata(){
+            $.ajax({
+                url: "/notification/add",
+                method: "POST",
+                data: {action: "getUnseen"},
+                success: function (data, tS, theXHRObject) {
+                    if (data > 0) {
+                        $('.badge').html(data);
+                    }
+                }
+            }); }
+
+    $(document).ready(function() {
+
+        $.ajax({
+            url: "/notification/add",
+            method: "POST",
+            data: {action: "getUnseen"},
+            success: function (data, tS, theXHRObject) {
+                if (data > 0) {
+                    $('.badge').html(data);
+                }
+            }
+        });
+
+        $(document).on('click', '.dropdown-toggle', function () {
+            var d = new Date();
+
+            $('.badge').html('');
+            $.ajax({
+                url: "/notification/add",
+                method: "POST",
+                data: {action: "getSeen"},
+                success: function (data, tS, theXHRObject) {
+                    $('.dropdown2').html('');
+                    $.each(JSON.parse(data), function (i, data) {
+                        $('.dropdown2').append($('<li><a href=""><span class="subject"><span class="from">' + data.fname + ' ' + data.lname + '</span><span class="time">' + data.created_at + '</span></span><span class="message">' + data.title + '</span><span class="message">' + data.body + '</span></a></li>'));
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+

@@ -4,3 +4,5 @@
                 require_once HOME_TEMPLATE_PATH . 'header.php';
                 require_once HOME_TEMPLATE_PATH . 'nav.php';
                 require_once HOME_TEMPLATE_PATH . 'templatefooter.php';
+?>
+
