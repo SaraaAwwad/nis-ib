@@ -162,4 +162,30 @@ class SemesterModel extends AbstractModel{
 
         }
     }
+
+    public static function count($semester){
+        $query = "SELECT COUNT(id) FROM registration WHERE semester_id_fk = '.$semester.'";
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            $num_rows = $stmt->fetchColumn();
+            return intval($num_rows);
+        }else{
+            return false;
+        }
+    }
+
+    public static function sumAmount($decorator){
+        $query = "SELECT SUM(payment_detail.amount) as 'Total' FROM payment_detail
+                    INNER JOIN decorator on decorator.id = payment_detail.decorator_id_fk
+                    WHERE decorator.name = '$decorator'";
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $row['Total'];
+        }else{
+            return false;
+        }
+    }
+
+
 }
