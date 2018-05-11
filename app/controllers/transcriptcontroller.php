@@ -19,7 +19,7 @@ class TranscriptController extends AbstractController
 {   use Helper;
     use InputFilter;
     public function defaultAction(){
-        $this->_data['transcript'] = TranscriptModel::getTranscript($_SESSION["userID"]);
+        $this->_data['transcript'] = TranscriptModel::getStudentTranscript($_SESSION["userID"]);
         $this->_view();
     }
 

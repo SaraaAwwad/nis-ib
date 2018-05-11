@@ -44,7 +44,8 @@ class TranscriptModel extends AbstractModel{
                 $this->date = $row['date'];
             }
         }
-        $this->decryptGrade();      
+        $this->decryptGrade();   
+        $this->getOutOfGrade();   
     }
 
     public function add(){
@@ -153,9 +154,37 @@ class TranscriptModel extends AbstractModel{
         }
     }
 
-    public function isExist(){
+    public function getStudentTranscript($id){
+        $query = "SELECT transcript.*, semester.year, season.season_name, course.course_code FROM transcript 
+        INNER JOIN semester ON transcript.semester_id_fk = semester.id
+        INNER JOIN season ON semester.season_id_fk = season.id 
+        INNER JOIN course ON transcript.course_id_fk = course.id
+        WHERE transcript.user_id_fk = '.$id.'";
+
+        $stmt = self::prepareStmt($query);
+        $stmt->bindParam(':id', $this->id);
+
+        $Trans = array();
+        $i=0;
         
+        if ($stmt->execute()){
+           while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $transObj = new TranscriptModel($row["id"]);
+                $Trans[$i] = $transObj;
+            $i++;
+            }
+            return $Trans;
+        }else{
+            return false;
+        }
     }
+
+    public function getOutOfGrade(){
+        $maxgrade  = ExamModel::getOutOfGrade($this->course_id_fk, $this->semester_id_fk);
+        $this->OutOfGrade = $maxgrade;
+    }
+
+
 }
 
 

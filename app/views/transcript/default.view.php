@@ -28,6 +28,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
           <th>Semester</th>
           <th>Course</th>          
           <th>Grade</th>                              
+          <th>Out Of</th>                              
         </tr>
       </thead>
       <tbody>
@@ -37,10 +38,10 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                 foreach ($transcript as $t){
                     echo '<tr>
                     <td>'.$t->user_id_fk.'</td>
-                    <td>'.$t->season_name .' - '. $t->year.'</td>
-                    <td>'.$t->course_code.'</td>
-                    <td>'.$t->LetterGrade.'</td>
-                    
+                    <td>'.$t->semester->season_name .' - '. $t->semester->year.'</td>
+                    <td>'.$t->course->course_code.'</td>
+                    <td>'.$t->NumericGrade.'</td>
+                    <td>'.$t->OutOfGrade.'</td>                    
                     </tr>';
                 }
             }

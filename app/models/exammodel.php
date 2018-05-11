@@ -81,7 +81,6 @@ class ExamModel extends AbstractModel{
         $query = "select * from exam_details where course_id_fk = :course AND semester_id_fk = :semester";
         $stmt = self::prepareStmt($query);
         
-   
         $stmt->bindParam(":course", $course);
         $stmt->bindParam(":semester", $semester);
 
