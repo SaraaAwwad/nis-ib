@@ -67,9 +67,14 @@ class ParentModel extends UserModel{
 
     }
 
-    static public function getParent(){
 
-        $query = "SELECT id , fname, lname FROM ".static::$tableName." WHERE user_id_fk = ". $_SESSION['userID'];
+    static public function getParent($parent_id = " "){
+
+        if($parent_id = " ")
+        {
+            $parent_id =  $_SESSION['userID'];
+        }
+        $query = "SELECT id , fname, lname FROM ".static::$tableName." WHERE user_id_fk = ".$parent_id;
         $stmt = self::prepareStmt($query);
         $children = array();
         $i=0;
@@ -86,6 +91,24 @@ class ParentModel extends UserModel{
         }else{
             return false;
         }
+
+    }
+
+    static public function getParentOf($child_id){
+
+        $query= "SELECT user_id_fk FROM ". self::$tableName ." WHERE id = " . $child_id;
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                //echo $row['id'];
+                $parentObj = new ParentModel($row['user_id_fk']);
+            }
+            return $parentObj;
+        }else{
+            return false;
+        }
+
+
 
     }
 
