@@ -52,7 +52,7 @@
                       </ul>
                   </li>
 -->
-                    <li class="sub-menu dcjq-parent-li">
+                  <!--  <li class="sub-menu dcjq-parent-li">
                       <a class="dcjq-parent" href="javascript:;">
                           <i class="fa fa-bars"></i>
                           <span>Classes</span>
@@ -109,7 +109,7 @@
                       </ul>
                   </li>
 
-              </ul>
+              </ul> -->
               <!-- sidebar menu end-->
           </div>
       </aside>

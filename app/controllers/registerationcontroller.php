@@ -13,18 +13,13 @@ class RegisterationController extends AbstractController
 {   use Helper;
     use InputFilter;
 
-    public function defaultAction()
-    {
-        //$lvl = LevelModel::getAll();
-        //$this->_data['levels'] = $lvl;
-
+    public function defaultAction(){
         $this->_data['details'] = RegisterationModel::getReg();
         $this->_view();
-
     }
 
-    public function addAction()
-    {
+    public function addAction(){
+
         $grade = SclGradeModel::getAll();
         $semester = SemesterModel::getSemesters();
         $this->_data['semester'] = $semester;
@@ -52,14 +47,20 @@ class RegisterationController extends AbstractController
 
             $this->redirect('/registeration');
         }
-        if(isset($_POST['action']))
-        {
+
+        if(isset($_POST['action'])){
             if($_POST['action'] == 'getClasses'){
                 $g = $_POST['grade'];
                 $sem = $_POST['semester'];
                 $class = ClassModel::getClassesByGrade($g);
+
+                //want students who paid for this semester and are in this grade and are not already registered.
                 $students = StudentModel::getNonRegisteredStudents($g, $sem);
-          
+          /* SELECT user.* from user INNER JOIN student_level ON user.id = student_level.user_id_fk INNER JOIN status
+        ON status.id= user.status INNER JOIN payment ON payment.user_id_fk = user.id INNER JOIN payment_status
+        ON payment.status_id_fk = payment_status.id WHERE status.code = "active" AND 
+        student_level.scl_grade_id_fk = 1 AND  payment_status.code = "approved" AND payment.semester_id_fk = 1
+        AND  user.id NOT IN (select student_id_fk FROM registration WHERE registration.semester_id_fk = 1)*/
                 $output = array(
                     'class' => $class, 
                     'students' => $students

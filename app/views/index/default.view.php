@@ -7,3 +7,4 @@ require_once TEMPLATE_PATH . 'header.php';
 
                 //require_once TEMPLATE_PATH . 'wrapperend.php';
 require_once TEMPLATE_PATH . 'templatefooter.php';
+?>

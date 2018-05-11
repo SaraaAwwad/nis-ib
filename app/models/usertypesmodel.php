@@ -75,6 +75,23 @@ class UserTypesModel extends AbstractModel {
         }
 
     }
+    Static function getExcept(){
+        $query = "SELECT * FROM user_type WHERE title NOT IN ('student','parent')";
+        $stmt = self::prepareStmt($query);
+        $Types= array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $UserTypeObj = new UserTypesModel($row['id']);
+                $Types[$i] = $UserTypeObj;
+                $i++;
+            }
+            return $Types;
+        }else{
+            return false;
+        }
+
+    }
 
     public function update($title, $statusId){
         $sql = "UPDATE user_type SET title = :title, status_id_fk = :status_id_fk WHERE id = :id";
@@ -131,7 +148,7 @@ class UserTypesModel extends AbstractModel {
 
 
     Static function getUsers(){
-        $query = "SELECT * FROM user_type WHERE title NOT IN ('student','Student')";
+        $query = "SELECT * FROM user_type WHERE title NOT IN ('student','Student','parent','Parent')";
         $stmt = self::prepareStmt($query);        
         $Types= array();
         $i=0;
@@ -235,6 +252,29 @@ class UserTypesModel extends AbstractModel {
         }
         return $result;
     }*/
+
+    public static function count($usertitle){
+        $query = "SELECT COUNT(user.id) from user inner join user_type ON user.type_id = user_type.id
+         WHERE user_type.title = '$usertitle' ";
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            $num_rows = $stmt->fetchColumn();
+            return intval($num_rows);
+        }else{
+            return false;
+        }
+    }
+
+    public static function countUserTypes(){
+        $query = "SELECT COUNT(id) FROM user_type";
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            $num_rows = $stmt->fetchColumn();
+            return intval($num_rows);
+        }else{
+            return false;
+        }
+    }
 
 }
 

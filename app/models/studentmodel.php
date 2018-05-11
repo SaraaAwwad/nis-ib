@@ -8,13 +8,14 @@ class StudentModel extends UserModel{
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
 
-     public function __construct($id=""){
+    public function __construct($id=""){
          if($id != ""){
              $this->id = $id;
              $this->getInfo();
          }
-     }
+    }
 
+    
     public function getInfo(){
 
         $query = "SELECT * FROM user WHERE id = :id ";
@@ -156,13 +157,40 @@ class StudentModel extends UserModel{
     }
 
     public static function getNonRegisteredStudents($grade_id_fk, $semester_id_fk){
-        //that are not in a class and are active
-        return self::getArr('SELECT user.* FROM '.self::$tableName.' INNER JOIN student_level
-        ON  user.id = student_level.user_id_fk
-        INNER JOIN status ON status.id = user.status
-        WHERE user.id NOT IN (select student_id_fk FROM registration) AND 
-        scl_grade_id_fk = '. $grade_id_fk.' AND
-        status.code="active"');
+
+        $sql = "SELECT user.* from user INNER JOIN student_level ON user.id = student_level.user_id_fk INNER JOIN status
+        ON status.id= user.status INNER JOIN payment ON payment.user_id_fk = user.id INNER JOIN payment_status
+        ON payment.status_id_fk = payment_status.id WHERE status.code = :active AND 
+        student_level.scl_grade_id_fk = :grade AND  payment_status.code = :approved AND payment.semester_id_fk = :semester
+        AND  user.id NOT IN (select student_id_fk FROM registration WHERE registration.semester_id_fk = :regsemester)";
+
+        $stmt = self::prepareStmt($sql);
+        $grade_id_fk = self::test_input($grade_id_fk);
+        $semester_id_fk = self::test_input($semester_id_fk);
+
+        $active = StatusModel::ACTIVE;
+        $approved = PaymentModel::APPROVED;
+        
+        $stmt->bindParam(":active", $active);
+        $stmt->bindParam(":approved", $approved);
+        $stmt->bindParam(":grade", $grade_id_fk);
+        $stmt->bindParam(":semester", $semester_id_fk);
+        $stmt->bindParam(":regsemester", $semester_id_fk);
+
+        $Students = array();
+        $i = 0;
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $studObj = new StudentModel($row["id"]);
+                $Students[$i] = $studObj;
+                $i++;        
+            }
+            return $Students;
+        }else{
+            return false;
+        }
+    
     }
 
     public static function getStudentsBySemester($semester){

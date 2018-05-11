@@ -12,6 +12,9 @@ class PaymentModel extends AbstractModel
     public $currency_id_fk;
     public $semester_id_fk;
 
+    const PENDING = "pending";
+    const APPROVED = "approved";
+
     protected static $tableName = 'payment';
 
     public function __construct($id=""){

@@ -28,14 +28,7 @@ class RegisterationModel extends AbstractModel{
         }
     }
 
-    public static function getReg()
-    {
-        // return self::get(
-        // 'SELECT registration.* , user.fname, user.lname, class.name, season.season_name, semester.year FROM ' . self::$tableName . ' INNER JOIN
-        //   class ON registration.class_id_fk = class.id INNER JOIN semester ON registration.semester_id_fk = semester.id
-        //   INNER JOIN season on season.id = semester.season_id_fk INNER JOIN user ON registration.student_id_fk = user.id'
-        // );
-
+    public static function getReg(){
         $query = "SELECT registration.* , user.fname, user.lname, class.name, season.season_name, semester.year FROM registration INNER JOIN
       class ON registration.class_id_fk = class.id INNER JOIN semester ON registration.semester_id_fk = semester.id INNER JOIN season on season.id = semester.season_id_fk INNER JOIN user ON registration.student_id_fk = user.id";
         $stmt = self::prepareStmt($query);

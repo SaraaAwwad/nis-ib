@@ -547,12 +547,12 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 .dropdown-menu.extended li a {
     border-bottom: 1px solid #EBEBEB !important;
-    font-size: 12px;
+    font-size: 15px;
     list-style: none;
 }
 
 .dropdown-menu.extended li a {
-    padding: 15px 10px !important;
+    padding: 5px 10px ;
     width: 100%;
     display: inline-block;
 }
@@ -2786,4 +2786,110 @@ input[type="time"]{
     border: none;
     width: 135%;
     margin-bottom: 20px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttonkite {
+    width: 135px;
+    padding: 12px 18px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #FFCA28;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+    left: 450px;
+}
+#buttonkite:hover {
+     background-color: #FFD54F;
+}
+
+#buttonkite:focus {
+     outline: none;
+     background-color: #D4E157;
+ }
+
+#fabutton {
+    margin-left: 12px;
+}
+
+.plane {
+    position: absolute;
+    right: 18px;
+}
+
+inbox {
+    margin: auto;
+}
+
+inbox-list {
+    display: flex;
+    flex-direction: column;
+}
+
+message-item {
+    width: 100%;
+    padding: 2rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    opacity: 0.4;
+}
+message-item.unread {
+    background: #c8e3f5;
+    color:black;
+    opacity: 0.8;
+}
+
+message-item:hover {
+     opacity: 1;
+ }
+
+message-item.subject {
+    font-weight: 600;
+}
+
+
+message-item:last-child {
+     margin-bottom: 0;
+ }
+
+.sender-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.subject {
+    font-size: 20px;
+}
+
+.from {
+    font-size: 10px;
+}
+
+.time {
+    font-weight: normal;
+    font-size: 10px;
+}
+
+
+#mainp p {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.pie {
+    height: 500px;
 }
