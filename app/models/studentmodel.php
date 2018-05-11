@@ -35,7 +35,7 @@ class StudentModel extends UserModel{
               $this->email = $row["email"];
               $this->phone = $row["phone"];
               $this->status = $row["status"];
-              //$this->getGrade();
+              $this->getGrade();
             }
         }  
     }
