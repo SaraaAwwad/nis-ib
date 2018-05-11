@@ -106,6 +106,8 @@ $(document).ready(function(){
         '</div>')
 
           i++;  
+
+        $(".firstreq").prop('required',true);
         });
 
       $(document).on('click', '.optrmv', function(){  
@@ -114,6 +116,10 @@ $(document).ready(function(){
            $('#div'+button_id+'').remove();  
             var k = 0;
             i--;
+
+            if(i==1){
+                $(".firstreq").prop('required',false);
+            }
 
             $(".optrow").each(function(){
                 $(this).attr("id","row"+k);

@@ -18,8 +18,12 @@ class StudentModel extends UserModel{
 
     public function getInfo(){
 
+<<<<<<< HEAD
         $query = "SELECT * FROM user WHERE id = :id";
         
+=======
+        $query = "SELECT * FROM user WHERE id = :id ";
+>>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         $stmt->bindParam(':id', $this->id);
@@ -36,12 +40,15 @@ class StudentModel extends UserModel{
               $this->email = $row["email"];
               $this->phone = $row["phone"];
               $this->status = $row["status"];
+<<<<<<< HEAD
               $this->user_id_fk = $row["user_id_fk"];
               $this->paymentObj = PaymentModel::getPayment($row['id']);
               $this->getGrade();
+=======
+              //$this->getGrade();
+>>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
             }
         }  
-        
     }
 
     public static function getAll(){
@@ -185,9 +192,34 @@ class StudentModel extends UserModel{
             }
         }
         return $stud;
-}
+    }
 
+    public static function getStudentsBySemAndCourse($sem, $course){
+        $query = "SELECT user.* FROM user inner join registration on  registration.student_id_fk = user.id inner join 
+        class on registration.class_id_fk = class.id inner join schedule on schedule.class_id_fk = class.id 
+        inner join  schedule_details on schedule_details.sched_id_fk = schedule.id
+        where registration.semester_id_fk = :sem and schedule.semester_id_fk = :sem and schedule_details.course_id_fk = :course";
+
+        $stmt = self::prepareStmt($query); 
+
+        $stmt->bindParam(':sem', $sem);         
+        $stmt->bindParam(':course', $course); 
+        $Stud = array();
+        $i=0;
+
+        if($stmt->execute()){
+           while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+            $s = new StudentModel($row["id"]);
+            $Stud[$i] = $s;
+            $i++;
+           }
+           return $Stud;
+        }else{
+            return false;
+        }        
 
     }
+
+}
 
 

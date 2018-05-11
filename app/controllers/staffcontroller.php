@@ -12,6 +12,7 @@ use PHPMVC\Models\UserModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\CurrencyModel;
 
+
 use PHPMVC\LIB\InputFilter;
 
 class StaffController extends AbstractController
@@ -86,7 +87,7 @@ class StaffController extends AbstractController
                 $telephone->number = $this->filterInt($second);
                 $telephone->save(); }
             }
-         $this->redirect('/staff/default');
+           $this->redirect('/staff/default');
 
     	}
         $this->_view();

@@ -84,6 +84,19 @@ class UserModel extends AbstractModel {
 
         $result = self::isExist($username);
         if ($result){
+<<<<<<< HEAD
+/*
+            if($password == $result['pwd']){
+
+                //  if(password_verify($password, $row['pwd'])){
+                    session_start();
+                    $_SESSION["userID"] = $result['id'];
+                    $_SESSION["userType"] = $result['type_id'];
+                    return true;
+                } */
+
+=======
+>>>>>>> 63d7f44674e7c37e88e33d03d287e739dffc4537
          //   if($password== $result['pwd']){
             $row = $result->fetch(\PDO::FETCH_ASSOC);
            if($password== $row['pwd']){
@@ -100,7 +113,9 @@ class UserModel extends AbstractModel {
 
     Static function isExist($username){
 
-        /*$query = "SELECT * FROM user Where username = '$username' ";
+<<<<<<< HEAD
+/*
+        $query = "SELECT * FROM user Where username = '$username' ";
         $stmt =self::prepareStmt($query);
         if($stmt->execute()){
 
@@ -113,7 +128,9 @@ class UserModel extends AbstractModel {
                 return false;
             }
 
-        }*/
+        } */
+=======
+>>>>>>> 63d7f44674e7c37e88e33d03d287e739dffc4537
         $sql = "SELECT * FROM user Where username = :username";
 
         $stmt = self::prepareStmt($sql); 
@@ -140,6 +157,13 @@ class UserModel extends AbstractModel {
              ' INNER JOIN user_type ON user.type_id = user_type.id 
                where user_type.title = "teacher" '
             );
+    }
+
+    public static function getUsersByUserType($typeid){
+        return self::getArr(
+            'SELECT user.* FROM ' . self::$tableName .
+            ' WHERE type_id = '.$typeid.' '
+        );
     }
 
     public static function getStudents($exam){

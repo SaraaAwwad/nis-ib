@@ -6,43 +6,112 @@ class ParentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
 
-    public static function getByUsername($pk){
-        $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE username = "' . $pk . '"';
-        $stmt = DatabaseHandler::factory()->prepare($sql);
-        if ($stmt->execute() === true) {
-            if(method_exists(get_called_class(), '__construct')) {
-                $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
-            } else {
-                $obj = $stmt->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-            }
-            return !empty($obj) ? array_shift($obj) : false;
+    public function __construct($id=""){
+        if($id != ""){
+            $this->id = $id;
+            $this->getInfo();
         }
-        return false;
     }
 
-    Static function InsertinDB($objParent)
+    public static function getByUsername($pk){
+
+        // $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE username = "' . $pk . '"';
+        // $stmt = DatabaseHandler::factory()->prepare($sql);
+        // $stmt = self::prepareStmt($sql);
+
+        // if ($stmt->execute() === true) {
+        //     if(method_exists(get_called_class(), '__construct')) {
+        //         $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));
+        //     } else {
+        //         $obj = $stmt->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+        //     }
+        //     return !empty($obj) ? array_shift($obj) : false;
+        // }
+        // return false;
+
+        $sql = 'SELECT * FROM user WHERE username = "' . $pk . '"';
+        $stmt = self::prepareStmt($sql);
+        // $objParent = array();
+        // $i = 0;
+        if($stmt->execute()){
+
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+            $MyObj = new ParentModel($row["id"]);
+            // $objParent[$i] = new ParentModel($row["id"]);
+            // $objParent[$i]->fname = $row["fname"];
+            // $objParent[$i]->lname = $row["lname"];
+            // $i++;
+
+            //$this->id = $row["id"];
+            
+            }
+          
+            return $MyObj;
+
+        }
+        
+        
+
+    }
+
+    public function add()
     {
         
-        $result = UserTypesModel::getUserTypeId();
+        $result = UserTypesModel::getParentId(); //parent?
+
         $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk)
-                VALUES ('$result', '$objParent->fname','$objParent->lname','$objParent->gender', '$objParent->DOB',
-                 '$objParent->username', '$objParent->pwd', '$objParent->email', '$objParent->status',
-                  '$objParent->img','$objParent->user_id_fk','$objParent->add_id_fk')";
-        $db = DatabaseHandler::getConnection();
-        $idresult = mysqli_query($db,$sql);
-        return $idresult;
+                VALUES ('$result', :fname ,:lname,:gender, :DOB,:username, :pwd, :email, :status,
+                  :img,:user_id_fk,:add_id_fk)";
+
+        // $db = DatabaseHandler::getConnection();
+        // $idresult = mysqli_query($db,$sql);
+        // return $idresult;
+
+        $stmt = self::prepareStmt($sql);
+        $stmt->bindParam(':fname', $this->fname);
+        $stmt->bindParam(':lname', $this->lname);
+        $stmt->bindParam(':gender', $this->gender);
+        $stmt->bindParam(':DOB', $this->DOB);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':pwd', $this->pwd);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':img', $this->img);
+        $stmt->bindParam(':user_id_fk', $this->user_id_fk);
+        $stmt->bindParam(':add_id_fk', $this->add_id_fk);
+
+        if ($stmt->execute()){
+            $this->id = self::getLastId(); 
+            return true;
+        }else{
+        //    exit();
+            return false;
+        }
+
     }
 
     Static function getExistingParent($username)
     {
        
         $sql = "SELECT id FROM user Where username = '$username'";
-        $db = DatabaseHandler::getConnection();
-        $idresult = mysqli_query($db,$sql);
-        while($row = mysqli_fetch_array($idresult)){
-                $result = $row['id'];
+        $stmt = self::prepareStmt($sql);
+        // $db = DatabaseHandler::getConnection();
+        // $idresult = mysqli_query($db,$sql);
+
+        if($stmt->execute()){
+
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+
+                $result = new ScheduleModel($row['id']); 
+            }
             }
             return $result;
+
+        // while($row = mysqli_fetch_array($idresult)){
+
+        //         $result = $row['id'];
+        //     }
+        //     return $result;
     }
 
     static public function getChildren(){

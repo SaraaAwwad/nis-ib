@@ -61,7 +61,6 @@ class CourseWorkAttrModel extends AbstractModel{
     }
 
     public static function getAll(){
-
         $query = "SELECT * FROM coursework_attr";
         $stmt = self::prepareStmt($query);        
         $Res = array();
@@ -76,8 +75,6 @@ class CourseWorkAttrModel extends AbstractModel{
         }else{
             return false;
         }
-
-
     }
 
     public function addOption($valueOpt){
