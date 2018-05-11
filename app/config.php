@@ -33,6 +33,7 @@ define('ASSETS_FONTS',  PUBLIC_PATH . 'assets' . DS . 'fonts'. DS);
 define('ASSETS_FONT_AWESOME',  PUBLIC_PATH . 'assets' . DS . 'font-awesome'. DS);
 define('ASSETS_ICONS',  PUBLIC_PATH . 'assets' . DS. 'lineicons' . DS);
 define('PDF', PUBLIC_PATH . 'pdf'. DS);
+define('FPDF', PUBLIC_PATH . 'fpdf'. DS);
 
 define('DB_HOST' ,'localhost');
 define('DB_NAME', 'nefertari');

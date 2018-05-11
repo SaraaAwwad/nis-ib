@@ -19,20 +19,10 @@ use PHPMVC\Models\ExamModel;
 class TranscriptController extends AbstractController
 {   use Helper;
     use InputFilter;
+
     public function defaultAction(){
 
-        $student = new StudentModel($_SESSION["userID"]);
-
-        //$this->_data['transcript'] = TranscriptModel::getStudentTranscript($_SESSION["userID"]);
-        $semArr = TranscriptModel::getStudentSemesters($student);
-        $transArr = array();
-        $i=0;
-        foreach($semArr as $sem){
-            $transArr[$i] =  TranscriptModel::getBySemester($sem, $student);
-            $i++;
-        }
-        
-        $this->_data['transcript'] = $transArr;
+        $this->generateReport();
         $this->_view();
     }
 
@@ -151,6 +141,24 @@ class TranscriptController extends AbstractController
             $this->_data["maxgrade"] = $maxgrade;
             $this->_view();
         }
+    }
+
+    public function pdfAction(){
+        $this->generateReport();
+        $this->_view(); 
+    }
+
+    public function generateReport(){
+        $student = new StudentModel($_SESSION["userID"]);
+        $semArr = TranscriptModel::getStudentSemesters($student);
+        $transArr = array();
+        $i=0;
+        foreach($semArr as $sem){
+            $transArr[$i] =  TranscriptModel::getBySemester($sem, $student);
+            $i++;
+        }
+
+        $this->_data['transcript'] = $transArr;
     }
 
 }
