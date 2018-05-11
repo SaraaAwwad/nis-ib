@@ -37,14 +37,14 @@ class TranscriptModel extends AbstractModel{
                 $this->course_id_fk = $row['course_id_fk'];
                 $this->course = new CourseModel($row['course_id_fk']);
                 $this->user_id_fk = $row['user_id_fk'];
+                $this->student = new StudentModel($this->user_id_fk);
                 $this->semester_id_fk = $row['semester_id_fk'];
                 $this->semester = new SemesterModel($row['semester_id_fk']);
                 $this->NumericGrade = $row['NumericGrade'];
                 $this->date = $row['date'];
             }
         }
-
-        $this->decryptGrade();
+        $this->decryptGrade();      
     }
 
     public function add(){
@@ -54,7 +54,6 @@ class TranscriptModel extends AbstractModel{
                 VALUES (:user_id_fk, :semester_id_fk, :NumericGrade, :date, :course_id_fk)";
 
         $stmt = self::prepareStmt($sql);  
-
         
         $stmt->bindParam(':user_id_fk', $this->user_id_fk);         
         $stmt->bindParam(":semester_id_fk", $this->semester_id_fk);
@@ -71,18 +70,19 @@ class TranscriptModel extends AbstractModel{
 
     public function encryptGrade(){
         $old = $this->user_id_fk;
-        $old .= $this->NumericGrade;
         $old .= $this->semester_id_fk;
         $old .= $this->course_id_fk;
+        $old .= $this->NumericGrade;
 
         $this->NumericGrade = self::encrypt($old);
     }
 
     public function decryptGrade(){
-        $dec = self::decrypt($this->NumericGrade);
-        $dec = str_replace($this->user_id_fk, "", $dec);
-        $dec = str_replace($this->semester_id_fk, "", $dec);
-        $dec = str_replace($this->course_id_fk, "", $dec);
+        $dec = self::decrypt($this->NumericGrade);  
+        $dec = self::replace($dec, $this->user_id_fk);          
+        $dec =  self::replace($dec, $this->semester_id_fk);
+        $dec =  self::replace($dec, $this->course_id_fk);
+
         $this->NumericGrade = $dec;
     }
 
@@ -104,6 +104,46 @@ class TranscriptModel extends AbstractModel{
             return false;
         }
     }
+
+    public static function getBySemAndCourse($course, $semester){
+        $sql = "SELECT * from transcript where course_id_fk = :course and semester_id_fk = :semester";
+        $stmt = self::prepareStmt($sql);  
+
+        $stmt->bindParam(":semester", $semester);
+        $stmt->bindParam(":course", $course);
+ 
+        $Trans = array();
+        $i=0;
+        if ($stmt->execute()){
+           while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $transObj = new TranscriptModel($row["id"]);
+                $Trans[$i] = $transObj;
+            $i++;
+            }
+            return $Trans;
+        }else{
+            return false;
+        }
+    }
+
+    public function edit(){
+        $this->encryptGrade();
+        $sql = "UPDATE transcript SET NumericGrade = :NumericGrade, date = :date
+        WHERE id = :id";
+        
+        $stmt = self::prepareStmt($sql);  
+
+        $stmt->bindParam(':id', $this->id, \PDO::PARAM_INT); 
+        $stmt->bindParam(':NumericGrade', $this->NumericGrade);
+        $stmt->bindParam(':date', $this->date);
+    
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
+
 
 

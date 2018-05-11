@@ -22,9 +22,9 @@ class TranscriptController extends AbstractController
         $this->_data['transcript'] = TranscriptModel::getTranscript($_SESSION["userID"]);
         $this->_view();
     }
+
     public function addAction(){
        
-
         if(isset($_POST['addTran'])){
 
             $grades = $_POST['grades'];
@@ -51,7 +51,7 @@ class TranscriptController extends AbstractController
                 $transObj->NumericGrade = $g;
                 $transObj->date = $date;
                 $transObj->user_id_fk = $students[$i]->id;
-
+                $i++;
                 $transObj->add();
             }
             $this->redirect('/transcript');
@@ -94,6 +94,47 @@ class TranscriptController extends AbstractController
         $trans = TranscriptModel::getAll();
         $this->_data["trans"] = $trans;
         $this->_view();
+    }
+
+    public function editAction(){
+        if(isset($this->_params[0]) && isset($this->_params[1])){
+        
+            $course = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+            $semester = filter_var($this->_params[1], FILTER_SANITIZE_NUMBER_INT);
+            //check if that semester exists ^^
+            $trans = TranscriptModel::getBySemAndCourse($course, $semester);
+        
+            if(isset($_POST["editTranscript"])){
+                $grades = $_POST['grades'];
+
+                foreach($grades as $g){
+                    //1st check they're all under the maximum limit
+                    $maxgrade = ExamModel::getOutOfGrade($course, $semester);
+                    if($g > $maxgrade){
+                        //exit with error message;
+                        $this->redirect("/transcript");
+                    }
+                } 
+            
+            $i=0;                
+            
+            foreach($grades as $g){
+                $transObj = new TranscriptModel($trans[$i]->id);
+                $date = date("Y/m/d");
+                $transObj->NumericGrade = $g;
+                $transObj->date = $date;
+                $i++;
+                $transObj->edit();
+            }
+            $this->redirect('/transcript/view');
+            }
+
+            $maxgrade = ExamModel::getOutOfGrade($course, $semester);
+           //StudentModel::getStudentsBySemAndCourse($sem, $course);
+            $this->_data["trans"] = $trans;
+            $this->_data["maxgrade"] = $maxgrade;
+            $this->_view();
+        }
     }
 
 }

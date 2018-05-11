@@ -236,4 +236,12 @@ class AbstractModel
     return $decrypted;
   }
 
+  public static function replace($word, $find){
+    $pos = strpos($word, $find);
+    if ($pos !== false) {
+        $newstring = substr_replace($word, "", $pos, strlen($find));
+    }
+    return $newstring;
+  }
+
 }

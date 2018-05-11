@@ -32,7 +32,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                         echo '<tr>';
                         echo '<td>'.$t->course->course_code.'</td>';
                         echo '<td>'.$t->semester->year .' - '. $t->semester->season_name .'</td>';
-                        echo '<td> <a href="/transcript/edit/'.$t->course_id_fk.'/'.$t->semester_id_fk.'">View Grades</a></td>';
+                        echo '<td> <a href="/transcript/edit/'.$t->course->id.'/'.$t->semester->id.'">View Grades</a></td>';
                         echo '</tr>';
                     }
                 }
