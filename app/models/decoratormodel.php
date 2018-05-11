@@ -19,7 +19,7 @@ class DecoratorModel extends AbstractModel
     public function getInfo(){
 
         $query = "SELECT * FROM ". self::$tableName ." Where id = '$this->id' ";
-        $stmt = DatabaseHandler::getConnection()->prepare($query);
+        $stmt = self::prepareStmt($query);
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $this->id = $row['id'];

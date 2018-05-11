@@ -6,8 +6,9 @@ class PaymentdetailsModel extends AbstractModel
 {
 
     public $id;
-    public $user_id_fk; //student id
+    public $payment_id_fk;
     public $decorator_id_fk;
+    public $decoratorObj;
     public $amount;
 
     protected static $tableName = 'payment_detail';
@@ -15,19 +16,21 @@ class PaymentdetailsModel extends AbstractModel
     public function __construct($id="")
     {
         if($id != ""){
+            $this->id = $id;
             $this->getInfo($id);
         }
     }
 
     public function getInfo()
     {
-        $query = "SELECT * FROM " . self::$tableName . " Where user_id_fk = '$this->user_id_fk' ";
+        $query = "SELECT * FROM " . self::$tableName . " Where id = '$this->id' ";
+//        var_dump($query);
         $stmt = self::prepareStmt($query);
 
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-                $this->id = $row['id'];
                 $this->decorator_id_fk = $row['decorator_id_fk'];
+                $this->decoratorObj = new DecoratorModel($row['decorator_id_fk']);
                 $this->amount = $row['amount'];
                 $this->payment_id_fk = $row['payment_id_fk'];
             }
@@ -44,6 +47,22 @@ class PaymentdetailsModel extends AbstractModel
 
         if($stmt->execute()){
             return true;
+        }else{
+            return false;
+        }
+    }
+
+    static public function getDetails($payment_id){
+        $query = "SELECT * FROM ". self::$tableName ." WHERE payment_id_fk =". $payment_id;
+        $stmt =self::prepareStmt($query);
+        $details = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $details[$i] = new PaymentdetailsModel($row['id']);
+                $i++;
+            }
+            return $details;
         }else{
             return false;
         }

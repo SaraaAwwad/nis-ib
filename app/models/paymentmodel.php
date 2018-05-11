@@ -6,39 +6,52 @@ class PaymentModel extends AbstractModel
 {
 
     public $id;
-    public $user_id_fk; //student id
     public $amount;
-    public $method_id_fk;
+    public $status_id_fk;
+    public $status_val;
+    public $user_id_fk;
     public $currency_id_fk;
-    public $semester_id_fk;
+    public $currency_val;
+    //aggregation
+    public $semesterObj;
+    public $studentObj;
+    public $paymentMethodObj;
+    public $currencyObj;
 
     protected static $tableName = 'payment';
 
     public function __construct($id=""){
         if($id != ""){
+            $this->id = $id;
             $this->getInfo($id);
         }
     }
 
     public function getInfo(){
-        $query = "SELECT * FROM ". self::$tableName ." Where user_id_fk = '$this->user_id_fk' ";
+        $query = "SELECT * FROM ". self::$tableName ." Where id = '$this->id' ";
         $stmt =self::prepareStmt($query);
 
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                $this->id = $row['id'];
-                $this->user_id_fk = $row['user_id_fk'];
                 $this->amount = $row['amount'];
-                $this->method_id = $row['method_id'];
-                $this->currency_id = $row['currency_id'];
-                $this->semester_id_fk = $row['semester_id_fk'];
+                $this->user_id_fk = $row['user_id_fk'];
+                // Remove aggregation
+                $this->currency_id_fk = $row['currency_id_fk'];
+                $this->currency_val = CurrencyModel::getCurrencyCode($row['currency_id_fk']);
+                //$this->currencyObj = new CurrencyModel($row['currency_id_fk']);
+                $this->status_id_fk = $row['status_id_fk'];
+                $this->status_val = PaymentstatusModel::getStatusCode($row['status_id_fk']);
+                $this->studentObj = new StudentModel($row['user_id_fk']);
+                $this->paymentMethodObj = new PaymentmethodModel($row['method_id_fk']);
+                $this->semesterObj = new SemesterModel($row['semester_id_fk']);
+
             }
         }
     }
 
     public function insertPayment(){
-        $query = "INSERT INTO " .self::$tableName. " (user_id_fk, amount, method_id_fk, currency_id_fk, semester_id_fk)
-                  VALUES ($this->user_id_fk,$this->amount, $this->method_id_fk, $this->currency_id_fk, $this->semester_id_fk )";
+        $query = "INSERT INTO " .self::$tableName. " (user_id_fk, amount, method_id_fk, currency_id_fk, semester_id_fk , status_id_fk)
+                  VALUES ($this->user_id_fk,$this->amount, $this->method_id_fk, $this->currency_id_fk, $this->semester_id_fk,$this->status_id_fk )";
         $stmt = self::prepareStmt($query);
         if ($stmt->execute()){
             $this->id = self::getLastId();
@@ -61,7 +74,7 @@ class PaymentModel extends AbstractModel
                 $payments[$i] = $paymentObj;
                 $i++;
             }
-            return $paymentObj;
+            return $payments;
         }else{
             return false;
         }
@@ -91,7 +104,17 @@ class PaymentModel extends AbstractModel
         return false;
     }
 
-    public static function getAll( $semester_id_fk){
+    public function updateStatus($sid){
+        $query = "UPDATE ". self::$tableName ." SET status_id_fk = ".$sid." WHERE id = ". $this->id;
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function getAllPayments($semester_id_fk){
         $query = "SELECT * FROM payment where semester_id_fk = '$semester_id_fk' ORDER BY date DESC ";
         $stmt = self::prepareStmt($query);        
         $Res = array();
@@ -103,6 +126,25 @@ class PaymentModel extends AbstractModel
                 $i++;
             }
         return $Res;
+        }else{
+            return false;
+        }
+    }
+
+
+    public static function getAllStudentsPayments(){
+
+        $query = "SELECT * FROM " .self::$tableName;
+        $stmt = self::prepareStmt($query);
+        $payments = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $paymentObj = new PaymentModel($row['id']);
+                $payments[$i] = $paymentObj;
+                $i++;
+            }
+            return $payments;
         }else{
             return false;
         }

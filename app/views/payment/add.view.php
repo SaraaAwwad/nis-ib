@@ -18,12 +18,32 @@ $sm = new SemesterView();
                         <div class="row">
                             <div class="col-xs-9">
                                 <div class="invoice-title">
-                                    <h2>Invoice</h2>
+                                    <h2>Payment</h2>
                                 </div>
                                 <hr>
-
                                 <div class="form-group">
-                                    <label class="col-sm-1 col-sm-1 control-label"><strong>Payment Method</strong></label>
+                                <label class="col-sm-1 control-label"><strong>Semester</strong></label>
+                                <div class="col-sm-5">
+                                    <?= $sm->getAllSemester($semester); ?>
+                                </div>
+                                <br><br><br>
+
+                                <label class="col-sm-1 control-label"><strong>Currency</strong></label>
+                                <div class="col-sm-5">
+                                    <select name="currency" class="form-control" id="currency" required>
+                                        <option value="" disabled selected="selected">Select Currency</option>
+                                        <?php
+                                        foreach($currency as $cr){
+                                            echo '<option value='.$cr->id.'>'.$cr->code.'</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+
+                                <br><br><br>
+
+                                    <label class="col-sm-1 control-label"><strong>Payment Method</strong></label>
                                     <div class="col-sm-5">
                                         <select name="method" class="form-control selectMethod" id="method" required>
                                             <option value="" disabled selected="selected">Select Method</option>
@@ -34,12 +54,11 @@ $sm = new SemesterView();
                                             ?>
                                         </select>
                                     </div>
-                                    <label class="col-sm-1 col-sm-1 control-label"><strong>Semester</strong></label>
-                                    <div class="col-sm-5"> <!-- change it to non registered semesters -->
-                                    <?= $sm->getAllSemester($semester); ?>
-                                    </div>
+
                                 </div>
-                                
+
+                            </div>
+
                                 <div id="dynamicform" class="row"></div>
 
                                 <fieldset id="attributesform" style="display:none;">
@@ -76,6 +95,7 @@ $sm = new SemesterView();
                                             </address>
                                     </div>
                                 </div>
+
 
                         <div class="row">
                             <div class="col-md-9">
@@ -147,7 +167,7 @@ $sm = new SemesterView();
                 },  
                 success:function(data)  
                 { 
-                    //alert(data.id); 
+                    //alert(data.id);
 
                     $('#semprice').html(data.price);
                     $('#semlabel').val(data.id);

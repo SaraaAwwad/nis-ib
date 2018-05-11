@@ -39,7 +39,11 @@ class SemesterModel extends AbstractModel{
     }
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
+<<<<<<< HEAD
+        season ON semester.season_id_fk = season.id WHERE semester.id = ". $this->id;
+=======
         season ON semester.season_id_fk = season.id where semester.id = :id";
+>>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
 
         $stmt = $this->prepareStmt($query);  
         $stmt->bindParam(':id', $this->id);
@@ -50,6 +54,7 @@ class SemesterModel extends AbstractModel{
             $this->season_name = $row['season_name'];
             $this->start_date = $row['start_date'];
             $this->end_date = $row['end_date'];
+            $this->season_id_fk = $row['season_id_fk'];
         }
         //$this->getFees();
     }
@@ -72,6 +77,27 @@ class SemesterModel extends AbstractModel{
         return $sem;
     }
 
+<<<<<<< HEAD
+    public static function getUnpaidSemester($student_id){
+
+        $query = "SELECT DISTINCT id FROM semester WHERE id NOT IN
+                 (SELECT semester_id_fk FROM payment WHERE user_id_fk = $student_id)";
+        $stmt =self::prepareStmt($query);
+        $semesters = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $SemesterObj = new SemesterModel($row['id']);
+                $semesters[$i] = $SemesterObj;
+                $i++;
+            }
+            return $semesters;
+        }else{
+            return false;
+        }
+    }
+
+=======
     public static function getNonTranscriptedSemesters($course){
         $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
         AND exam_details.course_id_fk = :course";
@@ -96,6 +122,7 @@ class SemesterModel extends AbstractModel{
     }
 
     public function add(){
+>>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
 
         $query = "INSERT INTO
         semester(year, season_id_fk, start_date, end_date)

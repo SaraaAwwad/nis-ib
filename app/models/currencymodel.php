@@ -43,4 +43,18 @@ class CurrencyModel extends AbstractModel{
     
     }
 
+    static function getCurrencyCode($cid){
+
+        $query = "SELECT code FROM currency WHERE id =" . $cid;
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result = $row['code'];
+            }
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
 }
