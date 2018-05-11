@@ -13,6 +13,8 @@ class ExamModel extends AbstractModel{
     public $date;
     public $status_id_fk;
     public $semester_id_fk;
+    public $OutOfGrade;
+    
     protected static $tableName = 'exam_details';
 
     protected static $tableSchema = array(
@@ -75,7 +77,21 @@ class ExamModel extends AbstractModel{
     }
 
 
+    public static function getOutOfGrade($course, $semester){
+        $query = "select * from exam_details where course_id_fk = :course AND semester_id_fk = :semester";
+        $stmt = self::prepareStmt($query);
+        
+        $stmt->bindParam(":course", $course);
+        $stmt->bindParam(":semester", $semester);
 
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $grade = $row['OutOfGrade'];
+            return $grade;
+        }else{
+            return false;
+        }
+    }
 //    public static function getSlots($students,$day,$date){
 //
 //        return self::getArr(

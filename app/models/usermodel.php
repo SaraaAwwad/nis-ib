@@ -84,6 +84,7 @@ class UserModel extends AbstractModel {
 
         $result = self::isExist($username);
         if ($result){
+<<<<<<< HEAD
 /*
             if($password == $result['pwd']){
 
@@ -94,6 +95,8 @@ class UserModel extends AbstractModel {
                     return true;
                 } */
 
+=======
+>>>>>>> 63d7f44674e7c37e88e33d03d287e739dffc4537
          //   if($password== $result['pwd']){
             $row = $result->fetch(\PDO::FETCH_ASSOC);
            if($password== $row['pwd']){
@@ -110,6 +113,7 @@ class UserModel extends AbstractModel {
 
     Static function isExist($username){
 
+<<<<<<< HEAD
 /*
         $query = "SELECT * FROM user Where username = '$username' ";
         $stmt =self::prepareStmt($query);
@@ -125,6 +129,8 @@ class UserModel extends AbstractModel {
             }
 
         } */
+=======
+>>>>>>> 63d7f44674e7c37e88e33d03d287e739dffc4537
         $sql = "SELECT * FROM user Where username = :username";
 
         $stmt = self::prepareStmt($sql); 

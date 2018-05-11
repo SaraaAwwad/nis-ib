@@ -4,7 +4,8 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 interface IpayModel
 {
-    public function addPayment();
+   // public function addPayment();
+    public function cost();
 }
 
 ?>

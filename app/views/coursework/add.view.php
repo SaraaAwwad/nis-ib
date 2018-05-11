@@ -49,7 +49,6 @@
         </div>
     </div>
 
-
                         <div class="form-group container" id="dynamic_field"> 
 
                              <div class="row mt optrow" id="row0">                            
@@ -87,9 +86,9 @@
               </div>      
             </div>
 
-
-<script>  
- $(document).ready(function(){  
+<script>
+$(document).ready(function(){  
+    var pathname = window.location.pathname;     
     var htmloption = '';
     htmloption += "<?php echo $cv->newCourseWorkType($type);  ?>";
     var i=1;  
@@ -107,6 +106,8 @@
         '</div>')
 
           i++;  
+
+        $(".firstreq").prop('required',true);
         });
 
       $(document).on('click', '.optrmv', function(){  
@@ -115,6 +116,10 @@
            $('#div'+button_id+'').remove();  
             var k = 0;
             i--;
+
+            if(i==1){
+                $(".firstreq").prop('required',false);
+            }
 
             $(".optrow").each(function(){
                 $(this).attr("id","row"+k);
@@ -168,8 +173,28 @@
         var val =  $(this).val(); 
 
         var txt = $(this).find("option:selected").text();
+        
+       // var typeid;
+        
+        $.ajax({  
+                url:pathname,  
+                method:'POST',  
+                dataType:'json',
+                data:{  
+                    txt: txt,
+                    action:"getType"
+                },  
+                success:function(data)  
+                {  
+                    typeid = data.typeflag;
+                   addopt(typeid, id, divId);
+                },  
+                });  
 
-        if(txt == 'radiobutton' || txt == 'combobox'){
+     });
+
+     function addopt(typeid, id, divId){
+        if(typeid == 1){
             $(divId).css('display', 'block');
          
             $(divId).append('<div><button type="button" class="btn btn-success btn-sm addopt" id="add'+i+'"> Add option </button></div>'
@@ -182,7 +207,7 @@
         }else{
             $(divId).css('display', 'none');
         }
-     });
+     }
 
      $(document).on('click', '.addopt', function(){
         var pid = $(this).parent().parent().attr('id'); //here is div-id
@@ -202,7 +227,6 @@
      });
 
  });
-
  </script>
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';

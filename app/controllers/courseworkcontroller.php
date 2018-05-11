@@ -6,7 +6,6 @@ use PHPMVC\Models\CourseWorkModel;
 use PHPMVC\Models\CourseWorkValueModel;
 use PHPMVC\Models\SemesterModel;
 
-
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 use PHPMVC\Models\TypeModel;
@@ -18,7 +17,7 @@ class CourseWorkController extends AbstractController
     use Helper;
 
     public function addAction(){
-
+        
         if(isset($_POST["newcoursework"])){
 
             //to add to the cw req model (ُEntity)
@@ -32,8 +31,12 @@ class CourseWorkController extends AbstractController
                     $cwEntityObj->addSelected($value, $ReqId);
                 }
             }
-
             $name = $_POST["name"];
+            $emptytestarray = array_filter($name);
+
+            if(!empty($emptytestarray)){
+
+            //$name = $_POST["name"];
             $type = $_POST["type"]; 
 
             foreach($name as $key => $value){
@@ -56,7 +59,24 @@ class CourseWorkController extends AbstractController
                 }
                 
             }
-            $this->redirect("/coursework/add");
+            }
+                $this->redirect("/coursework/add");
+            
+        }
+
+        if(isset($_POST["action"])){
+                    if($_POST["action"] == "getType"){
+
+                        $val = $_POST['txt'];
+                        $type = TypeModel::getByName($val);
+                        
+                        $output = array(
+                            'typeflag' => $type->option_flag
+                        );
+                        
+                        echo json_encode($output);
+                        return;
+                    }
         }
         
         $this->_data["type"] = TypeModel::getAll();
@@ -124,13 +144,11 @@ class CourseWorkController extends AbstractController
         if(isset($this->_params[0]) && isset($this->_params[1])){
             $course_id = $this->filterInt($this->_params[0]);
             $sem_id = $this->filterInt($this->_params[1]);
+
             if($course_id!="" && $sem_id!=""){
-                //get all the course work (at the time the student was enrolled) + permission
 
                 $coursework = CourseWorkModel::getAll($course_id, $sem_id);
-                //var_dump($coursework);
-                //echo "<br>";
-
+                
                 foreach($coursework as $c){
                 
                     $entity = $c->req;
@@ -146,8 +164,7 @@ class CourseWorkController extends AbstractController
                         $j=0;
 
                         if($value!=""){
-                            
-                            if($t->type == "combobox" || $t->type == "radiobutton" || $t->type == "checkbox" ){
+                            if($t->flag == 1){
                                 $opt=array();
                                 $i=0;
                                 foreach($value as $v){
@@ -168,8 +185,6 @@ class CourseWorkController extends AbstractController
                     }
 
                 }
-                
-//                exit();
                 
                 $this->_data['coursework'] = $coursework;
                 $this->_view();

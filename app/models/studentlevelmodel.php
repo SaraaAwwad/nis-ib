@@ -31,8 +31,8 @@ class StudentLevelModel extends AbstractModel{
 
 
     public static function getGradeID($student_id)
-    {
-        $query =  "SELECT * FROM ". self::$tableName ." WHERE user_id_fk =" . $student_id;
+    {   
+        $query = "SELECT * FROM ". self::$tableName ." WHERE user_id_fk = 7";
         $stmt =self::prepareStmt($query);
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){

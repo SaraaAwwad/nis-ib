@@ -105,9 +105,6 @@ class CourseWorkEntityModel extends AbstractModel{
          }else{
              return false;
          }
-
     }
-
-
 }
 ?>

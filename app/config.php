@@ -6,6 +6,8 @@ if(!defined('DS')){
 
 defined('APP_SALT')     ? null : define ('APP_SALT', '$2a$07$yeNCSNwRpYopOhv0TrrReP$');
 
+define('KEY', pack('H*', "bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3"));
+
 $path_parts = pathinfo(realpath(dirname(__FILE__)));
 define('PATH_PARTS', $path_parts['dirname']);
 define('PUBLIC_FULL_IMAGE_PATH', PATH_PARTS . DS . 'public' . DS . 'uploads' . DS . 'images');
@@ -31,6 +33,7 @@ define('ASSETS_FONTS',  PUBLIC_PATH . 'assets' . DS . 'fonts'. DS);
 define('ASSETS_FONT_AWESOME',  PUBLIC_PATH . 'assets' . DS . 'font-awesome'. DS);
 define('ASSETS_ICONS',  PUBLIC_PATH . 'assets' . DS. 'lineicons' . DS);
 define('PDF', PUBLIC_PATH . 'pdf'. DS);
+define('FPDF', PUBLIC_PATH . 'fpdf'. DS);
 
 define('DB_HOST' ,'localhost');
 define('DB_NAME', 'nefertari');
