@@ -39,8 +39,11 @@ class SemesterModel extends AbstractModel{
     }
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
-        season ON semester.season_id_fk = season.id";
+        season ON semester.season_id_fk = season.id where semester.id = :id";
+
         $stmt = $this->prepareStmt($query);  
+        $stmt->bindParam(':id', $this->id);
+        
         if($stmt->execute()){
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             $this->year = $row['year'];
@@ -67,6 +70,29 @@ class SemesterModel extends AbstractModel{
             }
         }
         return $sem;
+    }
+
+    public static function getNonTranscriptedSemesters($course){
+        $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
+        AND exam_details.course_id_fk = :course";
+
+        $stmt = self::prepareStmt($sql);
+        $stmt->bindParam(':course', $course);
+
+        $Semesters = array();
+        $i=0;
+
+        if ($stmt->execute()){
+           while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
+                $semObj = new SemesterModel($row["semester_id_fk"]);
+                $Semesters[$i] = $semObj;
+                $i++;
+            }
+            return $Semesters;
+        }else{
+            return false;
+        }
+
     }
 
     public function add(){

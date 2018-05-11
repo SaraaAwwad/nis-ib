@@ -51,6 +51,9 @@ $semview = new SemesterView();
                         </div>
                     </div>
 
+                    <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label"  id="maxgrade"></label>
+                    </div>
 
  <div id="sched">
     <table id="tab_sched" class="table table-striped text-center">
@@ -199,7 +202,9 @@ $semview = new SemesterView();
                     success:function(data){
                         var students = (data.students);
                         var maxgrade = (data.maxgrade);
-                        
+                        $("#maxgrade").html("");
+                        $("#maxgrade").text("Out Of Grade: "+ maxgrade);
+
                         $("#tab_sched").find("tbody").html("");
                         $.each(students, function (i, data) {
                             $("#tab_sched").find('tbody').append($('<tr><td>'+data.fname + ' ' + data.lname+'</td>'+

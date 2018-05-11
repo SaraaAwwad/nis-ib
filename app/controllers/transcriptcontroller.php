@@ -24,7 +24,7 @@ class TranscriptController extends AbstractController
     }
 
     public function addAction(){
-       
+
         if(isset($_POST['addTran'])){
 
             $grades = $_POST['grades'];
@@ -68,7 +68,7 @@ class TranscriptController extends AbstractController
             
             else if($_POST['action'] == 'getSemesters'){
                 $course = $_POST['course'];
-                $semesters = SemesterModel::getSemestersByCourse($course);
+                $semesters = SemesterModel::getNonTranscriptedSemesters($course);
                 echo json_encode($semesters);
                 return;
             }
@@ -77,7 +77,7 @@ class TranscriptController extends AbstractController
                 $semester = $_POST['semester'];
                 $grade = $_POST['grade'];
                 $course = $_POST['course'];
-                $students = ExamModel::getStudentsInCourse($course,$grade);
+                $students = StudentModel::getStudentsBySemAndCourse($semester, $course);
                 $maxgrade = ExamModel::getOutOfGrade($course, $semester);
                 $output = array("students"=> $students, "maxgrade" => $maxgrade);
                 echo json_encode($output);
@@ -130,7 +130,6 @@ class TranscriptController extends AbstractController
             }
 
             $maxgrade = ExamModel::getOutOfGrade($course, $semester);
-           //StudentModel::getStudentsBySemAndCourse($sem, $course);
             $this->_data["trans"] = $trans;
             $this->_data["maxgrade"] = $maxgrade;
             $this->_view();
