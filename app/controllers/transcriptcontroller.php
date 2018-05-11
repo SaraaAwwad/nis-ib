@@ -68,6 +68,7 @@ class TranscriptController extends AbstractController
             
             else if($_POST['action'] == 'getSemesters'){
                 $course = $_POST['course'];
+                //search the courses that had exams this semester (check exist), and that its transcript is not computed yet
                 $semesters = SemesterModel::getNonTranscriptedSemesters($course);
                 echo json_encode($semesters);
                 return;
@@ -86,7 +87,6 @@ class TranscriptController extends AbstractController
         }
 
         $this->_data['grade'] = GradeModel::getAll();
-       //??? $this->_data['semester'] = SemesterModel::getSemesters();
         $this->_view();
     }
 
@@ -101,9 +101,13 @@ class TranscriptController extends AbstractController
         
             $course = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
             $semester = filter_var($this->_params[1], FILTER_SANITIZE_NUMBER_INT);
-            //check if that semester exists ^^
+          
             $trans = TranscriptModel::getBySemAndCourse($course, $semester);
-        
+            
+            if(!$trans){
+                $this->redirect("/transcript");
+            }
+
             if(isset($_POST["editTranscript"])){
                 $grades = $_POST['grades'];
 

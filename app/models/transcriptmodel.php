@@ -108,6 +108,9 @@ class TranscriptModel extends AbstractModel{
     public static function getBySemAndCourse($course, $semester){
         $sql = "SELECT * from transcript where course_id_fk = :course and semester_id_fk = :semester";
         $stmt = self::prepareStmt($sql);  
+        
+        $semester = self::test_input($semester);
+        $course = self::test_input($course);
 
         $stmt->bindParam(":semester", $semester);
         $stmt->bindParam(":course", $course);
@@ -115,11 +118,17 @@ class TranscriptModel extends AbstractModel{
         $Trans = array();
         $i=0;
         if ($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){ 
                 $transObj = new TranscriptModel($row["id"]);
                 $Trans[$i] = $transObj;
             $i++;
             }
+        }else{
+            return false;
+        }
+
+        if($numofrows > 0 ) {
             return $Trans;
         }else{
             return false;
@@ -142,6 +151,10 @@ class TranscriptModel extends AbstractModel{
         }else{
             return false;
         }
+    }
+
+    public function isExist(){
+        
     }
 }
 

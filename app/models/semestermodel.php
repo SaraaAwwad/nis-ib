@@ -144,4 +144,22 @@ class SemesterModel extends AbstractModel{
         }
     }
 
+    public function isExist(){
+        $sql = "SELECT * FROM semester Where id = :id";
+
+        $stmt = self::prepareStmt($sql); 
+        $id = self::test_input($this->id);
+
+        $stmt->bindParam(':id', $this->id);         
+
+        if($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
+        }
+        if($numofrows > 0 ) {
+            return $stmt;
+        }else{
+            return false;
+
+        }
+    }
 }

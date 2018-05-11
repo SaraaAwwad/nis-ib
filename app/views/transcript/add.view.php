@@ -81,6 +81,8 @@ $semview = new SemesterView();
     <script>
         $(document).ready(function(data) {
             $("#semdiv").hide();
+            $("#main").hide();
+
             var pathname = window.location.pathname;
             $('#transcriptform').hide();
 
@@ -200,6 +202,11 @@ $semview = new SemesterView();
                         action:"getStudents"
                     },
                     success:function(data){
+                        if(data.students != ""){
+                            $("#main").show();        
+                        }else{
+                            $("#main").hide();            
+                        }
                         var students = (data.students);
                         var maxgrade = (data.maxgrade);
                         $("#maxgrade").html("");

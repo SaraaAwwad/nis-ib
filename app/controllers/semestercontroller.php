@@ -51,6 +51,10 @@ class SemesterController extends AbstractController
 
         $s = new SemesterModel($id);
 
+        if(!$s->isExist()){
+            $this->redirect("\semester");
+        }
+        
         if(isset($_POST['editsemester'])){
             $s->year = $_POST['year'];
             $s->start_date = $_POST['start_date'];
