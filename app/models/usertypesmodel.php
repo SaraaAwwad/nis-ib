@@ -75,7 +75,7 @@ class UserTypesModel extends AbstractModel {
         }
 
     }
-    Static function getExcept(){
+    Static function getUserTypeExcept(){
         $query = "SELECT * FROM user_type WHERE title NOT IN ('student','parent')";
         $stmt = self::prepareStmt($query);
         $Types= array();
@@ -90,7 +90,6 @@ class UserTypesModel extends AbstractModel {
         }else{
             return false;
         }
-
     }
 
     public function update($title, $statusId){

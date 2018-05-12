@@ -27,7 +27,22 @@ class DecoratorModel extends AbstractModel
             }
         }
     }
-
+    Static function getDecorator(){
+        $query = "SELECT * FROM decorator";
+        $stmt = self::prepareStmt($query);
+        $Types= array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $Obj = new DecoratorModel($row['id']);
+                $Types[$i] = $Obj;
+                $i++;
+            }
+            return $Types;
+        }else{
+            return false;
+        }
+    }
 
 }
 ?>
