@@ -61,6 +61,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             </div>
                         </div>
 
+
                         <div class="col-md-8">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -68,16 +69,12 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <address>
-                                            <strong>Name:</strong><br>
-                                            <?php echo $parent->fname ." ".  $parent->lname ?><br>
-                                        </address>
-                                        </address>
-                                        <strong>Phone:</strong><br>
-                                        <?php  echo $parent->phone ?><br>
-                                        </address>
-
-
+                                        <?php
+                                        foreach($methods as $meth){
+                                            echo  '<address><strong>'.$meth->attr_name.':</strong> '.$meth->value.'<br>
+                                        </address>';
+                                        }
+                                            ?>
                                     </div>
                                 </div>
                             </div>

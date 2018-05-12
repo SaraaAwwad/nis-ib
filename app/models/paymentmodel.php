@@ -15,9 +15,11 @@ class PaymentModel extends AbstractModel
     //aggregation
     public $semesterObj;
     public $studentObj;
-    public $paymentMethodObj;
     public $currencyObj;
+    public $paymentValueObjs = array();
 
+    //EAV
+    public $paymentMethodObj;
     protected static $tableName = 'payment';
 
     public function __construct($id=""){

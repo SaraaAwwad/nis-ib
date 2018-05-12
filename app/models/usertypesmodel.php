@@ -215,13 +215,8 @@ class UserTypesModel extends AbstractModel {
         }
     }
     
-<<<<<<< HEAD
     //parent
-    Static function getUserTypeId(){
-=======
-    
     Static function getParentId(){
->>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
         $title = 'parent';
 
         $query = "SELECT id FROM user_type WHERE title = '$title'";
