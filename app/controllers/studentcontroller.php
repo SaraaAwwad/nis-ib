@@ -20,10 +20,7 @@ class StudentController extends AbstractController{
     public function defaultAction(){
         
         $this->_data['students'] = StudentModel::getAll();
-        // $this->_data['country'] = AddressModel::getCountry();
-        // $this->_data['status'] = StatusModel::getAll();
-        // $this->_data['usertype'] = UserTypesModel::getUsers();
-        $this->_data['usertype'] = UserTypesModel::getUsers();
+        var_dump($this->_data['students']);
         $this->_view();
     }
 
