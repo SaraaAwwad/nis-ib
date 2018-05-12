@@ -8,6 +8,7 @@ use PHPMVC\Models\StudentModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
 use PHPMVC\Lib\Helper;
+use PHPMVC\Models\RoomModel;
 
 class RegisterationController extends AbstractController
 {   use Helper;
@@ -31,16 +32,26 @@ class RegisterationController extends AbstractController
             $class = $_POST['class'];
 
             $sem = $_POST['semester'];
-            
+
+            $grade = $_POST['grade'];
+
             if(!empty($_POST['studentsCB'])){
+
+                if(count($_POST['studentsCB']) > RoomModel::getMinCapacity($class, $sem)){
+                   $this->redirect("/registeration");
+                }
+
                 foreach($_POST['studentsCB'] as $selected){
                    $register = new RegisterationModel();
                    $date =  date("Y/m/d");
-                   $register->semester_id_fk = $sem;
-                   $register->student_id_fk = $selected;
-                   $register->class_id_fk = $class;
-                   $register->datetime  = $date;
-                   $register->save();
+
+                   if(StudentModel::regValid($grade, $sem, $selected)){
+                        $register->semester_id_fk = $sem;
+                        $register->student_id_fk = $selected;
+                        $register->class_id_fk = $class;
+                        $register->datetime  = $date;
+                        $register->save();
+                    }
                 }
 
             }
@@ -54,13 +65,9 @@ class RegisterationController extends AbstractController
                 $sem = $_POST['semester'];
                 $class = ClassModel::getClassesByGrade($g);
 
-                //want students who paid for this semester and are in this grade and are not already registered.
+                //want students(active) who paid (approved)for this semester and are in this grade and are not already registered.
                 $students = StudentModel::getNonRegisteredStudents($g, $sem);
-          /* SELECT user.* from user INNER JOIN student_level ON user.id = student_level.user_id_fk INNER JOIN status
-        ON status.id= user.status INNER JOIN payment ON payment.user_id_fk = user.id INNER JOIN payment_status
-        ON payment.status_id_fk = payment_status.id WHERE status.code = "active" AND 
-        student_level.scl_grade_id_fk = 1 AND  payment_status.code = "approved" AND payment.semester_id_fk = 1
-        AND  user.id NOT IN (select student_id_fk FROM registration WHERE registration.semester_id_fk = 1)*/
+
                 $output = array(
                     'class' => $class, 
                     'students' => $students
@@ -74,34 +81,12 @@ class RegisterationController extends AbstractController
 
     }
 
-    public function editAction(){
-
+    public function deleteAction(){
         if(isset($this->_params[0])){
-            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
-            $reg = new RegisterationModel();
-            $regist = $reg->getInfo($id);
-
-            if($regist == false){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+            if(RegisterationModel::deleteReg($id)){
                 $this->redirect("/registeration");
             }
-
-            //to send to view
-            $this->_data['regist'] = $regist;
-
-            if(isset($_POST['updateReg'])){
-                $objReg = new RegisterationModel($id);
-                $objReg->student_id = $_POST['st_id'];
-                $objReg->class_id = $_POST['cl_id'];
-                $objReg->datetime = $_POST['dt'];
-                $objReg->Semester_id_fk = $_POST['sem_id'];
-
-//                if ($objReg->save()){
-//                    $this->redirect("/registeration");
-//                }else{
-//
-//                }
-            }
-            $this->_view();
         }
     }
 }

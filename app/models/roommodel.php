@@ -35,8 +35,7 @@ class RoomModel extends AbstractModel
         //check active
     }
 
-    public static function getExamRooms($date, $slot)
-    {
+    public static function getExamRooms($date, $slot){
         return self::getArr(
             'SELECT room.* FROM room
         WHERE  room.id NOT IN (SELECT room_id_fk
@@ -44,6 +43,34 @@ class RoomModel extends AbstractModel
         WHERE  exam_details.date = "' . $date . '"
         AND exam_details.slot_id_fk = ' . $slot . ' ) '
         );
+
+    }
+
+    public static function getMinCapacity($class_id_fk, $semester_id_fk){
+        $query = "SELECT MIN(room.size) as capacity FROM room INNER JOIN schedule_details ON room.id = schedule_details.room_id_fk
+        INNER JOIN schedule ON schedule_details.sched_id_fk = schedule.id where schedule.class_id_fk =:class_id_fk
+        AND semester_id_fk =:semester_id_fk";
+
+        $stmt = self::prepareStmt($query);
+
+        $class_id_fk = self::test_input($class_id_fk);
+        $semester_id_fk = self::test_input($semester_id_fk);
+
+        $stmt->bindParam(":class_id_fk", $class_id_fk);
+        $stmt->bindParam(":semester_id_fk", $semester_id_fk);
+
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $capacity = $row["capacity"];
+        }else{
+            return false;
+        }
+
+        if($capacity!=null){
+            return $capacity;
+        }else{
+            return false;
+        }
 
     }
 

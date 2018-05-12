@@ -170,7 +170,7 @@ class StudentModel extends UserModel{
 
         $active = StatusModel::ACTIVE;
         $approved = PaymentModel::APPROVED;
-        
+
         $stmt->bindParam(":active", $active);
         $stmt->bindParam(":approved", $approved);
         $stmt->bindParam(":grade", $grade_id_fk);
@@ -235,6 +235,46 @@ class StudentModel extends UserModel{
             return false;
         }        
 
+    }
+
+    public static function regValid($grade_id_fk, $semester_id_fk, $student_id_fk){
+        $sql = "SELECT user.* from user INNER JOIN student_level ON user.id = student_level.user_id_fk INNER JOIN status
+        ON status.id= user.status INNER JOIN payment ON payment.user_id_fk = user.id INNER JOIN payment_status
+        ON payment.status_id_fk = payment_status.id WHERE status.code = :active AND 
+        student_level.scl_grade_id_fk = :grade AND  payment_status.code = :approved AND payment.semester_id_fk = :semester AND
+        user.id = :student_id_fk 
+        AND  user.id NOT IN (select student_id_fk FROM registration WHERE registration.semester_id_fk = :regsemester)";
+
+        $stmt = self::prepareStmt($sql);
+        $grade_id_fk = self::test_input($grade_id_fk);
+        $semester_id_fk = self::test_input($semester_id_fk);
+        $student_id_fk = self::test_input($student_id_fk);
+
+        $active = StatusModel::ACTIVE;
+        $approved = PaymentModel::APPROVED;
+
+        $stmt->bindParam(":active", $active);
+        $stmt->bindParam(":approved", $approved);
+        $stmt->bindParam(":grade", $grade_id_fk);
+        $stmt->bindParam(":semester", $semester_id_fk);
+        $stmt->bindParam(":regsemester", $semester_id_fk);
+        $stmt->bindParam(":student_id_fk", $student_id_fk);
+
+        $Students = array();
+        $i = 0;
+
+        if($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
+        }else{
+            return false;
+        }
+
+        if($numofrows > 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    
     }
 
 }
