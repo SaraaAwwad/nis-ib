@@ -1,33 +1,20 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\CurrencyModel;
-use PHPMVC\Models\DecoratorModel;
 use PHPMVC\Models\DecoratorpricesModel;
 use PHPMVC\Models\ParentModel;
 use PHPMVC\Models\PaymentmethodModel;
 use PHPMVC\Models\PaymentModel;
-<<<<<<< HEAD
-use PHPMVC\Models\PaymentselectedattrModel;
 use PHPMVC\Models\PaymentstatusModel;
-=======
 use PHPMVC\Models\PaymentAttrModel;
->>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
 use PHPMVC\Models\PaymentvalueModel;
-use PHPMVC\Models\StudentLevelModel;
 use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\SemesterModel;
 use PHPMVC\Models\SemesterPricesModel;
 use PHPMVC\Models\FormModel;
 use PHPMVC\Models\PaymentdetailsModel;
-<<<<<<< HEAD
-use PHPMVC\Models\UserTypesModel;
-=======
-use PHPMVC\Models\TypeModel;
-
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
-
->>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
 
 class PaymentController extends AbstractController
 {
@@ -41,7 +28,6 @@ class PaymentController extends AbstractController
 
     }
 
-<<<<<<< HEAD
     public function adminAction()
     {
         $this->_data['payment'] = PaymentModel::getAllStudentsPayments();
@@ -76,9 +62,6 @@ class PaymentController extends AbstractController
 
     public function addAction()
     {
-=======
-    public function addAction(){
->>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
         //EAV
         $this->_data['methods'] = PaymentmethodModel::getAll();
 
@@ -88,7 +71,7 @@ class PaymentController extends AbstractController
 
         $grade = $child->gradeObj->id;
         $this->_data['decorator'] = DecoratorpricesModel::getPriceByGrade($grade);
-        $this->_data['semester'] = SemesterModel::getUnpaidSemester($child_id);
+        $this->_data['semester'] = SemesterModel::CurrentSemester();
         $this->_data['currency'] = CurrencyModel::getAll();
         if (isset($_POST['addPayment'])) {
 
@@ -232,24 +215,30 @@ class PaymentController extends AbstractController
 
     public function invoiceAction(){
 
-        $payment_id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
-        $paymentObj = new PaymentModel($payment_id);
+        if(isset($this->_params[0])) {
 
-        //Child and parent Info
-        $this->_data['payment'] = $paymentObj;
-        $child = new StudentModel($paymentObj->user_id_fk);
-        $this->_data['child'] = $child;
-        $this->_data['parent'] = ParentModel::getParentOf($paymentObj->user_id_fk);
-        $this->_data['details'] = PaymentdetailsModel::getDetails($paymentObj->id);
+            $payment_id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+            if($payment_id!="")
+            {
+                $paymentObj = new PaymentModel($payment_id);
+                //Child and parent Info
+                $this->_data['payment'] = $paymentObj;
+                $this->_data['pending'] = PaymentstatusModel::pending;
+                $child = new StudentModel($paymentObj->user_id_fk);
+                $this->_data['child'] = $child;
+                $this->_data['parent'] = ParentModel::getParentOf($paymentObj->user_id_fk);
+                $this->_data['details'] = PaymentdetailsModel::getDetails($paymentObj->id);
 
-        //Semester Price
-        $child->getGrade();
-        $this->_data['semesterPrice'] = new SemesterPricesModel($paymentObj->semesterObj->id, $child->gradeObj->id);
+                //Semester Price
+                $child->getGrade();
+                $this->_data['semesterPrice'] = new SemesterPricesModel($paymentObj->semesterObj->id, $child->gradeObj->id);
 
-        /////view EAV payment
+                // view Payment Method details
+                $this->_data['methods'] = PaymentvalueModel::viewMethodsValues($payment_id);
 
 
-
+            }
+        }
         $this->_view();
 
     }

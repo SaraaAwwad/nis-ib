@@ -7,7 +7,10 @@ class StudentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
-    public $paymentObj;
+    public $paymentObj;               // array of all payments
+    public $current_semester_status;  // paid 0 - 1
+    public $pid;                      // payment id of current semester
+    public $sem_status;               // current semester payment status
 
      public function __construct($id=""){
          if($id != ""){
@@ -35,8 +38,16 @@ class StudentModel extends UserModel{
               $this->email = $row["email"];
               $this->phone = $row["phone"];
               $this->status = $row["status"];
+              $this->user_id_fk = $row["user_id_fk"];
+              $this->paymentObj = PaymentModel::getPayment($row['id']);
+              $this->getGrade();
+              $this->current_semester_status = SemesterModel::getCurrentSemester($this->id);
+              if($this->current_semester_status)
+              {
+                  $sem_id = SemesterModel::CurrentSemesterID();
+                  $this->pid = PaymentModel::PaymentID($this->id,$sem_id);
+              }
 
-              //$this->getGrade();
             }
         }  
     }

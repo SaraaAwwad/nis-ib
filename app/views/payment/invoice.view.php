@@ -61,23 +61,30 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             </div>
                         </div>
 
+
                         <div class="col-md-8">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><strong>Payment Method</strong></h3>
+                                    <?php
+                                    if($payment->status_id_fk == $pending) {
+                                        echo '<h3 class="panel-title"><strong>Payment Method</strong><label class= "label label-warning label-mini">'
+                                            . $payment->status_val.'</label></h3>';
+                                    }else{
+                                        echo '<h3 class="panel-title"><strong>Payment Method </strong>
+                                             <label class= "label label-info label-mini">'. $payment->status_val.
+                                            '</label></h3>';
+                                    }
+
+                                    ?>
                                 </div>
                                 <div class="panel-body">
                                     <div class="table-responsive">
-                                        <address>
-                                            <strong>Name:</strong><br>
-                                            <?php echo $parent->fname ." ".  $parent->lname ?><br>
-                                        </address>
-                                        </address>
-                                        <strong>Phone:</strong><br>
-                                        <?php  echo $parent->phone ?><br>
-                                        </address>
-
-
+                                        <?php
+                                        foreach($methods as $meth){
+                                            echo  '<address><strong>'.$meth->attr_name.':</strong> '.$meth->value.'<br>
+                                        </address>';
+                                        }
+                                            ?>
                                     </div>
                                 </div>
                             </div>
