@@ -151,11 +151,13 @@ class TranscriptController extends AbstractController
     public function generateReport(){
         $student = new StudentModel($_SESSION["userID"]);
         $semArr = TranscriptModel::getStudentSemesters($student);
-        $transArr = array();
+        $transArr = "";
         $i=0;
-        foreach($semArr as $sem){
-            $transArr[$i] =  TranscriptModel::getBySemester($sem, $student);
-            $i++;
+        if(!empty($semArr)){
+            foreach($semArr as $sem){
+                $transArr[$i] =  TranscriptModel::getBySemester($sem, $student);
+                $i++;
+            }
         }
 
         $this->_data['transcript'] = $transArr;

@@ -84,6 +84,15 @@ class UserModel extends AbstractModel {
 
         $result = self::isExist($username);
         if ($result){
+    
+         /*   if($password == $result['pwd']){
+
+                //  if(password_verify($password, $row['pwd'])){
+                    session_start();
+                    $_SESSION["userID"] = $result['id'];
+                    $_SESSION["userType"] = $result['type_id'];
+                    return true;
+                } */
 
          //   if($password== $result['pwd']){
                 

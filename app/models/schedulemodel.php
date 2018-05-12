@@ -103,7 +103,7 @@ class ScheduleModel extends AbstractModel {
     }
 
     public function getInfo(){
-        $query = 'SELECT schedule.*, class.name, semester.year, season.season_name, status.code  FROM schedule INNER JOIN
+        $query = 'SELECT schedule.*, class.name, class.grade_id_fk, semester.year, season.season_name, status.code  FROM schedule INNER JOIN
           class ON schedule.class_id_fk = class.id
          INNER JOIN status ON schedule.status_id_fk = status.id
          INNER JOIN semester ON schedule.semester_id_fk = semester.id
@@ -121,6 +121,7 @@ class ScheduleModel extends AbstractModel {
             $this->year = $row['year'];
             $this->season_name = $row['season_name'];
             $this->code = $row['code'];
+            $this->grade_id_fk = $row['grade_id_fk'];
         }
        $this->sched_details = ScheduleDetailsModel::getDet($this->id);
     }

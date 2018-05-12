@@ -8,23 +8,19 @@ use PHPMVC\Models\StudentModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
 use PHPMVC\Lib\Helper;
+use PHPMVC\Models\RoomModel;
 
 class RegisterationController extends AbstractController
 {   use Helper;
     use InputFilter;
 
-    public function defaultAction()
-    {
-        //$lvl = LevelModel::getAll();
-        //$this->_data['levels'] = $lvl;
-
+    public function defaultAction(){
         $this->_data['details'] = RegisterationModel::getReg();
         $this->_view();
-
     }
 
-    public function addAction()
-    {
+    public function addAction(){
+
         $grade = SclGradeModel::getAll();
         $semester = SemesterModel::getSemesters();
         $this->_data['semester'] = $semester;
@@ -36,30 +32,46 @@ class RegisterationController extends AbstractController
             $class = $_POST['class'];
 
             $sem = $_POST['semester'];
-            
+
+            $grade = $_POST['grade'];
+
             if(!empty($_POST['studentsCB'])){
+
+                $c = RoomModel::getMinCapacity($class, $sem);
+                if($c !== false){
+                    if(count($_POST['studentsCB']) > $c){
+                        exit();
+                    }
+                }
+
+
                 foreach($_POST['studentsCB'] as $selected){
                    $register = new RegisterationModel();
                    $date =  date("Y/m/d");
-                   $register->semester_id_fk = $sem;
-                   $register->student_id_fk = $selected;
-                   $register->class_id_fk = $class;
-                   $register->datetime  = $date;
-                   $register->save();
+
+                   if(StudentModel::regValid($grade, $sem, $selected)){
+                        $register->semester_id_fk = $sem;
+                        $register->student_id_fk = $selected;
+                        $register->class_id_fk = $class;
+                        $register->datetime  = $date;
+                        $register->save();
+                    }
                 }
 
             }
 
             $this->redirect('/registeration');
         }
-        if(isset($_POST['action']))
-        {
+
+        if(isset($_POST['action'])){
             if($_POST['action'] == 'getClasses'){
                 $g = $_POST['grade'];
                 $sem = $_POST['semester'];
                 $class = ClassModel::getClassesByGrade($g);
+
+                //want students(active) who paid (approved)for this semester and are in this grade and are not already registered.
                 $students = StudentModel::getNonRegisteredStudents($g, $sem);
-          
+
                 $output = array(
                     'class' => $class, 
                     'students' => $students
@@ -73,34 +85,12 @@ class RegisterationController extends AbstractController
 
     }
 
-    public function editAction(){
-
+    public function deleteAction(){
         if(isset($this->_params[0])){
-            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
-            $reg = new RegisterationModel();
-            $regist = $reg->getInfo($id);
-
-            if($regist == false){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
+            if(RegisterationModel::deleteReg($id)){
                 $this->redirect("/registeration");
             }
-
-            //to send to view
-            $this->_data['regist'] = $regist;
-
-            if(isset($_POST['updateReg'])){
-                $objReg = new RegisterationModel($id);
-                $objReg->student_id = $_POST['st_id'];
-                $objReg->class_id = $_POST['cl_id'];
-                $objReg->datetime = $_POST['dt'];
-                $objReg->Semester_id_fk = $_POST['sem_id'];
-
-//                if ($objReg->save()){
-//                    $this->redirect("/registeration");
-//                }else{
-//
-//                }
-            }
-            $this->_view();
         }
     }
 }

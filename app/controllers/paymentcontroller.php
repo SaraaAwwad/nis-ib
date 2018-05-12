@@ -13,6 +13,13 @@ use PHPMVC\Models\SemesterModel;
 use PHPMVC\Models\SemesterPricesModel;
 use PHPMVC\Models\FormModel;
 use PHPMVC\Models\PaymentdetailsModel;
+use PHPMVC\Models\UserTypesModel;
+use PHPMVC\Models\TypeModel;
+
+use PHPMVC\LIB\InputFilter;
+use PHPMVC\LIB\Helper;
+
+
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 

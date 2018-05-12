@@ -39,7 +39,7 @@ class SemesterModel extends AbstractModel{
     }
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
-        season ON semester.season_id_fk = season.id where semester.id = :id";
+        season ON semester.season_id_fk = season.id WHERE semester.id = ". $this->id;
 
         $stmt = $this->prepareStmt($query);  
         $stmt->bindParam(':id', $this->id);
@@ -73,9 +73,7 @@ class SemesterModel extends AbstractModel{
         return $sem;
     }
 
-
     public static function getUnpaidSemester($student_id){
-
         $query = "SELECT DISTINCT id FROM semester WHERE id NOT IN
                  (SELECT semester_id_fk FROM payment WHERE user_id_fk = $student_id)";
         $stmt =self::prepareStmt($query);
@@ -93,7 +91,6 @@ class SemesterModel extends AbstractModel{
         }
     }
 
-    //returns only one semester object
     public static function CurrentSemester(){
 
         $date = date("Y-m-d");
@@ -107,8 +104,7 @@ class SemesterModel extends AbstractModel{
             return false;
         }
     }
-
-
+    
     public static function getNonTranscriptedSemesters($course){
         $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
         AND exam_details.course_id_fk = :course";

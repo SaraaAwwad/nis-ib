@@ -18,8 +18,9 @@ class PaymentModel extends AbstractModel
     public $currencyObj;
     public $paymentValueObjs = array();
 
-    //EAV
-    public $paymentMethodObj;
+    const PENDING = "pending";
+    const APPROVED = "approved";
+
     protected static $tableName = 'payment';
 
     public function __construct($id = "")
