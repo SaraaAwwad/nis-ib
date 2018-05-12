@@ -46,7 +46,6 @@ class StudentModel extends UserModel{
               $this->user_id_fk = $row["user_id_fk"];
               $this->paymentObj = PaymentModel::getPayment($row['id']);
               $this->getGrade();
-
             }
         }  
     }
@@ -54,13 +53,32 @@ class StudentModel extends UserModel{
     public static function getAll(){
 
         $db = DatabaseHandler::getConnection();
-        $sql ="SELECT * FROM user WHERE user_id_fk != 0";
+        $sql ="SELECT user.*,
+        parent.fname as 'parent_fname',
+        parent.lname as 'parent_lname' FROM user AS user JOIN user AS parent 
+        ON parent.id = user.user_id_fk WHERE user.user_id_fk != 0";
         $result = self::prepareStmt($sql);
         $Res = array();
         $i=0;
         if($result->execute()) {
             while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
-                $MyObj = new StudentModel($row["id"]);
+                $MyObj = new StudentModel();
+                $MyObj->id=$row["id"];
+                $MyObj->fname = $row["fname"];
+                $MyObj->lname = $row["lname"];
+                $MyObj->gender = $row["gender"];
+                $MyObj->DOB = $row["DOB"];
+                $MyObj->username = $row["username"];
+                $MyObj->email = $row["email"];
+                $MyObj->img = $row["img"];
+                $MyObj->password = $row["pwd"];
+                $MyObj->phone = $row["phone"];
+                $MyObj->user_id_fk = $row["user_id_fk"];
+                $MyObj->add_id_fk = $row["add_id_fk"];
+                $MyObj->status = $row["status"];
+                $MyObj->parent_fname = $row["parent_fname"];
+                $MyObj->parent_lname = $row["parent_lname"];
+
                 $Res[$i] = $MyObj;
                 $i++;
             }
