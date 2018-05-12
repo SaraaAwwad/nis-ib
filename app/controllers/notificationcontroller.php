@@ -15,7 +15,7 @@ class NotificationController extends AbstractController{
     public function defaultAction()
     {
         $userid = $_SESSION["userID"];
-        $this->_data['notifications'] = NotificationModel::getAllNotifications($userid);
+        $this->_data['notifications'] = NotificationUserModel::getNotifications($userid);
         $this->_view();
     }
 
@@ -74,9 +74,15 @@ class NotificationController extends AbstractController{
         $this->_view();
     }
 
-    public function getAction(){
+    public function deleteAction()
+    {
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+            $s = NotificationUserModel::getByPK($id);
+            $s->delete();
+            $this->redirect('/notification/default');
+        }
 
     }
-
 
 }

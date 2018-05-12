@@ -39,7 +39,7 @@ class SemesterModel extends AbstractModel{
     }
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
-        season ON semester.season_id_fk = season.id where semester.id = :id";
+        season ON semester.season_id_fk = season.id WHERE semester.id = ". $this->id;
 
         $stmt = $this->prepareStmt($query);  
         $stmt->bindParam(':id', $this->id);
@@ -50,6 +50,7 @@ class SemesterModel extends AbstractModel{
             $this->season_name = $row['season_name'];
             $this->start_date = $row['start_date'];
             $this->end_date = $row['end_date'];
+            $this->season_id_fk = $row['season_id_fk'];
         }
         //$this->getFees();
     }
@@ -70,6 +71,25 @@ class SemesterModel extends AbstractModel{
             }
         }
         return $sem;
+    }
+
+    public static function getUnpaidSemester($student_id){
+
+        $query = "SELECT DISTINCT id FROM semester WHERE id NOT IN
+                 (SELECT semester_id_fk FROM payment WHERE user_id_fk = $student_id)";
+        $stmt =self::prepareStmt($query);
+        $semesters = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $SemesterObj = new SemesterModel($row['id']);
+                $semesters[$i] = $SemesterObj;
+                $i++;
+            }
+            return $semesters;
+        }else{
+            return false;
+        }
     }
 
     public static function getNonTranscriptedSemesters($course){
@@ -162,4 +182,30 @@ class SemesterModel extends AbstractModel{
 
         }
     }
+
+    public static function count($semester){
+        $query = "SELECT COUNT(id) FROM registration WHERE semester_id_fk = '.$semester.'";
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            $num_rows = $stmt->fetchColumn();
+            return intval($num_rows);
+        }else{
+            return false;
+        }
+    }
+
+    public static function sumAmount($decorator){
+        $query = "SELECT SUM(payment_detail.amount) as 'Total' FROM payment_detail
+                    INNER JOIN decorator on decorator.id = payment_detail.decorator_id_fk
+                    WHERE decorator.name = '$decorator'";
+        $stmt = self::prepareStmt($query);
+        if ($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $row['Total'];
+        }else{
+            return false;
+        }
+    }
+
+
 }

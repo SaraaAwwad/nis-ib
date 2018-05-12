@@ -75,7 +75,7 @@ class UserTypesModel extends AbstractModel {
         }
 
     }
-    Static function getExcept(){
+    Static function getUserTypeExcept(){
         $query = "SELECT * FROM user_type WHERE title NOT IN ('student','parent')";
         $stmt = self::prepareStmt($query);
         $Types= array();
@@ -90,7 +90,6 @@ class UserTypesModel extends AbstractModel {
         }else{
             return false;
         }
-
     }
 
     public function update($title, $statusId){
@@ -215,8 +214,8 @@ class UserTypesModel extends AbstractModel {
         }
     }
     
-    
-    Static function getParentId(){
+    //parent
+    Static function getUserTypeId(){
         $title = 'parent';
 
         $query = "SELECT id FROM user_type WHERE title = '$title'";
@@ -227,6 +226,22 @@ class UserTypesModel extends AbstractModel {
                 $result = $row['id'];
             }
         return $result;
+        }else{
+            return false;
+        }
+    }
+
+    Static function getStudentTypeId(){
+        $title = 'student';
+
+        $query = "SELECT id FROM user_type WHERE title = '$title'";
+        $stmt = self::prepareStmt($query);
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result = $row['id'];
+            }
+            return $result;
         }else{
             return false;
         }

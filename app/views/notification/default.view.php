@@ -27,7 +27,7 @@ require_once HOME_TEMPLATE_PATH . 'nav.php';
                                 <main id="mainp">
                                     <p><?php echo $notifi->body; ?></p>
                                 </main>
-                            </message-item>
+                                <a style="float:right; color:blue;" class="delete" id="<?= $notifi->id ?>" href="\notification\delete\<?= $notifi->id ?>" >Delete <i class="fa fa-trash-o"></i></a></message-item>
                             <?php }} ?>
                         </inbox-list>
                     </inbox>

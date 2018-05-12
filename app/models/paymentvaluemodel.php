@@ -4,11 +4,6 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class PaymentValueModel extends AbstractModel
 {
-    //public $id;
-    //public $value;            //price for each decorator
-   //? public $paymentObj;       // payment_id_fk
-   //? public $selectedAttrObj;  // selected_id_fk
-
     public $id;
     public $selected_id_fk;
     public $payment_id_fk;
@@ -33,12 +28,9 @@ class PaymentValueModel extends AbstractModel
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $this->id = $row['id'];
-               // $this->paymentObj = new PaymentModel($row['$payment_id_fk']);
-               // $this->selectedAttrObj = new PaymentselectedattrModel($row['selected_id_fk']);
-               $this->selected_id_fk = $row['selected_id_fk'];
-               $this->payment_id_fk = $row['payment_id_fk']; 
-               $this->value = $row['value'];
-                //$this->totalPrice = 0;
+                $this->selected_id_fk = $row['selected_id_fk'];
+                $this->payment_id_fk = $row['payment_id_fk'];
+                $this->value = $row['value'];
             }
         }
     }

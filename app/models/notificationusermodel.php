@@ -55,7 +55,7 @@ class NotificationUserModel extends AbstractModel {
         }
     }
     public static function getNotifications($userid){
-        return self::getArr('SELECT notification.*, notification_user.*, user.* from notification_user INNER JOIN notification ON notification.id = notification_user.notification_id_fk inner join user on user.id = 
+        return self::getArr('SELECT notification.*, notification_user.*, user.fname, user.lname from notification_user INNER JOIN notification ON notification.id = notification_user.notification_id_fk inner join user on user.id = 
         notification.sender_id_fk WHERE notification_user.user_id_fk = '.$userid.' order by notification.created_at DESC LIMIT 5');
     }
 
