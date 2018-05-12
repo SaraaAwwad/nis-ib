@@ -15,7 +15,6 @@ use PHPMVC\Models\StaffModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 
-
 class ScheduleController extends AbstractController
 {
     use InputFilter;
@@ -56,9 +55,6 @@ class ScheduleController extends AbstractController
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
             $s = new ScheduleModel($id);
             
-           // $w = $s->getFreeDays(1);
-           // var_dump($w);
-            //exit();
             if(isset($_POST['action']))  {
                 if($_POST['action']== 'getDays'){
                     $slot = $_POST['slot'];
@@ -70,7 +66,7 @@ class ScheduleController extends AbstractController
                 else if($_POST['action'] == 'getRooms'){
                     $slot = $_POST['slot'];
                     $day = $_POST['day'];    
-                    $rooms = RoomModel::getFreeRooms($day, $slot, $s->semester_id_fk);
+                    $rooms = RoomModel::getFreeAndEnoughCapacityRooms($day, $slot, $s->class_id_fk, $s->semester_id_fk);
                     $teachers = StaffModel::getFreeTeachers($day, $slot, $s->semester_id_fk);
                     $output = array(
                         'rooms' => $rooms, 
@@ -93,16 +89,11 @@ class ScheduleController extends AbstractController
                 if($sDetail->save()){
                     $this->redirect('/schedule/details/'.$id.'');
                 }
-
             }
 
-            //$s = ScheduleModel::getByPK($id);
-            //$s->getDetails();
+            $this->_data['details'] = $s->sched_details; 
 
-            $this->_data['details'] = $s->sched_details; // ScheduleDetailsModel::getDetails($id);
-          //  var_dump($s->sched_details);
-         //   exit();
-            $this->_data['courses'] = CourseModel::getAll();
+            $this->_data['courses'] = CourseModel::getCourseByGrade($s->grade_id_fk);
             $this->_data['slots'] = SlotModel::getAll();
           
             $this->_view();

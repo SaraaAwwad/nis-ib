@@ -37,9 +37,13 @@ class RegisterationController extends AbstractController
 
             if(!empty($_POST['studentsCB'])){
 
-                if(count($_POST['studentsCB']) > RoomModel::getMinCapacity($class, $sem)){
-                   $this->redirect("/registeration");
+                $c = RoomModel::getMinCapacity($class, $sem);
+                if($c !== false){
+                    if(count($_POST['studentsCB']) > $c){
+                        exit();
+                    }
                 }
+
 
                 foreach($_POST['studentsCB'] as $selected){
                    $register = new RegisterationModel();

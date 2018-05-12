@@ -9,7 +9,6 @@ class CourseModel extends AbstractModel {
     public $descr;
     public $status;
     public $grade_id_fk;
-    public $level_id_fk;
     public $name;
     public $teaching_hours;
     public $group;
@@ -20,7 +19,6 @@ class CourseModel extends AbstractModel {
         'name'               => self::DATA_TYPE_STR,
         'course_code'        => self::DATA_TYPE_STR,
         'descr'              => self::DATA_TYPE_STR,
-        'level_id_fk'        => self::DATA_TYPE_INT,
         'teaching_hours'     => self::DATA_TYPE_INT,
         'grade_id_fk'        => self::DATA_TYPE_INT,
         'status'             => self::DATA_TYPE_INT
@@ -68,7 +66,6 @@ class CourseModel extends AbstractModel {
                 $this->name = $row["name"];
                 $this->course_code = $row["course_code"];
                 $this->descr = $row["descr"];
-                $this->level_id_fk = $row["level_id_fk"]; //no use
                 $this->teaching_hours = $row["teaching_hours"];
                 $this->grade_id_fk = $row["grade_id_fk"];
                 $this->status = $row["status"];
@@ -120,26 +117,6 @@ class CourseModel extends AbstractModel {
         INNER JOIN registration ON registration.student_id_fk =user.id 
         AND scl_grade_id_fk = $grade AND status.code='active'";
 
-        // $sql="SELECT user.id, user.fname, user.lname
-        // From user inner JOIN registration ON registration.student_id_fk = user.id 
-        // INNER JOIN schedule ON schedule.class_id_fk = registration.class_id_fk 
-        // INNER JOIN schedule_details ON schedule_details.sched_id_fk = schedule.id 
-        // AND schedule_details.course_id_fk = $course
-        // AND schedule.semester_id_fk = registration.semester_id_fk 
-        // WHERE user.status = (SELECT id FROM status WHERE code = 'active')";
-
-        // select user.id, user.fname, user.lname
-        //     From user inner JOIN registration on registration.student_id_fk = user.id 
-        //     INNER JOIN schedule ON schedule.class_id_fk = registration.class_id_fk
-        //     AND registration.semester_id_fk = schedule.semester_id_fk 
-        //     AND schedule.semester_id_fk = $semester
-        
-        //     INNER JOIN student_level ON student_level.user_id_fk = user.id
-        //     AND student_level.scl_grade_id_fk IN ('.$grade.')
-        //     INNER JOIN schedule_details ON schedule.id = schedule_details.sched_id_fk
-        //     AND schedule_details.course_id_fk IN ('.$course.')
-        //     AND user.status = (SELECT id FROM status WHERE code = "active")'
-
         $stmt = self::prepareStmt($sql);  
 
         $Res = array();
@@ -150,11 +127,8 @@ class CourseModel extends AbstractModel {
                 $st = new CourseModel($row['id']);
                 $Res[$i] = $st;
                 $i++;
-               //var_dump($st);
             }
         }
-        //var_dump($Res);
-        //exit();
         return $Res;
 
     }
@@ -180,5 +154,6 @@ class CourseModel extends AbstractModel {
 
         return $Res;
     }
-    
+
+
 }
