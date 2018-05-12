@@ -19,12 +19,8 @@ class StudentModel extends UserModel{
     
     public function getInfo(){
 
-<<<<<<< HEAD
         $query = "SELECT * FROM user WHERE id = :id";
-        
-=======
-        $query = "SELECT * FROM user WHERE id = :id ";
->>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
+
         $stmt = self::prepareStmt($query);
         $this->id = self::test_input($this->id);
         $stmt->bindParam(':id', $this->id);
@@ -41,17 +37,13 @@ class StudentModel extends UserModel{
               $this->email = $row["email"];
               $this->phone = $row["phone"];
               $this->status = $row["status"];
-<<<<<<< HEAD
+
               $this->getGrade();
-=======
-<<<<<<< HEAD
+
               $this->user_id_fk = $row["user_id_fk"];
               $this->paymentObj = PaymentModel::getPayment($row['id']);
               $this->getGrade();
-=======
-              //$this->getGrade();
->>>>>>> 8d29226263d0a40a3317e2f18def03d3a58e532a
->>>>>>> 98d93dabdc021c1c6ee6dce7854b669c44b88ec2
+
             }
         }  
     }
@@ -66,17 +58,6 @@ class StudentModel extends UserModel{
         if($result->execute()) {
             while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
                 $MyObj = new StudentModel($row["id"]);
-//                $MyObj->id = $row["id"];
-//                $MyObj->fname = $row["fname"];
-//                $MyObj->lname = $row["lname"];
-//                $MyObj->gender = $row["gender"];
-//                $MyObj->DOB = $row["DOB"];
-//                $MyObj->password = $row["pwd"];
-//                $MyObj->username = $row["username"];
-//                $MyObj->email = $row["email"];
-//                $MyObj->phone = $row["phone"];
-//                $MyObj->status = $row["status"];
-//                $MyObj->getGrade();
                 $Res[$i] = $MyObj;
                 $i++;
             }

@@ -19,20 +19,6 @@ class RoomModel extends AbstractModel
 
     protected static $primaryKey = 'id';
 
-
-    public static function getFreeRooms($day, $slot, $semester){
-        //rooms that are free in that day - slot - semester,
-        return self::getArr(
-            'SELECT room.* FROM ' . self::$tableName . '
-        WHERE  room.id NOT IN (SELECT room_id_fk
-        FROM   schedule_details 
-        INNER JOIN
-        schedule ON schedule_details.sched_id_fk = schedule.id
-        WHERE schedule.semester_id_fk= ' . $semester . ' AND schedule_details.day_id_fk = ' . $day . ' 
-        AND schedule_details.slot_id_fk = ' . $slot . ' )  '
-        );
-    }
-
     public static function getExamRooms($date, $slot){
         return self::getArr(
             'SELECT room.* FROM room
@@ -133,6 +119,5 @@ class RoomModel extends AbstractModel
             $this->size = $row['size'];
         }
     }
-
 
 }
