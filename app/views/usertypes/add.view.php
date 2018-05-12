@@ -5,8 +5,10 @@
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
     
-    if ($message!=""){
-        echo $message;
+    if (!empty($message)){
+        foreach($message as $m){
+            echo $m;
+        }
     }
 ?>
 

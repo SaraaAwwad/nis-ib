@@ -9,7 +9,7 @@ class AbstractController{
 
     //3shan a3mlha pass lel view men el model
     protected $_data = [];
-    protected $message = "";
+    protected $message = [];
 
     public function notFoundAction(){
         $this->_view();
@@ -52,8 +52,6 @@ class AbstractController{
         if (isset($_SESSION["message"])){
             $this->message = $_SESSION["message"];
             unset($_SESSION["message"]);
-        }else{
-            $this->message = "ayhaga";
         }
     }
 }

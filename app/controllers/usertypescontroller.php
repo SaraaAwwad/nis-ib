@@ -16,7 +16,7 @@ class UserTypesController extends AbstractController{
     }
 
     public function addAction(){
-        
+
         if(isset($_POST['addusertype'])){
 
             $title = $_POST['title']; 
@@ -24,11 +24,12 @@ class UserTypesController extends AbstractController{
 
             if(UserTypesModel::addUserType($title, $status_id)){
                 $err = UserTypesModel::ADD_SUCCESS;
-                $_SESSION["message"] = ErrorModel::getError($err);
+                $_SESSION["message"][] = ErrorModel::getError($err);
                 $this->redirect('\usertypes');
+                
             }else{
                 $err = UserTypesModel::ERR_EXIST;
-                $_SESSION["message"] = ErrorModel::getError($err);
+                $_SESSION["message"][] = ErrorModel::getError($err);
             }
         }
 
