@@ -4,12 +4,8 @@
     require_once HOME_TEMPLATE_PATH . 'header.php';
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
-    if (!empty($message)){
-        foreach($message as $m){
-            echo $m;
-        }
-    }
 ?>
+
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>User Types</h1>

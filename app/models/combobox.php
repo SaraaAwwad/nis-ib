@@ -1,7 +1,8 @@
 <?php
 namespace PHPMVC\Models;
+use PHPMVC\Models\iElementModel;
 
-class Combobox{
+class Combobox implements ielementmodel{
     private $html;
     public function __construct($attrObj){
         $this->html= '<label class="col-sm-2 col-sm-2 control-label">'.$attrObj->attr_name.'</label>';
@@ -16,7 +17,7 @@ class Combobox{
         
         $this->html.=$list.'</select></div>';
     }
-    public function getHTML(){
+    public function load(){
         return $this->html;
     }
 }
