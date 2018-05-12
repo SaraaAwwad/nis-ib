@@ -22,9 +22,13 @@ $sm = new SemesterView();
                                 </div>
                                 <hr>
                                 <div class="form-group">
-                                <label class="col-sm-1 control-label"><strong>Semester</strong></label>
-                                <div class="col-sm-5">
-                                    <?= $sm->getAllSemester($semester); ?>
+                                    <label class="col-sm-1 control-label"><strong>Semester</strong></label>
+
+                                    <div class="col-sm-5">
+                                    <select name="semester" class="semester form-control" id="semester" required>
+                                        <option value="" disabled selected="selected">Select Semester</option>
+                                        <option value='<?= $semester->id ?>'><?= $semester->season_name .' - '. $semester->year?></option>
+                                    </select>
                                 </div>
                                 <br><br><br>
 

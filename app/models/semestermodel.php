@@ -93,6 +93,22 @@ class SemesterModel extends AbstractModel{
         }
     }
 
+    //returns only one semester object
+    public static function CurrentSemester(){
+
+        $date = date("Y-m-d");
+        $query = "SELECT id FROM semester WHERE end_date >= '$date' AND start_date <= '$date'";
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $semObj = new SemesterModel($row['id']);
+            return $semObj;
+        }else{
+            return false;
+        }
+    }
+
+
     public static function getNonTranscriptedSemesters($course){
         $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
         AND exam_details.course_id_fk = :course";
@@ -207,5 +223,34 @@ class SemesterModel extends AbstractModel{
         }
     }
 
+    // to check if student paid current semester
+    public static function getCurrentSemester($uid){
+
+        $date = date("Y-m-d");
+        $query = "SELECT count(*) as count FROM `payment` WHERE user_id_fk = '$uid'
+                  AND semester_id_fk IN ( SELECT id FROM semester WHERE end_date >= '$date' AND start_date <= '$date') ";
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $row['count'];
+            }else{
+            return false;
+        }
+
+    }
+
+    //get current semester id
+    public static function CurrentSemesterID(){
+
+        $date = date("Y-m-d");
+        $query = "SELECT id FROM semester WHERE end_date >= '$date' AND start_date <= '$date'";
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $row['id'];
+        }else{
+            return false;
+        }
+    }
 
 }

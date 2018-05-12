@@ -71,7 +71,7 @@ class PaymentController extends AbstractController
 
         $grade = $child->gradeObj->id;
         $this->_data['decorator'] = DecoratorpricesModel::getPriceByGrade($grade);
-        $this->_data['semester'] = SemesterModel::getUnpaidSemester($child_id);
+        $this->_data['semester'] = SemesterModel::CurrentSemester();
         $this->_data['currency'] = CurrencyModel::getAll();
         if (isset($_POST['addPayment'])) {
 
@@ -223,6 +223,7 @@ class PaymentController extends AbstractController
                 $paymentObj = new PaymentModel($payment_id);
                 //Child and parent Info
                 $this->_data['payment'] = $paymentObj;
+                $this->_data['pending'] = PaymentstatusModel::pending;
                 $child = new StudentModel($paymentObj->user_id_fk);
                 $this->_data['child'] = $child;
                 $this->_data['parent'] = ParentModel::getParentOf($paymentObj->user_id_fk);

@@ -29,11 +29,15 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     foreach ($children as $c){
                         echo '<tr>
                     <td>'.$c->fname . ' ' . $c->lname.'</td>
-                    <td>'.$c->gradeObj->grade_name .'</td>
-                    <td> <a href="\payment\add\\'.$c->id.'">View</a></td>
-                    </tr>';
+                    <td>'.$c->gradeObj->grade_name .'</td>';
+                     if($c->current_semester_status)
+                     {
+                         echo '<td> <a href="\payment\invoice\\'.$c->pid.'">View</a></td></tr>';
+
+                     }else{
+                        echo '<td> <a href="\payment\add\\'.$c->id.'">Pay</a></td></tr>';
                     }
-                }
+                }}
                 ?>
             </tr>
             </tbody>
