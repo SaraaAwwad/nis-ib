@@ -3,6 +3,9 @@ namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
 class UserTypesModel extends AbstractModel {
+    const ERR_EXIST = "err_user_exist";
+    const ADD_SUCCESS = "add_user_type";
+
     public $id;
     public $title;
     public $status_id_fk;
@@ -39,25 +42,54 @@ class UserTypesModel extends AbstractModel {
 
     public static function addUserType($title, $statusId){
 
-        $query = "INSERT INTO
-                user_type (title, status_id_fk)
-                VALUES(:title, :status_id_fk)";
 
-        $stmt = self::prepareStmt($query);  
+        if(!self::isExist($title)){
+            $query = "INSERT INTO
+            user_type (title, status_id_fk)
+            VALUES(:title, :status_id_fk)";
 
-        $title = self::test_input($title);  
-        $statusId = self::test_input($statusId);  
-        
-        $stmt->bindParam(":title", $title, \PDO::PARAM_STR);
-        $stmt->bindParam(":status_id_fk", $statusId,  \PDO::PARAM_INT);
+            $stmt = self::prepareStmt($query);  
 
-        if ($stmt->execute()){
-            return true;
+            $title = self::test_input($title);  
+            $statusId = self::test_input($statusId);  
+            
+            $stmt->bindParam(":title", $title, \PDO::PARAM_STR);
+            $stmt->bindParam(":status_id_fk", $statusId,  \PDO::PARAM_INT);
+
+            if ($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
+
     }
     
+    
+    public static function isExist($title){
+        $query = "SELECT * from user_type where title = :title";
+
+        $title = self::test_input($title);
+        $stmt = self::prepareStmt($query);
+
+        $stmt->bindParam(":title", $title);
+
+        if($stmt->execute()){
+           $numofrows =  $stmt->rowCount();
+        }else {
+            return false;
+        }
+
+        if($numofrows > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
     Static function getAll(){
         $query = "SELECT * FROM user_type";
         $stmt = self::prepareStmt($query);        
@@ -75,6 +107,7 @@ class UserTypesModel extends AbstractModel {
         }
 
     }
+
     Static function getUserTypeExcept(){
         $query = "SELECT * FROM user_type WHERE title NOT IN ('student','parent')";
         $stmt = self::prepareStmt($query);
@@ -145,7 +178,6 @@ class UserTypesModel extends AbstractModel {
         }
     }
 
-
     Static function getUsers(){
         $query = "SELECT * FROM user_type WHERE title NOT IN ('student','Student','parent','Parent')";
         $stmt = self::prepareStmt($query);        
@@ -163,7 +195,6 @@ class UserTypesModel extends AbstractModel {
         }
     }
 
-
     public function getAllPages(){
         $query = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
         WHERE typeid_fk = '$this->id'
@@ -180,7 +211,6 @@ class UserTypesModel extends AbstractModel {
         
     }
 
-   
     public function insertUserPages($pageid, $ordervalue){
 
         $query = "INSERT INTO user_type_pages (typeid_fk, pageid_fk, ordervalue)
@@ -245,27 +275,6 @@ class UserTypesModel extends AbstractModel {
             return false;
         }
     }
-/*
-    Static function getStudentId(){
-        $dbobj= new dbconnect;
-        $title = 'student';
-        $sql = "SELECT id FROM user_type WHERE title = '$title'";
-        $qresult = $dbobj->selectsql($sql);
-        while($row = mysqli_fetch_array($qresult)){
-            $result = $row['id'];
-        }
-        return $result;
-    }
-
-    Static function getUser($title){
-        $dbobj= new dbconnect;
-        $sql = "SELECT id FROM user_type WHERE title = '$title'";
-        $qresult = $dbobj->selectsql($sql);
-        while($row = mysqli_fetch_array($qresult)){
-            $result = $row['id'];
-        }
-        return $result;
-    }*/
 
     public static function count($usertitle){
         $query = "SELECT COUNT(user.id) from user inner join user_type ON user.type_id = user_type.id

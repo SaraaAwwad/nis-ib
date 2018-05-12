@@ -4,6 +4,7 @@ use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\PagesModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\Lib\Helper;
+use PHPMVC\Models\ErrorModel;
 
 class UserTypesController extends AbstractController{
     use Helper;
@@ -15,19 +16,26 @@ class UserTypesController extends AbstractController{
     }
 
     public function addAction(){
-
+        
         if(isset($_POST['addusertype'])){
 
             $title = $_POST['title']; 
-            $status_id = $_POST['status'];                 
+            $status_id = $_POST['status'];   
+
             if(UserTypesModel::addUserType($title, $status_id)){
+                $err = UserTypesModel::ADD_SUCCESS;
+                $_SESSION["message"] = ErrorModel::getError($err);
                 $this->redirect('\usertypes');
             }else{
-                //error messages
+                $err = UserTypesModel::ERR_EXIST;
+                $_SESSION["message"] = ErrorModel::getError($err);
             }
         }
 
         $stat = StatusModel::getAll();
+        if(isset($_SESSION["message"])){
+            $this->message = $_SESSION["message"];
+        }
         $this->_data['status'] = $stat;
         $this->_view();
     }

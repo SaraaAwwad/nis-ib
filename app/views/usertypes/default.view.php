@@ -4,6 +4,9 @@
     require_once HOME_TEMPLATE_PATH . 'header.php';
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
+    if ($message!=""){
+        echo $message;
+    }
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
