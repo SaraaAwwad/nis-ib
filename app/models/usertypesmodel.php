@@ -213,8 +213,7 @@ class UserTypesModel extends AbstractModel {
             return false;
         }
     }
-    
-    //parent
+
     Static function getUserTypeId(){
         $title = 'parent';
 

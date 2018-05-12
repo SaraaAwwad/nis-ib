@@ -7,7 +7,10 @@ class StudentModel extends UserModel{
 
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
-    public $paymentObj;
+    public $paymentObj;               // array of all payments
+    public $current_semester_status;  // paid 0 - 1
+    public $pid;                      // payment id of current semester
+    public $sem_status;               // current semester payment status
 
     public function __construct($id=""){
          if($id != ""){

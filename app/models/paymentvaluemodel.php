@@ -8,8 +8,6 @@ class PaymentValueModel extends AbstractModel
     public $selected_id_fk;
     public $payment_id_fk;
     public $value;
-
-
     public $totalPrice;
 
     protected static $tableName = 'payment_value';
@@ -17,6 +15,7 @@ class PaymentValueModel extends AbstractModel
     public function __construct($id="")
     {
         if($id != ""){
+            $this->id = $id;
             $this->getInfo($id);
         }
     }
@@ -27,7 +26,6 @@ class PaymentValueModel extends AbstractModel
 
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                $this->id = $row['id'];
                 $this->selected_id_fk = $row['selected_id_fk'];
                 $this->payment_id_fk = $row['payment_id_fk'];
                 $this->value = $row['value'];
@@ -106,31 +104,53 @@ class PaymentValueModel extends AbstractModel
         }
     }
 
-    public static function getAll($selected_id_fk, $payment_id_fk){
-
-        //change to (assoc)
-
-        $query = 'SELECT * FROM payment_value where payment_id_fk = '.$payment_id_fk.'
-         and selected_id_fk = '.$selected_id_fk.'';
- 
-         $stmt = self::prepareStmt($query);        
-         $Res = array();
-         $i=0;
-         if($stmt->execute()){
-             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-                 $MyObj= new PaymentValueModel($row['id']);
-                 $Res[$i]=$MyObj;
-                 $i++;
-             }
-         return $Res;
-         }else{
-             return false;
-         }
-  
-    }
+//    public static function getAll($selected_id_fk, $payment_id_fk){
+//
+//        //change to (assoc)
+//        $query = 'SELECT * FROM payment_value where payment_id_fk = '.$payment_id_fk.'
+//         and selected_id_fk = '.$selected_id_fk.'';
+//
+//         $stmt = self::prepareStmt($query);
+//         $Res = array();
+//         $i=0;
+//         if($stmt->execute()){
+//             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+//                 $MyObj= new PaymentValueModel($row['id']);
+//                 $Res[$i]=$MyObj;
+//                 $i++;
+//             }
+//         return $Res;
+//         }else{
+//             return false;
+//         }
+//
+//    }
 
     public static function getOpt($id){
         return (AttrOptionsModel::getOpt($id));
+    }
+
+    // payment id
+    public static function viewMethodsValues($pid){
+
+        $query = "SELECT payment_value.* , payment_attr.attr_name FROM payment_value 
+                  INNER JOIN payment_selected_attr ON payment_value.selected_id_fk = payment_selected_attr.id 
+                  INNER JOIN payment_attr ON payment_selected_attr.attr_id_fk = payment_attr.id  WHERE payment_id_fk =" .$pid;
+        $stmt = self::prepareStmt($query);
+        $details = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $valObj = new PaymentValueModel($row['id']);
+                $valObj->attr_name = $row['attr_name'];
+                $details[$i] = $valObj;
+                $i++;
+            }
+            return $details;
+        }else{
+            return false;
+        }
+
     }
 }
 
