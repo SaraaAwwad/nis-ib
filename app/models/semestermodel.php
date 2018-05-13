@@ -23,11 +23,22 @@ class SemesterModel extends AbstractModel{
         'end_date'           => self::DATA_TYPE_DATE        
     );
     protected static $primaryKey = 'id';
+
     public static function getSemesters(){
-        return self::get(
-        'SELECT semester.*, season.season_name FROM ' . self::$tableName . ' INNER JOIN
-          season ON semester.season_id_fk = season.id'
-        );
+        $query = "SELECT * from semester";
+        $stmt =self::prepareStmt($query);
+        $semesters = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $SemesterObj = new SemesterModel($row['id']);
+                $semesters[$i] = $SemesterObj;
+                $i++;
+            }
+            return $semesters;
+        }else{
+            return false;
+        }
     }
 
     public function __construct($id=""){
@@ -54,6 +65,7 @@ class SemesterModel extends AbstractModel{
         }
         //$this->getFees();
     }
+
 
     public static function getSemestersByCourse($course){
         $sql = "SELECT DISTINCT semester.* from semester

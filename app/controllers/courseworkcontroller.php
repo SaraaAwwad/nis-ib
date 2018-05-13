@@ -85,6 +85,7 @@ class CourseWorkController extends AbstractController
     }
 
     public function addcwAction(){
+
         if(isset($this->_params[0])){
             $id = $this->filterInt($this->_params[0]);
             if($id!=""){
@@ -118,16 +119,24 @@ class CourseWorkController extends AbstractController
                 {
                     if($_POST["action"] == "getForm"){
 
-                        $req = $_POST['req'];
-                        $cw = new CourseWorkEntityModel($req);
+                       //$req = $_POST['req'];
+                        $cw = new CourseWorkEntityModel(20);
                         $formArr  = $cw->attr;
                         $html=array();
                         $i=0;
-                        foreach($formArr as $f){
-                            $html[$i]= FormModel::createElement($f);
-                            $i++;
-                        }
 
+                        $form = new FormModel();
+       
+                        foreach($formArr as $f){
+                            $type = $f->type;
+                            $classpath  = "PHPMVC\\Models\\".$type;
+                            if(class_exists($classpath)){
+                                $form->setElement(new $classpath($f));
+                                $html[$i] = $form->loadElement();
+                                $i++;
+                            }
+
+                        }
                         echo json_encode($html);
                         return;
                     }

@@ -1,7 +1,8 @@
 <?php
 namespace PHPMVC\Models;
+use PHPMVC\Models\iElementModel;
 
-class Text{
+class Text implements ielementmodel{
     private $html;
     public function __construct($attrObj){
 
@@ -9,7 +10,8 @@ class Text{
         $this->html .='<div class="col-sm-4"><input type="text" class="form-control" name="'.$attrObj->sid.'"/></div>';
         
     }
-    public function getHTML(){
+
+    public function load(){
         return $this->html;
     }
 }

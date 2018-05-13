@@ -5,6 +5,7 @@
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
+
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>User Types</h1>

@@ -1,7 +1,8 @@
 <?php
 namespace PHPMVC\Models;
+use PHPMVC\Models\iElementModel;
 
-class Radiobutton{
+class Radiobutton implements ielementmodel{
     private $html;
     public function __construct($attrObj){
 
@@ -16,7 +17,7 @@ class Radiobutton{
         }
 
     }
-    public function getHTML(){
+    public function load(){
         return $this->html;
     }
 }
