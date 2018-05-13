@@ -45,10 +45,10 @@
             <td><?php echo $user->phone;?><br>
 
                     <!-- Extra Number Display -->
-                <?php foreach($telephones as $telephone){
+                <?php if(!empty($telephones)){foreach($telephones as $telephone){
                     if ($user->id == $telephone->user_id_fk){ ?>
                 <?php echo $telephone->number;?></td>
-                <?php } } ?>
+                <?php } } }?>
 
             <td><?php echo $user->title;?></td>
             <td><?php echo $user->amount;?></td>

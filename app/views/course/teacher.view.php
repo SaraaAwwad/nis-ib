@@ -19,8 +19,6 @@
           <th>Name</th>
           <th>Code</th>
           <th>Description</th>
-          <th>Grade</th>
-          <th>Status</th>
           <th>Actions</th>
 
         </tr>
@@ -34,8 +32,6 @@
                     <td>'.$cs->name.'</td>
                     <td>'.$cs->course_code.'</td>
                     <td>'.$cs->descr.'</td>
-                    <td>'.$cs->grade_id_fk.'</td>
-                    <td>'.$cs->status.'</td>
                     <td> <a href="\coursework\addcw\\'.$cs->id.'">Add CourseWork </a></td>
                     </tr>';
                 }

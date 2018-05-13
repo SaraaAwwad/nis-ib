@@ -20,6 +20,7 @@ class UserModel extends AbstractModel {
     public $phone;
     private $table_name = 'user';
 
+    CONST ERR_LOGIN = "err_login_invalid";
 
     protected static $tableName = 'user';
     protected static $tableSchema = array(
@@ -83,23 +84,12 @@ class UserModel extends AbstractModel {
     Static function Login($username, $password){
 
         $result = self::isExist($username);
+        $username = self::test_input($username);
+        $password = self::test_input($password);
+
         if ($result){
-    
-         /*   if($password == $result['pwd']){
-
-                //  if(password_verify($password, $row['pwd'])){
-                    session_start();
-                    $_SESSION["userID"] = $result['id'];
-                    $_SESSION["userType"] = $result['type_id'];
-                    return true;
-                } */
-
-         //   if($password== $result['pwd']){
-                
             $row = $result->fetch(\PDO::FETCH_ASSOC);
-           if($password== $row['pwd']){
-          //  if(password_verify($password, $row['pwd'])){
-              //  session_start();
+             if(password_verify($password, $row['pwd'])){
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
                 $_SESSION["userName"] = $row['fname'] .' - ' . $row['lname'];
@@ -156,7 +146,8 @@ class UserModel extends AbstractModel {
             WHERE exam_details.id = '.$exam.'
             GROUP BY user.id'); }
 
-    public function cryptPassword($password)
+   
+            public function cryptPassword($password)
     {
         $this->pwd = crypt($password, APP_SALT);
     }

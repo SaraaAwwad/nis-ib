@@ -11,7 +11,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
         <h3><i class="fa fa-angle-right"></i>Invoice details</h3>
     </div>
-
+<?php if(isset($child)) {?>
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
@@ -142,7 +142,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
             </div>
         </div>
     </div>
-
+                                            <?php }?>
 <script>
 
 

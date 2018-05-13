@@ -89,7 +89,6 @@ class CourseWorkController extends AbstractController
         if(isset($this->_params[0])){
             $id = $this->filterInt($this->_params[0]);
             if($id!=""){
-                //id of course 
 
                 if(isset($_POST["submitdynamicform"])){
                     $req = $_POST['req'];

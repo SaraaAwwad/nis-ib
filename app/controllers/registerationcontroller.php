@@ -58,7 +58,7 @@ class RegisterationController extends AbstractController
                         $register->class_id_fk = $class;
                         $register->datetime  = $date;
                         $register->save();
-                     }
+                    }
                 }
         
                 if(isset($_SESSION["message"])){
