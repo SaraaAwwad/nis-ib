@@ -32,6 +32,7 @@
       <tbody>
         <tr>
             <?php
+            if(!empty($rooms)){
                 foreach ($rooms as $r){
                     echo '<tr>
                     <td>'.$r->id.'</td>
@@ -40,7 +41,8 @@
                     <td> <a href="\room\edit\\'.$r->id.'">Edit </a></td>
                     </tr>';
                 }
-            ?>
+            }            
+                ?>
         </tr>
         </tbody>
     </table>

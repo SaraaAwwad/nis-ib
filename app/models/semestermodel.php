@@ -116,11 +116,7 @@ class SemesterModel extends AbstractModel{
             return false;
         }
     }
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 52ed94d98e9ddaeb1f80756b865713ff77fcce7f
     public static function getNonTranscriptedSemesters($course){
         $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
         AND exam_details.course_id_fk = :course";

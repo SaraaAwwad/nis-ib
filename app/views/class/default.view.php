@@ -33,6 +33,8 @@
       <tbody>
         <tr>
             <?php
+            if(!empty($class)){
+
                 foreach ($class as $ut){
                     echo '<tr>
                     <td>'.$ut->id.'</td>
@@ -42,6 +44,7 @@
                     <td> <a href="\class\edit\\'.$ut->id.'">Edit </a></td>
                     </tr>';
                 }
+            }
             ?>
         </tr>
         </tbody>

@@ -72,9 +72,7 @@ class PaymentValueModel extends AbstractModel
         $query = "INSERT INTO " .self::$tableName. " (user_id_fk, amount, method_id_fk, currency_id_fk, semester_id_fk)
                   VALUES ($this->paymentObj->user_id_fk, $this->paymentObj->amount,
                    $this->paymentObj->method_id, $this->paymentObj->currency_id, $this->paymentObj->semester_id_fk )";
-        echo $query;
-        var_dump($this->paymentObj);
-        exit();
+
         $stmt = self::prepareStmt($query);
         if ($stmt->execute()){
             return true;

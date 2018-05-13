@@ -5,6 +5,7 @@ use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
+use PHPMVC\Models\ErrorModel;
 
 class ClassController extends AbstractController
 {
@@ -25,12 +26,19 @@ class ClassController extends AbstractController
             $class->name = $this->filterString($_POST['name']);
             $class->grade_id_fk = $this->filterInt($_POST['grade']);
             $class->status_id_fk = $this->filterInt($_POST['status']);
-
-
-            if($class->save()){
+            
+            if($class->isClassExist()){
+                $err = ClassModel::ERR_EXIST;
+                $_SESSION["message"][] = ErrorModel::getError($err);
+            }  
+            else if($class->save()){
                 $this->redirect('/class');
             }   
-    	}
+        }
+        
+        if(isset($_SESSION["message"])){
+            $this->message = $_SESSION["message"];
+        }
     
         $this->_data['status'] = StatusModel::getAll();
         $this->_data['grade'] = SclGradeModel::getAll();
@@ -48,10 +56,19 @@ class ClassController extends AbstractController
                 $class->name = $this->filterString($_POST['name']);
                 $class->grade_id_fk = $this->filterInt($_POST['grade']);
                 $class->status_id_fk = $this->filterInt($_POST['status']);
+                
+                if($class->isClassExist()){
+                    $err = ClassModel::ERR_EXIST;
+                    $_SESSION["message"][] = ErrorModel::getError($err);
+                }  
+                else if($class->save()){
+                    $this->redirect('/class');
+                }  
 
-                if($class->save()){
-                    $this->redirect('\class');
+                if(isset($_SESSION["message"])){
+                    $this->message = $_SESSION["message"];
                 }
+
             }
         $this->_data['status'] = StatusModel::getAll();
         $this->_data['grade'] = SclGradeModel::getAll();
