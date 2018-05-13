@@ -2,7 +2,7 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class UserTypesModel extends AbstractModel implements iEncryptModel{
+class UserTypesModel extends AbstractModel{
 
     const ERR_EXIST = "err_user_exist";
     const ADD_SUCCESS = "add_user_type";
@@ -26,7 +26,6 @@ class UserTypesModel extends AbstractModel implements iEncryptModel{
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
-            $this->decryptBy();
             $this->getInfo();
         }
     }
@@ -47,7 +46,7 @@ class UserTypesModel extends AbstractModel implements iEncryptModel{
 
         $this->getUserParentPages();     
         $this->getAllPages();
-        $this->encryptBy();        
+     
     }
 
     public static function addUserType($title, $statusId){
@@ -319,14 +318,6 @@ class UserTypesModel extends AbstractModel implements iEncryptModel{
         }
     }
 
-    public function encryptBy(){
-       // $this->id = self::encrypt($this->id);
-    }
-    
-    public function decryptBy(){
-       // $this->id = self::decrypt($this->id);  
-    }
-
     public static function getUserTypeByTitle($title){
         $query = "SELECT id FROM user_type WHERE title = '$title'";
         $stmt = self::prepareStmt($query);        
@@ -341,5 +332,6 @@ class UserTypesModel extends AbstractModel implements iEncryptModel{
             return false;
         }
     }
+
 }
 

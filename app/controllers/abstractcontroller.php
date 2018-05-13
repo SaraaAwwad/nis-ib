@@ -7,7 +7,6 @@ class AbstractController{
     protected $_action;
     protected $params;
 
-    //3shan a3mlha pass lel view men el model
     protected $_data = [];
     protected $message = [];
 

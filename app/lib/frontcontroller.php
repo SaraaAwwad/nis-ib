@@ -1,6 +1,7 @@
 <?php
 
 namespace PHPMVC\LIB;
+use PHPMVC\Models\PagesModel;
 
 class FrontController{
 
@@ -29,6 +30,7 @@ class FrontController{
             $this->_params = explode('/', $url[2]);
         }
 
+
     }
 
     public function dispatch(){
@@ -36,13 +38,24 @@ class FrontController{
        
         $actionName = $this->_action . 'Action';
 
+        $permission = "/". $this->_controller."/".$this->_action ."/";
+
+        $page = PagesModel::getPageByTitle($permission);
+
+        if($this->_action == "public" || $this->_controller == "index" || $this->_action == "default")
+        {
+            $page = true;
+        } 
+        
+        $page = true;
+
         if(!class_exists($controllerClassName)){
             $controllerClassName = self::NOT_FOUND_CONTROLLER;
-        } 
+        }  
 
         $controller = new $controllerClassName();
 
-        if(!method_exists($controller, $actionName)){
+        if(!method_exists($controller, $actionName) || !$page){
             $this->_action = $actionName = self::NOT_FOUND_ACTION;
         }
         

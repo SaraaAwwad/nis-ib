@@ -41,7 +41,7 @@ class PagesModel extends AbstractModel{
 
     public static function insertPage($friendlyname, $physicalname, $status_id, $parentid, $html){
 
-        $sql = "INSERT INTO pages (friendlyname, physicalname, status_id_fk, pageid, HTML, layout_id_fk) 
+        $sql = "INSERT INTO pages (friendlyname, physicalname, status_id_fk, pageid, HTML) 
                 VALUES (:friendlyname, :physicalname, :status_id, :parentid, :html)";
 
         $stmt = self::prepareStmt($sql);  
@@ -69,7 +69,6 @@ class PagesModel extends AbstractModel{
 
           if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-
                 $this->id=$row["id"];
                 $this->friendlyname=$row["friendlyname"];
                 $this->physicalname=$row["physicalname"];
@@ -120,5 +119,50 @@ class PagesModel extends AbstractModel{
         }else{
             return false;
         }
+    }
+
+    public static function getPage($id){
+        $query = "SELECT pages.* from pages inner join user_type_pages on user_type_pages.pageid_fk = pages.id 
+        where pages.id =:id AND user_type_pages.typeid_fk =:type";
+
+        $stmt = self::prepareStmt($query);
+        
+        $id = self::test_input($id);
+
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":type", $_SESSION["userType"]);
+        
+        if($stmt->execute()){
+            $row =  $stmt->fetch(\PDO::FETCH_ASSOC);
+            $pageObj = new PagesModel($row["id"]);
+            return $pageObj;
+        }else{
+            return false;
+        }
+    }
+
+    public function getPageByTitle($title){
+        $query = "SELECT pages.* from pages inner join user_type_pages on user_type_pages.pageid_fk = pages.id 
+        where pages.physicalname =:title AND user_type_pages.typeid_fk =:type";
+
+        $stmt = self::prepareStmt($query);
+        
+        $title = self::test_input($title);
+
+        $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":type", $_SESSION["userType"]);
+        
+        if($stmt->execute()){
+            $row =  $stmt->fetch(\PDO::FETCH_ASSOC);
+            if($row["id"]!=""){
+                $pageObj = new PagesModel($row["id"]);
+                return $pageObj;
+            }
+        }
+            return false;
+    }
+
+    public function isExist(){
+        $query = "SELECT pages.* from pages where id=:id";
     }
 }

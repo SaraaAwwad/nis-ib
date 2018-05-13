@@ -20,8 +20,7 @@ class PagesController extends AbstractController{
             $friendlyname = $_POST['friendlyname']; 
             $physicalname = $_POST['physicalname'];
             $status_id = $_POST['status']; 
-
-            
+  
             switch($_POST['optradio']) {
                 case "exist":
                     $parentid = $_POST['grouppicker'];
@@ -44,7 +43,6 @@ class PagesController extends AbstractController{
            }
         }
 
-
         $stat = StatusModel::getAll();
         $this->_data['status'] = $stat;
 
@@ -52,10 +50,6 @@ class PagesController extends AbstractController{
         $this->_data['pages'] = $pages;
 
         $this->_view();
-    }
-
-    public function editAction(){
-
     }
 
     public function manageAction(){
@@ -85,5 +79,12 @@ class PagesController extends AbstractController{
             $this->_view();
 
         } 
+    }
+
+    public function viewAction(){
+        $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+        $p = PagesModel::getPage($id);
+        $this->_data["page"] = $p;
+        $this->_view();
     }
 }

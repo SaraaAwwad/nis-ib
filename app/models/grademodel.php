@@ -14,6 +14,13 @@ class GradeModel extends AbstractModel {
     );
     protected static $primaryKey = 'id';
 
-
+    public static function getMaxGrade(){
+        $query = "SELECT MAX(id) as id from scl_grade";
+        $stmt = self::prepareStmt($query);
+        if($stmt->execute()){
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $row["id"];
+        }
+    }
 
 }
