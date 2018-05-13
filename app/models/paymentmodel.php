@@ -22,6 +22,9 @@ class PaymentModel extends AbstractModel
     public $paymentMethodObj;
     protected static $tableName = 'payment';
 
+    const APPROVED="approved";
+    const PENDING = "pending";
+    
     public function __construct($id = "")
     {
         if ($id != "") {

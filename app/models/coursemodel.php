@@ -144,7 +144,7 @@ class CourseModel extends AbstractModel {
     }
 
     public static function getStudentCourses(){
-        $query2='SELECT course.* , schedule.semester_id_fk from course inner join schedule_details on schedule_details.course_id_fk = course.id 
+        $query2='SELECT course.* , registration.semester_id_fk from course inner join schedule_details on schedule_details.course_id_fk = course.id 
         inner join schedule on schedule_details.sched_id_fk = schedule.id inner join class on schedule.class_id_fk = class.id 
         inner join registration on registration.class_id_fk = class.id where registration.student_id_fk = :id';
         

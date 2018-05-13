@@ -127,6 +127,10 @@ class ScheduleController extends AbstractController
                 $s->status_id_fk = $_POST['status'];
                 $s->semester_id_fk = $_POST['semester'];
                 
+            if($s->isExist()){
+                $this->redirect('/schedule');
+                //message = already added
+            }
                 if($s->edit()){
                     $this->redirect('/schedule');
                 }

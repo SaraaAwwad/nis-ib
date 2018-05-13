@@ -4,7 +4,8 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class RoomModel extends AbstractModel
 {
-
+    const ERR_CAPACITY = "err_room_overload";
+    
     public $id;
     public $room_name;
     public $size;

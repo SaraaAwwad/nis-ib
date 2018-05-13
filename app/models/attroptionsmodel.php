@@ -11,7 +11,7 @@ class AttrOptionsModel extends AbstractModel{
 
         $stmt = self::prepareStmt($query);
         
-        $value = self::test_input($value);
+        //$value = self::test_input($value);
 
         $stmt->bindParam(":attr_id_fk", $this->id);
         $stmt->bindParam(":value", $valueOpt);

@@ -12,25 +12,17 @@ class ScheduleView{
                 <hr>
             </div>
         </div>'	;
-        /*foreach($s->sched_details as $det){
-            var_dump($det->course_code);
 
-        }*/
-        
-        
-
-echo '<button type="button" class="btn btn-danger" id="toPDF" > Export as PDF </button>';
-
-echo '<div id="sched">
-    <table id="tab_sched" class="table table-striped text-center">
-        <colgroup>
-            <col width="5%">
-                <col width="20%">
-                    <col width="10%">
-                        <col width="15%">
+            echo '<div id="sched">
+                <table id="tab_sched" class="table table-striped text-center">
+                    <colgroup>
+                        <col width="5%">
                             <col width="20%">
                                 <col width="10%">
-                                    <col width="20%">
+                                    <col width="15%">
+                                        <col width="20%">
+                                            <col width="10%">
+                                                <col width="20%">
         </colgroup>
         <thead>
             <tr class="warning">
@@ -55,10 +47,10 @@ echo '<div id="sched">
                     </tr>';    
                 }
         echo'</tbody>
-    </table>
-</div>';
+          </table>
+            </div>';
 
-echo '<hr>';
+        echo '<hr>';
     } 
 }
 

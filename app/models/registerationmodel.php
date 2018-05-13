@@ -4,6 +4,8 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class RegisterationModel extends AbstractModel{
 
+    const SUCCESS_REG = "success_reg";
+    
     public $id;
     public $student_id;
     public $class_id;

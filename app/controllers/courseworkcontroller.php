@@ -30,33 +30,34 @@ class CourseWorkController extends AbstractController
                     $cwEntityObj->addSelected($value, $ReqId);
                 }
             }
+
             $name = $_POST["name"];
+            $type = $_POST["type"];
             $emptytestarray = array_filter($name);
 
             if(!empty($emptytestarray)){
 
-            //$name = $_POST["name"];
-            $type = $_POST["type"]; 
-
             foreach($name as $key => $value){
                 $attr = $this->filterString($value);
                 $ty = $type[$key];
+
                 $AttId = CourseWorkAttrModel::add($attr, $ty); 
 
                 $cwAttrObj = new CourseWorkAttrModel($AttId);
-                //add in the m2m table
-                $cwEntityObj->addSelected($AttId, $ReqId);
 
+               $cwEntityObj->addSelected($AttId, $ReqId);
+
+                echo $key."options";
 
                if(isset($_POST[$key."options"])){
                     
-                    $s =$_POST[$key."options"];
-                     
+                    $s = $_POST[$key."options"];
+                    var_dump($s);
+                    
                     foreach($s as $keyopt => $valueopt){ 
                         $cwAttrObj->addOption($valueopt);
                     }
                 }
-                
             }
             }
                 $this->redirect("/coursework/add");

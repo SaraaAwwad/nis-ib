@@ -19,8 +19,6 @@
           <th>Name</th>
           <th>Code</th>
           <th>Description</th>
-          <th>Level</th>
-          <th>Teaching Hours</th>
           <th>Actions</th>
 
         </tr>
@@ -34,8 +32,6 @@
                     <td>'.$cs->name.'</td>
                     <td>'.$cs->course_code.'</td>
                     <td>'.$cs->descr.'</td>
-                    <td>'.$cs->level_id_fk.'</td>
-                    <td>'.$cs->teaching_hours.'</td>
                     <td>
                      <a href="\coursework\viewcw\\'.$cs->id.'\\'.$cs->semester_id_fk.'">View CourseWork </a></td>
                     </tr>';
