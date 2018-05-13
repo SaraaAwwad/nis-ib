@@ -165,6 +165,6 @@ require_once HOME_TEMPLATE_PATH . 'nav.php';
         </section>
     </section>
 </section>
-<?php
-require_once HOME_TEMPLATE_PATH . 'templatefooter.php'; ?>
+    <?php
+    require_once HOME_TEMPLATE_PATH . 'templatefooter.php'; ?>
 

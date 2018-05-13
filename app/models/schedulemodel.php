@@ -8,7 +8,6 @@ class ScheduleModel extends AbstractModel {
     public $semester_id_fk;
     public $class_id_fk ;
     public $status_id_fk;
-
     public $sched_details ;
     public $class_name;
     public $year;
@@ -103,7 +102,7 @@ class ScheduleModel extends AbstractModel {
     }
 
     public function getInfo(){
-        $query = 'SELECT schedule.*, class.name, semester.year, season.season_name, status.code  FROM schedule INNER JOIN
+        $query = 'SELECT schedule.*, class.name, class.grade_id_fk, semester.year, season.season_name, status.code  FROM schedule INNER JOIN
           class ON schedule.class_id_fk = class.id
          INNER JOIN status ON schedule.status_id_fk = status.id
          INNER JOIN semester ON schedule.semester_id_fk = semester.id
@@ -121,14 +120,16 @@ class ScheduleModel extends AbstractModel {
             $this->year = $row['year'];
             $this->season_name = $row['season_name'];
             $this->code = $row['code'];
+            $this->grade_id_fk = $row['grade_id_fk'];
         }
        $this->sched_details = ScheduleDetailsModel::getDet($this->id);
     }
 
     public static function getAllStudentSched(){
-        //change to session_id; and order desc
-        $query = 'SELECT schedule.* FROM SCHEDULE INNER JOIN class on schedule.class_id_fk = class.id
-        Inner join registration on registration.class_id_fk = class.id Where registration.student_id_fk = '.$_SESSION["userID"].'';
+
+        $query = 'SELECT schedule.* FROM schedule inner join class on schedule.class_id_fk = class.id inner join registration 
+        on registration.class_id_fk = class.id 
+        and registration.semester_id_fk = schedule.semester_id_fk where registration.student_id_fk = '.$_SESSION["userID"].'';
         
         $stmt = self::prepareStmt($query);  
         $sched = array();

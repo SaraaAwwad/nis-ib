@@ -71,6 +71,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
         $(document).ready(function(data){
             $('#studentform').hide();
+            $("#main").hide();
 
             $('.addGrade').on('change',function(e){
                 e.preventDefault();
@@ -105,6 +106,12 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             });
 
                             $("#studentform").show();
+                            
+                            if(students != ""){
+                                $("#main").show();
+                            }else{
+                                $("#main").hide();
+                            }
 
                             $('.students').html('');
                             $.each(students, function (i, students) {

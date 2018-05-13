@@ -23,11 +23,22 @@ class SemesterModel extends AbstractModel{
         'end_date'           => self::DATA_TYPE_DATE        
     );
     protected static $primaryKey = 'id';
+
     public static function getSemesters(){
-        return self::get(
-        'SELECT semester.*, season.season_name FROM ' . self::$tableName . ' INNER JOIN
-          season ON semester.season_id_fk = season.id'
-        );
+        $query = "SELECT * from semester";
+        $stmt =self::prepareStmt($query);
+        $semesters = array();
+        $i=0;
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $SemesterObj = new SemesterModel($row['id']);
+                $semesters[$i] = $SemesterObj;
+                $i++;
+            }
+            return $semesters;
+        }else{
+            return false;
+        }
     }
 
     public function __construct($id=""){
@@ -37,13 +48,13 @@ class SemesterModel extends AbstractModel{
         }
         $this->getAllPrices();
     }
+
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
-                  season ON semester.season_id_fk = season.id where semester.id = :id";
+        season ON semester.season_id_fk = season.id WHERE semester.id = :id";
+        $stmt = $this->prepareStmt($query);
 
-        $stmt = $this->prepareStmt($query);  
         $stmt->bindParam(':id', $this->id);
-        
         if($stmt->execute()){
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             $this->year = $row['year'];
@@ -54,6 +65,7 @@ class SemesterModel extends AbstractModel{
         }
         //$this->getFees();
     }
+
 
     public static function getSemestersByCourse($course){
         $sql = "SELECT DISTINCT semester.* from semester
@@ -74,7 +86,6 @@ class SemesterModel extends AbstractModel{
     }
 
     public static function getUnpaidSemester($student_id){
-
         $query = "SELECT DISTINCT id FROM semester WHERE id NOT IN
                  (SELECT semester_id_fk FROM payment WHERE user_id_fk = $student_id)";
         $stmt =self::prepareStmt($query);
@@ -92,7 +103,6 @@ class SemesterModel extends AbstractModel{
         }
     }
 
-    //returns only one semester object
     public static function CurrentSemester(){
 
         $date = date("Y-m-d");
@@ -106,7 +116,11 @@ class SemesterModel extends AbstractModel{
             return false;
         }
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 52ed94d98e9ddaeb1f80756b865713ff77fcce7f
     public static function getNonTranscriptedSemesters($course){
         $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
         AND exam_details.course_id_fk = :course";

@@ -4,6 +4,8 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class RegisterationModel extends AbstractModel{
 
+    const SUCCESS_REG = "success_reg";
+    
     public $id;
     public $student_id;
     public $class_id;
@@ -28,16 +30,9 @@ class RegisterationModel extends AbstractModel{
         }
     }
 
-    public static function getReg()
-    {
-        // return self::get(
-        // 'SELECT registration.* , user.fname, user.lname, class.name, season.season_name, semester.year FROM ' . self::$tableName . ' INNER JOIN
-        //   class ON registration.class_id_fk = class.id INNER JOIN semester ON registration.semester_id_fk = semester.id
-        //   INNER JOIN season on season.id = semester.season_id_fk INNER JOIN user ON registration.student_id_fk = user.id'
-        // );
-
+    public static function getReg(){
         $query = "SELECT registration.* , user.fname, user.lname, class.name, season.season_name, semester.year FROM registration INNER JOIN
-      class ON registration.class_id_fk = class.id INNER JOIN semester ON registration.semester_id_fk = semester.id INNER JOIN season on season.id = semester.season_id_fk INNER JOIN user ON registration.student_id_fk = user.id";
+        class ON registration.class_id_fk = class.id INNER JOIN semester ON registration.semester_id_fk = semester.id INNER JOIN season on season.id = semester.season_id_fk INNER JOIN user ON registration.student_id_fk = user.id";
         $stmt = self::prepareStmt($query);
         $reg = array();
         $i=0;  
@@ -55,10 +50,23 @@ class RegisterationModel extends AbstractModel{
             $reg[$i]->datetime = $row['datetime'];
             $i++;
 
+            }
+        }
+        return $reg;
+    }
+
+    public static function deleteReg($id){
+        $query = "DELETE FROM registration WHERE id = :id";
+        $stmt = self::prepareStmt($query);
+
+        $stmt->bindParam(":id", $id);
+
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
         }
     }
-    return $reg;
-}
 }
 
 ?>

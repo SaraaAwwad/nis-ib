@@ -1,17 +1,19 @@
 <?php
 namespace PHPMVC\Models;
+use PHPMVC\Models\iElementModel;
 
-class FormModel
-{
-    public static function createElement($attrObj){
-        $type = $attrObj->type;
-        $classpath  = "PHPMVC\\Models\\".$type;
-        if(class_exists($classpath)){
-            $formElement=new $classpath($attrObj);  
-        }else{
-            $input = "PHPMVC\\Models\\Input";
-            $formElement = new $input($attrObj);
-        }
-        return $formElement->getHTML();
+class FormModel{
+    private $element;
+
+    public function setElement(iElementModel $elementType)
+    {
+        $this->element = $elementType;
+    }
+
+    public function loadElement()
+    {
+        return $this->element->load();
     }
 }
+
+?>

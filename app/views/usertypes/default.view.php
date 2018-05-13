@@ -5,6 +5,7 @@
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
+
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>User Types</h1>
@@ -23,7 +24,6 @@
     <table class="order-table">
       <thead>
         <tr>
-          <th>ID</th>
           <th>User Type</th>
           <th>Status</th>
           <th>Action</th>
@@ -34,7 +34,6 @@
             <?php
                 foreach ($usertypes as $ut){
                     echo '<tr>
-                    <td>'.$ut->id.'</td>
                     <td>'.$ut->title.'</td>
                     <td>'.$ut->status.'</td>
                     <td> <a href="\usertypes\edit\\'.$ut->id.'">Edit , </a>

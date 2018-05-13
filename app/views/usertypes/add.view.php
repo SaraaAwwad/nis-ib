@@ -17,7 +17,7 @@
               <div class="col-lg-12">
                   <div class="form-panel">
                       <form class="form-horizontal style-form" method="post">
-                        
+
                           <legend>User Type Info</legend>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">User Type</label>

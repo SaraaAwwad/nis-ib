@@ -22,7 +22,7 @@ class SalaryModel extends AbstractModel {
 public static function getByUser($userk)
     {
         $sql = 'SELECT * FROM ' . static::$tableName . '  WHERE user_id_fk = "' . $userk . '"';
-        $stmt = DatabaseHandler::factory()->prepare($sql);
+        $stmt = self::prepareStmt($sql);
         if ($stmt->execute() === true) {
             if(method_exists(get_called_class(), '__construct')) {
                 $obj = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$tableSchema));

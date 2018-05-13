@@ -6,6 +6,10 @@ class StatusModel extends AbstractModel {
     public $id;
     public $code;
     private $tableName = "status";
+
+    const ACTIVE = "active";
+    const INACTIVE = "inactive";
+
     
     public function __construct($id=""){
         if($id != ""){

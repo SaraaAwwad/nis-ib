@@ -1,7 +1,8 @@
 <?php
 namespace PHPMVC\Models;
+use PHPMVC\Models\iElementModel;
 
-class Checkbox{
+class Checkbox implements ielementmodel{
     private $html;
     public function __construct($attrObj){
         $this->html='<label class="col-sm-2 col-sm-2 control-label">'.$attrObj->attr_name.'</label>';
@@ -15,7 +16,7 @@ class Checkbox{
         }
 
     }
-    public function getHTML(){
+    public function load(){
         return $this->html;
     }
 }

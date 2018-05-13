@@ -36,7 +36,51 @@ class ClassModel extends AbstractModel {
         );
     }
 
-    public static function getClassesByGrade($grade_id_fk){
-       return self::getArr('SELECT * FROM ' . self::$tableName . ' WHERE grade_id_fk = '. $grade_id_fk .''); 
+
+    public function __construct($id=""){
+		if($id != ""){
+            $this->id = $id;
+			$this->getInfo();
+		}
     }
+
+    public function getInfo(){
+        $query = "SELECT * FROM class Where id = '$this->id' ";
+        $stmt = self::prepareStmt($query);
+
+          if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $this->id=$row["id"];
+                $this->name = $row['name'];
+                $this->grade_id_fk = $row['grade_id_fk'];
+                $this->status_id_fk = $row['status_id_fk'];
+            }
+        }
+    }
+
+    public static function getClassesByGrade($grade_id_fk){
+        return self::getArr('SELECT * FROM ' . self::$tableName . ' WHERE grade_id_fk = '. $grade_id_fk .'');
+        $query = "SELECT * from class where grade_id_fk =: grade_id_fk";
+        $stmt = self::prepareStmt($query);
+
+        $grade_id_fk = self::test_input($grade_id_fk);
+        $stmt->bindParam(":grade_id_fk", $grade_id_fk);
+
+        $Classes = array();
+        $i = 0;
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $classObj = new ClassModel(row["id"]);
+                $Classes[$i] = $classObj;
+                $i++;
+            }
+            return $Classes;
+        }else{
+            return false;
+        }
+
+
+    }
+ 
 }

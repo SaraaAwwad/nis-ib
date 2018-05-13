@@ -4,7 +4,6 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class CourseWorkModel extends AbstractModel{
     protected static $tableName = 'coursework';
-
     public $id;
     public $name;
     public $date;

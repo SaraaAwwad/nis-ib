@@ -71,6 +71,7 @@ class UserModel extends AbstractModel {
             }
         }
     }
+    
     public static function getUsers(){
         return self::get(
         'SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM ' . self::$tableName .
@@ -79,11 +80,19 @@ class UserModel extends AbstractModel {
         );
     }
 
-
     Static function Login($username, $password){
 
         $result = self::isExist($username);
         if ($result){
+    
+         /*   if($password == $result['pwd']){
+
+                //  if(password_verify($password, $row['pwd'])){
+                    session_start();
+                    $_SESSION["userID"] = $result['id'];
+                    $_SESSION["userType"] = $result['type_id'];
+                    return true;
+                } */
 
          //   if($password== $result['pwd']){
                 
@@ -93,6 +102,7 @@ class UserModel extends AbstractModel {
               //  session_start();
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
+                $_SESSION["userName"] = $row['fname'] .' - ' . $row['lname'];
                 return true;
             }
         }
@@ -145,4 +155,9 @@ class UserModel extends AbstractModel {
             INNER JOIN exam_details ON exam_details.id = exam_registration.exam_id_fk
             WHERE exam_details.id = '.$exam.'
             GROUP BY user.id'); }
+
+    public function cryptPassword($password)
+    {
+        $this->pwd = crypt($password, APP_SALT);
+    }
 }

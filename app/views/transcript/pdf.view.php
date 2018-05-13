@@ -48,36 +48,5 @@ if(!empty($transcript)){
     }
 }
 
-
-/*if(!empty($transcript)){
-    foreach($transcript as $transSem){?>
-    <h3> <?= $transSem[0]->semester->season_name .' - '. $transSem[0]->semester->year ?></h3>
-    <section class="tabcontent">
-    <table class="order-table">
-      <thead>
-        <tr>
-          <th>Course</th>          
-          <th>Grade</th>                              
-          <th>Out Of</th>                              
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-
-<?php
-           
-           foreach($transSem as $t){
-               echo '<tr>
-               <td>'.$t->course->course_code.'</td>
-               <td id="grade" >'.$t->NumericGrade.'</td>
-               <td id="total" >'.$t->OutOfGrade.'</td>                    
-               </tr>';
-           }
-       ?>
-   </tr>
-   </tbody>
-</table>
-</section>	
-<hr> */
 $pdf->Output();
 ?>

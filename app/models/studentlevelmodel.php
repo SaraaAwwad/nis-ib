@@ -7,6 +7,13 @@ class StudentLevelModel extends AbstractModel{
     public $scl_grade_id_fk; //use grade only (remove level from database)
     public $user_id_fk;
     protected static $tableName = "student_level";
+    protected static $tableSchema = array(
+        'id'                  => self::DATA_TYPE_INT,
+        'user_id_fk'             => self::DATA_TYPE_INT,
+        'scl_grade_id_fk'             => self::DATA_TYPE_INT
+
+    );
+    protected static $primaryKey = 'id';
 
     public function __construct($id=""){
         if($id != ""){
@@ -45,17 +52,15 @@ class StudentLevelModel extends AbstractModel{
 
     }
 
-//    public function InsertinDB(){
-//
-//        $sql = "INSERT INTO student_level (scl_level_id_fk, scl_grade_id_fk,user_id_fk)
-//                VALUES ($this->scl_level_id, $this->scl_grade_id,$this->user_id)";
-//        $db = DatabaseHandler::getConnection();
-//        $result = mysqli_query($db,$sql);
-//        if($result){
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
-
+    public static function getByUserID($id)
+    {
+        $sql = "SELECT * FROM student_level WHERE user_id_fk = '$id'";
+        $result = self::prepareStmt($sql);
+        if ($result->execute()) {
+            while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+                $MyObj = new StudentLevelModel($row["id"]);
+            }
+            return $MyObj;
+        }
+    }
 }

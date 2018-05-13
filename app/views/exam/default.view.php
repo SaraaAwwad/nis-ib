@@ -52,7 +52,7 @@
                     <td>'.$exam->date.'</td>
                     <td>'.$exam->slot_name.' Slot</td>
                     <td>'.$exam->room_name.'</td>
-                    <td>'.$exam->code.'</td>
+                    <td><span class="label label-info label-mini">'.$exam->code.'</span></td>
                     <td> <!--<a href="\exam\edit\\'.$exam->id.'">Edit ,  </a> -->
                      <a href="\exam\details\\'.$exam->id.'">Students Applied </a><br>';
                      if($exam->code == "active")

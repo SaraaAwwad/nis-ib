@@ -1,7 +1,8 @@
 <?php
 namespace PHPMVC\Models;
+use PHPMVC\Models\iElementModel;
 
-class Radiobutton{
+class Radiobutton implements ielementmodel{
     private $html;
     public function __construct($attrObj){
 
@@ -12,11 +13,11 @@ class Radiobutton{
         $list = "";
 
         foreach($options as $key=>$value){
-            $this->html .= '<div class="col-sm-1"><input type="radio" name="'.$attrObj->sid.'" value="'.$value.'" />'.$values[$key].'</div>';
+            $this->html .= '<div class="col-sm-1"><input type="radio" required name="'.$attrObj->sid.'" value="'.$value.'" />'.$values[$key].'</div>';
         }
 
     }
-    public function getHTML(){
+    public function load(){
         return $this->html;
     }
 }
