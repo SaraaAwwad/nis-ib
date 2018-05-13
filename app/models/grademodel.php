@@ -14,4 +14,6 @@ class GradeModel extends AbstractModel {
     );
     protected static $primaryKey = 'id';
 
+
+
 }

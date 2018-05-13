@@ -15,9 +15,14 @@ class UserTypesModel extends AbstractModel implements iEncryptModel{
     public $status;
     public $UserParentPages = array();
     public $pages = array();
-
     private $tableName = 'user_type';
-    
+
+    const PARENT = "parent";
+    const STUDENT = "student";
+    const ADMIN = "admin";
+    const TEACHER = "teacher";
+
+
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
@@ -268,6 +273,19 @@ class UserTypesModel extends AbstractModel implements iEncryptModel{
         $query = "SELECT id FROM user_type WHERE title = '$title'";
         $stmt = self::prepareStmt($query);
 
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result = $row['id'];
+            }
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    Static function getTypeID($title){
+        $query = "SELECT id FROM user_type WHERE title = '$title'";
+        $stmt = self::prepareStmt($query);
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $result = $row['id'];

@@ -20,164 +20,121 @@ class StudentController extends AbstractController{
     public function defaultAction(){
         
         $this->_data['students'] = StudentModel::getAll();
-        var_dump($this->_data['students']);
         $this->_view();
     }
 
     public function addAction(){
 
-        $Levels = LevelModel::getAll();
-        $this->_data['Levels'] = $Levels;
-        $Address = AddressModel::getCountry();
-        $this->_data['country'] = $Address;
-        $stat = StatusModel::getAll();
-        $this->_data['status'] = $stat;
-        $grade = SclGradeModel::getAll();
-        $this->_data['grade'] = $grade;
+        $this->_data['country'] = AddressModel::getCountry();
+        $this->_data['status'] = StatusModel::getAll();
+        $this->_data['grade'] = SclGradeModel::getAll();
 
+        if(isset($_POST['addStudent'])) {
 
-        if(isset($_POST['addStudent'])){
-
-            if(!empty($_POST['parentsearch'])) {
-                $objParent = ParentModel::getByUsername($_POST['parentsearch']);
-
-                // $stud = new StudentModel();
-                // $stud->fname = $_POST['fnamein'];
-                // $stud->lname = $_POST['lnamein'];
-                // $stud->DOB = $_POST['datein'];
-                // $stud->gender = $_POST['radioin'];
-                // $stud->phone = $_POST['numberin'];
-                // $stud->status = $_POST['statusinput'];
-                // $stud->add_id_fk = $_POST['street'];
-                // $stud->email = $_POST['emailin'] . $stud->concatenate;
-                // $stud->pwd = $_POST['passwordin'];
-                // $stud->username = $_POST['usernamein'];
-                // $stud->type_id = 1;
-
-                // $stud->img = 'hi';
-                // $stud->user_id_fk = $objParent->id;
-                // $stud->save();
-
-                // $stlevel = new StudentLevelModel();
-                // $stlevel->scl_level_id_fk = $_POST['level'];
-                // $stlevel->scl_grade_id_fk = $_POST['gradein'];
-                // $stlevel->user_id_fk = $stud->id;
-                // $stlevel->save();
-
-
-            }else
-                { //New parent
-                    $objParent = new ParentModel();
-                    
-                    $objParent->fname = $_POST['parentfname'];
-                    $objParent->lname = $_POST['parentlname'];
-                    $objParent->phone = $_POST['parentnumber'];
-                    $objParent->DOB = $_POST['parentdate'];
-                    $objParent->gender = $_POST['parentradio'];
-                    $objParent->add_id_fk = $_POST['street'];
-                    $objParent->email = $_POST['parentemail'] . $objParent->concatenate;
-                    $objParent->pwd = $_POST['parentpassword'];
-                    $objParent->username = $_POST['parentusername'];
-                    $objParent->user_id_fk = 0;
-//                    if (isset($_FILES['parentimage']["name"])) {
-//                        $uploader = new FileUpload($_FILES['parentimage']);
-//                        $uploader->upload();
-//                        $objParent->img = $uploader->getFileName();
-//                    }
-                    $objParent->img = 'hi';
-                    $objParent->type_id = UserTypesModel::getParentId();
-                    $objParent->user_id_fk = 0;
-                    $objParent->status = 1;
-                    $objParent->add();
+        if (isset($_POST['parentinfo'])) {
+            if($_POST['parentinfo'] == "New Parent"){
+                $parent = new ParentModel();
+                $parent->type_id = $this->filterInt(UserTypesModel::getTypeID("parent"));
+                $parent->fname = $this->filterString($_POST['parentfname']);
+                $parent->lname = $this->filterString($_POST['parentlname']);
+                $parent->gender = $this->filterString($_POST['parentradio']);
+                $parent->DOB = $_POST['parentdate'];
+                $parent->username = $this->filterString($_POST['parentusername']);
+                $parent->phone = $this->filterString($_POST['parentnumberin']);
+                $parent->cryptPassword($_POST['passwordin']);
+                $parent->email = $this->filterString($_POST['parentemail'] . $_POST['extension']);
+                $parent->status = $this->filterInt(1);
+                $parent->user_id_fk = $this->filterInt(0);
+                $parent->add_id_fk = $this->filterInt($_POST['street']);
+                //Image Manipulation
+                if (isset($_FILES["imageparentinput"]["name"])) {
+                    $uploader = new FileUpload($_FILES['imageparentinput']);
+                    $uploader->upload();
+                    $parent->img = $uploader->getFileName();
                 }
+                $parent->save();
 
-                $stud = new StudentModel();
-                $stud->fname = $_POST['fnamein'];
-                $stud->lname = $_POST['lnamein'];
-                $stud->DOB = $_POST['datein'];
-                $stud->gender = $_POST['radioin'];
-                $stud->phone = $_POST['numberin'];
-                $stud->status = $_POST['statusinput'];
-                $stud->add_id_fk = $_POST['street'];
-                $stud->email = $_POST['emailin'] . $stud->concatenate;
-                $stud->pwd = $_POST['passwordin'];
-                $stud->username = $_POST['usernamein'];
-                $stud->type_id = 1;
-
-//                if (isset($_FILES["imageinput"]["name"])) {
-//                $uploader = new FileUpload($_FILES['imageinput']);
-//                $uploader->upload();
-//                $stud->img = $uploader->getFileName();
-//                }
-
-                $stud->img = 'hi';
-                //????
-                $stud->user_id_fk = $objParent->id;
-                $stud->save();
-
-//                //student Level
-                $stlevel = new StudentLevelModel();
-                $stlevel->scl_level_id_fk = $_POST['level'];
-                $stlevel->scl_grade_id_fk = $_POST['gradein'];
-                $stlevel->user_id_fk = $stud->id;
-                $stlevel->save();
-
-
+            }else if($_POST['parentinfo'] == "Existing Parent") {
+                $parent = ParentModel::getExistingParent($this->filterString($_POST['parentsearch']));
+            }
         }
-        
-        //exit();
+            $user = new StudentModel();
+            $user->type_id = $this->filterInt(UserTypesModel::getTypeID("student"));
+            $user->fname = $this->filterString($_POST['fnamein']);
+            $user->lname = $this->filterString($_POST['lnamein']);
+            $user->gender = $this->filterString($_POST['radioin']);
+            $user->DOB = $_POST['datein'];
+            $user->username = $this->filterString($_POST['usernamein']);
+            $user->cryptPassword($_POST['passwordin']);
+            $user->email = $this->filterString($_POST['emailin']);
+            $user->status = $this->filterInt($_POST['statusinput']);
+            $user->user_id_fk = $this->filterInt($parent->id);
+            $user->add_id_fk = $this->filterInt($_POST['street']);
+            $user->phone = $this->filterInt($_POST['numberin']);
+            if (isset($_FILES["imagestudentinput"]["name"])) {
+                $uploader = new FileUpload($_FILES['imagestudentinput']);
+                $uploader->upload();
+                $user->img = $uploader->getFileName();
+            }
+            $user->save();
+
+            //Grade
+            $user_grade = new StudentLevelModel();
+            $user_grade->user_id_fk = $this->filterInt($user->id);
+            $user_grade->scl_grade_id_fk = $this->filterInt($_POST['gradein']);
+            $user_grade->save();
+
+            $this->redirect('/student/default');
+        }
         $this->_view();
 
     }
 
-    public function deleteAction(){
-        if(isset($this->_params[0])){
-            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
-            $stud = StudentModel::getByPK($id);
+    public function activateAction()
+    {
+        $this->_data['status'] = StatusModel::getAll();
+        $id = $this->filterInt($this->_params[0]);
+        $user = StudentModel::getByPK($id);
 
-            if($stud == false){
-                $this->redirect("/student");
-            }
-
-           // if($objUser()->updateActivation()){
-                //$this->redirect("/student");
-           // }
+        if($user === false)
+        { $this->redirect('/student/default'); }
+        $this->_data['users'] = $user;
+        if(isset($_POST['activate']))
+        {   $user->status = $this->filterInt($_POST['statusinput']);
+            $user->update();
+            $this->redirect('/student/default');
         }
 
+        $this->_view();
     }
 
     public function editAction(){
         if(isset($this->_params[0])){
             $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT); 
-            $stud = StudentModel::getByPK($id);
-
-            if($stud == false){
+            $student = StudentModel::getByPK($id);
+            if($student == false){
                 $this->redirect("\student");
             }
-            
-            //to send to view 
-            $this->_data['student'] = $stud;
+            $this->_data['student'] = $student;
+            $this->_data['status'] = StatusModel::getAll();
+            $this->_data['grade'] = SclGradeModel::getAll();
 
-            if(isset($_POST['updatestudent'])){
-                $objUser = new StudentModel($id);
-                $objUser->fname = $_POST['fname'];
-                $objUser->lname = $_POST['lname'];
-                $objUser->phone = $_POST['number'];
-                $objUser->DOB = $_POST['date'];
-                $objUser->gender = $_POST['radio'];
-                $objUser->address_id_fk = 4;
-                $objUser->email = $_POST['email'];
-                $objUser->status = 1;
-                $objUser->password = $_POST['password'];
-                $objUser->username = $_POST['username'];
-                $objUser->img = $_POST['image'];
-                $objUser->user_id_fk = 6;
-                    
-                if ($objUser->update()){
-                    $this->redirect("/student");
-                }else{
 
-                }
+            if(isset($_POST['editStudent'])){
+                $student->fname = $this->filterString($_POST['fnamein']);
+                $student->lname = $this->filterString($_POST['lnamein']);
+                $student->gender = $this->filterString($_POST['radioin']);
+                $student->DOB = $_POST['datein'];
+                $student->username = $this->filterString($_POST['usernamein']);
+                $student->email = $this->filterString($_POST['emailin']);
+                $student->phone = $this->filterInt($_POST['numberin']);
+                $student->update();
+
+                $user_grade = StudentLevelModel::getByUserID($id);
+                $user_grade->scl_grade_id_fk = $this->filterInt($_POST['gradein']);
+                $user_grade->save();
+
+                $this->redirect("/student");
             }
             $this->_view();
         }       

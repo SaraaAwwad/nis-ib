@@ -155,4 +155,9 @@ class UserModel extends AbstractModel {
             INNER JOIN exam_details ON exam_details.id = exam_registration.exam_id_fk
             WHERE exam_details.id = '.$exam.'
             GROUP BY user.id'); }
+
+    public function cryptPassword($password)
+    {
+        $this->pwd = crypt($password, APP_SALT);
+    }
 }

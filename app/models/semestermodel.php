@@ -51,11 +51,10 @@ class SemesterModel extends AbstractModel{
 
     public function getInfo(){
         $query = "SELECT semester.*, season.season_name FROM semester INNER JOIN
-        season ON semester.season_id_fk = season.id WHERE semester.id = ". $this->id;
+        season ON semester.season_id_fk = season.id WHERE semester.id = :id";
+        $stmt = $this->prepareStmt($query);
 
-        $stmt = $this->prepareStmt($query);  
         $stmt->bindParam(':id', $this->id);
-        
         if($stmt->execute()){
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             $this->year = $row['year'];

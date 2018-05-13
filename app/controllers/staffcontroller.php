@@ -95,46 +95,48 @@ class StaffController extends AbstractController
 
     public function editAction()
     {
-        $id = $this->filterInt($this->_params[0]);
-        $user = UserModel::getByPK($id);
-        if($user === false)
-        { $this->redirect('/staff/default'); }
-        $salary = SalaryModel::getByUser($id);
-        $this->_data['users'] = $user;
-        $this->_data['salary'] = $salary;
-        $this->_data['country'] = AddressModel::getCountry();
-        $this->_data['status'] = StatusModel::getAll();
-        $this->_data['usertype'] = UserTypesModel::getUsers();
-        $this->_data['currencies'] = CurrencyModel::getAll();
-
-        if(isset($_POST['edit']))
-        {
-            $user->type_id = $this->filterInt($_POST['professioninput']);
-            $user->fname = $this->filterString($_POST['fnameinput']);
-            $user->lname = $this->filterString($_POST['lnameinput']);
-            $user->gender = $this->filterString($_POST['radioinput']);
-            $user->DOB = $_POST['dateinput'];
-            $user->username = $this->filterString($_POST['usernameinput']);
-            $user->email = $this->filterString($_POST['emailinput']);
-            $user->status = $this->filterInt($_POST['statusinput']);
-            $user->user_id_fk = $this->filterInt(0);
-            $user->add_id_fk = $this->filterInt($_POST['street']);
-            $user->phone = $this->filterInt($_POST['numberinput']);
-            if (isset($_FILES["imageinput"]["name"])) {
-                $uploader = new FileUpload($_FILES['imageinput']);
-                $uploader->upload();
-                $user->img = $uploader->getFileName();
+        if (isset($this->_params[0])) {
+            $id = $this->filterInt($this->_params[0]);
+            $user = UserModel::getByPK($id);
+            if ($user === false) {
+                $this->redirect('/staff/default');
             }
-            $user->save();
+            $salary = SalaryModel::getByUser($id);
+            $this->_data['users'] = $user;
+            $this->_data['salary'] = $salary;
+            $this->_data['country'] = AddressModel::getCountry();
+            $this->_data['status'] = StatusModel::getAll();
+            $this->_data['usertype'] = UserTypesModel::getUsers();
+            $this->_data['currencies'] = CurrencyModel::getAll();
 
-            $salary->amount = $this->filterInt($_POST['salaryinput']);
-            $salary->currency_id = $this->filterInt($_POST['currencyinput']);
-            $salary->save();
+            if (isset($_POST['edit'])) {
+                $user->type_id = $this->filterInt($_POST['professioninput']);
+                $user->fname = $this->filterString($_POST['fnameinput']);
+                $user->lname = $this->filterString($_POST['lnameinput']);
+                $user->gender = $this->filterString($_POST['radioinput']);
+                $user->DOB = $_POST['dateinput'];
+                $user->username = $this->filterString($_POST['usernameinput']);
+                $user->email = $this->filterString($_POST['emailinput']);
+                $user->status = $this->filterInt($_POST['statusinput']);
+                $user->user_id_fk = $this->filterInt(0);
+                $user->add_id_fk = $this->filterInt($_POST['street']);
+                $user->phone = $this->filterInt($_POST['numberinput']);
+                if (isset($_FILES["imageinput"]["name"])) {
+                    $uploader = new FileUpload($_FILES['imageinput']);
+                    $uploader->upload();
+                    $user->img = $uploader->getFileName();
+                }
+                $user->save();
+
+                $salary->amount = $this->filterInt($_POST['salaryinput']);
+                $salary->currency_id = $this->filterInt($_POST['currencyinput']);
+                $salary->save();
 
 
-            $this->redirect('/staff/default');
+                $this->redirect('/staff/default');
+            }
+            $this->_view();
         }
-        $this->_view();
     }
 
      public function activateAction()

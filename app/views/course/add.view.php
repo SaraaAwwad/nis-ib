@@ -4,8 +4,7 @@
     require_once HOME_TEMPLATE_PATH . 'header.php';
     require_once HOME_TEMPLATE_PATH . 'nav.php';
 
-?>       
-      <script src="../../../public/js/user.js"></script>
+?>
       <section id="container" >
       <section id="main-content">
           <section class="wrapper">
@@ -20,72 +19,51 @@
                     <div class="form-group">
                     <label class="col-sm-2 col-sm-2 control-label">Course Name</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="coursename" required>
+                    <input type="text" class="form-control" name="name" required>
                     </div>
             </div>
                           
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label">Course Code</label>
                   <div class="col-sm-10">
-                  <input type="text" class="form-control" name="coursecode" required>
+                  <input type="text" class="form-control" name="code" required>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="description" required>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="description" rows="7" cols="10" required></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Level</label>
-                <div class="col-sm-8">
-                <?php for($i=0; $i<count($Levels); $i++){ ?>
-                <label class="containerradio"><?php echo $Levels[$i]->level; ?>
-                <input type="radio" checked="checked" value ="<?php echo $Levels[$i]->id; ?>" name="level">
-                <span class="checkmark"></span>
-                </label>
-                <?php } ?>
-                </div>
-                </div>
-
-                <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Group</label>
-                <div class="col-sm-8">
-                <?php for($i=0; $i<count($group); $i++){ ?>
-                <label class="containerradio"><?php echo $group[$i]->group_name; ?>
-                <input type="radio" checked="checked" value ="<?php echo $group[$i]->id; ?>" name="group">
-                <span class="checkmark"></span>
-                </label>
-                <?php } ?>
-                </div>
-                </div>   
-
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                  <div class="col-sm-10">
-                  <?php foreach($status as $status){ ?>
-                  <label class="containerradio"><?php echo $status->code; ?>
-                  <input type="radio" checked="checked" value="<?php echo $status->id; ?>" name="status">
-                  <span class="checkmark"></span>
-                  </label>
-                  <?php } ?>
-                </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 col-sm-2 control-label">Teaching Hours</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="teaching" required>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Grade</label>
+                        <div class="styled-select slate">
+                            <select name="grade" id="grade" required>
+                                <option value="" selected="selected" disabled="disabled">Select Grade</option>
+                                <?php foreach($grade as $gr){ ?>
+                                    <option value="<?php echo $gr->id; ?>"><?php echo $gr->grade_name; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                      
-                </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Status</label>
+                        <div class="styled-select slate">
+                            <select name="status" id="status" required>
+                                <option value="" selected="selected" disabled="disabled">Select Status</option>
+                                <?php foreach($status as $st){ ?>
+                                    <option value="<?php echo $st->id; ?>"><?php echo $st->code; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
                 </fieldset>
-                
-                          <input type="submit" name="addcourse" id="main">
+                          <input type="submit" name="addCourse" id="main">
                       </form>
                   </div>
               </div>     

@@ -1,7 +1,7 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\CourseModel;
-use PHPMVC\Models\SclGradeModel;
+use PHPMVC\Models\GradeModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\Models\CourseGroupModel;
@@ -14,67 +14,55 @@ class CourseController extends AbstractController
     use Helper;
 
     public function defaultAction(){
-        $this->_data['course'] = CourseModel::getCourse();
+        $this->_data['course'] = CourseModel::getAll();
         $this->_view();
     }
 
     public function addAction(){   
 
-        $this->_data['Levels'] = LevelModel::getAll();
-        $this->_data['group'] = CourseGroupModel::getAll();
         $this->_data['status'] = StatusModel::getAll();
-       
-      
-        if(isset($_POST['addcourse'])){
+        $this->_data['grade'] = GradeModel::getAll();
+
+        if(isset($_POST['addCourse'])){
             
             $course = new CourseModel();
-            $course->name = $this->filterString($_POST['coursename']);
-            $course->course_code = $this->filterString($_POST['coursecode']);
+            $course->name = $this->filterString($_POST['name']);
+            $course->course_code = $this->filterString($_POST['code']);
             $course->descr = $this->filterString($_POST['description']);
-            $course->level_id_fk = $_POST['level'];
-            $course->group_id_fk = $_POST['group'];
+            $course->grade_id_fk = $_POST['grade'];
             $course->status = $_POST['status'];
-            $course->teaching_hours = $this->filterInt($_POST['teaching']);
 
             if ($course->save()){
               $this->redirect('/course/default');
             }else{
                 // handle error
             }
-
         }
-
         $this->_view();
-    	
     }
 
     public function editAction(){
-
+        if(isset($this->_params[0])){
         $id = $this->filterInt($this->_params[0]);
         $course = CourseModel::getByPK($id);
         if($course === false)
         { $this->redirect('/course/default'); }
         $this->_data['course'] = $course;
+        $this->_data['grade'] = GradeModel::getAll();
         $this->_data['status'] = StatusModel::getAll();
-        $this->_data['group'] = CourseGroupModel::getAll();
-        $this->_data['Levels'] = LevelModel::getAll();
-       
-        if(isset($_POST['updatecourse']))
+
+        if(isset($_POST['editCourse']))
         {
-            $course->name = $this->filterString($_POST['coursename']);
-            $course->course_code = $this->filterString($_POST['coursecode']);
+            $course->name = $this->filterString($_POST['name']);
+            $course->course_code = $this->filterString($_POST['code']);
             $course->descr = $this->filterString($_POST['description']);
-            $course->level_id_fk = $_POST['level'];
-            $course->group = $_POST['group'];
+            $course->grade_id_fk = $this->filterInt($_POST['grade']);
             $course->status = $this->filterInt($_POST['status']);
-            $course->teaching_hours = $this->filterInt($_POST['teaching']);
-            
-
             $course->save();
-
             $this->redirect('/course/default');
         }
         $this->_view();
+        }
     }
 
     public function studentAction(){

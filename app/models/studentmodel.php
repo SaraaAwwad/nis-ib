@@ -40,45 +40,40 @@ class StudentModel extends UserModel{
               $this->email = $row["email"];
               $this->phone = $row["phone"];
               $this->status = $row["status"];
-
-              $this->getGrade();
-
               $this->user_id_fk = $row["user_id_fk"];
+              $this->img = $row["img"];
+              $this->add_id_fk = $row["add_id_fk"];
               $this->paymentObj = PaymentModel::getPayment($row['id']);
-              $this->getGrade();
             }
         }  
     }
 
     public static function getAll(){
 
-        $db = DatabaseHandler::getConnection();
-        $sql ="SELECT user.*,
-        parent.fname as 'parent_fname',
-        parent.lname as 'parent_lname' FROM user AS user JOIN user AS parent 
-        ON parent.id = user.user_id_fk WHERE user.user_id_fk != 0";
+        $sql ="SELECT users.*,
+       parent.fname as 'parent_fname',
+       parent.lname as 'parent_lname',
+       parent.phone as 'parent_phone',
+       parent.email as 'parent_email',
+       status.code,
+       scl_grade.grade_name
+       FROM user AS users JOIN user AS parent 
+       ON parent.id = users.user_id_fk INNER JOIN status ON users.status = status.id
+       INNER JOIN student_level ON student_level.user_id_fk = users.id
+       INNER JOIN scl_grade ON student_level.scl_grade_id_fk = scl_grade.id
+       WHERE users.user_id_fk != 0 ORDER BY users.id ASC";
         $result = self::prepareStmt($sql);
         $Res = array();
         $i=0;
         if($result->execute()) {
             while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
-                $MyObj = new StudentModel();
-                $MyObj->id=$row["id"];
-                $MyObj->fname = $row["fname"];
-                $MyObj->lname = $row["lname"];
-                $MyObj->gender = $row["gender"];
-                $MyObj->DOB = $row["DOB"];
-                $MyObj->username = $row["username"];
-                $MyObj->email = $row["email"];
-                $MyObj->img = $row["img"];
-                $MyObj->password = $row["pwd"];
-                $MyObj->phone = $row["phone"];
-                $MyObj->user_id_fk = $row["user_id_fk"];
-                $MyObj->add_id_fk = $row["add_id_fk"];
-                $MyObj->status = $row["status"];
+                $MyObj = new StudentModel($row["id"]);
+                $MyObj->code = $row["code"];
                 $MyObj->parent_fname = $row["parent_fname"];
                 $MyObj->parent_lname = $row["parent_lname"];
-
+                $MyObj->parent_phone = $row["parent_phone"];
+                $MyObj->parent_email = $row["parent_email"];
+                $MyObj->grade_name = $row["grade_name"];
                 $Res[$i] = $MyObj;
                 $i++;
             }
@@ -91,7 +86,6 @@ class StudentModel extends UserModel{
 
     public static function insertInDB($stud){
         $db = DatabaseHandler::getConnection();
-
         $sql = "INSERT INTO user (type_id, fname, lname, gender, DOB, username, pwd, email, status, img, user_id_fk, add_id_fk, phone) 
         VALUES ('1', '$stud->fname','$stud->lname','$stud->gender', '$stud->DOB', '$stud->username', '$stud->password', '$stud->email', '$stud->status', '$stud->img','$stud->user_id_fk','$stud->address_id_fk','$stud->phone')";
 
@@ -103,45 +97,27 @@ class StudentModel extends UserModel{
         }
     }
 
-    public static function getByPK($id){
-        $db = DatabaseHandler::getConnection();
-
-        $sql ="SELECT * FROM `user` WHERE id = '$id'";
-        $result = mysqli_query($db,$sql);
-        $Res= false;
-        $i=0;
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            $MyObj= new StudentModel($row["id"]);
-            $MyObj->id=$row["id"];
-            $MyObj->fname=$row["fname"];
-            $MyObj->lname=$row["lname"];
-            $MyObj->gender=$row["gender"];
-            $MyObj->DOB=$row["DOB"];
-            $MyObj->username=$row["username"];
-            $MyObj->email=$row["email"];
-            $MyObj->img=$row["img"];
-            $MyObj->password=$row["pwd"];
-            $MyObj->phone=$row["phone"];
-            $MyObj->address_id_fk = $row["add_id_fk"];
-            $MyObj->status = $row["status"];
-            $Res=$MyObj;
+    public static function getByPK($id)
+    {
+        $sql = "SELECT * FROM user WHERE id = '$id'";
+        $result = self::prepareStmt($sql);
+        if ($result->execute()) {
+            while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+                $MyObj = new StudentModel($row["id"]);
+            }
+            return $MyObj;
         }
-
-        return $Res;
     }
 
     public function update(){
-        $db = DatabaseHandler::getConnection();
         $sql = "UPDATE user SET fname= '$this->fname' ,lname='$this->lname', DOB='$this->DOB', phone = '$this->phone',
          gender='$this->gender', email='$this->email'
-        , pwd = '$this->password', username = '$this->username', img = '$this->img' WHERE id='$this->id'";
-
-                if (mysqli_query($db, $sql)){
+        , status = '$this->status', pwd = '$this->password', username = '$this->username', img = '$this->img' WHERE id='$this->id'";
+        $stmt = self::prepareStmt($sql);
+        if($stmt->execute()){
                     return true;
                 }else{
                    return false;
-                 //die(mysqli_error($db));
                 }
     }
 

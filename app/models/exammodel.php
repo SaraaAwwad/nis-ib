@@ -26,7 +26,8 @@ class ExamModel extends AbstractModel{
         'room_id_fk'                 => self::DATA_TYPE_INT,
         'date'                       => self::DATA_TYPE_DATE,
         'semester_id_fk'             => self::DATA_TYPE_INT,
-        'status_id_fk'               => self::DATA_TYPE_INT
+        'status_id_fk'               => self::DATA_TYPE_INT,
+        'OutOfGrade'               => self::DATA_TYPE_INT
     );
     protected static $primaryKey = 'id';
 
@@ -73,7 +74,7 @@ class ExamModel extends AbstractModel{
         return self::getArr(
             'SELECT exam_details.* FROM exam_details 
             INNER JOIN exam_registration ON exam_details.id = exam_registration.exam_id_fk 
-            WHERE exam_registration.user_id_fk IN ('.$students.') ');
+            WHERE exam_registration.user_id_fk IN ('.$students.')');
     }
 
 
@@ -92,17 +93,4 @@ class ExamModel extends AbstractModel{
             return false;
         }
     }
-//    public static function getSlots($students,$day,$date){
-//
-//        return self::getArr(
-//            'SELECT slot.* FROM slot
-//                 WHERE  slot.id NOT IN (SELECT slot_id_fk
-//                 FROM   exam_details
-//                 INNER JOIN
-//                 exam_registration ON exam_details.id = exam_registration.exam_id_fk
-//                 WHERE exam_registration.user_id_fk IN ('.$students.')
-//                 AND exam_details.day_id_fk = '.$day.'
-//                 AND exam_details.date = "' . $date . '" ) ' );  }
-
-
 }
