@@ -57,7 +57,6 @@ class PaymentValueModel extends AbstractModel
           return false;
     }
 
-
     public function getTotalPrice()
     {
         return $this->totalPrice;
