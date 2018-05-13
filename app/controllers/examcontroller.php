@@ -29,58 +29,47 @@ class ExamController extends AbstractController
     }
 
     public function addAction(){
-//        if(isset($this->_params[0])) {
-//            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
-//            $exam = ExamModel::getByPK($id);
 
             if(isset($_POST['action']))  {
                 if($_POST['action']== 'getCourse'){
-                    $course = $_POST['course'];
-                    $grade = $_POST['grade'];
+                    $course = $this->filterInt($_POST['course']);
+                    $grade = $this->filterInt($_POST['grade']);
                     $students =  ExamModel::getStudentsInCourse($course,$grade);
                     echo json_encode($students);
                     return;
                 } else if($_POST['action'] == 'getStudents'){
-
-                    $students = $_POST['students'];
+                    $students = $this->filterInt($_POST['students']);
                     $output = ExamModel::getDates($students);
                     echo json_encode($output);
                     return;
                 }else if($_POST['action'] == 'getRooms'){
-                    $slot = $_POST['slot'];
+                    $slot = $this->filterInt($_POST['slot']);
                     $date = $_POST['date'];
                     $output = RoomModel::getExamRooms($date,$slot);
                     echo json_encode($output);
                     return;
 
                 }else if($_POST['action'] == 'getCourseByGrade'){
-                    $grade = $_POST['grade'];
+                    $grade = $this->filterInt($_POST['grade']);
                     $courses = CourseModel::getByGrade($grade);
                     echo json_encode($courses);
                     return;
                 }
-//                else if($_POST['action'] == 'getSlots'){
-//                    $students = $_POST['students'];
-//                    $day = $_POST['day'];
-//                    $date = $_POST['date'];
-//                    $output = $exam->getSlots($students,$day,$date);
-//                    echo json_encode($output);
-//                    return;
-//                }
             }
             if(isset($_POST['addDetail'])){
 
                 $exam = new ExamModel();
                 $exam_reg = new ExamRegistrationModel();
 
-                $exam->grade_id_fk = $_POST['grade'];
-                $exam->course_id_fk = $_POST['course'];
-                $exam->slot_id_fk = $_POST['slot'];
-                $exam->room_id_fk = $_POST['room'];
-                $exam->day_id_fk = $_POST['day'];
-                $exam->status_id_fk = $_POST['status'];
-                $exam->semester_id_fk = $_POST['semester'];
+                $exam->grade_id_fk = $this->filterInt($_POST['grade']);
+                $exam->course_id_fk = $this->filterInt($_POST['course']);
+                $exam->slot_id_fk = $this->filterInt($_POST['slot']);
+                $exam->room_id_fk = $this->filterInt($_POST['room']);
+                $exam->day_id_fk = $this->filterInt($_POST['day']);
+                $exam->status_id_fk = $this->filterInt($_POST['status']);
+                $exam->semester_id_fk = $this->filterInt($_POST['semester']);
                 $exam->date = $_POST['dateinput'];
+                $exam->OutOfGrade = $_POST['gradeof'];
                 $students = $_POST['students'];
                 $exam->save();
 
@@ -99,7 +88,6 @@ class ExamController extends AbstractController
             $this->_data['status'] = StatusModel::getAll();
             $this->_data['semesters'] = SemesterModel::getSemesters();
             $this->_view();
-        //}
     }
 
     public function detailsAction(){

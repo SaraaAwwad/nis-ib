@@ -27,9 +27,7 @@
           <th>Name</th>
           <th>Code</th>
           <th>Description</th>
-          <th>Level</th>
-          <th>Group</th>
-          <th>Teaching Hours</th>
+          <th>Grade</th>
           <th>Status</th>
           <th>Actions</th>
 
@@ -44,10 +42,8 @@
                     <td>'.$cs->name.'</td>
                     <td>'.$cs->course_code.'</td>
                     <td>'.$cs->descr.'</td>
-                    <td>'.$cs->level_id_fk.'</td>
-                    <td>'.$cs->group_id_fk.'</td>
-                    <td>'.$cs->teaching_hours.'</td>
-                    <td>'.$cs->status.'</td>
+                    <td>'.$cs->grade_name.' Grade</td>
+                    <td><span class="label label-info label-mini">'.$cs->code.'</span></td>
                     <td> <a href="\course\edit\\'.$cs->id.'">Edit , </a>
                      <a href="\coursework\addcw\\'.$cs->id.'">Add CourseWork </a></td>
                     </tr>';

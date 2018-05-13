@@ -9,7 +9,7 @@ class StaffModel extends UserModel{
         return self::get(
         'SELECT user.*, user_type.title, salary.amount, status.code FROM ' . self::$tableName .
          ' INNER JOIN user_type ON user.type_id = user_type.id INNER JOIN salary ON user.id = salary.user_id_fk 
-         INNER JOIN status ON user.status = status.id where title NOT IN ("student","parent")'
+         INNER JOIN status ON user.status = status.id where title NOT IN ("UserTypesModel::STUDENT","UserTypesModel::PARENT") ORDER BY user.id ASC'
         );
     }
 

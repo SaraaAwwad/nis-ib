@@ -10,8 +10,6 @@ class CourseModel extends AbstractModel {
     public $status;
     public $grade_id_fk;
     public $name;
-    public $teaching_hours;
-    public $group;
 
     protected static $tableName = 'course';
     protected static $tableSchema = array(
@@ -19,18 +17,12 @@ class CourseModel extends AbstractModel {
         'name'               => self::DATA_TYPE_STR,
         'course_code'        => self::DATA_TYPE_STR,
         'descr'              => self::DATA_TYPE_STR,
-        'teaching_hours'     => self::DATA_TYPE_INT,
         'grade_id_fk'        => self::DATA_TYPE_INT,
         'status'             => self::DATA_TYPE_INT
     );
 
     protected static $primaryKey = 'id';
 
-    public static function getCourse() {
-        return self::get(
-        'SELECT course.*, scl_grade.id, scl_level.id FROM ' . self::$tableName . ' INNER JOIN scl_grade ON course.grade_id_fk = scl_grade.id, INNER JOIN scl_level ON course.level_id_fk = scl_level.id'
-        );
-    }
 
     public static function insertInDB($course){
 
@@ -56,21 +48,38 @@ class CourseModel extends AbstractModel {
     }
 
     public function getInfo(){
-        $query = "SELECT * FROM course Where id = '$this->id' ";
+        $query = "SELECT * FROM course Where id = :id";
         $stmt = $this->prepareStmt($query);
-
+        $stmt->bindParam(":id", $this->id);
           if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
-
                 $this->id=$row["id"];
                 $this->name = $row["name"];
                 $this->course_code = $row["course_code"];
                 $this->descr = $row["descr"];
-                $this->teaching_hours = $row["teaching_hours"];
                 $this->grade_id_fk = $row["grade_id_fk"];
                 $this->status = $row["status"];
-
             }
+        }
+    }
+
+    public static function getAll(){
+        $sql ="SELECT course.*, scl_grade.grade_name, status.code FROM course INNER JOIN scl_grade ON scl_grade.id = course.grade_id_fk 
+        INNER JOIN status ON status.id = course.status";
+        $result = self::prepareStmt($sql);
+        $Res = array();
+        $i=0;
+        if($result->execute()) {
+            while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+                $MyObj = new CourseModel($row["id"]);
+                $MyObj->code = $row["code"];
+                $MyObj->grade_name = $row["grade_name"];
+                $Res[$i] = $MyObj;
+                $i++;
+            }
+            return $Res;
+        }else {
+            return false;
         }
     }
 
@@ -94,11 +103,12 @@ class CourseModel extends AbstractModel {
     public static function getByGrade($grade){
         //get all courses for this grade and active
         $sql = "SELECT course.* FROM course INNER JOIN status ON course.status = status.id
-         WHERE grade_id_fk = '.$grade.' AND status.code='active' 
+         WHERE grade_id_fk = :grade AND status.code='active' 
          AND course.id NOT IN (SELECT course_id_fk FROM exam_details)";
         $stmt = self::prepareStmt($sql);
         $Res = array();
         $i=0;
+        $stmt->bindParam(":grade", $grade);
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $courseObj = new CourseModel($row['id']);
