@@ -121,17 +121,6 @@ class StudentModel extends UserModel{
                 }
     }
 
-    public function getLevel(){
-        $db = DatabaseHandler::getConnection();
-        $sql = "SELECT level FROM scl_level";
-        $result = mysqli_query($db,$sql);
-        $Res = array();
-        while ($row = mysqli_fetch_assoc($result)){
-            $Res[] = $row;
-        }
-        return $Res;
-    }
-
     //aggregates Scl_grade class
     public function getGrade(){
 

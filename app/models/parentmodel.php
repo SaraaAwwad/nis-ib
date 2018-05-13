@@ -15,7 +15,6 @@ class ParentModel extends UserModel{
 
     public static function getByUsername($pk){
 
-
         $sql = 'SELECT * FROM user WHERE username = "' . $pk . '"';
         $stmt = self::prepareStmt($sql);
         if($stmt->execute()){
@@ -51,7 +50,6 @@ class ParentModel extends UserModel{
             $this->id = self::getLastId(); 
             return true;
         }else{
-        //    exit();
             return false;
         }
 
@@ -128,9 +126,6 @@ class ParentModel extends UserModel{
         }else{
             return false;
         }
-
-
-
     }
 
 }

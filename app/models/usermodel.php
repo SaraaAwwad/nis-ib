@@ -84,22 +84,9 @@ class UserModel extends AbstractModel {
 
         $result = self::isExist($username);
         if ($result){
-    
-         /*   if($password == $result['pwd']){
 
-                //  if(password_verify($password, $row['pwd'])){
-                    session_start();
-                    $_SESSION["userID"] = $result['id'];
-                    $_SESSION["userType"] = $result['type_id'];
-                    return true;
-                } */
-
-         //   if($password== $result['pwd']){
-                
             $row = $result->fetch(\PDO::FETCH_ASSOC);
            if($password== $row['pwd']){
-          //  if(password_verify($password, $row['pwd'])){
-              //  session_start();
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
                 return true;
@@ -115,9 +102,7 @@ class UserModel extends AbstractModel {
 
         $stmt = self::prepareStmt($sql); 
         $username = self::test_input($username);
-
-        $stmt->bindParam(':username', $username, \PDO::PARAM_STR);         
-
+        $stmt->bindParam(':username', $username, \PDO::PARAM_STR);
         if($stmt->execute()){
             $numofrows =  $stmt->rowCount();
         }
@@ -131,7 +116,6 @@ class UserModel extends AbstractModel {
     }
 
     static function getTeachers(){
-        //add: where they are available at the given day and slot
         return self::get(
             'SELECT user.* FROM ' . self::$tableName .
              ' INNER JOIN user_type ON user.type_id = user_type.id 
@@ -139,21 +123,21 @@ class UserModel extends AbstractModel {
             );
     }
 
-    public static function getUsersByUserType($typeid){
+    public static function getUsersByUserType($type_id){
         return self::getArr(
             'SELECT user.* FROM ' . self::$tableName .
-            ' WHERE type_id = '.$typeid.' '
+            ' WHERE type_id = '.$type_id.' '
         );
     }
 
-    public static function getStudents($exam){
-
+    public static function getStudents($exam_id){
         return self::getArr(
             'select user.id, user.fname, user.lname, user.phone, user.email
             From ' . self::$tableName . ' inner JOIN exam_registration on exam_registration.user_id_fk = user.id
             INNER JOIN exam_details ON exam_details.id = exam_registration.exam_id_fk
-            WHERE exam_details.id = '.$exam.'
-            GROUP BY user.id'); }
+            WHERE exam_details.id = '.$exam_id.'
+            GROUP BY user.id');
+    }
 
     public function cryptPassword($password)
     {

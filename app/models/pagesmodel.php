@@ -64,10 +64,6 @@ class PagesModel extends AbstractModel{
         }
     }
 
-    public static function getAllParentPages(){
-        
-    }
-
     public function getInfo(){
         $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
         $stmt = $this->prepareStmt($query);
@@ -90,7 +86,7 @@ class PagesModel extends AbstractModel{
     }
     
     public function getAllPermissions(){
-        $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type
+        $sql = "SELECT user_type.* FROM user_type_pages INNER JOIN user_type
                 ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
         $stmt = self::prepareStmt($sql);
         $Res = array();
