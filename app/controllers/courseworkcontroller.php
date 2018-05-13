@@ -5,7 +5,6 @@ use PHPMVC\Models\CourseWorkAttrModel;
 use PHPMVC\Models\CourseWorkModel;
 use PHPMVC\Models\CourseWorkValueModel;
 use PHPMVC\Models\SemesterModel;
-
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 use PHPMVC\Models\TypeModel;
@@ -31,33 +30,34 @@ class CourseWorkController extends AbstractController
                     $cwEntityObj->addSelected($value, $ReqId);
                 }
             }
+
             $name = $_POST["name"];
+            $type = $_POST["type"];
             $emptytestarray = array_filter($name);
 
             if(!empty($emptytestarray)){
 
-            //$name = $_POST["name"];
-            $type = $_POST["type"]; 
-
             foreach($name as $key => $value){
                 $attr = $this->filterString($value);
                 $ty = $type[$key];
+
                 $AttId = CourseWorkAttrModel::add($attr, $ty); 
 
                 $cwAttrObj = new CourseWorkAttrModel($AttId);
-                //add in the m2m table
-                $cwEntityObj->addSelected($AttId, $ReqId);
 
+               $cwEntityObj->addSelected($AttId, $ReqId);
+
+                echo $key."options";
 
                if(isset($_POST[$key."options"])){
                     
-                    $s =$_POST[$key."options"];
-                     
+                    $s = $_POST[$key."options"];
+                    var_dump($s);
+                    
                     foreach($s as $keyopt => $valueopt){ 
                         $cwAttrObj->addOption($valueopt);
                     }
                 }
-                
             }
             }
                 $this->redirect("/coursework/add");
@@ -89,7 +89,6 @@ class CourseWorkController extends AbstractController
         if(isset($this->_params[0])){
             $id = $this->filterInt($this->_params[0]);
             if($id!=""){
-                //id of course 
 
                 if(isset($_POST["submitdynamicform"])){
                     $req = $_POST['req'];
@@ -119,8 +118,8 @@ class CourseWorkController extends AbstractController
                 {
                     if($_POST["action"] == "getForm"){
 
-                       //$req = $_POST['req'];
-                        $cw = new CourseWorkEntityModel(20);
+                        $req = $_POST['req'];
+                        $cw = new CourseWorkEntityModel($req);
                         $formArr  = $cw->attr;
                         $html=array();
                         $i=0;

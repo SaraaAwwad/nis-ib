@@ -1,2 +1,0 @@
-# nis-ib
-SWE

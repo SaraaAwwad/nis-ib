@@ -5,6 +5,7 @@ use PHPMVC\Models\StudentModel;
 use PHPMVC\Models\LevelModel;
 use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\AddressModel;
+use PHPMVC\Models\ErrorModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\SclGradeModel;
 use PHPMVC\Models\StudentLevelModel;
@@ -90,8 +91,7 @@ class StudentController extends AbstractController{
 
     }
 
-    public function activateAction()
-    {
+    public function activateAction(){
         $this->_data['status'] = StatusModel::getAll();
         $id = $this->filterInt($this->_params[0]);
         $user = StudentModel::getByPK($id);
@@ -138,5 +138,18 @@ class StudentController extends AbstractController{
             }
             $this->_view();
         }       
+    }
+
+    public function upgradeAction(){
+        StudentModel::upgradeAll();
+        
+        $err = StudentModel::SUCCESS_UPGRADE;
+        $_SESSION["message"][] = ErrorModel::getError($err);
+
+        if(isset($_SESSION["message"])){
+            $this->message = $_SESSION["message"];
+        }
+
+        $this->redirect("/student/default");
     }
 }

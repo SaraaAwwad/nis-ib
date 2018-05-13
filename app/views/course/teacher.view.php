@@ -7,7 +7,7 @@
 ?>
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1> Your Courses</h1>
+            <h1>Courses</h1>
 		</div>
 	</div>		
 
@@ -32,8 +32,7 @@
                     <td>'.$cs->name.'</td>
                     <td>'.$cs->course_code.'</td>
                     <td>'.$cs->descr.'</td>
-                    <td>
-                     <a href="\coursework\viewcw\\'.$cs->id.'\\'.$cs->semester_id_fk.'">View CourseWork </a></td>
+                    <td> <a href="\coursework\addcw\\'.$cs->id.'">Add CourseWork </a></td>
                     </tr>';
                 }
             ?>

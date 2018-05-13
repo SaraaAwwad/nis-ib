@@ -1,6 +1,7 @@
 <?php
 namespace PHPMVC\Controllers;
 use PHPMVC\Models\UserModel;
+use PHPMVC\Models\ErrorModel;
 use PHPMVC\Lib\Helper;
 
 class IndexController extends AbstractController{
@@ -14,13 +15,19 @@ class IndexController extends AbstractController{
     public function loginAction(){
        
         if (isset($_POST['loginbtn'])){
-            //validation and sqli injection
             $em = $_POST["username"];
             $psw =$_POST["password"];
+
            if(UserModel::login($em, $psw)){
                 $this->redirect('\user');
-           }else{			
+           }else{	
+                $err = UserModel::ERR_LOGIN;
+                $_SESSION["message"][] = ErrorModel::getError($err);
            }
+
+           if(isset($_SESSION["message"])){
+            $this->message = $_SESSION["message"];
+            }
         }
 
         $this->_view();

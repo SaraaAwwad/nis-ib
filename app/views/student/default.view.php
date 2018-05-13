@@ -54,10 +54,17 @@ echo '  <tr>
  
  }
    echo '</table>'; 
-}else{
-    echo 'Sorry, No Students';
-}
+}?>
 
+<section class="tabcontent">    
+<div class="row">
+<div class="col-lg-12 main-chart">
+<a class="buttonlink btn btn-theme02 left" href="/student/upgrade"><i class="fa fa-plus"></i>Upgrade Students</a>
+</div>
+</div>
+</section>
+
+<?php
 require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
 require_once HOME_TEMPLATE_PATH . 'templatefooter.php';
 ?>

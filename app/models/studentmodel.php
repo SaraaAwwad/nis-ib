@@ -5,6 +5,8 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class StudentModel extends UserModel{
 
+    const SUCCESS_UPGRADE = "students_upgrade";
+
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
     public $paymentObj;               // array of all payments
@@ -19,7 +21,23 @@ class StudentModel extends UserModel{
          }
     }
 
-    
+    public static function upgradeAll(){
+        $students = self::getActiveStudents();
+        foreach($students as $s){
+            $max = GradeModel::getMaxGrade();
+            if($s->gradeObj->id >= $max){
+                $status = StatusModel::INACTIVE;
+                $id = StatusModel::getStatusID($status);
+                $s->status = $id;
+                $s->update();
+            }else{
+                $user_grade = StudentLevelModel::getByUserID($s->id);
+                $user_grade->scl_grade_id_fk = ++$s->gradeObj->id;
+                $user_grade->save();
+            }
+        }
+    }
+
     public function getInfo(){
 
         $query = "SELECT * FROM user WHERE id = :id";
@@ -45,7 +63,8 @@ class StudentModel extends UserModel{
               $this->add_id_fk = $row["add_id_fk"];
               $this->paymentObj = PaymentModel::getPayment($row['id']);
             }
-        }  
+        $this->getGrade();
+        }
     }
 
     public static function getAll(){
@@ -62,6 +81,7 @@ class StudentModel extends UserModel{
        INNER JOIN student_level ON student_level.user_id_fk = users.id
        INNER JOIN scl_grade ON student_level.scl_grade_id_fk = scl_grade.id
        WHERE users.user_id_fk != 0 ORDER BY users.id ASC";
+
         $result = self::prepareStmt($sql);
         $Res = array();
         $i=0;
@@ -121,6 +141,42 @@ class StudentModel extends UserModel{
                 }
     }
 
+    public function getLevel(){
+        $db = DatabaseHandler::getConnection();
+        $sql = "SELECT level FROM scl_level";
+        $result = mysqli_query($db,$sql);
+        $Res = array();
+        while ($row = mysqli_fetch_assoc($result)){
+            $Res[] = $row;
+        }
+        return $Res;
+    }
+
+    public static function getActiveStudents(){
+        
+        $status = StatusModel::ACTIVE;
+        $st = StatusModel::getStatusID($status);
+
+        $query = "SELECT user.* from user inner join user_type on user.type_id = user_type.id where user_type.title =:title and user.status = :st";
+        
+        $stmt = self::prepareStmt($query);
+        $title = UserTypesModel::STUDENT;
+
+        $stmt->bindParam(":title", $title);
+        $stmt->bindParam(":st", $st);
+        $Students = array();
+        $i=0;
+
+        if($stmt->execute()){
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                $MyObj = new StudentModel($row["id"]);
+                $Students[$i] = $MyObj;
+                $i++;
+            }
+            return $Students;
+        }
+    }
+
     //aggregates Scl_grade class
     public function getGrade(){
 
@@ -136,6 +192,20 @@ class StudentModel extends UserModel{
             return false;
         }
 
+    }
+
+    public function updateGrade(){
+        $query = "UPDATE student_level SET scl_grade_id_fk =:grade Where user_id_fk =:id";
+        $stmt = self::prepareStmt($query);
+
+        $stmt->bindParam(":grade", $this->gradeObj->id);
+        $stmt->bindParam(":id", $this->id);
+
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static function getNonRegisteredStudents($grade_id_fk, $semester_id_fk){

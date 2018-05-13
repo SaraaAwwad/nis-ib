@@ -16,6 +16,12 @@ require_once TEMPLATE_PATH . 'header.php';
                                             <div class="well">
                                                 <form id="loginForm" method="POST" action="" novalidate="novalidate">
                                                     <div class="form-group">
+                                                    <?php if (!empty($message)){
+        foreach($message as $m){
+            echo $m;
+        }
+    }
+?>
                                                         <label for="username" class="control-label">Username</label>
                                                         <input type="text" class="form-control" id="username" name="username" value="" required title="Please enter you username" placeholder="example@gmail.com">
                                                         

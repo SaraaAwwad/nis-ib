@@ -144,12 +144,12 @@ class CourseModel extends AbstractModel {
     }
 
     public static function getStudentCourses(){
-        $query2='SELECT course.* , schedule.semester_id_fk from course inner join schedule_details on schedule_details.course_id_fk = course.id 
+        $query2='SELECT course.* , registration.semester_id_fk from course inner join schedule_details on schedule_details.course_id_fk = course.id 
         inner join schedule on schedule_details.sched_id_fk = schedule.id inner join class on schedule.class_id_fk = class.id 
-        inner join registration on registration.class_id_fk = class.id where registration.student_id_fk = 7';
-
+        inner join registration on registration.class_id_fk = class.id where registration.student_id_fk = :id';
         
         $stmt = self::prepareStmt($query2);  
+        $stmt->bindParam(":id",$_SESSION["userID"]);
         $Res = array();
         $i=0;
         
@@ -165,5 +165,27 @@ class CourseModel extends AbstractModel {
         return $Res;
     }
 
+    public static function getTeacherCourses(){
+        $query = "SELECT DISTINCT course.* FROM course inner join schedule_details on schedule_details.course_id_fk = course.id
+        where schedule_details.teacher_id_fk = :id ";
 
+        $stmt = self::prepareStmt($query);
+        $stmt->bindParam(":id", $_SESSION["userID"]);
+        
+        $Courses = array();
+        $i=0;
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $crObj = new CourseModel($row["id"]);
+                $Courses[$i] = $crObj;
+                $i++;
+            }
+            
+            return $Courses;            
+        
+        }else{
+            return false;
+        }
+    }
 }

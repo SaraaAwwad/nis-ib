@@ -20,6 +20,7 @@ class UserModel extends AbstractModel {
     public $phone;
     private $table_name = 'user';
 
+    CONST ERR_LOGIN = "err_login_invalid";
 
     protected static $tableName = 'user';
     protected static $tableSchema = array(
@@ -71,6 +72,7 @@ class UserModel extends AbstractModel {
             }
         }
     }
+    
     public static function getUsers(){
         return self::get(
         'SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM ' . self::$tableName .
@@ -79,16 +81,19 @@ class UserModel extends AbstractModel {
         );
     }
 
-
     Static function Login($username, $password){
 
         $result = self::isExist($username);
-        if ($result){
 
+        $username = self::test_input($username);
+        $password = self::test_input($password);
+
+        if ($result){
             $row = $result->fetch(\PDO::FETCH_ASSOC);
-           if($password== $row['pwd']){
+             if(password_verify($password, $row['pwd'])){
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
+                $_SESSION["userName"] = $row['fname'] .' - ' . $row['lname'];
                 return true;
             }
         }
@@ -139,7 +144,8 @@ class UserModel extends AbstractModel {
             GROUP BY user.id');
     }
 
-    public function cryptPassword($password)
+   
+            public function cryptPassword($password)
     {
         $this->pwd = crypt($password, APP_SALT);
     }

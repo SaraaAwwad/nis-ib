@@ -7,17 +7,15 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
 
     <div class="col-lg-9 main-chart">
-        <button class = "btn btn-success left glyphicon glyphicon-arrow-left"></button>
-
         <h3><i class="fa fa-angle-right"></i>Invoice details</h3>
-    </div>
 
+    </div>
+<?php if(isset($child)) {?>
     <div class="row mt">
         <div class="col-lg-12">
             <div class="form-panel">
                 <form class="form-horizontal style-form" method="post">
                     <legend></legend>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="panel panel-default">
@@ -61,10 +59,10 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                             </div>
                         </div>
 
-
                         <div class="col-md-8">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
+
                                     <?php
                                     if($payment->status_id_fk == $pending) {
                                         echo '<h3 class="panel-title"><strong>Payment Method</strong><label class= "label label-warning label-mini">'
@@ -86,10 +84,13 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                         }
                                             ?>
                                     </div>
+                                    <button type="button" class="btn btn-danger" id="toPDF" > Export as PDF </button>
+
                                 </div>
                             </div>
                         </div>
-                            <div class="col-md-8">
+
+                        <div class="col-md-8">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title"><strong>Invoice</strong></h3>
@@ -135,16 +136,40 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
-                            </div>
+            </div>
                         </div>
                 </form>
             </div>
         </div>
     </div>
-
+                                            <?php }?>
 <script>
+    $("#toPDF").click(function(){
+        var pdf = new jsPDF('p', 'pt', 'letter');
 
+        source = $('#sched')[0];
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 40,
+            width: 522
+        };
+
+        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, { // y coord
+                'width': margins.width
+            },
+
+            function (dispose) {
+                pdf.save('Invoice.pdf');
+            }, margins);
+
+    });
 
 </script>
 

@@ -22,24 +22,26 @@ class PaymentModel extends AbstractModel
     public $paymentMethodObj;
     protected static $tableName = 'payment';
 
+    const APPROVED="approved";
+    const PENDING = "pending";
+    
     public function __construct($id = "")
     {
         if ($id != "") {
-            $this->id = $id;
             $this->getInfo($id);
         }
     }
 
-    public function getInfo()
+    public function getInfo($id)
     {
-        $query = "SELECT * FROM " . self::$tableName . " Where id = '$this->id' ";
+        $query = "SELECT * FROM " . self::$tableName . " Where id = '$id' ";
         $stmt = self::prepareStmt($query);
 
         if ($stmt->execute()) {
             while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                $this->id = $row["id"];
                 $this->amount = $row['amount'];
                 $this->user_id_fk = $row['user_id_fk'];
-                // Remove aggregation
                 $this->currency_id_fk = $row['currency_id_fk'];
                 $this->currency_val = CurrencyModel::getCurrencyCode($row['currency_id_fk']);
                 //$this->currencyObj = new CurrencyModel($row['currency_id_fk']);
@@ -48,7 +50,6 @@ class PaymentModel extends AbstractModel
                 $this->studentObj = new StudentModel($row['user_id_fk']);
                 $this->paymentMethodObj = new PaymentmethodModel($row['method_id_fk']);
                 $this->semesterObj = new SemesterModel($row['semester_id_fk']);
-
             }
         }
     }

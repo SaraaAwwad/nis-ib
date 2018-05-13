@@ -9,7 +9,6 @@ class DecoratorpricesModel extends ExtrafeesModel
     public $decoratorObj;      // $decorator_id_fk;
     public $gradeObj;         // $scl_grade_id_fk;
 
-   // public $ref_obj;
 
     protected static $tableName = 'decorator_prices';
 

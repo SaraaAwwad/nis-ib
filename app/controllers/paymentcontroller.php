@@ -20,9 +20,6 @@ use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 
 
-use PHPMVC\LIB\InputFilter;
-use PHPMVC\LIB\Helper;
-
 class PaymentController extends AbstractController
 {
     use InputFilter;
@@ -141,13 +138,22 @@ class PaymentController extends AbstractController
                 $req = $_POST['req'];
                 $pay = new PaymentmethodModel($req);
                 $formArr  = $pay->attr;
+                
                 $html=array();
                 $i=0;
-                foreach($formArr as $f){
-                    $html[$i]= FormModel::createElement($f);
-                    $i++;
-                }
 
+                $form = new FormModel();
+
+                foreach($formArr as $f){
+                    $type = $f->type;
+                    $classpath  = "PHPMVC\\Models\\".$type;
+                    if(class_exists($classpath)){
+                        $form->setElement(new $classpath($f));
+                        $html[$i] = $form->loadElement();
+                        $i++;
+                    }
+
+                }
                 echo json_encode($html);
                 return;
             }
@@ -228,20 +234,24 @@ class PaymentController extends AbstractController
             if($payment_id!="")
             {
                 $paymentObj = new PaymentModel($payment_id);
+
                 //Child and parent Info
-                $this->_data['payment'] = $paymentObj;
-                $this->_data['pending'] = PaymentstatusModel::pending;
-                $child = new StudentModel($paymentObj->user_id_fk);
-                $this->_data['child'] = $child;
-                $this->_data['parent'] = ParentModel::getParentOf($paymentObj->user_id_fk);
-                $this->_data['details'] = PaymentdetailsModel::getDetails($paymentObj->id);
-
-                //Semester Price
-                $child->getGrade();
-                $this->_data['semesterPrice'] = new SemesterPricesModel($paymentObj->semesterObj->id, $child->gradeObj->id);
-
-                // view Payment Method details
-                $this->_data['methods'] = PaymentvalueModel::viewMethodsValues($payment_id);
+                if($paymentObj->id!=""){
+                    $this->_data['payment'] = $paymentObj;
+                    $this->_data['pending'] = PaymentstatusModel::pending;
+                    $child = new StudentModel($paymentObj->user_id_fk);
+                    $this->_data['child'] = $child;
+                    $this->_data['parent'] = ParentModel::getParentOf($paymentObj->user_id_fk);
+                    $this->_data['details'] = PaymentdetailsModel::getDetails($paymentObj->id);
+    
+                    //Semester Price
+                    $child->getGrade();
+                    $this->_data['semesterPrice'] = new SemesterPricesModel($paymentObj->semesterObj->id, $child->gradeObj->id);
+    
+                    // view Payment Method details
+                    $this->_data['methods'] = PaymentvalueModel::viewMethodsValues($payment_id);
+                }
+             
 
 
             }

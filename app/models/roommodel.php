@@ -4,7 +4,8 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class RoomModel extends AbstractModel
 {
-
+    const ERR_CAPACITY = "err_room_overload";
+    
     public $id;
     public $room_name;
     public $size;
@@ -33,7 +34,7 @@ class RoomModel extends AbstractModel
     public static function getMinCapacity($class_id_fk, $semester_id_fk){
         $query = "SELECT MIN(room.size) as capacity FROM room INNER JOIN schedule_details ON room.id = schedule_details.room_id_fk
         INNER JOIN schedule ON schedule_details.sched_id_fk = schedule.id where schedule.class_id_fk =:class_id_fk
-        AND semester_id_fk =:semester_id_fk";
+        AND schedule.semester_id_fk =:semester_id_fk";
 
         $stmt = self::prepareStmt($query);
 

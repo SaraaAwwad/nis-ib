@@ -70,5 +70,11 @@ class CourseController extends AbstractController
         $this->_data['course']=$course;
         $this->_view();
     }
+
+    public function teacherAction(){
+        $course = CourseModel::getTeacherCourses();
+        $this->_data['course']=$course;
+        $this->_view();
+    }
   
 }

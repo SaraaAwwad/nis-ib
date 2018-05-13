@@ -33,8 +33,7 @@
                     <td>'.$pt->physicalname.'</td>                    
                     <td>'.$pt->pageid.'</td>                    
                     <td>'.$pt->status.'</td>    
-                    <td><a href="\pages\edit\\'.$pt->id.'"</a> Edit ,
-                    <a href="\pages\delete\\'.$pt->id.'"</a>Delete ,
+                    <td>
                     <a href="\pages\viewpermissions\\'.$pt->id.'"</a>View Permissions </td>
                     </tr>';
                 }

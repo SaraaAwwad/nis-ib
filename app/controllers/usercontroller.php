@@ -12,7 +12,6 @@ class UserController extends AbstractController
 
     public function CityAction()  
    {  
-      //set selected country id from POST 
       $id_country = $_POST['id'];
       $this->_data['datas']= AddressModel::getCity($id_country);  
       $output = null;  

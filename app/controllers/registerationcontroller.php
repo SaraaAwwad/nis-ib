@@ -9,6 +9,7 @@ use PHPMVC\LIB\InputFilter;
 use PHPMVC\Models\SemesterModel;
 use PHPMVC\Lib\Helper;
 use PHPMVC\Models\RoomModel;
+use PHPMVC\Models\ErrorModel;
 
 class RegisterationController extends AbstractController
 {   use Helper;
@@ -26,7 +27,6 @@ class RegisterationController extends AbstractController
         $this->_data['semester'] = $semester;
         $this->_data['grade'] = $grade;
 
-
         if(isset($_POST['addReg'])){
 
             $class = $_POST['class'];
@@ -40,16 +40,19 @@ class RegisterationController extends AbstractController
                 $c = RoomModel::getMinCapacity($class, $sem);
                 if($c !== false){
                     if(count($_POST['studentsCB']) > $c){
-                        exit();
+                        $err = RoomModel::ERR_CAPACITY;
+                        $_SESSION["message"][] = ErrorModel::getError($err);
+                        $this->redirect("/registeration/add");
                     }
                 }
 
-
                 foreach($_POST['studentsCB'] as $selected){
-                   $register = new RegisterationModel();
-                   $date =  date("Y/m/d");
-
-                   if(StudentModel::regValid($grade, $sem, $selected)){
+                    $register = new RegisterationModel();
+                    $date =  date("Y/m/d");
+ 
+                    if(StudentModel::regValid($grade, $sem, $selected)){ 
+                        $err = RegisterationModel::SUCCESS_REG;
+                        $_SESSION["message"][] = ErrorModel::getError($err); 
                         $register->semester_id_fk = $sem;
                         $register->student_id_fk = $selected;
                         $register->class_id_fk = $class;
@@ -57,7 +60,10 @@ class RegisterationController extends AbstractController
                         $register->save();
                     }
                 }
-
+        
+                if(isset($_SESSION["message"])){
+                    $this->message = $_SESSION["message"];
+                }
             }
 
             $this->redirect('/registeration');
@@ -69,11 +75,10 @@ class RegisterationController extends AbstractController
                 $sem = $_POST['semester'];
                 $class = ClassModel::getClassesByGrade($g);
 
-                //want students(active) who paid (approved)for this semester and are in this grade and are not already registered.
-                $students = StudentModel::getNonRegisteredStudents($g, $sem);
+                 $students = StudentModel::getNonRegisteredStudents($g, $sem);
 
                 $output = array(
-                    'class' => $class, 
+                    'class' => $class,
                     'students' => $students
                 );        
                 echo json_encode($output);
