@@ -73,7 +73,6 @@ class SemesterModel extends AbstractModel{
         return $sem;
     }
 
-
     public static function getUnpaidSemester($student_id){
 
         $query = "SELECT DISTINCT id FROM semester WHERE id NOT IN
@@ -107,7 +106,6 @@ class SemesterModel extends AbstractModel{
             return false;
         }
     }
-
 
     public static function getNonTranscriptedSemesters($course){
         $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
