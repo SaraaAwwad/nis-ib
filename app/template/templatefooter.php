@@ -23,36 +23,13 @@
                             <br> All rights reserved.</p>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="sitemap">
-                            <h3>Navigation</h3>
-                            <ul>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="admission-form.html">Admissions </a></li>
-                                <li><a href="admission.html">Academics</a></li>
-                                <li><a href="research.html">Research</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="tweet_box">
-                            <h3>Tweets</h3>
-                            <div class="tweet-wrap">
-                                <div class="tweet"></div>
-                                <!-- // end .tweet -->
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-3">
                         <div class="address">
                             <h3>Contact us</h3>
                             <p><span>Address: </span> Km 22 Ismailia desert road -Left side , Cairo</p>
                             <p>Email :  nlsinfo@niscl.com
                                 <br> Telephone :  26562521– 26562522 - 26562526 -01066682298</p>
-                                <ul class="footer-social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook fa-fb" aria-hidden="true"></i></a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>

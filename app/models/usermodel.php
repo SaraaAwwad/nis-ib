@@ -71,6 +71,7 @@ class UserModel extends AbstractModel {
             }
         }
     }
+    
     public static function getUsers(){
         return self::get(
         'SELECT user.*, user_type.title, salary.amount, status.code, telephone.number FROM ' . self::$tableName .
@@ -78,7 +79,6 @@ class UserModel extends AbstractModel {
           INNER JOIN status ON user.status = status.id INNER JOIN telephone ON user.id = telephone.user_id_fk where title NOT IN ("student","parent")'
         );
     }
-
 
     Static function Login($username, $password){
 
@@ -102,6 +102,7 @@ class UserModel extends AbstractModel {
               //  session_start();
                 $_SESSION["userID"] = $row['id'];
                 $_SESSION["userType"] = $row['type_id'];
+                $_SESSION["userName"] = $row['fname'] .' - ' . $row['lname'];
                 return true;
             }
         }

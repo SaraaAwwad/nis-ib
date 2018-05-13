@@ -159,7 +159,6 @@ class TranscriptController extends AbstractController
                 $i++;
             }
         }
-
         $this->_data['transcript'] = $transArr;
     }
 

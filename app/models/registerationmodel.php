@@ -53,8 +53,6 @@ class RegisterationModel extends AbstractModel{
         return $reg;
     }
 
-
-
     public static function deleteReg($id){
         $query = "DELETE FROM registration WHERE id = :id";
         $stmt = self::prepareStmt($query);

@@ -5,7 +5,6 @@ use PHPMVC\Models\CourseWorkAttrModel;
 use PHPMVC\Models\CourseWorkModel;
 use PHPMVC\Models\CourseWorkValueModel;
 use PHPMVC\Models\SemesterModel;
-
 use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 use PHPMVC\Models\TypeModel;
@@ -119,8 +118,8 @@ class CourseWorkController extends AbstractController
                 {
                     if($_POST["action"] == "getForm"){
 
-                       //$req = $_POST['req'];
-                        $cw = new CourseWorkEntityModel(20);
+                        $req = $_POST['req'];
+                        $cw = new CourseWorkEntityModel($req);
                         $formArr  = $cw->attr;
                         $html=array();
                         $i=0;

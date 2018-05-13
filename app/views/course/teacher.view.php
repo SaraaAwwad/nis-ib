@@ -5,40 +5,38 @@
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
-
     <div class="row">
         <div class="col-lg-9 main-chart">
-            <h1>User Types</h1>
+            <h1>Courses</h1>
 		</div>
 	</div>		
-
-  <section class="tabcontent">    
-    <div class="row">
-    <div class="col-lg-12 main-chart">
-    <a class="buttonlink btn btn-theme04 left" href="/usertypes/add"><i class="fa fa-plus"></i>User Type</a>
-    </div>
-  </div>
-  </section>
 
   <section class="tabcontent">
     <table class="order-table">
       <thead>
         <tr>
-          <th>User Type</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Description</th>
+          <th>Grade</th>
           <th>Status</th>
-          <th>Action</th>
+          <th>Actions</th>
+
         </tr>
       </thead>
       <tbody>
         <tr>
             <?php
-                foreach ($usertypes as $ut){
+                foreach ($course as $cs){
                     echo '<tr>
-                    <td>'.$ut->title.'</td>
-                    <td>'.$ut->status.'</td>
-                    <td> <a href="\usertypes\edit\\'.$ut->id.'">Edit , </a>
-                        <a href="\usertypes\managepages\\'.$ut->id.'">Permissions</a>
-                    </td>
+                    <td>'.$cs->id.'</td>
+                    <td>'.$cs->name.'</td>
+                    <td>'.$cs->course_code.'</td>
+                    <td>'.$cs->descr.'</td>
+                    <td>'.$cs->grade_id_fk.'</td>
+                    <td>'.$cs->status.'</td>
+                    <td> <a href="\coursework\addcw\\'.$cs->id.'">Add CourseWork </a></td>
                     </tr>';
                 }
             ?>

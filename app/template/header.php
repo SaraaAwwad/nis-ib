@@ -14,15 +14,6 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.php">About<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="admission-form.php">Admissions</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="academics.php">Academics</a>
-                                </li>
                                 <li class="nav-logo">
                                     <a href="index.php" class="navbar-brand"><img src="<?= IMG ?>nib_logo.png" class="img-fluid" alt="logo"></a>
                                 </li>
@@ -30,23 +21,23 @@
                                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Pages
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="events.php">Events</a></li>
-                                        <li><a class="dropdown-item" href="campus-life.php">Campus Life</a></li>
-                                        <li><a class="dropdown-item" href="our-teachers.php">Our Teachers</a></li>
-                                        <li><a class="dropdown-item" href="gallery.php">Gallery</a></li>  
-                                        <li class="dropdown">
-                                          <a class="dropdown-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Others Pages</a>
-                                          <ul class="dropdown-menu dropdown-menu1"> 
-                                            <li><a class="dropdown-item" href="notice-board.php">Notice Board</a></li>
-                                            <li><a class="dropdown-item" href="chairman-speech.php">Chairman Speech</a></li>
-                                            <li><a class="dropdown-item" href="faq.php">FAQ</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.php">Contact</a>
+                                    <?php 
+                                        use PHPMVC\Models\UserTypesModel;
+                                        $pub = UserTypesModel::PUBLIC_TYPE;
+
+                                        $usertypeid = UserTypesModel::getUserTypeByTitle($pub);
+                                        $userTypeObj = new UserTypesModel($usertypeid);
+
+                                        $pages = $userTypeObj->pages;
+                                        
+                                        echo "<ul class='dropdown-menu'>";
+                                        if($pages != ""){
+                                            foreach($pages as $p){
+                                                echo '<li><a class="dropdown-item" href="/pages/public/'.$p->id.'">'. $p->friendlyname .'</a></li>';
+                                            }
+                                        }
+                                        echo '</ul>';
+                                    ?>
                             </li>
                              <a class="nav-link" href="/index/login">Login</a>
                         </ul>

@@ -2,12 +2,12 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
-                  <p class="centered"><a href="profile.php"><img src="<?= ASSETS_IMG ?>ui-sam.jpg" class="img-circle" width="60"></a></p>
-                  <h5 class="centered"> User</h5>
+                  <h5 class="centered"> <?php if (isset($_SESSION["userName"])){
+                      echo $_SESSION["userName"];
+                  } ?></h5>
     
       <?php 
       use PHPMVC\Models\UserTypesModel;
-      use PHPMVC\Lib\Database\DatabaseHandler;
 
         if(!isset($_SESSION["userID"])){
             exit();

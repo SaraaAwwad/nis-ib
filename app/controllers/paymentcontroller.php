@@ -20,9 +20,6 @@ use PHPMVC\LIB\InputFilter;
 use PHPMVC\LIB\Helper;
 
 
-use PHPMVC\LIB\InputFilter;
-use PHPMVC\LIB\Helper;
-
 class PaymentController extends AbstractController
 {
     use InputFilter;
@@ -141,13 +138,22 @@ class PaymentController extends AbstractController
                 $req = $_POST['req'];
                 $pay = new PaymentmethodModel($req);
                 $formArr  = $pay->attr;
+                
                 $html=array();
                 $i=0;
-                foreach($formArr as $f){
-                    $html[$i]= FormModel::createElement($f);
-                    $i++;
-                }
 
+                $form = new FormModel();
+
+                foreach($formArr as $f){
+                    $type = $f->type;
+                    $classpath  = "PHPMVC\\Models\\".$type;
+                    if(class_exists($classpath)){
+                        $form->setElement(new $classpath($f));
+                        $html[$i] = $form->loadElement();
+                        $i++;
+                    }
+
+                }
                 echo json_encode($html);
                 return;
             }

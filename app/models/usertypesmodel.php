@@ -2,9 +2,12 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class UserTypesModel extends AbstractModel {
+class UserTypesModel extends AbstractModel implements iEncryptModel{
+
     const ERR_EXIST = "err_user_exist";
     const ADD_SUCCESS = "add_user_type";
+
+    const PUBLIC_TYPE = "public";
 
     public $id;
     public $title;
@@ -18,11 +21,13 @@ class UserTypesModel extends AbstractModel {
     public function __construct($id=""){
         if($id != ""){
             $this->id = $id;
+            $this->decryptBy();
             $this->getInfo();
         }
     }
 
     public function getInfo(){
+        
         $query = "SELECT * FROM ".$this->tableName ." Where id = '$this->id' ";
         $stmt =self::prepareStmt($query);        
        
@@ -37,7 +42,7 @@ class UserTypesModel extends AbstractModel {
 
         $this->getUserParentPages();     
         $this->getAllPages();
-    
+        $this->encryptBy();        
     }
 
     public static function addUserType($title, $statusId){
@@ -67,7 +72,6 @@ class UserTypesModel extends AbstractModel {
 
     }
     
-    
     public static function isExist($title){
         $query = "SELECT * from user_type where title = :title";
 
@@ -88,7 +92,6 @@ class UserTypesModel extends AbstractModel {
             return false;
         }
     }
-
 
     Static function getAll(){
         $query = "SELECT * FROM user_type";
@@ -197,8 +200,7 @@ class UserTypesModel extends AbstractModel {
 
     public function getAllPages(){
         $query = "SELECT user_type_pages.pageid_fk from user_type_pages INNER JOIN pages ON pages.id = user_type_pages.pageid_fk 
-        WHERE typeid_fk = '$this->id'
-        order by ordervalue";
+        WHERE typeid_fk = '$this->id' ";
         
         $stmt = $this->prepareStmt($query);
         if($stmt->execute()){
@@ -299,5 +301,27 @@ class UserTypesModel extends AbstractModel {
         }
     }
 
+    public function encryptBy(){
+       // $this->id = self::encrypt($this->id);
+    }
+    
+    public function decryptBy(){
+       // $this->id = self::decrypt($this->id);  
+    }
+
+    public static function getUserTypeByTitle($title){
+        $query = "SELECT id FROM user_type WHERE title = '$title'";
+        $stmt = self::prepareStmt($query);        
+        $result = "";
+
+        if($stmt->execute()){
+            while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+                $result = $row['id'];
+            }
+        return $result;
+        }else{
+            return false;
+        }
+    }
 }
 

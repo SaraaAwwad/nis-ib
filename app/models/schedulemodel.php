@@ -8,7 +8,6 @@ class ScheduleModel extends AbstractModel {
     public $semester_id_fk;
     public $class_id_fk ;
     public $status_id_fk;
-
     public $sched_details ;
     public $class_name;
     public $year;

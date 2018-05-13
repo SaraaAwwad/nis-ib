@@ -76,4 +76,14 @@ class PagesController extends AbstractController{
 
         
     }
+
+    public function publicAction(){
+        if(isset($this->_params[0])){
+            $id = filter_var($this->_params[0], FILTER_SANITIZE_NUMBER_INT);
+            $p = PagesModel::getPublicPage($id);
+            $this->_data["page"] = $p;
+            $this->_view();
+
+        } 
+    }
 }
