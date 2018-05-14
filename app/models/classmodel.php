@@ -5,6 +5,7 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 class ClassModel extends AbstractModel {
 
     CONST ERR_EXIST = "err_class_exist";
+    CONST SUCCESS_ADD = "success_msg";
 
     public $id;
     public $name;

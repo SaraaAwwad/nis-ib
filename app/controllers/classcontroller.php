@@ -32,6 +32,8 @@ class ClassController extends AbstractController
                 $_SESSION["message"][] = ErrorModel::getError($err);
             }  
             else if($class->save()){
+                $err = ClassModel::SUCCESS_ADD;
+                $_SESSION["message"][] = ErrorModel::getError($err);
                 $this->redirect('/class');
             }   
         }
@@ -62,6 +64,8 @@ class ClassController extends AbstractController
                     $_SESSION["message"][] = ErrorModel::getError($err);
                 }  
                 else if($class->save()){
+                    $err = ClassModel::SUCCESS_ADD;
+                    $_SESSION["message"][] = ErrorModel::getError($err);
                     $this->redirect('/class');
                 }  
 
