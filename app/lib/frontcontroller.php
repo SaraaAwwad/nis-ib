@@ -42,7 +42,7 @@ class FrontController{
 
         $page = PagesModel::getPageByTitle($permission);
 
-        if($this->_action == "public" || $this->_controller == "index" || $this->_action == "default")
+        if($this->_action == "public" || $this->_controller == "index")
         {
             $page = true;
         } 

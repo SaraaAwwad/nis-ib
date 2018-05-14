@@ -4,6 +4,9 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class ClassModel extends AbstractModel {
 
+    CONST ERR_EXIST = "err_class_exist";
+    CONST SUCCESS_ADD = "success_msg";
+
     public $id;
     public $name;
     public $grade_id_fk;
@@ -35,7 +38,6 @@ class ClassModel extends AbstractModel {
             grade_id_fk = '.$this->grade_id_fk .' '
         );
     }
-
 
     public function __construct($id=""){
 		if($id != ""){
@@ -82,5 +84,21 @@ class ClassModel extends AbstractModel {
 
 
     }
- 
+    
+    public function isClassExist(){
+        $query = "SELECT * FROM class where name =:name AND grade_id_fk =:grade ";
+        $stmt = self::prepareStmt($query);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":grade", $this->grade_id_fk);
+
+        if($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
+        }
+        if($numofrows > 0 ) {
+            return true;
+        }else{
+            return false;
+        }
+    
+    }
 }
