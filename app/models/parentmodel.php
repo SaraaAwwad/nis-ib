@@ -128,6 +128,13 @@ class ParentModel extends UserModel{
         }
     }
 
+    public function cryptPassword($password)
+    {
+        $this->pwd =  password_hash($password, PASSWORD_BCRYPT, array('cost'=>8));
+    }
+
+
+
 }
 
 ?>
