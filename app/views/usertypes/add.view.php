@@ -5,14 +5,12 @@
     require_once HOME_TEMPLATE_PATH . 'nav.php';
     require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 ?>
-
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>Add A New User Type</h1>
             <hr>
 		</div>
-	</div>	
-
+	</div>
         <div class="row mt">
               <div class="col-lg-12">
                   <div class="form-panel">

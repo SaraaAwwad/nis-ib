@@ -80,7 +80,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     <div class="form-group">
                         <label class="col-sm-2 col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="emailin" maxlength="15" value="<?php echo $student->email; ?>" required>
+                            <input type="text" class="form-control" name="emailin" maxlength="15" value="<?php echo $student->email; ?>" required>@nis.edu.eg
                             <input type="hidden" name="extension" value="<?php echo '@nis.edu.eg'; ?>">
                         </div>
                     </div>

@@ -11,6 +11,7 @@ use PHPMVC\Models\StatusModel;
 use PHPMVC\Models\UserModel;
 use PHPMVC\Models\UserTypesModel;
 use PHPMVC\Models\CurrencyModel;
+use PHPMVC\Models\ErrorModel;
 
 
 use PHPMVC\LIB\InputFilter;
@@ -74,6 +75,12 @@ class StaffController extends AbstractController
                 $user->img = $uploader->getFileName();
             }
 
+            if(UserModel::UsernameExist($this->filterString($_POST['usernameinput']))){
+                $err = StaffModel::ERR_EXIST;
+                $_SESSION["message"][] = ErrorModel::getError($err);
+
+            }else{
+
             if($user->save()) {
                 $salary = new SalaryModel();
                 $salary->user_id_fk = $user->id;
@@ -86,10 +93,16 @@ class StaffController extends AbstractController
                 $telephone->user_id_fk = $user->id;
                 $telephone->number = $this->filterInt($second);
                 $telephone->save(); }
-            }
-           $this->redirect('/staff/default');
 
-    	}
+                $err = StaffModel::ADD_SUCCESS;
+                $_SESSION["message"][] = ErrorModel::getError($err);
+            }
+                $this->redirect('/staff/default');
+    	    }
+        }
+        if(isset($_SESSION["message"])){
+            $this->message = $_SESSION["message"]; }
+
         $this->_view();
     }
 
@@ -126,15 +139,25 @@ class StaffController extends AbstractController
                     $uploader->upload();
                     $user->img = $uploader->getFileName();
                 }
-                $user->save();
 
+                if(UserModel::UsernameExist($this->filterString($_POST['usernameinput']))){
+                    $err = StaffModel::ERR_EXIST;
+                    $_SESSION["message"][] = ErrorModel::getError($err);
+
+                }else{
+                $user->save();
                 $salary->amount = $this->filterInt($_POST['salaryinput']);
                 $salary->currency_id = $this->filterInt($_POST['currencyinput']);
                 $salary->save();
 
-
+                $err = StaffModel::ADD_SUCCESS;
+                $_SESSION["message"][] = ErrorModel::getError($err);
                 $this->redirect('/staff/default');
+                }
             }
+            if(isset($_SESSION["message"])){
+                $this->message = $_SESSION["message"]; }
+
             $this->_view();
         }
     }

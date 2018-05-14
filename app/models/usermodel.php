@@ -149,4 +149,22 @@ class UserModel extends AbstractModel {
     {
         $this->pwd = crypt($password, APP_SALT);
     }
+
+    public static function UsernameExist($username){
+        $query = "SELECT * from user where username = :username";
+        $username = self::test_input($username);
+
+        $stmt = self::prepareStmt($query);
+        $stmt->bindParam(":username", $username);
+        if($stmt->execute()){
+            $numofrows =  $stmt->rowCount();
+        }else {
+            return false;
+        }
+        if($numofrows > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

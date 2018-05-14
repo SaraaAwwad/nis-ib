@@ -18,10 +18,10 @@ function randomPassword() {
 
 ?>
 <script src="../../../public/js/user.js"></script>
+    <script src="../../../public/assets/js/parentform.js"></script>
     <div class="row">
         <div class="col-lg-9 main-chart">
             <h1>Add A New Student</h1>
-
     </div>
   </div>  
 
@@ -68,7 +68,7 @@ function randomPassword() {
             <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
                 <div class="col-sm-8">
-                    <input name="numberin" type="text" pattern="\d*" maxlength="20" class="form-control" required>
+                    <input name="numberin" type="number" maxlength="20" class="form-control" required>
                 </div>
             </div>
 
@@ -179,7 +179,7 @@ function randomPassword() {
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Username</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" placeholder="Search By Username" name="parentsearch">
+                                      <input type="text" class="form-control" placeholder="Search By Username" name="parentsearch" id="parentsearch" required="true">
                                   </div>
                               </div>
                           </fieldset>
@@ -189,27 +189,20 @@ function randomPassword() {
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">First Name</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentfname">
+                                      <input type="text" class="form-control" name="parentfname" id="parentfname" required="true">
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Last Name</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentlname">
+                                      <input type="text" class="form-control" name="parentlname" id="parentlname" required="true">
                                   </div>
                               </div>
 
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Date Of Birth</label>
                                   <div class="col-sm-10">
-                                      <input id="date" type="date" name="parentdate">
-                                  </div>
-                              </div>
-
-                              <div class="form-group">
-                                  <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
-                                  <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentnumber">
+                                      <input type="date" name="parentdate" id ="parentdate" required="true">
                                   </div>
                               </div>
 
@@ -233,33 +226,33 @@ function randomPassword() {
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Email</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentemail" maxlength="15">@nis.edu.eg
+                                      <input type="text" class="form-control" name="parentemail" id="parentemail" maxlength="15" required="true">@nis.edu.eg
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Password</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentpassword" value="<?php echo randomPassword(); ?>">
+                                      <input type="text" class="form-control" name="parentpassword" id="parentpassword" value="<?php echo randomPassword(); ?>" required="true">
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Username</label>
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="parentusername">
+                                      <input type="text" class="form-control" name="parentusername" id="parentusername" required="true">
                                   </div>
                               </div>
 
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Phone Number</label>
                                   <div class="col-sm-8">
-                                      <input name="parentnumberin" type="text" pattern="\d*" maxlength="20" class="form-control">
+                                      <input name="parentnumberin" type="number" id="parentnumberin" maxlength="20" class="form-control" required="true">
                                   </div>
                               </div>
 
                               <div class="form-group">
                                   <label class="col-sm-2 col-sm-2 control-label">Image</label>
                                   <div class="col-sm-10">
-                                      <input type="file" name="imageparentinput" accept="image/*">
+                                      <input type="file" name="imageparentinput" id="imageparentinput" accept="image/*" required="true">
                                   </div>
                               </div>
 
@@ -271,28 +264,6 @@ function randomPassword() {
                   </div>
               </div>      
             </div>
-
-<script>
-    $(document).ready(function() {
-        $("#searchp").hide();
-        $("#pform").hide();
-    });
-
-    $(document).on("change","#parentinfo",function(){
-        var conceptName = $('#parentinfo').find(":selected").text();
-        if(conceptName == "New Parent")
-        {
-            $("#searchp").hide();
-            $("#pform").show();
-
-        }else if(conceptName == "Existing Parent"){
-            $("#searchp").show();
-            $("#pform").hide();
-
-        }
-
-    });
-</script>
 
 <?php
     require_once HOME_TEMPLATE_PATH . 'wrapperend.php';

@@ -6,7 +6,6 @@ class UserTypesModel extends AbstractModel{
 
     const ERR_EXIST = "err_user_exist";
     const ADD_SUCCESS = "add_user_type";
-
     const PUBLIC_TYPE = "public";
 
     public $id;
