@@ -7,6 +7,7 @@ class UserController extends AbstractController
 {
     public function defaultAction()
     {
+
         $this->_view();
     }
 

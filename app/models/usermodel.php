@@ -99,7 +99,6 @@ class UserModel extends AbstractModel {
         return false;
     }
 
-
     Static function isExist($username){
 
         $sql = "SELECT * FROM user Where username = :username";
@@ -147,7 +146,7 @@ class UserModel extends AbstractModel {
             GROUP BY user.id'); }
 
    
-            public function cryptPassword($password)
+    public function cryptPassword($password)
     {
         $this->pwd = crypt($password, APP_SALT);
     }
