@@ -118,11 +118,12 @@ class SemesterModel extends AbstractModel{
     }
     
     public static function getNonTranscriptedSemesters($course){
-        $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript)
+        $sql = "SELECT exam_details.semester_id_fk FROM exam_details WHERE  exam_details.semester_id_fk NOT IN ( select semester_id_fk from transcript where transcript.course_id_fk =:courseid )
         AND exam_details.course_id_fk = :course";
 
         $stmt = self::prepareStmt($sql);
         $stmt->bindParam(':course', $course);
+        $stmt->bindParam(':courseid', $course);
 
         $Semesters = array();
         $i=0;

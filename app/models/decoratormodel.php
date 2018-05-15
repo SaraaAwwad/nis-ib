@@ -44,5 +44,20 @@ class DecoratorModel extends AbstractModel
         }
     }
 
+    Static function add($name){
+        
+        $name = self::test_input($name);
+
+        $query = "INSERT INTO decorator(name) VALUES (:name)";
+        $stmt = self::prepareStmt($query);
+
+        $stmt->bindParam(":name", $name);
+
+        if($stmt->execute()){
+            return self::getLastId();
+        }else{
+            return false;
+        }
+    }
 }
 ?>

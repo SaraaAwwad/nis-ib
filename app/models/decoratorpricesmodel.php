@@ -64,6 +64,28 @@ class DecoratorpricesModel extends ExtrafeesModel
     {
         return $this->ipay->cost() + $this->price;
     }
+
+    public static function add($d_id, $currency, $price, $scl_grade_id_fk){
+        $query = "INSERT INTO
+        decorator_prices(decorator_id_fk, currency_id_fk, price, scl_grade_id_fk)
+        VALUES (:decorator_id_fk, :currency_id_fk, :price, :scl_grade_id_fk)";
+
+        $stmt = self::prepareStmt($query);
+
+        $price = self::test_input($price);
+
+        $stmt->bindParam(":decorator_id_fk", $d_id);
+        $stmt->bindParam(":currency_id_fk", $currency);
+        $stmt->bindParam(":price", $price);                
+        $stmt->bindParam(":scl_grade_id_fk", $scl_grade_id_fk);        
+
+        if($stmt->execute()){
+            //$this->id = self::getLastId(); 
+            return self::getLastId();
+        }
+
+        return false;
+    }
 }
 
 

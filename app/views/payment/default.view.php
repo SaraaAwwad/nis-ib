@@ -32,7 +32,7 @@ require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
                     <td>'.$c->gradeObj->grade_name .'</td>';
                      if($c->current_semester_status)
                      {
-                         echo '<td> <a href="\payment\invoice\\'.$c->pid.'">View</a></td></tr>';
+                         echo '<td> <a href="\payment\invoice\\'.$c->pid.'">View</a> , <a href="/transcript/default/'.$c->id.'">'.$c->id.' </a></td></tr>';
 
                      }else{
                         echo '<td> <a href="\payment\add\\'.$c->id.'">Pay</a></td></tr>';

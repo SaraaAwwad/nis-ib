@@ -22,8 +22,11 @@ class TranscriptController extends AbstractController
 
     public function defaultAction(){
 
+
         $this->generateReport();
+      
         $this->_view();
+
     }
 
     public function addAction(){
@@ -57,7 +60,7 @@ class TranscriptController extends AbstractController
                 $i++;
                 $transObj->add();
             }
-            $this->redirect('/transcript');
+            $this->redirect('/transcript/view/');
         }
 
         if(isset($_POST['action'])){
@@ -119,7 +122,7 @@ class TranscriptController extends AbstractController
                     $maxgrade = ExamModel::getOutOfGrade($course, $semester);
                     if($g > $maxgrade){
                         //exit with error message;
-                        $this->redirect("/transcript");
+                        $this->redirect("/transcript/view/");
                     }
                 } 
             
@@ -133,7 +136,7 @@ class TranscriptController extends AbstractController
                 $i++;
                 $transObj->edit();
             }
-            $this->redirect('/transcript/view');
+            $this->redirect('/transcript/view/');
             }
 
             $maxgrade = ExamModel::getOutOfGrade($course, $semester);

@@ -4,6 +4,9 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class StaffModel extends UserModel{
 
+    const ERR_EXIST = "err_user_exist";
+    const ADD_SUCCESS = "add_user";
+
     public static function getUsers()
     {
         return self::get(

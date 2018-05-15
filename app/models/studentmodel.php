@@ -6,6 +6,10 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 class StudentModel extends UserModel{
 
     const SUCCESS_UPGRADE = "students_upgrade";
+    const ERR_EXIST = "err_user_exist";
+    const ADD_SUCCESS = "add_user";
+    const PARENT_SUCCESS = "parent_success";
+    const PARENT_ERROR = "err_parent";
 
     public $concatenate = "@nis.edu.eg";
     public $gradeObj;
@@ -64,6 +68,12 @@ class StudentModel extends UserModel{
               $this->paymentObj = PaymentModel::getPayment($row['id']);
             }
         $this->getGrade();
+        $this->current_semester_status = SemesterModel::getCurrentSemester($this->id);
+            if($this->current_semester_status)
+            {
+                $sem_id = SemesterModel::CurrentSemesterID();
+                $this->pid = PaymentModel::PaymentID($this->id,$sem_id);
+            }
         }
     }
 

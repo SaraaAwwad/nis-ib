@@ -22,8 +22,7 @@ class ClassModel extends AbstractModel {
 
     protected static $primaryKey = 'id';
 
-    public static function getClasses()
-    {
+    public static function getClasses(){
         return self::get(
         'SELECT class.*, scl_grade.grade_name, status.code  FROM ' . self::$tableName . ' INNER JOIN
           scl_grade ON class.grade_id_fk = scl_grade.id

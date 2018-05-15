@@ -79,12 +79,13 @@ class PaymentController extends AbstractController
         $this->_data['currency'] = CurrencyModel::getAll();
         if (isset($_POST['addPayment'])) {
 
-        //1st: getting total amount
+        //1st: getting total amount (classes is the obj from the concrete class)
             $semid = $_POST['semester'];
             $classes = new SemesterPricesModel($semid, $grade);
             
             $selected = $_POST['myCheck'];
             
+            //now add to the decorators
             foreach ($selected as $s) {
                 $classes = new DecoratorpricesModel($classes, $s);                
             }
