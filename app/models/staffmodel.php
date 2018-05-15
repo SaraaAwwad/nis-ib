@@ -4,6 +4,7 @@ use PHPMVC\Lib\Database\DatabaseHandler;
 
 class StaffModel extends UserModel{
 
+    const SUCCESS_UPGRADE = "students_upgrade";
     const ERR_EXIST = "err_user_exist";
     const ADD_SUCCESS = "add_user";
 
@@ -37,6 +38,7 @@ class StaffModel extends UserModel{
     {
         $this->pwd =  password_hash($password, PASSWORD_BCRYPT, array('cost'=>8));
     }
+
 
 
 }

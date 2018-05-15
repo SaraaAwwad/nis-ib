@@ -2,7 +2,8 @@
 namespace PHPMVC\Models;
 use PHPMVC\Lib\Database\DatabaseHandler;
 
-class AddressModel extends AbstractModel{
+class AddressModel extends AbstractModel
+{
     public $id;
     public $address;
     public $add_id;
@@ -100,18 +101,16 @@ class AddressModel extends AbstractModel{
         $add_id = $objUser->add_id;
 
         $stmt = self::prepareStmt($sql);
-
         $address = self::test_input($address);  
-        $add_id = self::test_input($add_id);  
+        $add_id = self::test_input($add_id);
 
         $stmt->bindParam(':address', $address);  
-        $stmt->bindParam(':add_id', $add_is);  
+        $stmt->bindParam(':add_id', $add_id);
 
         if($stmt->execute()){
             return true;
         }
         return false;
-    
     }
 
 }

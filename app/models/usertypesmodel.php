@@ -6,7 +6,6 @@ class UserTypesModel extends AbstractModel{
 
     const ERR_EXIST = "err_user_exist";
     const ADD_SUCCESS = "add_user_type";
-
     const PUBLIC_TYPE = "public";
 
     public $id;
@@ -186,7 +185,7 @@ class UserTypesModel extends AbstractModel{
     }
 
     Static function getUsers(){
-        $query = "SELECT * FROM user_type WHERE title NOT IN ('student','Student','parent','Parent')";
+        $query = "SELECT * FROM user_type WHERE title NOT IN ('student','parent')";
         $stmt = self::prepareStmt($query);        
         $Types= array();
         $i=0;
@@ -252,10 +251,8 @@ class UserTypesModel extends AbstractModel{
 
     Static function getUserTypeId(){
         $title = 'parent';
-
         $query = "SELECT id FROM user_type WHERE title = '$title'";
-        $stmt = self::prepareStmt($query);        
-
+        $stmt = self::prepareStmt($query);
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $result = $row['id'];
@@ -268,10 +265,8 @@ class UserTypesModel extends AbstractModel{
 
     Static function getStudentTypeId(){
         $title = 'student';
-
         $query = "SELECT id FROM user_type WHERE title = '$title'";
         $stmt = self::prepareStmt($query);
-
         if($stmt->execute()){
             while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
                 $result = $row['id'];

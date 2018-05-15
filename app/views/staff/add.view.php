@@ -9,23 +9,26 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
-                require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
-                require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
-                require_once HOME_TEMPLATE_PATH . 'header.php';
-                require_once HOME_TEMPLATE_PATH . 'nav.php';
+    require_once HOME_TEMPLATE_PATH . 'templateheaderstart.php';
+    require_once HOME_TEMPLATE_PATH . 'templateheaderend.php';
+    require_once HOME_TEMPLATE_PATH . 'header.php';
+    require_once HOME_TEMPLATE_PATH . 'nav.php';
+    require_once HOME_TEMPLATE_PATH . 'wrapperstart.php';
 
 ?>  
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>      
-      <script src="../../../public/js/user.js"></script>
-      <script src="../../../public/assets/js/staff.js"></script>
-      <section id="container" >
-      <section id="main-content">
-          <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Add To Staff</h3>
-            
-            <div class="row mt">
-              <div class="col-lg-12">
-                  <div class="form-panel">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../../../public/js/user.js"></script>
+    <script src="../../../public/assets/js/staff.js"></script>
+<div class="row">
+    <div class="col-lg-9 main-chart">
+        <h1>Add A New Staff</h1>
+        <hr>
+    </div>
+</div>
+
+<div class="row mt">
+    <div class="col-lg-12">
+        <div class="form-panel">
                       <form class="form-horizontal style-form" method="post" enctype="multipart/form-data">
                         <fieldset>
                           <legend>Personal Information</legend>
@@ -46,7 +49,7 @@ function randomPassword() {
                               <div class="col-sm-10">
                                   <table class="tablenumber" id="dynamic_field">
                                       <tr>
-                                          <td>  <input type="text" class="form-control" name="numberinput[]" required></td>
+                                          <td><input type="number" maxlength="20" class="form-control" name="numberinput[]" required></td>
                                           <td><button type="button" name="addmore" id="addmore" class="btn btn-success">Add More</button></td>
                                       </tr>
                                   </table>
@@ -182,12 +185,9 @@ function randomPassword() {
                           <input type="submit" name="add" id="main">
                           <a href="/staff/default" id="cancel">Cancel</a>
                       </form>
-                  </div>
-              </div>     
-            </div>
-    </section>
-    </section>
-  </section>
-                <?php
-                require_once HOME_TEMPLATE_PATH . 'templatefooter.php'; ?>
-
+        </div>
+    </div>
+</div>
+<?php
+require_once HOME_TEMPLATE_PATH . 'wrapperend.php';
+require_once HOME_TEMPLATE_PATH . 'templatefooter.php';

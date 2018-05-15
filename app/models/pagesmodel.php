@@ -83,7 +83,7 @@ class PagesModel extends AbstractModel{
     }
     
     public function getAllPermissions(){
-        $sql = "SELECT user_type.*FROM user_type_pages INNER JOIN user_type
+        $sql = "SELECT user_type.* FROM user_type_pages INNER JOIN user_type
                 ON user_type.id = user_type_pages.typeid_fk WHERE pageid_fk = '$this->id' ";
         $stmt = self::prepareStmt($sql);
         $Res = array();
@@ -141,7 +141,7 @@ class PagesModel extends AbstractModel{
         }
     }
 
-    public function getPageByTitle($title){
+    public static function getPageByTitle($title){
         $query = "SELECT pages.* from pages inner join user_type_pages on user_type_pages.pageid_fk = pages.id 
         where pages.physicalname =:title AND user_type_pages.typeid_fk =:type";
 
